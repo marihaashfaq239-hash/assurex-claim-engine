@@ -1,0 +1,102 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}My Warranties — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">My Warranties</h4>
+    <p class="page-subtitle mb-0">Track coverage and expiry for all your products</p>
+  </div>
+  <a href="{% url 'warranties:add' %}" class="btn btn-primary btn-sm">
+    <i class="bi bi-shield-plus me-1"></i> Add Warranty
+  </a>
+</div>
+
+<!-- Active & Expiring -->
+<h6 class="fw-semibold text-uppercase text-muted mb-2" style="font-size:0.75rem;letter-spacing:1px;">
+  Active Warranties ({{ active_warranties|length }})
+</h6>
+{% if active_warranties %}
+<div class="row g-3 mb-4">
+  {% for w in active_warranties %}
+  <div class="col-md-6 col-lg-4">
+    <div class="card h-100 border-{% if w.status == 'expiring' %}warning{% else %}success{% endif %} border-opacity-50">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-2">
+          <div class="fw-semibold">{{ w.product.brand }} {{ w.product.product_name|truncatechars:22 }}</div>
+          {% if w.status == 'expiring' %}
+            <span class="badge bg-warning text-dark rounded-pill">Expiring</span>
+          {% else %}
+            <span class="badge bg-success rounded-pill">Active</span>
+          {% endif %}
+        </div>
+        <div class="text-muted small mb-2">{{ w.product.category }} · {{ w.get_warranty_type_display }}</div>
+
+        <!-- Progress bar -->
+        {% with total_days=w.product.warranty_duration_months|default:12 %}
+        <div class="confidence-bar mb-1">
+          <div class="confidence-fill bg-{% if w.status == 'expiring' %}warning{% else %}success{% endif %}"
+               data-value="{% if w.remaining_days > 0 %}{{ w.remaining_days|divisibleby:1 }}{% else %}0{% endif %}"
+               style="width:{{ w.remaining_days }}px;"></div>
+        </div>
+        {% endwith %}
+
+        <table class="table table-sm table-borderless mb-2" style="font-size:0.82rem;">
+          <tr><td class="text-muted ps-0">Start</td><td>{{ w.start_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted ps-0">Expires</td><td class="fw-semibold">{{ w.expiry_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted ps-0">Remaining</td>
+              <td class="fw-bold text-{% if w.status == 'expiring' %}warning{% else %}success{% endif %}">
+                {{ w.remaining_days }} days
+              </td>
+          </tr>
+          <tr><td class="text-muted ps-0">Provider</td><td>{{ w.warranty_provider }}</td></tr>
+        </table>
+
+        <a href="{% url 'warranties:detail' w.pk %}" class="btn btn-sm btn-outline-secondary w-100">
+          View Details
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card mb-4">
+  <div class="card-body text-center py-4 text-muted">
+    <i class="bi bi-shield-x fs-2 opacity-25 d-block mb-2"></i>
+    No active warranties. <a href="{% url 'products:register' %}">Register a product</a> to add one.
+  </div>
+</div>
+{% endif %}
+
+<!-- Expired -->
+{% if expired_warranties %}
+<h6 class="fw-semibold text-uppercase text-muted mb-2" style="font-size:0.75rem;letter-spacing:1px;">
+  Expired ({{ expired_warranties|length }})
+</h6>
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr><th>Product</th><th>Type</th><th>Expired On</th><th>Provider</th></tr>
+        </thead>
+        <tbody>
+          {% for w in expired_warranties %}
+          <tr>
+            <td>{{ w.product.brand }} {{ w.product.product_name|truncatechars:25 }}</td>
+            <td>{{ w.get_warranty_type_display }}</td>
+            <td class="text-danger">{{ w.expiry_date|date:"M d, Y" }}</td>
+            <td>{{ w.warranty_provider }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

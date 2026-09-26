@@ -1,0 +1,476 @@
+{% load static assurex_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Report — {{ claim.claim_reference }} — AssureX</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    /* ── Print & screen styles ── */
+    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #fff; }
+
+    .report-header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem; }
+    .report-header h2 { font-size: 1.4rem; margin: 0; }
+    .report-header .sub { opacity: .8; font-size: .85rem; }
+
+    .section-title { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: #6b7280; font-weight: 700; margin-bottom: .5rem; padding-bottom: .25rem; border-bottom: 2px solid #e5e7eb; }
+
+    .info-table td:first-child { color: #6b7280; width: 40%; font-size: .82rem; }
+    .info-table td:last-child   { font-weight: 600; font-size: .85rem; }
+    .info-table { margin-bottom: 0; }
+
+    .decision-box { border-radius: 10px; padding: 1.2rem; text-align: center; }
+    .decision-valid   { background: #f0fdf4; border: 2px solid #16a34a; }
+    .decision-invalid { background: #fef2f2; border: 2px solid #dc2626; }
+    .decision-manual  { background: #fffbeb; border: 2px solid #d97706; }
+
+    .conf-bar-wrap { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin: 3px 0; }
+    .conf-bar-fill { height: 100%; border-radius: 4px; }
+
+    .rule-badge-pass { background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:20px;font-size:.75rem; }
+    .rule-badge-fail { background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:20px;font-size:.75rem; }
+    .rule-badge-warn { background:#fef9c3;color:#d97706;padding:2px 8px;border-radius:20px;font-size:.75rem; }
+    .rule-badge-skip { background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:20px;font-size:.75rem; }
+
+    .contra-hard { background:#fff1f2;border-left:4px solid #dc2626;padding:.6rem .8rem;margin-bottom:.5rem;border-radius:0 4px 4px 0; }
+    .contra-warn { background:#fffbeb;border-left:4px solid #d97706;padding:.6rem .8rem;margin-bottom:.5rem;border-radius:0 4px 4px 0; }
+
+    .page-break { page-break-before: always; }
+    .no-print   { display: block; }
+
+    /* Watermark for non-final reports */
+    {% if claim.status == 'draft' %}
+    body::before {
+      content: "DRAFT";
+      position: fixed; top: 40%; left: 50%; transform: translate(-50%,-50%) rotate(-30deg);
+      font-size: 8rem; color: rgba(0,0,0,.04); font-weight: 900; pointer-events: none; z-index: 0;
+    }
+    {% endif %}
+
+    @media print {
+      .no-print { display: none !important; }
+      body { font-size: 11px; }
+      .report-header { background: #1e3a5f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body class="p-4">
+
+<!-- ── Print / Close buttons ── -->
+<div class="no-print d-flex gap-2 justify-content-end mb-3">
+  <button onclick="window.print()" class="btn btn-primary btn-sm">
+    <i class="bi bi-printer me-1"></i> Print / Save as PDF
+  </button>
+  <button onclick="window.close()" class="btn btn-outline-secondary btn-sm">
+    <i class="bi bi-x-lg me-1"></i> Close
+  </button>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HEADER
+     ════════════════════════════════════════════ -->
+<div class="report-header">
+  <div class="d-flex justify-content-between align-items-start">
+    <div>
+      <div style="font-size:1.1rem;font-weight:800;letter-spacing:.03em;">
+        <i class="bi bi-shield-check me-2"></i>AssureX Claim Engine
+      </div>
+      <h2 class="mt-1">Warranty Claim Report</h2>
+      <div class="sub">
+        Claim Reference: <strong>{{ claim.claim_reference }}</strong>
+        &nbsp;&middot;&nbsp;
+        Generated: {{ generated_at|date:"F d, Y — H:i" }}
+      </div>
+    </div>
+    <div class="text-end">
+      <div class="sub">Status</div>
+      <div style="font-size:1.2rem;font-weight:700;">{{ claim.get_status_display }}</div>
+      {% if claim.is_duplicate %}
+        <div class="mt-1"><span style="background:#fbbf24;color:#000;padding:2px 8px;border-radius:4px;font-size:.75rem;">⚠ Duplicate Flagged</span></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 1 — CLAIM & PRODUCT DETAILS
+     ════════════════════════════════════════════ -->
+<div class="row g-4 mb-4">
+
+  <div class="col-md-6">
+    <div class="section-title"><i class="bi bi-box-seam me-1"></i> Product Information</div>
+    <table class="table table-sm info-table">
+      <tr><td>Product</td><td>{{ claim.product.brand }} {{ claim.product.product_name }}</td></tr>
+      <tr><td>Model Number</td><td class="font-monospace">{{ claim.product.model_number }}</td></tr>
+      <tr><td>Serial Number</td><td class="font-monospace">{{ claim.product.serial_number }}</td></tr>
+      <tr><td>Purchase Date</td><td>{{ claim.product.purchase_date|date:"M d, Y" }}</td></tr>
+      <tr><td>Purchase Price</td><td>PKR {{ claim.product.purchase_price|default:"—" }}</td></tr>
+      <tr><td>Retailer</td><td>{{ claim.product.retailer|default:"—" }}</td></tr>
+      <tr><td>Product Age</td><td>{{ ai_summary.product.age_months }} months</td></tr>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <div class="section-title"><i class="bi bi-shield me-1"></i> Warranty Information</div>
+    {% if ai_summary.warranty %}
+    <table class="table table-sm info-table">
+      <tr><td>Provider</td><td>{{ ai_summary.warranty.provider }}</td></tr>
+      <tr><td>Type</td><td>{{ ai_summary.warranty.type }}</td></tr>
+      <tr><td>Start Date</td><td>{{ ai_summary.warranty.start }}</td></tr>
+      <tr><td>Expiry Date</td><td>{{ ai_summary.warranty.expiry }}</td></tr>
+      <tr><td>Status</td>
+          <td>
+            {% if ai_summary.warranty.is_expired %}
+              <span class="rule-badge-fail">Expired</span>
+            {% else %}
+              <span class="rule-badge-pass">{{ ai_summary.warranty.status }} ({{ ai_summary.warranty.remaining_days }} days left)</span>
+            {% endif %}
+          </td>
+      </tr>
+    </table>
+    {% else %}
+    <p class="text-muted small">No warranty record linked to this claim.</p>
+    {% endif %}
+  </div>
+
+  <div class="col-md-6">
+    <div class="section-title"><i class="bi bi-exclamation-triangle me-1"></i> Reported Fault</div>
+    <table class="table table-sm info-table">
+      <tr><td>Claimant</td><td>{{ claim.claimant.get_full_name }} ({{ claim.claimant.email }})</td></tr>
+      <tr><td>Claim ID</td><td class="font-monospace">{{ claim.claim_reference }}</td></tr>
+      <tr><td>Submission Date</td><td>{{ claim.submission_date|date:"M d, Y H:i"|default:"Not submitted" }}</td></tr>
+      <tr><td>Fault Date</td><td>{{ claim.fault_date|date:"M d, Y" }}</td></tr>
+      <tr><td>Damage Type</td><td>{{ claim.get_damage_type_display }}</td></tr>
+      <tr><td>Days Since Fault</td><td>{{ claim.days_since_fault }} days</td></tr>
+    </table>
+    <div class="section-title mt-2">Fault Description</div>
+    <p style="font-size:.85rem;background:#f9fafb;padding:.6rem;border-radius:4px;">{{ claim.fault_description }}</p>
+    {% if claim.additional_notes %}
+    <div class="section-title mt-1">Additional Notes</div>
+    <p style="font-size:.83rem;color:#6b7280;">{{ claim.additional_notes }}</p>
+    {% endif %}
+  </div>
+
+  <div class="col-md-6">
+    <div class="section-title"><i class="bi bi-tools me-1"></i> Repair History</div>
+    {% if repair_hist %}
+    <table class="table table-sm" style="font-size:.82rem;">
+      <thead><tr><th>Date</th><th>Center</th><th>Outcome</th><th>Auth?</th></tr></thead>
+      <tbody>
+      {% for r in repair_hist %}
+        <tr>
+          <td>{{ r.repair_date }}</td>
+          <td>{{ r.repair_center }}</td>
+          <td>{{ r.get_outcome_display }}</td>
+          <td>{% if r.is_authorized %}<span class="rule-badge-pass">Yes</span>{% else %}<span class="rule-badge-fail">No</span>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-muted small">No prior repair history recorded.</p>
+    {% endif %}
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — UPLOADED EVIDENCE & OCR
+     ════════════════════════════════════════════ -->
+<div class="section-title"><i class="bi bi-paperclip me-1"></i> Uploaded Evidence</div>
+{% if documents %}
+<table class="table table-sm table-bordered mb-3" style="font-size:.82rem;">
+  <thead class="table-light"><tr><th>Document Type</th><th>Filename</th><th>Size</th><th>Uploaded</th></tr></thead>
+  <tbody>
+  {% for doc in documents %}
+  <tr>
+    <td>{{ doc.get_doc_type_display }}</td>
+    <td class="font-monospace">{{ doc.file_name }}</td>
+    <td>{{ doc.file_size|filesizeformat }}</td>
+    <td>{{ doc.uploaded_at|date:"M d, Y" }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="text-muted small mb-3">No documents uploaded.</p>
+{% endif %}
+
+{% if ai_summary.missing_documents %}
+<div class="contra-warn mb-3">
+  <strong>Missing Required Documents:</strong>
+  {% for m in ai_summary.missing_documents %}
+    <span class="rule-badge-fail ms-1">{{ m|replace_underscore }}</span>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if ocr_results %}
+<div class="section-title"><i class="bi bi-search me-1"></i> OCR Extraction Results</div>
+<table class="table table-sm table-bordered mb-4" style="font-size:.82rem;">
+  <thead class="table-light">
+    <tr><th>Document</th><th>Invoice #</th><th>Serial #</th><th>Purchase Date</th><th>Amount</th><th>Status</th><th>Verified</th></tr>
+  </thead>
+  <tbody>
+  {% for ocr in ocr_results %}
+  <tr>
+    <td>{{ ocr.document.get_doc_type_display }}</td>
+    <td class="font-monospace">{{ ocr.invoice_number|default:"—" }}</td>
+    <td class="font-monospace">{{ ocr.serial_number|default:"—" }}</td>
+    <td>{{ ocr.purchase_date|default:"—" }}</td>
+    <td>{{ ocr.purchase_amount|default:"—" }}</td>
+    <td>
+      {% if ocr.status == 'success' %}<span class="rule-badge-pass">Success</span>
+      {% elif ocr.status == 'partial' %}<span class="rule-badge-warn">Partial</span>
+      {% else %}<span class="rule-badge-fail">Failed</span>{% endif %}
+    </td>
+    <td>{% if ocr.is_verified %}<span class="rule-badge-pass">✓</span>{% else %}—{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — AI MODEL RESULTS (SRS §1.6.xliv)
+     ════════════════════════════════════════════ -->
+<div class="page-break"></div>
+
+<div class="section-title mt-4"><i class="bi bi-cpu me-1"></i> AI Model Results</div>
+
+<div class="row g-3 mb-4">
+
+  <!-- Python ML -->
+  <div class="col-md-4">
+    <div style="border:1px solid #dbeafe;border-radius:8px;padding:1rem;background:#f0f7ff;">
+      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#2563eb;margin-bottom:.5rem;">Python ML Model</div>
+      <div class="fw-bold" style="font-size:1rem;">
+        {{ claim.python_prediction|prediction_label|default:"Pending" }}
+      </div>
+      <div class="mt-2" style="font-size:.8rem;">
+        <div class="d-flex justify-content-between"><span>Valid Claim</span><span>{{ claim.python_confidence_valid|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-success" style="width:{{ claim.python_confidence_valid|default:0|floatformat:0 }}%"></div></div>
+        <div class="d-flex justify-content-between mt-1"><span>Invalid Claim</span><span>{{ claim.python_confidence_invalid|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-danger" style="width:{{ claim.python_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
+        <div class="d-flex justify-content-between mt-1"><span>Manual Review</span><span>{{ claim.python_confidence_manual|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-warning" style="width:{{ claim.python_confidence_manual|default:0|floatformat:0 }}%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teachable Machine -->
+  <div class="col-md-4">
+    <div style="border:1px solid #cffafe;border-radius:8px;padding:1rem;background:#f0fdff;">
+      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#0891b2;margin-bottom:.5rem;">Teachable Machine (Image AI)</div>
+      <div class="fw-bold" style="font-size:1rem;">
+        {{ claim.tm_prediction|prediction_label|default:"Pending" }}
+      </div>
+      <div class="mt-2" style="font-size:.8rem;">
+        <div class="d-flex justify-content-between"><span>Valid Claim</span><span>{{ claim.tm_confidence_valid|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-success" style="width:{{ claim.tm_confidence_valid|default:0|floatformat:0 }}%"></div></div>
+        <div class="d-flex justify-content-between mt-1"><span>Invalid Claim</span><span>{{ claim.tm_confidence_invalid|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-danger" style="width:{{ claim.tm_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
+        <div class="d-flex justify-content-between mt-1"><span>Manual Review</span><span>{{ claim.tm_confidence_manual|default:0|floatformat:1 }}%</span></div>
+        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-warning" style="width:{{ claim.tm_confidence_manual|default:0|floatformat:0 }}%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Model Comparison -->
+  <div class="col-md-4">
+    <div style="border:1px solid #ede9fe;border-radius:8px;padding:1rem;background:#faf5ff;">
+      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#7c3aed;margin-bottom:.5rem;">Model Comparison</div>
+      <table class="table table-sm info-table">
+        <tr><td>Python Class</td><td>{{ claim.python_prediction|prediction_label|default:"—" }}</td></tr>
+        <tr><td>TM Class</td><td>{{ claim.tm_prediction|prediction_label|default:"—" }}</td></tr>
+        <tr><td>Class Match</td>
+          <td>
+            {% if claim.python_prediction and claim.tm_prediction %}
+              {% if claim.python_prediction == claim.tm_prediction %}
+                <span class="rule-badge-pass">✓ Match</span>
+              {% else %}
+                <span class="rule-badge-fail">✗ Mismatch</span>
+              {% endif %}
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+        <tr><td>Conf. Difference</td>
+          <td>
+            {% if claim.confidence_difference is not None %}
+              <strong>{{ claim.confidence_difference|floatformat:1 }}%</strong>
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+        <tr><td>Consistency</td>
+          <td>{{ claim.model_consistency_status|consistency_label|default:"—" }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — WARRANTY RULE VALIDATION
+     ════════════════════════════════════════════ -->
+<div class="section-title"><i class="bi bi-clipboard-check me-1"></i> Warranty Rule Validation Results</div>
+{% if rule_results %}
+<table class="table table-sm table-bordered mb-4" style="font-size:.82rem;">
+  <thead class="table-light"><tr><th>Rule</th><th>Type</th><th>Outcome</th><th>Details</th></tr></thead>
+  <tbody>
+  {% for r in rule_results %}
+  <tr>
+    <td>{{ r.rule_name }}</td>
+    <td><span class="text-muted">{{ r.rule_type|capfirst }}</span></td>
+    <td>
+      {% if r.outcome == 'pass' %}<span class="rule-badge-pass">Pass</span>
+      {% elif r.outcome == 'fail' %}<span class="rule-badge-fail">Fail</span>
+      {% elif r.outcome == 'warning' %}<span class="rule-badge-warn">Warning</span>
+      {% else %}<span class="rule-badge-skip">Skip</span>{% endif %}
+    </td>
+    <td style="color:#6b7280;">{{ r.description|truncatechars:80 }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="d-flex gap-3 mb-3" style="font-size:.83rem;">
+  <span><strong style="color:#16a34a;">{{ claim.rules_passed }}</strong> Passed</span>
+  <span><strong style="color:#dc2626;">{{ claim.rules_failed }}</strong> Failed</span>
+  <span><strong style="color:#d97706;">{{ claim.rules_warning }}</strong> Warnings</span>
+</div>
+{% else %}
+<p class="text-muted small mb-3">Rule validation not yet performed.</p>
+{% endif %}
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — CONTRADICTIONS (SRS §1.6.xxviii)
+     ════════════════════════════════════════════ -->
+{% if contradictions %}
+<div class="section-title"><i class="bi bi-exclamation-diamond me-1"></i> Contradiction & Inconsistency Report</div>
+<div class="mb-3">
+  {% for c in hard_contradictions %}
+  <div class="contra-hard">
+    <strong style="color:#dc2626;">HARD — {{ c.type|replace_underscore|title }}:</strong>
+    <span style="font-size:.82rem;"> {{ c.description }}</span>
+  </div>
+  {% endfor %}
+  {% for c in warn_contradictions %}
+  <div class="contra-warn">
+    <strong style="color:#d97706;">WARNING — {{ c.type|replace_underscore|title }}:</strong>
+    <span style="font-size:.82rem;"> {{ c.description }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — FINAL DECISION (SRS §1.6.xxxiv, §1.6.xxxv)
+     ════════════════════════════════════════════ -->
+<div class="section-title"><i class="bi bi-award me-1"></i> Final Decision</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-5">
+    <div class="decision-box
+      {% if claim.final_decision == 'likely_valid' %}decision-valid
+      {% elif claim.final_decision == 'likely_invalid' %}decision-invalid
+      {% else %}decision-manual{% endif %}">
+      {% if claim.final_decision == 'likely_valid' %}
+        <div style="font-size:2rem;">✅</div>
+        <div class="fw-bold text-success fs-5">Likely Valid</div>
+      {% elif claim.final_decision == 'likely_invalid' %}
+        <div style="font-size:2rem;">❌</div>
+        <div class="fw-bold text-danger fs-5">Likely Invalid</div>
+      {% elif claim.final_decision == 'manual_review' %}
+        <div style="font-size:2rem;">🔍</div>
+        <div class="fw-bold text-warning fs-5">Manual Review Required</div>
+      {% else %}
+        <div style="font-size:2rem;">⏳</div>
+        <div class="fw-bold text-secondary fs-5">Pending Evaluation</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col-md-7">
+    {% if claim.decision_reason %}
+    <div class="section-title">Decision Explanation</div>
+    <p style="font-size:.85rem;background:#f9fafb;padding:.8rem;border-radius:6px;border-left:3px solid #3b82f6;">
+      {{ claim.decision_reason }}
+    </p>
+    {% endif %}
+
+    <table class="table table-sm info-table mt-2">
+      <tr><td>Supporting Factors</td>
+          <td>{{ ai_summary.rules_passed|length }} rules passed</td></tr>
+      <tr><td>Opposing Factors</td>
+          <td>{{ ai_summary.rules_failed|length }} rules failed,
+              {{ hard_contradictions|length }} hard contradiction(s)</td></tr>
+      <tr><td>Missing Evidence</td>
+          <td>{{ ai_summary.missing_documents|length }} document(s)</td></tr>
+      <tr><td>Duplicate Flag</td>
+          <td>{% if claim.is_duplicate %}<span class="rule-badge-warn">Yes — flagged</span>{% else %}No{% endif %}</td></tr>
+    </table>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — REVIEWER DECISION (SRS §1.6.xxxvii)
+     ════════════════════════════════════════════ -->
+{% if review %}
+<div class="section-title"><i class="bi bi-person-check me-1"></i> Reviewer Decision & Comments</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <table class="table table-sm info-table">
+      <tr><td>Reviewer Decision</td>
+          <td>
+            {% if review.decision == 'approved' %}<span class="rule-badge-pass">Approved</span>
+            {% elif review.decision == 'rejected' %}<span class="rule-badge-fail">Rejected</span>
+            {% else %}<span class="rule-badge-warn">{{ review.get_decision_display }}</span>{% endif %}
+          </td>
+      </tr>
+      {% if review.is_ai_override %}
+      <tr><td>AI Override</td><td><span class="rule-badge-warn">Yes — Original: {{ review.ai_original_result }}</span></td></tr>
+      {% if review.override_reason %}<tr><td>Override Reason</td><td>{{ review.override_reason }}</td></tr>{% endif %}
+      {% endif %}
+      <tr><td>Reviewed At</td><td>{{ review.reviewed_at|date:"M d, Y H:i"|default:"—" }}</td></tr>
+    </table>
+  </div>
+  <div class="col-md-6">
+    {% if review.reviewer_comments %}
+    <div class="section-title">Reviewer Comments</div>
+    <p style="font-size:.85rem;background:#f9fafb;padding:.8rem;border-radius:6px;">{{ review.reviewer_comments }}</p>
+    {% endif %}
+    {% if review.additional_info_request %}
+    <div class="section-title">Additional Info Requested</div>
+    <p style="font-size:.85rem;color:#6b7280;">{{ review.additional_info_request }}</p>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+
+<!-- ── Footer ── -->
+<hr>
+<div class="d-flex justify-content-between" style="font-size:.75rem;color:#9ca3af;">
+  <span>AssureX Claim Engine &mdash; AI-Powered Warranty Claim Validation System</span>
+  <span>Report generated: {{ generated_at|date:"Y-m-d H:i:s" }} &mdash; {{ claim.claim_reference }}</span>
+</div>
+<div class="text-center text-muted mt-2" style="font-size:.72rem;">
+  This report is system-generated. Reviewer override and human judgment may supersede AI recommendations.
+</div>
+
+<script>
+  /* Auto-animate confidence bars on load */
+  document.querySelectorAll('.conf-bar-fill').forEach(function(b) {
+    var w = b.style.width; b.style.width = '0%';
+    setTimeout(function() { b.style.transition = 'width .5s ease'; b.style.width = w; }, 100);
+  });
+</script>
+</body>
+</html>

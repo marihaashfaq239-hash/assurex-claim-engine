@@ -1,0 +1,56 @@
+{
+  "claim_id": "SAMPLE-0000009",
+  "scenario": "Unauthorized Repair Claim",
+  "description": "Product was repaired at local roadside shop (unauthorized). Warranty voided.",
+  "expected_decision": "Likely Invalid",
+  "claimant_email": "customer09@example.com",
+  "product": {
+    "name": "Kenwood Split AC 1 Ton",
+    "category": "Air Conditioner",
+    "brand": "Kenwood",
+    "model_number": "KES-1240S",
+    "serial_number": "SN-AC-20230505-201",
+    "purchase_date": "2025-07-31",
+    "purchase_price": 78000,
+    "retailer": "Cool World"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2025-07-31",
+    "expiry_date": "2026-07-31",
+    "remaining_days": 0,
+    "is_active": false
+  },
+  "claim": {
+    "fault_date": "2026-09-17",
+    "fault_description": "Refrigerant leaking. AC making loud noise and not cooling.",
+    "damage_type": "mechanical",
+    "fault_location": "Refrigerant lines"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": true,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": true,
+    "missing_doc_count": 0
+  },
+  "repair_history": [
+    {
+      "repair_date": "2026-05-27",
+      "repair_center": "Local AC Repair Shop, Block 9 Gulshan",
+      "is_authorized": false,
+      "outcome": "Partial",
+      "notes": "Gas refilled by local technician — NOT an authorized Kenwood service center"
+    }
+  ],
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": true,
+    "is_duplicate_flag": false,
+    "repair_count": 1,
+    "claim_submission_delay_days": 7
+  },
+  "rule_triggered": "authorized_repair_only (hard_fail) — UNAUTHORIZED REPAIR FOUND",
+  "claim_summary_card": "SAMPLE-0000009_v0.png"
+}

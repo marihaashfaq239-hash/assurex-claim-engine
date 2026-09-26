@@ -1,0 +1,52 @@
+=================================================================
+AssureX Claim Engine — Model Comparison Report
+Generated: 2026-09-24 10:59:28
+=================================================================
+
+DATASET INFORMATION
+----------------------------------------
+  Total test claims  : 45
+  Valid claims       : 15
+  Invalid claims     : 15
+  Manual review      : 15
+
+MODEL PERFORMANCE
+----------------------------------------
+  Python ML accuracy   : 97.78%  (44/45 correct)
+  TM model accuracy    : 97.78%  (44/45 correct)
+  SRS 85% target       : MET [OK]
+
+MODEL AGREEMENT
+----------------------------------------
+  Models agree         : 43/45 (95.6%)
+  Models disagree      : 2/45 (4.4%)
+  Average conf. diff   : 7.61%
+  Max conf. diff       : 43.93%
+
+MODEL CONSISTENCY BREAKDOWN
+----------------------------------------
+  Strong Match          :  29 (64.4%)
+  Acceptable Match      :   8 (17.8%)
+  Weak Match            :   3 (6.7%)
+  Uncertain Result      :   3 (6.7%)
+  Model Disagreement    :   2 (4.4%)
+
+FINAL DECISION BREAKDOWN
+----------------------------------------
+  Likely Valid                :   4 (8.9%)
+  Likely Invalid              :  41 (91.1%)
+  Manual Review Required      :   0 (0.0%)
+
+DISAGREEMENT CASES
+----------------------------------------
+  CLM-0000577: Python=manual_review TM=invalid_claim Actual=invalid_claim | Hard fail rules: WARRANTY_EXPIRED, LATE_REPORTING
+  CLM-0001099: Python=manual_review TM=valid_claim Actual=manual_review | Hard fail rules: WARRANTY_EXPIRED, LATE_REPORTING
+
+OVERALL SUMMARY
+----------------------------------------
+  Both models correctly predicted the same class in 95.6% of test claims.
+  The Python ML model achieved 97.78% accuracy.
+  The TM image model achieved 97.78% accuracy.
+  Average confidence difference between models: 7.61%.
+  Final application decision accuracy: 42.22%.
+=================================================================

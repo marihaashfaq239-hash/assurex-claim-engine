@@ -1,0 +1,20 @@
+[phases.setup]
+nixPkgs = [
+  "tesseract",
+  "python311",
+  "gcc",
+  "libmagic",
+]
+
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt",
+]
+
+[phases.build]
+cmds = [
+  "python manage.py collectstatic --noinput",
+]
+
+[start]
+cmd = "gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"

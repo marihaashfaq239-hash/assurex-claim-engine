@@ -1,0 +1,124 @@
+{
+  "title": "AssureX Claim Engine — Data Dictionary",
+  "version": "1.0",
+  "description": "Complete data dictionary for all 19 ML features, 15 database tables, and claim classes.",
+
+  "ml_features": {
+    "description": "19 features used by Python ML model and GTM image model",
+    "string_categoricals": {
+      "product_category": {
+        "type": "string",
+        "description": "Product type category",
+        "values": ["Air Conditioner","Refrigerator","Washing Machine","Television","Smartphone","Laptop","Microwave","Generator","Water Heater","Small Appliance"],
+        "encoding": "OneHotEncoder in sklearn pipeline"
+      },
+      "brand": {
+        "type": "string",
+        "description": "Product manufacturer brand",
+        "example_values": ["Samsung","LG","Haier","PEL","Dawlance","Orient","TCL","Sony"],
+        "encoding": "OneHotEncoder in sklearn pipeline"
+      },
+      "damage_type": {
+        "type": "string",
+        "description": "Primary fault/damage category",
+        "values": ["physical","electrical","mechanical","software","manufacturing","water","overheating","battery","display","other"],
+        "encoding": "OneHotEncoder in sklearn pipeline"
+      },
+      "warranty_type": {
+        "type": "string",
+        "description": "Type of warranty coverage",
+        "values": ["standard","extended","third_party"],
+        "encoding": "OneHotEncoder in sklearn pipeline"
+      }
+    },
+    "numerical_features": {
+      "product_age_months": {
+        "type": "float",
+        "unit": "months",
+        "description": "Product age in months (days since purchase / 30.44)",
+        "range": "0 to 240+"
+      },
+      "remaining_warranty_days": {
+        "type": "int",
+        "unit": "days",
+        "description": "Days remaining in warranty (max(0, expiry - today))",
+        "range": "0 to 730+"
+      },
+      "days_since_fault": {
+        "type": "int",
+        "unit": "days",
+        "description": "Number of days since the fault was first noticed",
+        "range": "0 to 365+"
+      },
+      "claim_submission_delay_days": {
+        "type": "int",
+        "unit": "days",
+        "description": "Days between fault occurrence and claim submission",
+        "range": "0 to 365+"
+      },
+      "purchase_price": {
+        "type": "float",
+        "unit": "PKR",
+        "description": "Original product purchase price in Pakistani Rupees",
+        "range": "1000 to 500000+"
+      },
+      "repair_count": {
+        "type": "int",
+        "description": "Number of prior repairs on the product",
+        "range": "0 to 10+"
+      },
+      "missing_doc_count": {
+        "type": "int",
+        "description": "Number of mandatory documents not uploaded",
+        "range": "0 to 5"
+      }
+    },
+    "binary_features": {
+      "has_purchase_receipt": {"type": "int (0/1)", "description": "Purchase receipt uploaded"},
+      "has_warranty_card": {"type": "int (0/1)", "description": "Warranty card uploaded"},
+      "has_product_image": {"type": "int (0/1)", "description": "Product photograph uploaded"},
+      "has_fault_evidence": {"type": "int (0/1)", "description": "Fault evidence (photo/video) uploaded"},
+      "has_repair_report": {"type": "int (0/1)", "description": "Repair report document uploaded"},
+      "serial_number_match": {"type": "int (0/1)", "description": "Serial number matches across all documents"},
+      "had_unauthorized_repair": {"type": "int (0/1)", "description": "Any prior repair at unauthorized center"},
+      "is_duplicate_flag": {"type": "int (0/1)", "description": "Detected as possible duplicate claim"}
+    }
+  },
+
+  "target_classes": {
+    "valid_claim": "Claim meets all warranty conditions; should be approved",
+    "invalid_claim": "Claim fails one or more hard-fail rules; should be rejected",
+    "manual_review": "Borderline case; requires human reviewer evaluation"
+  },
+
+  "final_decisions": {
+    "Likely Valid": "Both models predict valid + rules pass + high confidence",
+    "Likely Invalid": "Hard fail rule triggered OR both models predict invalid",
+    "Manual Review Required": "Model disagreement OR low confidence OR rule manual-review trigger"
+  },
+
+  "model_consistency_statuses": {
+    "Strong Match": "Same class + confidence difference <= 5%",
+    "Acceptable Match": "Same class + confidence difference <= 15%",
+    "Weak Match": "Same class + confidence difference <= 25%",
+    "Uncertain Result": "Same class + confidence difference > 25%",
+    "Model Disagreement": "Different class predictions between models"
+  },
+
+  "claim_status_flow": [
+    "draft",
+    "submitted",
+    "evaluation",
+    "additional",
+    "manual",
+    "approved",
+    "rejected",
+    "closed"
+  ],
+
+  "warranty_rule_types": {
+    "hard_fail": "Claim is definitively invalid — automatic rejection decision",
+    "warning": "Suspicious condition — flags for review but does not auto-reject",
+    "manual_review": "Ambiguous condition — routes claim to human reviewer"
+  }
+}

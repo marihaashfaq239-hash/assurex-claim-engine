@@ -1,0 +1,111 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}My Claims — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">My Claims</h4>
+    <p class="page-subtitle mb-0">Track all your warranty claim submissions</p>
+  </div>
+  <a href="{% url 'claims:submit' %}" class="btn btn-primary">
+    <i class="bi bi-file-earmark-plus me-1"></i>New Claim
+  </a>
+</div>
+
+<!-- Search + Filter -->
+<div class="card mb-3">
+  <div class="card-body py-3">
+    <form method="get" class="row g-2 align-items-end">
+      <div class="col-md-5">
+        <input type="text" name="q" value="{{ search }}" class="form-control"
+               placeholder="Search by reference, product name or serial...">
+      </div>
+      <div class="col-md-3">
+        <select name="status" class="form-select">
+          <option value="">All Statuses</option>
+          {% for val, label in status_choices %}
+            <option value="{{ val }}" {% if status_filter == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{% url 'claims:my_claims' %}" class="btn btn-outline-secondary ms-1">Clear</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Claims Table -->
+<div class="card">
+  <div class="card-body p-0">
+    {% if claims %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Product</th>
+            <th>Damage Type</th>
+            <th>Fault Date</th>
+            <th>Status</th>
+            <th>AI Decision</th>
+            <th>Submitted</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in claims %}
+          <tr>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+                {{ c.claim_reference|default:"—" }}
+              </a>
+            </td>
+            <td>
+              <div>{{ c.product.brand }} {{ c.product.product_name|truncatechars:20 }}</div>
+              <small class="text-muted font-monospace">{{ c.product.serial_number }}</small>
+            </td>
+            <td>{{ c.get_damage_type_display }}</td>
+            <td class="text-muted small">{{ c.fault_date|date:"M d, Y" }}</td>
+            <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+            <td>
+              {% if c.final_decision == 'likely_valid' %}
+                <span class="badge bg-success-subtle text-success rounded-pill"><i class="bi bi-check-circle me-1"></i>Likely Valid</span>
+              {% elif c.final_decision == 'likely_invalid' %}
+                <span class="badge bg-danger-subtle text-danger rounded-pill"><i class="bi bi-x-circle me-1"></i>Likely Invalid</span>
+              {% elif c.final_decision == 'manual_review' %}
+                <span class="badge bg-warning-subtle text-warning rounded-pill"><i class="bi bi-person me-1"></i>Manual Review</span>
+              {% else %}
+                <span class="text-muted small">Pending</span>
+              {% endif %}
+            </td>
+            <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-eye"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-file-earmark-x fs-1 d-block mb-2 opacity-25"></i>
+      {% if search or status_filter %}
+        No claims match your filters.
+        <a href="{% url 'claims:my_claims' %}" class="d-block mt-1">Clear filters</a>
+      {% else %}
+        No claims submitted yet.
+        <a href="{% url 'claims:submit' %}" class="d-block mt-1 text-primary">Submit your first claim</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

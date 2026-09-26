@@ -1,0 +1,53 @@
+{
+  "claim_id": "SAMPLE-0000010",
+  "scenario": "Tricky Boundary-Date Claim",
+  "description": "Warranty expires EXACTLY today. Fault was reported exactly 14 days ago (at the claim-period limit). This is a boundary edge case requiring careful review.",
+  "expected_decision": "Manual Review Required",
+  "claimant_email": "customer10@example.com",
+  "product": {
+    "name": "Waves 7 kg Top-Load Washing Machine",
+    "category": "Washing Machine",
+    "brand": "Waves",
+    "model_number": "WM-S70",
+    "serial_number": "SN-WM-20230924-350",
+    "purchase_date": "2025-09-24",
+    "purchase_price": 38000,
+    "retailer": "Galaxy Electronics"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2025-09-24",
+    "expiry_date": "2026-09-24",
+    "remaining_days": 0,
+    "is_active": true
+  },
+  "claim": {
+    "fault_date": "2026-09-10",
+    "fault_description": "Drain pump failure. Water not draining after wash cycle.",
+    "damage_type": "mechanical",
+    "fault_location": "Drain pump"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": true,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": false,
+    "missing_doc_count": 0
+  },
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": false,
+    "repair_count": 0,
+    "claim_submission_delay_days": 14
+  },
+  "boundary_conditions": {
+    "warranty_expires_today": true,
+    "report_delay_exactly_at_limit": true,
+    "submission_delay_days": 14,
+    "max_allowed_days": 14
+  },
+  "note": "Borderline: submitted on last day of warranty with maximum allowed reporting delay.",
+  "claim_summary_card": "SAMPLE-0000010_v0.png"
+}

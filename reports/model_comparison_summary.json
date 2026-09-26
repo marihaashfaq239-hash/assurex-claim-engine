@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-09-24T10:59:28",
+  "total_claims": 45,
+  "py_accuracy_pct": 97.78,
+  "tm_accuracy_pct": 97.78,
+  "model_agreement_pct": 95.56,
+  "avg_conf_diff_pct": 7.61,
+  "max_conf_diff_pct": 43.93,
+  "decision_accuracy_pct": 42.22,
+  "srs_85pct_target_met": true,
+  "consistency_breakdown": {
+    "Strong Match": 29,
+    "Acceptable Match": 8,
+    "Weak Match": 3,
+    "Uncertain Result": 3,
+    "Model Disagreement": 2
+  },
+  "final_decisions": {
+    "Likely Valid": 4,
+    "Likely Invalid": 41,
+    "Manual Review Required": 0
+  },
+  "disagreement_count": 2,
+  "agreement_count": 43
+}

@@ -1,0 +1,17 @@
+{
+  "claim_submission_delay_days": 0.19063,
+  "purchase_price": 0.12679,
+  "repair_count": 0.1206,
+  "days_since_fault": 0.09994,
+  "product_age_months": 0.09548,
+  "missing_doc_count": 0.09144,
+  "warranty_type_standard": 0.0534,
+  "has_warranty_card": 0.03918,
+  "warranty_type_third_party": 0.03654,
+  "has_purchase_receipt": 0.02831,
+  "warranty_type_extended": 0.024,
+  "had_unauthorized_repair": 0.02252,
+  "serial_number_match": 0.0125,
+  "has_product_image": 0.00798,
+  "damage_type_physical": 0.00714
+}

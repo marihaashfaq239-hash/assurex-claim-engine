@@ -1,0 +1,107 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Submit Claim — Step 1 — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:my_claims' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div>
+    <h4 class="page-title mb-0">Submit a Warranty Claim</h4>
+    <p class="page-subtitle mb-0">Tell us about the fault with your product</p>
+  </div>
+</div>
+
+<!-- Stepper -->
+<div class="claim-stepper mb-4">
+  <div class="stepper-step active"><div class="step-circle">1</div><div class="step-label">Fault Details</div></div>
+  <div class="stepper-step"><div class="step-circle">2</div><div class="step-label">Documents</div></div>
+  <div class="stepper-step"><div class="step-circle">3</div><div class="step-label">Repair History</div></div>
+  <div class="stepper-step"><div class="step-circle">4</div><div class="step-label">Review</div></div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Fault & Product Information</div>
+      <div class="card-body">
+        <form method="post" novalidate data-loading>
+          {% csrf_token %}
+          <div class="row g-3">
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Product <span class="text-danger">*</span></label>
+              {{ form.product }}
+              {% if form.product.errors %}<div class="text-danger small">{{ form.product.errors.as_text }}</div>{% endif %}
+              <div class="text-muted small mt-1">Select the product you're filing a claim for.</div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Warranty (optional)</label>
+              {{ form.warranty }}
+              {% if form.warranty.errors %}<div class="text-danger small">{{ form.warranty.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Fault / Damage Type <span class="text-danger">*</span></label>
+              {{ form.damage_type }}
+              {% if form.damage_type.errors %}<div class="text-danger small">{{ form.damage_type.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Date Fault Occurred <span class="text-danger">*</span></label>
+              {{ form.fault_date }}
+              {% if form.fault_date.errors %}<div class="text-danger small">{{ form.fault_date.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Fault Description <span class="text-danger">*</span></label>
+              {{ form.fault_description }}
+              {% if form.fault_description.errors %}<div class="text-danger small">{{ form.fault_description.errors.as_text }}</div>{% endif %}
+              <div class="text-muted small mt-1">Be specific — describe what happened, when it started, and any symptoms.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Fault Location (optional)</label>
+              {{ form.fault_location }}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Additional Notes (optional)</label>
+              {{ form.additional_notes }}
+            </div>
+
+          </div>
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger mt-3 py-2">{{ form.non_field_errors.as_text }}</div>
+          {% endif %}
+
+          <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'claims:my_claims' %}" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary px-4">
+              Next: Upload Documents <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// When product changes, update warranty dropdown via AJAX
+document.querySelector('select[name="product"]')?.addEventListener('change', function() {
+    const pid = this.value;
+    if (!pid) return;
+    const warrantySelect = document.querySelector('select[name="warranty"]');
+    if (!warrantySelect) return;
+    fetch(`/claims/ajax/customer-products/?customer_id=0&product_id=${pid}`)
+        .then(r => r.json())
+        .catch(() => {});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{
+  "claim_id": "SAMPLE-0000006",
+  "scenario": "Duplicate Claim",
+  "description": "Same product already has open claim CLM-0000500. Flagged as duplicate.",
+  "expected_decision": "Manual Review Required",
+  "claimant_email": "customer06@example.com",
+  "original_claim_id": "CLM-0000500",
+  "product": {
+    "name": "Orient 40-inch LED TV",
+    "category": "Television",
+    "brand": "Orient",
+    "model_number": "OE40FG613",
+    "serial_number": "SN-TV-20230915-088",
+    "purchase_date": "2025-12-18",
+    "purchase_price": 42000,
+    "retailer": "Anees Bahri Electronics"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2025-12-18",
+    "expiry_date": "2026-12-18",
+    "remaining_days": 85,
+    "is_active": true
+  },
+  "claim": {
+    "fault_date": "2026-09-20",
+    "fault_description": "Display flickering. Same issue as previous claim.",
+    "damage_type": "electrical",
+    "fault_location": "Display board"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": true,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": false,
+    "missing_doc_count": 0
+  },
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": true,
+    "repair_count": 1,
+    "claim_submission_delay_days": 4
+  },
+  "duplicate_of": "CLM-0000500",
+  "rule_triggered": "duplicate_claim (manual_review) — OPEN CLAIM EXISTS",
+  "claim_summary_card": "SAMPLE-0000006_v0.png"
+}

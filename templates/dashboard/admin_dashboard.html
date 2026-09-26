@@ -1,0 +1,362 @@
+{% extends "base/base.html" %}
+{% load static assurex_tags %}
+
+{% block title %}Admin Dashboard — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active">Admin Dashboard</li>
+{% endblock %}
+
+{% block content %}
+
+<!-- ── Page Header ── -->
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h4 class="page-title mb-0">
+      <span class="text-gradient-blue">Administrator</span> Dashboard
+    </h4>
+    <p class="page-subtitle mb-0 mt-1">System-wide overview — AI models, claims, users</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{% url 'administrator:monitoring' %}" class="btn btn-outline-secondary btn-sm d-flex align-items-center gap-1">
+      <i class="bi bi-activity"></i> Monitoring
+    </a>
+    <a href="{% url 'administrator:reports' %}?export=claims_csv" class="btn btn-primary btn-sm d-flex align-items-center gap-1">
+      <i class="bi bi-download"></i> Export CSV
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PRIMARY STAT CARDS — ROW 1
+     ══════════════════════════════════════════ -->
+<div class="row g-3 mb-3">
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-blue animate-in animate-in-delay-1">
+      <div class="stat-label">Total Claims</div>
+      <div class="stat-value" data-count="{{ total_claims }}">{{ total_claims }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-file-earmark-text"></i></div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-green animate-in animate-in-delay-1">
+      <div class="stat-label">Likely Valid</div>
+      <div class="stat-value" data-count="{{ valid_claims }}">{{ valid_claims }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-check-circle-fill"></i></div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-red animate-in animate-in-delay-2">
+      <div class="stat-label">Likely Invalid</div>
+      <div class="stat-value" data-count="{{ invalid_claims }}">{{ invalid_claims }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-x-circle-fill"></i></div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-amber animate-in animate-in-delay-2">
+      <div class="stat-label">Manual Review</div>
+      <div class="stat-value" data-count="{{ manual_claims }}">{{ manual_claims }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-person-check-fill"></i></div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-red animate-in animate-in-delay-3">
+      <div class="stat-label">Duplicates</div>
+      <div class="stat-value" data-count="{{ duplicate_alerts }}">{{ duplicate_alerts }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-copy"></i></div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="stat-card stat-violet animate-in animate-in-delay-3">
+      <div class="stat-label">AI Disagreements</div>
+      <div class="stat-value" data-count="{{ model_disagreements }}">{{ model_disagreements }}</div>
+      <div class="stat-icon mt-2"><i class="bi bi-cpu"></i></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECONDARY STAT CARDS — ROW 2
+     ══════════════════════════════════════════ -->
+<div class="row g-3 mb-4">
+
+  <div class="col-6 col-md-3">
+    <div class="stat-card stat-cyan animate-in">
+      <div class="d-flex align-items-center gap-3">
+        <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+        <div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-value" data-count="{{ total_users }}" style="font-size:1.6rem;">{{ total_users }}</div>
+        </div>
+      </div>
+      <div class="mt-2 d-flex gap-3" style="font-size:.75rem;">
+        <span class="text-primary">{{ customers }} Customers</span>
+        <span class="text-success">{{ employees }} Employees</span>
+        <span class="text-warning" style="color:#8b5cf6!important;">{{ reviewers }} Reviewers</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <div class="stat-card stat-green animate-in">
+      <div class="d-flex align-items-center gap-3">
+        <div class="stat-icon"><i class="bi bi-check2-circle"></i></div>
+        <div>
+          <div class="stat-label">Approved</div>
+          <div class="stat-value" data-count="{{ approved_claims }}" style="font-size:1.6rem;">{{ approved_claims }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <div class="stat-card stat-red animate-in">
+      <div class="d-flex align-items-center gap-3">
+        <div class="stat-icon"><i class="bi bi-x-octagon-fill"></i></div>
+        <div>
+          <div class="stat-label">Rejected</div>
+          <div class="stat-value" data-count="{{ rejected_claims }}" style="font-size:1.6rem;">{{ rejected_claims }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-3">
+    <div class="stat-card stat-amber animate-in">
+      <div class="d-flex align-items-center gap-3">
+        <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+        <div>
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" data-count="{{ pending_claims }}" style="font-size:1.6rem;">{{ pending_claims }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     CHARTS + QUICK ACTIONS
+     ══════════════════════════════════════════ -->
+<div class="row g-4 mb-4">
+
+  <!-- Claim Trend Chart -->
+  <div class="col-lg-8">
+    <div class="card h-100 animate-in animate-target">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:28px;height:28px;background:linear-gradient(135deg,#2563eb,#3b82f6);border-radius:.5rem;display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-graph-up text-white" style="font-size:.78rem;"></i>
+          </div>
+          <span>Claim Submissions — Last 7 Days</span>
+        </div>
+        <a href="{% url 'administrator:analytics' %}" class="btn btn-sm btn-outline-primary">
+          Full Analytics <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div style="height:220px;">
+          <canvas id="claimTrendChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decision Distribution Donut -->
+  <div class="col-lg-4">
+    <div class="card h-100 animate-in animate-target">
+      <div class="card-header d-flex align-items-center gap-2">
+        <div style="width:28px;height:28px;background:linear-gradient(135deg,#8b5cf6,#a78bfa);border-radius:.5rem;display:flex;align-items:center;justify-content:center;">
+          <i class="bi bi-pie-chart text-white" style="font-size:.78rem;"></i>
+        </div>
+        <span>AI Decision Split</span>
+      </div>
+      <div class="card-body d-flex flex-column align-items-center justify-content-center">
+        <div style="height:160px;width:100%;">
+          <canvas id="decisionDonutChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     QUICK ACTIONS + RECENT CLAIMS
+     ══════════════════════════════════════════ -->
+<div class="row g-4">
+
+  <!-- Quick Actions Panel -->
+  <div class="col-lg-3">
+    <div class="card animate-in animate-target">
+      <div class="card-header d-flex align-items-center gap-2">
+        <i class="bi bi-lightning-fill text-amber"></i>
+        <span>Quick Actions</span>
+      </div>
+      <div class="card-body p-2">
+        {% url 'reviewer:queue' as rq_url %}
+        {% url 'administrator:users' as users_url %}
+        {% url 'administrator:warranty_policies' as wp_url %}
+        {% url 'administrator:model_versions' as mv_url %}
+        {% url 'administrator:thresholds' as thresh_url %}
+        {% url 'administrator:audit_logs' as al_url %}
+        {% url 'administrator:monitoring' as mon_url %}
+
+        {% for item in ""|make_list %}{% endfor %}
+        <a href="{{ rq_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.12);color:#1e293b;transition:all .15s;">
+          <i class="bi bi-inbox-fill text-violet" style="color:#8b5cf6;"></i>
+          <span style="font-size:.83rem;font-weight:600;">Review Queue</span>
+          {% if manual_claims %}
+          <span class="ms-auto badge rounded-pill" style="background:#8b5cf6;font-size:.65rem;">{{ manual_claims }}</span>
+          {% endif %}
+        </a>
+        <a href="{{ users_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="font-size:.83rem;color:#475569;transition:background .15s;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-people text-primary"></i><span>User Management</span>
+        </a>
+        <a href="{{ wp_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="font-size:.83rem;color:#475569;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-shield-exclamation text-primary"></i><span>Warranty Policies</span>
+        </a>
+        <a href="{{ mv_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="font-size:.83rem;color:#475569;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-cpu text-primary"></i><span>Model Versions</span>
+        </a>
+        <a href="{{ thresh_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="font-size:.83rem;color:#475569;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-sliders text-primary"></i><span>AI Thresholds</span>
+        </a>
+        <a href="{{ al_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded mb-1"
+           style="font-size:.83rem;color:#475569;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-journal-text text-primary"></i><span>Audit Logs</span>
+        </a>
+        <a href="{{ mon_url }}" class="d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded"
+           style="font-size:.83rem;color:#475569;" onmouseover="this.style.background='rgba(37,99,235,.04)'" onmouseout="this.style.background=''">
+          <i class="bi bi-activity text-primary"></i><span>Monitoring</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Claims Table -->
+  <div class="col-lg-9">
+    <div class="card animate-in animate-target">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <div style="width:28px;height:28px;background:linear-gradient(135deg,#06b6d4,#22d3ee);border-radius:.5rem;display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-table text-white" style="font-size:.78rem;"></i>
+          </div>
+          <span>Recent Claims</span>
+        </div>
+        <a href="{% url 'administrator:all_claims' %}" class="btn btn-sm btn-outline-primary">
+          View All <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+      <div class="card-body p-0">
+        {% if recent_claims %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Decision</th>
+                <th>AI Match</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in recent_claims %}
+              <tr>
+                <td>
+                  <a href="{% url 'claims:detail' c.pk %}"
+                     class="fw-bold font-mono text-decoration-none"
+                     style="color:#2563eb;font-size:.8rem;">
+                    {{ c.claim_reference|default:"—" }}
+                  </a>
+                </td>
+                <td style="font-size:.83rem;">{{ c.claimant.get_full_name|truncatechars:18 }}</td>
+                <td style="font-size:.83rem;">{{ c.product.brand }} {{ c.product.product_name|truncatechars:16 }}</td>
+                <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+                <td>
+                  {% if c.final_decision == 'likely_valid' %}
+                    <span class="badge bg-success rounded-pill" style="font-size:.7rem;"><i class="bi bi-check me-1"></i>Valid</span>
+                  {% elif c.final_decision == 'likely_invalid' %}
+                    <span class="badge bg-danger rounded-pill" style="font-size:.7rem;"><i class="bi bi-x me-1"></i>Invalid</span>
+                  {% elif c.final_decision == 'manual_review' %}
+                    <span class="badge bg-warning rounded-pill" style="font-size:.7rem;color:#fff;">Review</span>
+                  {% else %}
+                    <span class="text-muted small">—</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if c.model_consistency_status %}
+                  <span class="badge rounded-pill
+                    {% if c.model_consistency_status == 'strong_match' %}bg-success
+                    {% elif c.model_consistency_status == 'acceptable_match' %}bg-info text-dark
+                    {% elif c.model_consistency_status == 'weak_match' %}bg-warning text-dark
+                    {% else %}bg-danger{% endif %}"
+                    style="font-size:.68rem;">
+                    {{ c.model_consistency_status|consistency_label|truncatechars:12 }}
+                  </span>
+                  {% else %}<span class="text-muted small">—</span>{% endif %}
+                </td>
+                <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5 text-muted">
+          <i class="bi bi-inbox fs-1 opacity-25 d-block mb-2"></i>
+          No claims in the system yet.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* ── Trend Chart ── */
+  const trendData = {{ claims_this_week|safe }};
+  window.AssureX.createLineChart(
+    'claimTrendChart',
+    trendData.map(d => {
+      const dt = new Date(d.date);
+      return dt.toLocaleDateString('en', { weekday:'short', month:'short', day:'numeric' });
+    }),
+    trendData.map(d => d.count),
+    'Claims',
+    '#2563eb'
+  );
+
+  /* ── Decision Donut ── */
+  window.AssureX.createDoughnutChart(
+    'decisionDonutChart',
+    ['Likely Valid', 'Likely Invalid', 'Manual Review', 'Pending'],
+    [{{ valid_claims }}, {{ invalid_claims }}, {{ manual_claims }}, {{ pending_claims }}],
+    ['#10b981', '#f43f5e', '#f59e0b', '#2563eb']
+  );
+
+});
+</script>
+{% endblock %}

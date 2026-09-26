@@ -1,0 +1,173 @@
+{% extends "base/base.html" %}
+{% load static humanize %}
+
+{% block title %}Employee Dashboard — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">Welcome, {{ user.first_name }} 👋</h4>
+    <p class="page-subtitle mb-0">Service Center Employee Dashboard</p>
+  </div>
+  <a href="{% url 'claims:employee_create' %}" class="btn btn-primary">
+    <i class="bi bi-file-earmark-plus me-1"></i>Create Claim
+  </a>
+</div>
+
+<!-- Stat Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="stat-card" style="border-left-color:#2563eb;">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="stat-label">Total Claims Created</div>
+          <div class="stat-value">{{ total_created }}</div>
+        </div>
+        <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-file-earmark-text"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card" style="border-left-color:#0891b2;">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="stat-label">Submitted Today</div>
+          <div class="stat-value">{{ submitted_today }}</div>
+        </div>
+        <div class="stat-icon bg-info bg-opacity-10 text-info"><i class="bi bi-calendar-check"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card" style="border-left-color:#d97706;">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="stat-label">Pending Review</div>
+          <div class="stat-value">{{ pending_claims }}</div>
+        </div>
+        <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-hourglass-split"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="stat-card" style="border-left-color:#16a34a;">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <div class="stat-label">Approved</div>
+          <div class="stat-value">{{ approved_claims }}</div>
+        </div>
+        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-check-circle"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <a href="{% url 'claims:customer_search' %}" class="card text-decoration-none h-100">
+      <div class="card-body d-flex align-items-center gap-3 py-3">
+        <div class="stat-icon bg-primary bg-opacity-10 text-primary" style="width:44px;height:44px;border-radius:10px;flex-shrink:0;">
+          <i class="bi bi-search"></i>
+        </div>
+        <div>
+          <div class="fw-semibold">Search Customer</div>
+          <small class="text-muted">Find customer by name or email</small>
+        </div>
+        <i class="bi bi-chevron-right text-muted ms-auto"></i>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'claims:employee_create' %}" class="card text-decoration-none h-100">
+      <div class="card-body d-flex align-items-center gap-3 py-3">
+        <div class="stat-icon bg-success bg-opacity-10 text-success" style="width:44px;height:44px;border-radius:10px;flex-shrink:0;">
+          <i class="bi bi-file-earmark-plus"></i>
+        </div>
+        <div>
+          <div class="fw-semibold">Create Claim</div>
+          <small class="text-muted">Submit a claim for a customer</small>
+        </div>
+        <i class="bi bi-chevron-right text-muted ms-auto"></i>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url 'claims:employee_list' %}" class="card text-decoration-none h-100">
+      <div class="card-body d-flex align-items-center gap-3 py-3">
+        <div class="stat-icon bg-info bg-opacity-10 text-info" style="width:44px;height:44px;border-radius:10px;flex-shrink:0;">
+          <i class="bi bi-list-ul"></i>
+        </div>
+        <div>
+          <div class="fw-semibold">My Claims</div>
+          <small class="text-muted">View all claims I created</small>
+        </div>
+        <i class="bi bi-chevron-right text-muted ms-auto"></i>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- Recent Claims -->
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span><i class="bi bi-file-earmark-text me-2 text-primary"></i>Recent Claims Created</span>
+    <a href="{% url 'claims:employee_list' %}" class="btn btn-sm btn-outline-primary">View All</a>
+  </div>
+  <div class="card-body p-0">
+    {% if recent_claims %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Status</th>
+            <th>Decision</th>
+            <th>Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in recent_claims %}
+          <tr>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+                {{ c.claim_reference|default:"—" }}
+              </a>
+            </td>
+            <td>
+              <div>{{ c.claimant.get_full_name }}</div>
+              <small class="text-muted">{{ c.claimant.email }}</small>
+            </td>
+            <td>{{ c.product.brand }} {{ c.product.product_name|truncatechars:18 }}</td>
+            <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+            <td>
+              {% if c.final_decision == 'likely_valid' %}<span class="badge bg-success-subtle text-success rounded-pill">Likely Valid</span>
+              {% elif c.final_decision == 'likely_invalid' %}<span class="badge bg-danger-subtle text-danger rounded-pill">Likely Invalid</span>
+              {% elif c.final_decision == 'manual_review' %}<span class="badge bg-warning-subtle text-warning rounded-pill">Manual Review</span>
+              {% else %}<span class="text-muted small">Pending</span>{% endif %}
+            </td>
+            <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-eye"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-file-earmark-x fs-1 d-block mb-2 opacity-25"></i>
+      No claims created yet.
+      <a href="{% url 'claims:employee_create' %}" class="d-block mt-2 text-primary">Create a claim</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

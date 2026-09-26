@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% load assurex_tags %}
+{% block title %}AI Override History — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="page-title mb-0">AI Override History</h4>
+  <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-primary btn-sm"><i class="bi bi-inbox me-1"></i>Back to Queue</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    {% if overrides %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Reference</th><th>Customer</th><th>Original AI Result</th><th>My Decision</th><th>Override Reason</th><th>Date</th></tr></thead>
+        <tbody>
+          {% for rev in overrides %}
+          <tr>
+            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-semibold text-primary text-decoration-none">{{ rev.claim.claim_reference }}</a></td>
+            <td>{{ rev.claim.claimant.get_full_name }}</td>
+            <td><span class="badge bg-secondary-subtle text-secondary">{{ rev.ai_original_result|decision_label|default:"—" }}</span></td>
+            <td>
+              {% if rev.decision == 'approved' %}<span class="badge bg-success rounded-pill">Approved</span>
+              {% elif rev.decision == 'rejected' %}<span class="badge bg-danger rounded-pill">Rejected</span>
+              {% else %}<span class="badge bg-warning text-dark rounded-pill">{{ rev.get_decision_display }}</span>{% endif %}
+            </td>
+            <td class="text-muted" style="font-size:0.85rem;max-width:220px;">{{ rev.override_reason|truncatechars:80 }}</td>
+            <td class="text-muted small">{{ rev.reviewed_at|date:"M d, Y" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted"><i class="bi bi-pencil-square fs-1 opacity-25 d-block mb-2"></i>No AI overrides on record.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

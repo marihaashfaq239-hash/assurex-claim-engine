@@ -1,0 +1,59 @@
+{% extends "base/base.html" %}
+{% block title %}Reviewed Claims — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="page-title mb-0">Reviewed Claims</h4>
+  <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-primary btn-sm">
+    <i class="bi bi-inbox me-1"></i>Back to Queue
+  </a>
+</div>
+<div class="card mb-3">
+  <div class="card-body py-3">
+    <form method="get" class="row g-2">
+      <div class="col-md-5">
+        <input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search reference or customer email...">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+        {% if search %}<a href="{% url 'reviewer:reviewed' %}" class="btn btn-outline-secondary ms-1">Clear</a>{% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    {% if reviews %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Reference</th><th>Customer</th><th>Product</th><th>Decision</th><th>AI Override</th><th>Reviewed</th><th></th></tr></thead>
+        <tbody>
+          {% for rev in reviews %}
+          <tr>
+            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-semibold text-primary text-decoration-none">{{ rev.claim.claim_reference }}</a></td>
+            <td><div>{{ rev.claim.claimant.get_full_name }}</div><small class="text-muted">{{ rev.claim.claimant.email }}</small></td>
+            <td>{{ rev.claim.product.brand }} {{ rev.claim.product.product_name|truncatechars:18 }}</td>
+            <td>
+              {% if rev.decision == 'approved' %}<span class="badge bg-success rounded-pill">Approved</span>
+              {% elif rev.decision == 'rejected' %}<span class="badge bg-danger rounded-pill">Rejected</span>
+              {% elif rev.decision == 'more_info' %}<span class="badge bg-warning text-dark rounded-pill">More Info</span>
+              {% else %}<span class="badge bg-secondary rounded-pill">{{ rev.get_decision_display }}</span>{% endif %}
+            </td>
+            <td>
+              {% if rev.is_ai_override %}
+                <span class="badge bg-danger-subtle text-danger"><i class="bi bi-pencil-square me-1"></i>Yes</span>
+              {% else %}<span class="text-muted small">—</span>{% endif %}
+            </td>
+            <td class="text-muted small">{{ rev.reviewed_at|date:"M d, Y H:i"|default:"—" }}</td>
+            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted"><i class="bi bi-clipboard-x fs-1 opacity-25 d-block mb-2"></i>No reviewed claims found.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

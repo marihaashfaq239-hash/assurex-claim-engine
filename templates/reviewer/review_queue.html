@@ -1,0 +1,125 @@
+{% extends "base/base.html" %}
+{% load assurex_tags %}
+{% load static assurex_tags %}
+
+{% block title %}Review Queue — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">Manual Review Queue</h4>
+    <p class="page-subtitle mb-0">{{ total }} claim{{ total|pluralize }} awaiting manual review</p>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="card mb-3">
+  <div class="card-body py-3">
+    <form method="get" class="row g-2 align-items-end">
+      <div class="col-md-6">
+        <input type="text" name="q" value="{{ search }}" class="form-control"
+               placeholder="Search by reference, customer email, serial...">
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+        {% if search %}<a href="{% url 'reviewer:queue' %}" class="btn btn-outline-secondary ms-1">Clear</a>{% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    {% if claims %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Python Model</th>
+            <th>TM Model</th>
+            <th>Conf. Diff</th>
+            <th>Consistency</th>
+            <th>Submitted</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in claims %}
+          <tr class="{% if c.already_reviewed %}table-secondary{% endif %}">
+            <td>
+              <a href="{% url 'reviewer:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+                {{ c.claim_reference|default:"—" }}
+              </a>
+              {% if c.is_duplicate %}
+                <br><span class="badge bg-danger-subtle text-danger" style="font-size:.65rem;">Duplicate</span>
+              {% endif %}
+            </td>
+            <td>
+              <div>{{ c.claimant.get_full_name }}</div>
+              <small class="text-muted">{{ c.claimant.email }}</small>
+            </td>
+            <td>
+              <div>{{ c.product.brand }} {{ c.product.product_name|truncatechars:18 }}</div>
+              <small class="font-monospace text-muted">{{ c.product.serial_number }}</small>
+            </td>
+            <td>
+              {% if c.python_prediction %}
+                <span class="badge {% if c.python_prediction == 'valid_claim' %}bg-success-subtle text-success{% elif c.python_prediction == 'invalid_claim' %}bg-danger-subtle text-danger{% else %}bg-warning-subtle text-warning{% endif %}">
+                  {{ c.python_prediction|prediction_label }}
+                </span>
+              {% else %}<span class="text-muted small">—</span>{% endif %}
+            </td>
+            <td>
+              {% if c.tm_prediction %}
+                <span class="badge {% if c.tm_prediction == 'valid_claim' %}bg-success-subtle text-success{% elif c.tm_prediction == 'invalid_claim' %}bg-danger-subtle text-danger{% else %}bg-warning-subtle text-warning{% endif %}">
+                  {{ c.tm_prediction|prediction_label }}
+                </span>
+              {% else %}<span class="text-muted small">—</span>{% endif %}
+            </td>
+            <td>
+              {% if c.confidence_difference is not None %}
+                <span class="fw-bold {% if c.confidence_difference > 25 %}text-danger{% elif c.confidence_difference > 15 %}text-warning{% else %}text-success{% endif %}">
+                  {{ c.confidence_difference|floatformat:1 }}%
+                </span>
+              {% else %}—{% endif %}
+            </td>
+            <td>
+              {% if c.model_consistency_status %}
+                <span class="badge
+                  {% if c.model_consistency_status == 'strong_match' %}bg-success-subtle text-success
+                  {% elif c.model_consistency_status == 'acceptable_match' %}bg-info-subtle text-info
+                  {% elif c.model_consistency_status == 'weak_match' %}bg-warning-subtle text-warning
+                  {% else %}bg-danger-subtle text-danger{% endif %}">
+                  {{ c.model_consistency_status|consistency_label }}
+                </span>
+              {% else %}—{% endif %}
+            </td>
+            <td class="text-muted small">{{ c.submission_date|date:"M d, Y"|default:c.created_at|date:"M d, Y" }}</td>
+            <td>
+              {% if c.already_reviewed %}
+                <span class="badge bg-success rounded-pill">Done</span>
+              {% else %}
+                <a href="{% url 'reviewer:detail' c.pk %}" class="btn btn-sm btn-warning">
+                  <i class="bi bi-pencil-square me-1"></i>Review
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-check2-all fs-1 opacity-25 d-block mb-2"></i>
+      {% if search %}No claims match "{{ search }}".
+      {% else %}Queue is empty — no claims pending manual review.{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

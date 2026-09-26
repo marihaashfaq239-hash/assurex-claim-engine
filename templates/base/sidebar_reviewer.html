@@ -1,0 +1,57 @@
+{% load static %}
+<ul class="nav flex-column px-1 mt-1">
+
+  <!-- ── Main ── -->
+  <li class="sidebar-section-title">Main</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'reviewer_dashboard' in request.resolver_match.url_name %}active{% endif %}"
+       href="{% url 'dashboard:reviewer' %}">
+      <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'notifications' in request.path %}active{% endif %}"
+       href="{% url 'notifications:list' %}">
+      <i class="bi bi-bell"></i>
+      <span>Notifications</span>
+      {% if unread_notifications_count %}
+        <span class="ms-auto badge rounded-pill sidebar-badge-alert">{{ unread_notifications_count }}</span>
+      {% endif %}
+    </a>
+  </li>
+
+  <!-- ── Review Work ── -->
+  <li class="sidebar-section-title">Review Work</li>
+  <li class="nav-item">
+    <a class="nav-link sidebar-highlight {% if 'queue' in request.path %}active{% endif %}"
+       href="{% url 'reviewer:queue' %}">
+      <i class="bi bi-inbox-fill"></i>
+      <span class="fw-semibold">Review Queue</span>
+      {% if pending_reviews_count %}
+        <span class="ms-auto badge rounded-pill sidebar-badge-primary">{{ pending_reviews_count }}</span>
+      {% endif %}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'reviewed' in request.path %}active{% endif %}"
+       href="{% url 'reviewer:reviewed' %}">
+      <i class="bi bi-check2-circle"></i><span>Reviewed Claims</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'overrides' in request.path %}active{% endif %}"
+       href="{% url 'reviewer:overrides' %}">
+      <i class="bi bi-pencil-square"></i><span>AI Overrides</span>
+    </a>
+  </li>
+
+  <!-- ── Account ── -->
+  <li class="sidebar-section-title">Account</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'profile' in request.path %}active{% endif %}"
+       href="{% url 'accounts:profile' %}">
+      <i class="bi bi-person-gear"></i><span>My Profile</span>
+    </a>
+  </li>
+
+</ul>

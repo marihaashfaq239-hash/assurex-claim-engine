@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+{% block title %}Warranty Detail — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'warranties:list' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <h4 class="page-title mb-0">Warranty — {{ warranty.product.product_name }}</h4>
+</div>
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-shield-check me-2 text-primary"></i>Warranty Information</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless">
+          <tr><td class="text-muted">Product</td><td class="fw-semibold">{{ warranty.product.brand }} {{ warranty.product.product_name }}</td></tr>
+          <tr><td class="text-muted">Type</td><td>{{ warranty.get_warranty_type_display }}</td></tr>
+          <tr><td class="text-muted">Provider</td><td>{{ warranty.warranty_provider }}</td></tr>
+          <tr><td class="text-muted">Start Date</td><td>{{ warranty.start_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted">Expiry Date</td><td class="fw-semibold">{{ warranty.expiry_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted">Status</td>
+            <td>
+              {% if warranty.status == 'active' %}<span class="badge bg-success">Active</span>
+              {% elif warranty.status == 'expiring' %}<span class="badge bg-warning text-dark">Expiring Soon</span>
+              {% else %}<span class="badge bg-danger">Expired</span>{% endif %}
+            </td>
+          </tr>
+          <tr><td class="text-muted">Days Remaining</td>
+            <td class="fw-bold {% if warranty.remaining_days > 30 %}text-success{% elif warranty.remaining_days > 0 %}text-warning{% else %}text-danger{% endif %}">
+              {{ warranty.remaining_days }} days
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-card-text me-2 text-primary"></i>Coverage Details</div>
+      <div class="card-body">
+        <p class="text-muted mb-1 fw-semibold small">Coverage</p>
+        <p>{{ warranty.coverage_description|default:"Standard manufacturer warranty coverage." }}</p>
+        <p class="text-muted mb-1 fw-semibold small">Exclusions</p>
+        <p class="mb-0">{{ warranty.exclusions|default:"Physical damage, water damage, unauthorized repairs." }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

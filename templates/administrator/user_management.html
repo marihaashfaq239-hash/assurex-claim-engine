@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}User Management — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="page-title mb-0">User Management <span class="badge bg-primary rounded-pill ms-2">{{ total }}</span></h4>
+</div>
+<div class="card mb-3">
+  <div class="card-body py-3">
+    <form method="get" class="row g-2">
+      <div class="col-md-4"><input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search name, email, phone..."></div>
+      <div class="col-md-2">
+        <select name="role" class="form-select">
+          <option value="">All Roles</option>
+          {% for val, label in role_choices %}<option value="{{ val }}" {% if role_filter == val %}selected{% endif %}>{{ label }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select name="status" class="form-select">
+          <option value="">All Status</option>
+          <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Active</option>
+          <option value="inactive" {% if status_filter == 'inactive' %}selected{% endif %}>Inactive</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{% url 'administrator:users' %}" class="btn btn-outline-secondary ms-1">Clear</a>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th>Last Login</th><th>Actions</th></tr></thead>
+        <tbody>
+          {% for u in users %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar-sm" style="width:32px;height:32px;font-size:.8rem;background:var(--primary);">{{ u.get_initials }}</div>
+                <div>
+                  <div class="fw-semibold">{{ u.get_full_name }}</div>
+                  <small class="text-muted">{{ u.email }}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <form method="post" action="{% url 'administrator:change_role' u.pk %}" class="d-inline">
+                {% csrf_token %}
+                <select name="role" class="form-select form-select-sm" onchange="this.form.submit()" style="width:auto;">
+                  {% for val, label in role_choices %}
+                  <option value="{{ val }}" {% if u.role == val %}selected{% endif %}>{{ label }}</option>
+                  {% endfor %}
+                </select>
+              </form>
+            </td>
+            <td>
+              {% if u.is_active %}<span class="badge bg-success rounded-pill">Active</span>
+              {% else %}<span class="badge bg-danger rounded-pill">Inactive</span>{% endif %}
+            </td>
+            <td class="text-muted small">{{ u.date_joined|date:"M d, Y" }}</td>
+            <td class="text-muted small">{{ u.last_login|date:"M d, Y"|default:"Never" }}</td>
+            <td>
+              {% if u.pk != request.user.pk %}
+              <form method="post" action="{% url 'administrator:toggle_user' u.pk %}" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm {% if u.is_active %}btn-outline-danger{% else %}btn-outline-success{% endif %}"
+                        onclick="return confirm('{% if u.is_active %}Deactivate{% else %}Activate{% endif %} {{ u.email }}?')">
+                  {% if u.is_active %}<i class="bi bi-person-x"></i>{% else %}<i class="bi bi-person-check"></i>{% endif %}
+                </button>
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

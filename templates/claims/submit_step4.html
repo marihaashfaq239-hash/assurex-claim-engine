@@ -1,0 +1,164 @@
+{% extends "base/base.html" %}
+{% load static assurex_tags %}
+{% block title %}Submit Claim — Review — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:submit_step3' claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <h4 class="page-title mb-0">Review & Submit Claim</h4>
+</div>
+
+<!-- Stepper -->
+<div class="claim-stepper mb-4">
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Fault Details</div></div>
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Documents</div></div>
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Repair History</div></div>
+  <div class="stepper-step active"><div class="step-circle">4</div><div class="step-label">Review</div></div>
+</div>
+
+<!-- Missing documents alert -->
+{% if missing %}
+<div class="alert alert-warning d-flex align-items-start gap-2 mb-4">
+  <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+  <div>
+    <strong>Missing recommended documents:</strong>
+    {% for m in missing %}<span class="badge bg-warning text-dark ms-1">{{ m|lower|title }}</span>{% endfor %}
+    <div class="mt-1 small">You can still submit, but missing documents may affect your claim evaluation.</div>
+  </div>
+</div>
+{% endif %}
+
+<div class="row g-4">
+  <div class="col-lg-7">
+
+    <!-- Claim Summary -->
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-file-earmark-text me-2 text-primary"></i>Claim Summary</span>
+        <a href="{% url 'claims:submit' %}" class="btn btn-sm btn-outline-secondary">
+          <i class="bi bi-pencil me-1"></i>Edit
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="row g-2" style="font-size:.87rem;">
+          <div class="col-6"><span class="text-muted">Product</span><br><span class="fw-semibold">{{ claim.product.brand }} {{ claim.product.product_name }}</span></div>
+          <div class="col-6"><span class="text-muted">Serial No.</span><br><span class="font-monospace">{{ claim.product.serial_number }}</span></div>
+          <div class="col-6"><span class="text-muted">Damage Type</span><br>{{ claim.get_damage_type_display }}</div>
+          <div class="col-6"><span class="text-muted">Fault Date</span><br>{{ claim.fault_date|date:"M d, Y" }}</div>
+          <div class="col-12"><span class="text-muted">Fault Description</span><br>{{ claim.fault_description }}</div>
+          <div class="col-6"><span class="text-muted">Warranty</span><br>
+            {% if claim.warranty %}
+              {% if claim.warranty.is_expired %}<span class="badge bg-danger-subtle text-danger">Expired</span>
+              {% else %}<span class="badge bg-success-subtle text-success">Active ({{ claim.warranty.remaining_days }}d)</span>{% endif %}
+            {% else %}<span class="text-muted">Not specified</span>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents -->
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-paperclip me-2 text-primary"></i>Documents ({{ documents|length }})</span>
+        <a href="{% url 'claims:submit_step2' claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil me-1"></i>Edit</a>
+      </div>
+      <div class="card-body p-0">
+        {% if documents %}
+        <ul class="list-group list-group-flush">
+          {% for doc in documents %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-file-earmark me-2 text-primary"></i>
+              <span class="fw-semibold">{{ doc.get_doc_type_display }}</span>
+              <small class="text-muted ms-2">{{ doc.file_name }}</small>
+            </div>
+            {% if doc.pk in ocr_map %}
+            <span class="badge bg-success-subtle text-success"><i class="bi bi-cpu me-1"></i>OCR Done</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-center py-3 text-muted small">No documents uploaded.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Repair History -->
+    {% if repairs %}
+    <div class="card mb-3">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-tools me-2 text-primary"></i>Repair History ({{ repairs|length }})</span>
+        <a href="{% url 'claims:submit_step3' claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil me-1"></i>Edit</a>
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          {% for r in repairs %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <div class="fw-semibold">{{ r.repair_center }}</div>
+              <small class="text-muted">{{ r.repair_date|date:"M d, Y" }} · {{ r.get_outcome_display }}</small>
+            </div>
+            {% if not r.is_authorized %}<span class="badge bg-danger-subtle text-danger">Unauthorized</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- Right: Submit Panel -->
+  <div class="col-lg-5">
+    <div class="card border-primary border-opacity-50">
+      <div class="card-header bg-primary bg-opacity-5">
+        <i class="bi bi-send me-2 text-primary"></i><strong>Ready to Submit</strong>
+      </div>
+      <div class="card-body">
+        <div class="mb-3 p-3 rounded bg-light" style="font-size:.83rem;">
+          <p class="mb-2"><i class="bi bi-cpu text-primary me-2"></i>After submission, our <strong>AI engine</strong> will:</p>
+          <ul class="mb-0 ps-3">
+            <li>Extract data from your documents (OCR)</li>
+            <li>Run the <strong>Python ML model</strong> on your claim</li>
+            <li>Run the <strong>Teachable Machine</strong> model independently</li>
+            <li>Compare both model results</li>
+            <li>Apply <strong>warranty rules</strong> validation</li>
+            <li>Generate a final recommendation</li>
+          </ul>
+        </div>
+
+        <div class="mb-3" style="font-size:.83rem;">
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span class="text-muted">Documents uploaded</span>
+            <span class="fw-semibold">{{ documents|length }}</span>
+          </div>
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span class="text-muted">OCR processed</span>
+            <span class="fw-semibold">{{ ocr_results|length }}</span>
+          </div>
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span class="text-muted">Repair records</span>
+            <span class="fw-semibold">{{ repairs|length }}</span>
+          </div>
+          <div class="d-flex justify-content-between py-1">
+            <span class="text-muted">Missing docs</span>
+            <span class="fw-semibold {% if missing %}text-warning{% else %}text-success{% endif %}">{{ missing|length }}</span>
+          </div>
+        </div>
+
+        <form method="post" data-loading>
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary w-100 py-3 fw-semibold fs-6">
+            <i class="bi bi-send me-2"></i>Submit Claim for AI Evaluation
+          </button>
+        </form>
+        <p class="text-muted text-center mt-2" style="font-size:.75rem;">
+          By submitting, you confirm that all information provided is accurate.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

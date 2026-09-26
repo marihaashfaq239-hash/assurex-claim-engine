@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+{% block title %}Warranty Policies — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<h4 class="page-title mb-4">Warranty Policies</h4>
+<div class="card">
+  <div class="card-body p-0">
+    {% if policies %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead><tr><th>Policy Name</th><th>Category</th><th>Standard Duration</th><th>Claim Period</th><th>Status</th><th>Source File</th></tr></thead>
+        <tbody>
+          {% for p in policies %}
+          <tr>
+            <td class="fw-semibold">{{ p.name }}</td>
+            <td>{{ p.product_category }}</td>
+            <td>{{ p.standard_duration_months }} months</td>
+            <td>{{ p.claim_reporting_period_days }} days</td>
+            <td>{% if p.is_active %}<span class="badge bg-success rounded-pill">Active</span>{% else %}<span class="badge bg-secondary rounded-pill">Inactive</span>{% endif %}</td>
+            <td class="font-monospace small text-muted">{{ p.policy_file|default:"—" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted"><i class="bi bi-shield-exclamation fs-1 opacity-25 d-block mb-2"></i>No warranty policies loaded. Run the policy loader script.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

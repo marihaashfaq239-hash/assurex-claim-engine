@@ -1,0 +1,685 @@
+{% extends "base/base.html" %}
+{% load static assurex_tags %}
+
+{% block title %}{{ page_title }} — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+
+<!-- ── Page Header ── -->
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:my_claims' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div class="flex-grow-1">
+    <h4 class="page-title mb-0">{{ claim.claim_reference|default:"Claim Detail" }}</h4>
+    <span class="text-muted small">
+      {{ claim.product.brand }} {{ claim.product.product_name }}
+      &middot; {{ claim.get_damage_type_display }}
+      &middot; Submitted: {{ claim.submission_date|date:"M d, Y"|default:"Draft" }}
+    </span>
+  </div>
+  <div class="d-flex gap-2 align-items-center">
+    {% if claim.is_duplicate %}
+      <span class="badge bg-warning text-dark">
+        <i class="bi bi-copy me-1"></i>Duplicate Flag
+      </span>
+    {% endif %}
+    <span class="badge-claim status-{{ claim.status }} fs-6 px-3 py-2">
+      {{ claim.get_status_display }}
+    </span>
+    <!-- Downloadable Report Button (SRS §1.6.xliv) -->
+    <a href="{% url 'claims:download_report' pk=claim.pk %}" class="btn btn-sm btn-outline-primary" target="_blank">
+      <i class="bi bi-file-earmark-pdf me-1"></i> Download Report
+    </a>
+  </div>
+</div>
+
+<!-- ── Status Timeline ── -->
+<div class="card mb-4">
+  <div class="card-body py-3">
+    <div class="claim-stepper">
+      {% with statuses="draft,submitted,evaluation,additional,manual,approved,rejected,closed" %}
+      {% for step in statuses.split %}
+        {% with step_clean=step|cut:"," %}
+        <div class="stepper-step {% if claim.status == step_clean %}active{% elif claim.status != 'draft' %}done{% endif %}">
+          <div class="step-circle">
+            {% if step_clean == 'draft' %}<i class="bi bi-pencil" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'submitted' %}<i class="bi bi-send" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'evaluation' %}<i class="bi bi-cpu" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'additional' %}<i class="bi bi-paperclip" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'manual' %}<i class="bi bi-person" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'approved' %}<i class="bi bi-check" style="font-size:.8rem;"></i>
+            {% elif step_clean == 'rejected' %}<i class="bi bi-x" style="font-size:.8rem;"></i>
+            {% else %}<i class="bi bi-archive" style="font-size:.8rem;"></i>{% endif %}
+          </div>
+          <div class="step-label">{{ step_clean|capfirst }}</div>
+        </div>
+        {% endwith %}
+      {% endfor %}
+      {% endwith %}
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SRS §1.6.xxxii — AI-GENERATED CLAIM SUMMARY
+     ══════════════════════════════════════════════════════════ -->
+{% if ai_summary %}
+<div class="card mb-4 border-0 shadow-sm" style="background:linear-gradient(135deg,#f0f7ff 0%,#f8faff 100%);">
+  <div class="card-header bg-transparent border-bottom-0 pb-0 pt-3 px-4">
+    <div class="d-flex align-items-center gap-2">
+      <span style="background:#3b82f6;color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+        <i class="bi bi-robot" style="font-size:1rem;"></i>
+      </span>
+      <div>
+        <h6 class="mb-0 fw-bold" style="color:#1e3a5f;">AI-Generated Claim Summary</h6>
+        <small class="text-muted">Automatically generated from submitted claim data</small>
+      </div>
+      <button class="btn btn-sm btn-outline-secondary ms-auto" type="button"
+              data-bs-toggle="collapse" data-bs-target="#aiSummaryBody" aria-expanded="true">
+        <i class="bi bi-chevron-up" id="aiSummaryIcon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="collapse show" id="aiSummaryBody">
+    <div class="card-body px-4 pb-4">
+      <div class="row g-3">
+
+        <!-- Product & Warranty -->
+        <div class="col-md-6">
+          <div class="summary-block p-3 rounded" style="background:rgba(255,255,255,.75);border:1px solid #dbeafe;">
+            <div class="fw-semibold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#3b82f6;">
+              <i class="bi bi-box-seam me-1"></i> Product & Warranty
+            </div>
+            <table class="w-100" style="font-size:.85rem;">
+              <tr><td class="text-muted pe-2">Product</td><td class="fw-semibold">{{ ai_summary.product.name }}</td></tr>
+              <tr><td class="text-muted pe-2">Model</td><td>{{ ai_summary.product.model }}</td></tr>
+              <tr><td class="text-muted pe-2">Serial</td><td class="font-monospace">{{ ai_summary.product.serial }}</td></tr>
+              <tr><td class="text-muted pe-2">Purchased</td><td>{{ ai_summary.product.purchased|date:"M d, Y" }}</td></tr>
+              <tr><td class="text-muted pe-2">Product Age</td><td>{{ ai_summary.product.age_months }} months</td></tr>
+              {% if ai_summary.warranty %}
+              <tr><td class="text-muted pe-2">Warranty</td>
+                  <td>
+                    <span class="badge {% if ai_summary.warranty.is_expired %}bg-danger{% else %}bg-success{% endif %}-subtle
+                          {% if ai_summary.warranty.is_expired %}text-danger{% else %}text-success{% endif %}">
+                      {{ ai_summary.warranty.status }}
+                    </span>
+                  </td>
+              </tr>
+              <tr><td class="text-muted pe-2">Expiry</td><td>{{ ai_summary.warranty.expiry }}</td></tr>
+              {% if not ai_summary.warranty.is_expired %}
+              <tr><td class="text-muted pe-2">Remaining</td><td class="text-success fw-semibold">{{ ai_summary.warranty.remaining_days }} days</td></tr>
+              {% endif %}
+              {% endif %}
+            </table>
+          </div>
+        </div>
+
+        <!-- Fault Details -->
+        <div class="col-md-6">
+          <div class="summary-block p-3 rounded" style="background:rgba(255,255,255,.75);border:1px solid #fde8d8;">
+            <div class="fw-semibold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#ef4444;">
+              <i class="bi bi-exclamation-triangle me-1"></i> Reported Fault
+            </div>
+            <table class="w-100" style="font-size:.85rem;">
+              <tr><td class="text-muted pe-2">Type</td><td class="fw-semibold">{{ ai_summary.fault.type }}</td></tr>
+              <tr><td class="text-muted pe-2">Date</td><td>{{ ai_summary.fault.date|date:"M d, Y" }}</td></tr>
+              <tr>
+                <td class="text-muted pe-2 align-top">Description</td>
+                <td class="text-muted" style="font-size:.82rem;">{{ ai_summary.fault.description|truncatechars:120 }}</td>
+              </tr>
+            </table>
+
+            {% if ai_summary.repair_history %}
+            <div class="mt-2 pt-2 border-top">
+              <div class="text-muted mb-1" style="font-size:.78rem;">PRIOR REPAIRS ({{ ai_summary.repair_history|length }})</div>
+              {% for r in ai_summary.repair_history %}
+              <div class="d-flex gap-1 align-items-center" style="font-size:.8rem;">
+                <i class="bi bi-tools text-secondary"></i>
+                <span>{{ r.center }}</span>
+                <span class="text-muted">— {{ r.date }}</span>
+                {% if not r.authorized %}
+                  <span class="badge bg-danger-subtle text-danger ms-1" style="font-size:.7rem;">Unauthorized</span>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Evidence & Documents -->
+        <div class="col-md-6">
+          <div class="summary-block p-3 rounded" style="background:rgba(255,255,255,.75);border:1px solid #dcfce7;">
+            <div class="fw-semibold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#16a34a;">
+              <i class="bi bi-folder2-open me-1"></i> Evidence & Documents
+            </div>
+            {% if ai_summary.documents_uploaded %}
+            <div class="mb-1" style="font-size:.82rem;">
+              <span class="text-muted">Uploaded:</span>
+              {% for doc in ai_summary.documents_uploaded %}
+                <span class="badge bg-success-subtle text-success me-1">{{ doc }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if ai_summary.missing_documents %}
+            <div style="font-size:.82rem;">
+              <span class="text-muted">Missing:</span>
+              {% for mdoc in ai_summary.missing_documents %}
+                <span class="badge bg-danger-subtle text-danger me-1">{{ mdoc|replace_underscore }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-success small"><i class="bi bi-check-circle me-1"></i>All required documents present</div>
+            {% endif %}
+
+            {% if ai_summary.ocr_extractions %}
+            <div class="mt-2 pt-2 border-top" style="font-size:.8rem;">
+              <div class="text-muted mb-1">OCR EXTRACTIONS</div>
+              {% for ocr in ai_summary.ocr_extractions %}
+              <div class="d-flex justify-content-between">
+                <span>Serial: <strong>{{ ocr.serial }}</strong></span>
+                <span class="{% if ocr.verified %}text-success{% else %}text-muted{% endif %}">
+                  {% if ocr.verified %}<i class="bi bi-patch-check-fill me-1"></i>Verified{% else %}Unverified{% endif %}
+                </span>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Decision Summary -->
+        <div class="col-md-6">
+          <div class="summary-block p-3 rounded" style="background:rgba(255,255,255,.75);border:1px solid #e9d5ff;">
+            <div class="fw-semibold mb-2" style="font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#7c3aed;">
+              <i class="bi bi-cpu me-1"></i> AI Decision Summary
+            </div>
+            <table class="w-100" style="font-size:.85rem;">
+              <tr>
+                <td class="text-muted pe-2">Status</td>
+                <td><span class="fw-semibold">{{ ai_summary.claim_status }}</span></td>
+              </tr>
+              {% if ai_summary.final_decision %}
+              <tr>
+                <td class="text-muted pe-2">Decision</td>
+                <td>
+                  <span class="badge
+                    {% if 'Valid' in ai_summary.final_decision %}bg-success
+                    {% elif 'Invalid' in ai_summary.final_decision %}bg-danger
+                    {% else %}bg-warning text-dark{% endif %}">
+                    {{ ai_summary.final_decision }}
+                  </span>
+                </td>
+              </tr>
+              {% endif %}
+              {% if ai_summary.model_results.python %}
+              <tr>
+                <td class="text-muted pe-2">Python ML</td>
+                <td>{{ ai_summary.model_results.python.prediction }}
+                  <small class="text-muted">({{ ai_summary.model_results.python.confidence }}%)</small>
+                </td>
+              </tr>
+              {% endif %}
+              {% if ai_summary.model_results.teachable_machine %}
+              <tr>
+                <td class="text-muted pe-2">Image AI</td>
+                <td>{{ ai_summary.model_results.teachable_machine.prediction }}
+                  <small class="text-muted">({{ ai_summary.model_results.teachable_machine.confidence }}%)</small>
+                </td>
+              </tr>
+              {% endif %}
+              {% if ai_summary.model_results.consistency %}
+              <tr>
+                <td class="text-muted pe-2">Match</td>
+                <td class="fw-semibold
+                  {% if ai_summary.model_results.consistency == 'Strong Match' %}text-success
+                  {% elif ai_summary.model_results.consistency == 'Acceptable Match' %}text-info
+                  {% elif ai_summary.model_results.consistency == 'Weak Match' %}text-warning
+                  {% else %}text-danger{% endif %}">
+                  {{ ai_summary.model_results.consistency }}
+                  {% if ai_summary.model_results.conf_diff is not None %}
+                    <small class="text-muted fw-normal">(Δ {{ ai_summary.model_results.conf_diff|floatformat:1 }}%)</small>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endif %}
+            </table>
+            <div class="d-flex gap-2 mt-2" style="font-size:.8rem;">
+              <span class="text-success"><i class="bi bi-check-circle me-1"></i>{{ ai_summary.rules_passed|length }} Rules Passed</span>
+              <span class="text-danger"><i class="bi bi-x-circle me-1"></i>{{ ai_summary.rules_failed|length }} Failed</span>
+            </div>
+            {% if ai_summary.decision_reason %}
+            <div class="mt-2 p-2 rounded" style="background:#f5f0ff;font-size:.8rem;color:#6d28d9;">
+              <i class="bi bi-info-circle me-1"></i>{{ ai_summary.decision_reason|truncatechars:150 }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+      </div><!-- /row -->
+    </div><!-- /card-body -->
+  </div><!-- /collapse -->
+</div>
+{% endif %}
+<!-- ── END AI SUMMARY ── -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SRS §1.6.xxviii — CONTRADICTION DETECTION PANEL
+     ══════════════════════════════════════════════════════════ -->
+{% if contradictions %}
+<div class="card mb-4 border-warning shadow-sm">
+  <div class="card-header bg-warning-subtle d-flex align-items-center gap-2">
+    <i class="bi bi-exclamation-diamond-fill text-warning fs-5"></i>
+    <span class="fw-semibold text-dark">Contradiction & Inconsistency Report</span>
+    <span class="badge bg-danger ms-1">{{ hard_contradictions|length }} Hard</span>
+    <span class="badge bg-warning text-dark ms-1">{{ warn_contradictions|length }} Warning</span>
+  </div>
+  <div class="card-body p-0">
+    <ul class="list-group list-group-flush">
+
+      {% for c in hard_contradictions %}
+      <li class="list-group-item border-0 py-3">
+        <div class="d-flex gap-3 align-items-start">
+          <span class="badge bg-danger mt-1" style="min-width:60px;text-align:center;">HARD</span>
+          <div>
+            <div class="fw-semibold text-danger" style="font-size:.85rem;">
+              {{ c.type|replace_underscore|title }}
+            </div>
+            <div class="text-muted" style="font-size:.83rem;">{{ c.description }}</div>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+
+      {% for c in warn_contradictions %}
+      <li class="list-group-item border-0 py-3">
+        <div class="d-flex gap-3 align-items-start">
+          <span class="badge bg-warning text-dark mt-1" style="min-width:60px;text-align:center;">WARN</span>
+          <div>
+            <div class="fw-semibold text-warning" style="font-size:.85rem;">
+              {{ c.type|replace_underscore|title }}
+            </div>
+            <div class="text-muted" style="font-size:.83rem;">{{ c.description }}</div>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+
+    </ul>
+  </div>
+</div>
+{% endif %}
+<!-- ── END CONTRADICTION PANEL ── -->
+
+
+<div class="row g-4">
+
+  <!-- ── LEFT: Claim Info + Documents + Repair ── -->
+  <div class="col-lg-7">
+
+    <!-- Claim Details Card -->
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Claim Information</div>
+      <div class="card-body">
+        <div class="row g-2" style="font-size:0.87rem;">
+          <div class="col-6"><span class="text-muted">Claim ID</span><br>
+            <span class="fw-semibold font-monospace">{{ claim.claim_reference }}</span>
+          </div>
+          <div class="col-6"><span class="text-muted">Product</span><br>
+            <span class="fw-semibold">{{ claim.product.brand }} {{ claim.product.product_name }}</span>
+          </div>
+          <div class="col-6"><span class="text-muted">Damage Type</span><br>
+            <span>{{ claim.get_damage_type_display }}</span>
+          </div>
+          <div class="col-6"><span class="text-muted">Fault Date</span><br>
+            <span>{{ claim.fault_date|date:"M d, Y" }}</span>
+          </div>
+          <div class="col-6"><span class="text-muted">Warranty Active</span><br>
+            {% if claim.is_under_warranty %}
+              <span class="badge bg-success-subtle text-success">Yes</span>
+            {% else %}
+              <span class="badge bg-danger-subtle text-danger">No</span>
+            {% endif %}
+          </div>
+          <div class="col-6"><span class="text-muted">Days Since Fault</span><br>
+            <span>{{ claim.days_since_fault }} days</span>
+          </div>
+          <div class="col-12"><span class="text-muted">Fault Description</span><br>
+            <p class="mb-0">{{ claim.fault_description }}</p>
+          </div>
+          {% if claim.additional_notes %}
+          <div class="col-12"><span class="text-muted">Additional Notes</span><br>
+            <p class="mb-0 text-muted">{{ claim.additional_notes }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents Card -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="bi bi-paperclip me-2 text-primary"></i>
+        Supporting Documents ({{ documents|length }})
+      </div>
+      <div class="card-body p-0">
+        {% if documents %}
+        <ul class="list-group list-group-flush">
+          {% for doc in documents %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-file-earmark me-2 text-primary"></i>
+              <span class="fw-semibold">{{ doc.get_doc_type_display }}</span>
+              <small class="text-muted ms-2">{{ doc.file_name }} · {{ doc.file_size|filesizeformat }}</small>
+            </div>
+            <a href="{{ doc.file.url }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-download"></i>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-center py-3 text-muted small">No documents uploaded yet.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- OCR Results Card -->
+    {% if ocr_results %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-search me-2 text-primary"></i>OCR Extracted Data</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush" style="font-size:.83rem;">
+          {% for ocr in ocr_results %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between mb-1">
+              <span class="fw-semibold">{{ ocr.document.get_doc_type_display }}</span>
+              <span class="badge {% if ocr.status == 'success' %}bg-success-subtle text-success{% elif ocr.status == 'partial' %}bg-warning-subtle text-warning{% else %}bg-danger-subtle text-danger{% endif %}">
+                {{ ocr.status|capfirst }}
+                {% if ocr.confidence %} · {{ ocr.confidence|floatformat:"0" }}% conf{% endif %}
+              </span>
+            </div>
+            <div class="row g-1">
+              {% if ocr.invoice_number %}<div class="col-6 text-muted">Invoice: <strong>{{ ocr.invoice_number }}</strong></div>{% endif %}
+              {% if ocr.serial_number %}<div class="col-6 text-muted">Serial: <strong class="font-monospace">{{ ocr.serial_number }}</strong></div>{% endif %}
+              {% if ocr.purchase_date %}<div class="col-6 text-muted">Purchase Date: <strong>{{ ocr.purchase_date }}</strong></div>{% endif %}
+              {% if ocr.purchase_amount %}<div class="col-6 text-muted">Amount: <strong>PKR {{ ocr.purchase_amount }}</strong></div>{% endif %}
+            </div>
+            {% if ocr.is_verified %}
+            <span class="badge bg-success-subtle text-success mt-1"><i class="bi bi-patch-check me-1"></i>Verified</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Repair History Card -->
+    {% if repair_hist %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-tools me-2 text-primary"></i>Repair History</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          {% for r in repair_hist %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <span class="fw-semibold">{{ r.repair_center }}</span>
+              <span class="text-muted small">{{ r.repair_date|date:"M d, Y" }}</span>
+            </div>
+            <div class="text-muted small">{{ r.repair_description|truncatechars:80 }}</div>
+            {% if not r.is_authorized %}
+              <span class="badge bg-danger-subtle text-danger mt-1">
+                <i class="bi bi-exclamation-triangle me-1"></i>Unauthorized Repair
+              </span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div><!-- /col-lg-7 -->
+
+  <!-- ── RIGHT: Final Decision + AI Models + Rules + Reviewer ── -->
+  <div class="col-lg-5">
+
+    <!-- Final Decision Banner -->
+    {% if claim.final_decision != 'pending' %}
+    <div class="card mb-4 {% if claim.final_decision == 'likely_valid' %}border-success{% elif claim.final_decision == 'likely_invalid' %}border-danger{% else %}border-warning{% endif %}">
+      <div class="card-body text-center py-4">
+        {% if claim.final_decision == 'likely_valid' %}
+          <i class="bi bi-check-circle-fill text-success" style="font-size:2.5rem;"></i>
+          <h5 class="mt-2 text-success fw-bold">Likely Valid</h5>
+        {% elif claim.final_decision == 'likely_invalid' %}
+          <i class="bi bi-x-circle-fill text-danger" style="font-size:2.5rem;"></i>
+          <h5 class="mt-2 text-danger fw-bold">Likely Invalid</h5>
+        {% else %}
+          <i class="bi bi-person-check-fill text-warning" style="font-size:2.5rem;"></i>
+          <h5 class="mt-2 text-warning fw-bold">Manual Review Required</h5>
+        {% endif %}
+        {% if claim.decision_reason %}
+          <p class="text-muted small mb-0 mt-2">{{ claim.decision_reason }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- AI Model Results (SRS §1.6.xix, §1.6.xxi, §1.6.xxii, §1.6.xxiii) -->
+    {% if claim.python_prediction %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-cpu me-2 text-primary"></i>AI Model Results</div>
+      <div class="card-body">
+
+        <!-- Python ML Model -->
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-semibold small"><i class="bi bi-filetype-py text-primary me-1"></i>Python ML Model</span>
+            <span class="badge bg-primary rounded-pill">{{ claim.python_prediction|title }}</span>
+          </div>
+          <div class="row g-1" style="font-size:0.78rem;">
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Valid</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-success"
+                   data-value="{{ claim.python_confidence_valid|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.python_confidence_valid|default:0|floatformat:1 }}%</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Invalid</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-danger"
+                   data-value="{{ claim.python_confidence_invalid|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.python_confidence_invalid|default:0|floatformat:1 }}%</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Manual</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-warning"
+                   data-value="{{ claim.python_confidence_manual|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.python_confidence_manual|default:0|floatformat:1 }}%</div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-2">
+
+        <!-- Teachable Machine -->
+        <div class="mb-2">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-semibold small"><i class="bi bi-image text-info me-1"></i>Teachable Machine (Image AI)</span>
+            <span class="badge bg-info rounded-pill text-dark">{{ claim.tm_prediction|title|default:"Pending" }}</span>
+          </div>
+          {% if claim.tm_prediction %}
+          <div class="row g-1" style="font-size:0.78rem;">
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Valid</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-success"
+                   data-value="{{ claim.tm_confidence_valid|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.tm_confidence_valid|default:0|floatformat:1 }}%</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Invalid</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-danger"
+                   data-value="{{ claim.tm_confidence_invalid|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.tm_confidence_invalid|default:0|floatformat:1 }}%</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="text-muted mb-1">Manual</div>
+              <div class="confidence-bar"><div class="confidence-fill bg-warning"
+                   data-value="{{ claim.tm_confidence_manual|default:0|floatformat:0 }}" style="width:0%"></div></div>
+              <div class="fw-semibold mt-1">{{ claim.tm_confidence_manual|default:0|floatformat:1 }}%</div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Model Comparison (SRS §1.6.xxii, §1.6.xxiii, §1.6.xxiv) -->
+        {% if claim.model_consistency_status %}
+        <div class="mt-3 p-3 rounded" style="background:#f8fafc;border:1px solid #e2e8f0;">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="fw-semibold small text-muted">Model Comparison</span>
+            <span class="badge rounded-pill
+              {% if claim.model_consistency_status == 'strong_match' %}bg-success
+              {% elif claim.model_consistency_status == 'acceptable_match' %}bg-info text-dark
+              {% elif claim.model_consistency_status == 'weak_match' %}bg-warning text-dark
+              {% else %}bg-danger{% endif %}">
+              {{ claim.model_consistency_status|consistency_label }}
+            </span>
+          </div>
+          <div class="row g-2 text-center" style="font-size:.8rem;">
+            <div class="col-6">
+              <div class="text-muted">Python Prediction</div>
+              <div class="fw-semibold">{{ claim.python_prediction|title }}</div>
+            </div>
+            <div class="col-6">
+              <div class="text-muted">TM Prediction</div>
+              <div class="fw-semibold">{{ claim.tm_prediction|title|default:"—" }}</div>
+            </div>
+            {% if claim.confidence_difference is not None %}
+            <div class="col-12 border-top pt-2">
+              <div class="text-muted">Confidence Difference (|Py − TM|)</div>
+              <div class="fw-bold {% if claim.confidence_difference > 25 %}text-danger{% elif claim.confidence_difference > 15 %}text-warning{% else %}text-success{% endif %}">
+                {{ claim.confidence_difference|floatformat:1 }}%
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Claim Summary Card Image -->
+    {% if claim.claim_card_image %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-card-image me-2 text-primary"></i>Claim Summary Card</div>
+      <div class="card-body text-center p-2">
+        <img src="{{ claim.claim_card_image.url }}" alt="Claim Summary Card"
+             class="img-fluid rounded" style="max-height:300px;">
+        <div class="text-muted small mt-1">Generated for Teachable Machine classification</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Warranty Rule Engine Results (SRS §1.6.xxv, §1.6.xxxv) -->
+    {% if rule_results %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-clipboard-check me-2 text-primary"></i>Warranty Rule Check</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush" style="font-size:0.83rem;">
+          {% for r in rule_results %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ r.rule_name }}</span>
+            {% if r.outcome == 'pass' %}
+              <span class="badge bg-success-subtle text-success"><i class="bi bi-check"></i> Pass</span>
+            {% elif r.outcome == 'fail' %}
+              <span class="badge bg-danger-subtle text-danger"><i class="bi bi-x"></i> Fail</span>
+            {% elif r.outcome == 'warning' %}
+              <span class="badge bg-warning-subtle text-warning"><i class="bi bi-exclamation"></i> Warning</span>
+            {% else %}
+              <span class="badge bg-secondary-subtle text-secondary">Skip</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="p-2 d-flex gap-3 justify-content-end" style="font-size:0.82rem;background:#f8fafc;">
+          <span class="text-success"><i class="bi bi-check-circle me-1"></i>{{ claim.rules_passed }} Passed</span>
+          <span class="text-danger"><i class="bi bi-x-circle me-1"></i>{{ claim.rules_failed }} Failed</span>
+          <span class="text-warning"><i class="bi bi-exclamation-circle me-1"></i>{{ claim.rules_warning }} Warnings</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Reviewer Decision (SRS §1.6.xxxvii) -->
+    {% if review %}
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-person-check me-2 text-primary"></i>Reviewer Decision</div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-muted small">Decision</span>
+          <span class="badge rounded-pill
+            {% if review.decision == 'approved' %}bg-success
+            {% elif review.decision == 'rejected' %}bg-danger
+            {% else %}bg-warning text-dark{% endif %}">
+            {{ review.get_decision_display }}
+          </span>
+        </div>
+        {% if review.reviewer_comments %}
+          <p class="text-muted small mb-1">Reviewer Notes:</p>
+          <p class="mb-0" style="font-size:0.87rem;">{{ review.reviewer_comments }}</p>
+        {% endif %}
+        {% if review.additional_info_request %}
+          <div class="alert alert-info py-2 mt-2 mb-0" style="font-size:0.8rem;">
+            <i class="bi bi-info-circle me-1"></i>
+            <strong>Additional info requested:</strong> {{ review.additional_info_request }}
+          </div>
+        {% endif %}
+        {% if review.is_ai_override %}
+          <div class="alert alert-warning py-2 mt-2 mb-0" style="font-size:0.8rem;">
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            AI result overridden. Original AI result:
+            <strong>{{ review.ai_original_result }}</strong>
+            {% if review.override_reason %}
+              — {{ review.override_reason }}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div><!-- /col-lg-5 -->
+
+</div><!-- /row -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* Animate confidence bars on load */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.confidence-fill[data-value]').forEach(function (bar) {
+    var val = parseFloat(bar.getAttribute('data-value')) || 0;
+    setTimeout(function () { bar.style.width = Math.min(val, 100) + '%'; }, 200);
+  });
+});
+
+/* Collapse icon toggle for AI summary */
+var aiBody = document.getElementById('aiSummaryBody');
+var aiIcon = document.getElementById('aiSummaryIcon');
+if (aiBody && aiIcon) {
+  aiBody.addEventListener('hide.bs.collapse', function () {
+    aiIcon.className = 'bi bi-chevron-down';
+  });
+  aiBody.addEventListener('show.bs.collapse', function () {
+    aiIcon.className = 'bi bi-chevron-up';
+  });
+}
+</script>
+{% endblock %}

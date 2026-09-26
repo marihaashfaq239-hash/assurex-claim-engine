@@ -1,0 +1,92 @@
+{
+  "policy_id": "POL-PHONE-001",
+  "name": "Smartphone Warranty Policy",
+  "product_category": "Smartphone",
+  "version": "1.0",
+  "description": "Warranty policy for smartphones and tablets.",
+
+  "coverage": {
+    "standard_duration_months": 12,
+    "extended_duration_months": 0,
+    "battery_warranty_months": 6,
+    "screen_warranty_months": 6,
+    "claim_reporting_period_days": 7,
+    "warranty_start_conditions": "From date of first activation or purchase, whichever is earlier",
+    "grace_period_days": 3
+  },
+
+  "covered_faults": [
+    "electrical",
+    "software",
+    "manufacturing",
+    "display",
+    "battery",
+    "Camera malfunction (manufacturing defect)",
+    "Speaker or microphone failure",
+    "Charging port failure (not due to misuse)",
+    "Wi-Fi or cellular connectivity failures",
+    "Button/switch malfunction (manufacturing)"
+  ],
+
+  "exclusions": [
+    "physical",
+    "water",
+    "Cracked or shattered screen due to impact",
+    "Damage due to unauthorized software modification (rooting/jailbreaking)",
+    "Corrosion from liquid exposure",
+    "Damage due to third-party accessories",
+    "Lost or stolen devices",
+    "Cosmetic damage (scratches, dents)",
+    "Battery degradation due to normal use after 6 months",
+    "Software issues caused by user-installed apps"
+  ],
+
+  "mandatory_documents": [
+    "purchase_receipt",
+    "product_image",
+    "fault_evidence",
+    "serial_photo"
+  ],
+
+  "repair_conditions": {
+    "authorized_repair_required": true,
+    "max_repair_count": 2,
+    "void_if_unauthorized_repair": true,
+    "void_if_screen_replaced_by_third_party": true,
+    "replacement_allowed": true,
+    "replacement_conditions": "Device deemed uneconomical to repair by authorized center",
+    "data_backup_customer_responsibility": true
+  },
+
+  "authorized_service_requirements": [
+    "Only manufacturer-authorized service centers may repair internal components",
+    "Any third-party screen repair voids remaining warranty",
+    "IMEI must match records in manufacturer database"
+  ],
+
+  "hard_fail_rules": [
+    "warranty_expired_at_fault_date",
+    "unauthorized_repair_voids_warranty",
+    "excluded_damage_type",
+    "fault_date_before_purchase_date",
+    "purchase_receipt_missing",
+    "imei_mismatch",
+    "device_reported_stolen"
+  ],
+
+  "warning_rules": [
+    "claim_submitted_late",
+    "missing_serial_photo",
+    "battery_claim_after_6_months",
+    "multiple_software_claims"
+  ],
+
+  "manual_review_rules": [
+    "serial_number_mismatch",
+    "duplicate_claim_detected",
+    "high_value_replacement_request",
+    "model_predictions_disagree",
+    "low_confidence_prediction",
+    "water_indicator_triggered_but_denied"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "claim_id": "SAMPLE-0000005",
+  "scenario": "Missing Document Claim",
+  "description": "Purchase receipt, warranty card, and fault evidence all missing.",
+  "expected_decision": "Likely Invalid",
+  "claimant_email": "customer05@example.com",
+  "product": {
+    "name": "PEL Microwave Oven",
+    "category": "Microwave",
+    "brand": "PEL",
+    "model_number": "PMO-23L",
+    "serial_number": "SN-MW-20240201-055",
+    "purchase_date": "2026-05-27",
+    "purchase_price": 18000,
+    "retailer": "Best Buy"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2026-05-27",
+    "expiry_date": "2027-05-27",
+    "remaining_days": 245,
+    "is_active": true
+  },
+  "claim": {
+    "fault_date": "2026-09-21",
+    "fault_description": "Microwave plate stopped rotating. Turntable motor issue.",
+    "damage_type": "mechanical",
+    "fault_location": "Turntable motor"
+  },
+  "documents": {
+    "has_purchase_receipt": false,
+    "has_warranty_card": false,
+    "has_product_image": true,
+    "has_fault_evidence": false,
+    "has_repair_report": false,
+    "missing_doc_count": 3
+  },
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": false,
+    "repair_count": 0,
+    "claim_submission_delay_days": 3
+  },
+  "missing_documents": [
+    "Purchase Receipt",
+    "Warranty Card",
+    "Fault Evidence"
+  ],
+  "rule_triggered": "purchase_proof (hard_fail) — NO PURCHASE RECEIPT",
+  "claim_summary_card": "SAMPLE-0000005_v0.png"
+}

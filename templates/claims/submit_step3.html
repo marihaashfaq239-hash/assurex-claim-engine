@@ -1,0 +1,129 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Submit Claim — Repair History — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:submit_step2' claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <h4 class="page-title mb-0">Repair History (Optional)</h4>
+</div>
+
+<!-- Stepper -->
+<div class="claim-stepper mb-4">
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Fault Details</div></div>
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Documents</div></div>
+  <div class="stepper-step active"><div class="step-circle">3</div><div class="step-label">Repair History</div></div>
+  <div class="stepper-step"><div class="step-circle">4</div><div class="step-label">Review</div></div>
+</div>
+
+<div class="row g-4">
+  <!-- Add Repair Form -->
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-tools me-2 text-primary"></i>Add Repair Record</div>
+      <div class="card-body">
+        <div class="alert alert-info py-2 mb-3" style="font-size:.83rem;">
+          <i class="bi bi-info-circle me-1"></i>
+          If this product has been repaired before, add each repair record here.
+          Unauthorized repairs may affect claim validity.
+        </div>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Repair Date</label>
+              {{ form.repair_date }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Repair Center</label>
+              {{ form.repair_center }}
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">Repair Description</label>
+              {{ form.repair_description }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Replaced Parts</label>
+              {{ form.replaced_parts }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Repair Cost (PKR)</label>
+              {{ form.repair_cost }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Outcome</label>
+              {{ form.outcome }}
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <div class="form-check mt-3">
+                {{ form.is_authorized }}
+                <label class="form-check-label fw-semibold" for="{{ form.is_authorized.id_for_label }}">
+                  Authorized Service Center
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" name="add_repair" class="btn btn-outline-primary mt-3 w-100">
+            <i class="bi bi-plus-circle me-1"></i>Add Repair Record
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Repair Records List -->
+  <div class="col-lg-7">
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-clock-history me-2 text-primary"></i>Recorded Repairs ({{ repairs|length }})</div>
+      <div class="card-body p-0">
+        {% if repairs %}
+        <ul class="list-group list-group-flush">
+          {% for r in repairs %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fw-semibold">{{ r.repair_center }}</div>
+                <small class="text-muted">{{ r.repair_date|date:"M d, Y" }} · {{ r.get_outcome_display }}</small>
+                <div style="font-size:.83rem;">{{ r.repair_description|truncatechars:80 }}</div>
+                {% if not r.is_authorized %}
+                  <span class="badge bg-danger-subtle text-danger mt-1">
+                    <i class="bi bi-exclamation-triangle me-1"></i>Unauthorized Repair
+                  </span>
+                {% else %}
+                  <span class="badge bg-success-subtle text-success mt-1">Authorized</span>
+                {% endif %}
+              </div>
+              <a href="{% url 'claims:delete_repair' claim.pk r.pk %}"
+                 class="btn btn-sm btn-outline-danger ms-2"
+                 onclick="return confirm('Remove this repair record?')">
+                <i class="bi bi-trash"></i>
+              </a>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-center py-4 text-muted small">
+          No repair records added. Skip if no previous repairs.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <form method="post">
+      {% csrf_token %}
+      <div class="d-flex justify-content-between">
+        <a href="{% url 'claims:submit_step2' claim.pk %}" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+        <button type="submit" name="next_step" class="btn btn-primary">
+          Next: Review & Submit <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

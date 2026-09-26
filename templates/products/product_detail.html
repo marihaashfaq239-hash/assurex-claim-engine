@@ -1,0 +1,165 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'products:list' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div class="flex-grow-1">
+    <h4 class="page-title mb-0">{{ product.brand }} {{ product.product_name }}</h4>
+    <span class="text-muted small">{{ product.category }} · SN: <span class="font-monospace">{{ product.serial_number }}</span></span>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{% url 'products:edit' product.pk %}" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-pencil me-1"></i>Edit
+    </a>
+    <a href="{% url 'claims:submit' %}?product={{ product.pk }}" class="btn btn-sm btn-primary">
+      <i class="bi bi-file-earmark-plus me-1"></i>New Claim
+    </a>
+    <!-- Deactivate (confirm modal) -->
+    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">
+      <i class="bi bi-trash me-1"></i>Remove
+    </button>
+  </div>
+</div>
+
+<!-- Deactivate Confirm Modal -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h6 class="modal-title fw-bold" id="deactivateModalLabel">
+          <i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Remove Product
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-1">Are you sure you want to remove <strong>{{ product.brand }} {{ product.product_name }}</strong>?</p>
+        <p class="text-muted small mb-0">This will hide the product and its warranty from your dashboard. Existing claims will remain in the system. You cannot undo this from the UI.</p>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+        <form method="post" action="{% url 'products:deactivate' product.pk %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">
+            <i class="bi bi-trash me-1"></i>Yes, Remove
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+
+  <!-- Product Info -->
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-info-circle me-2 text-primary"></i>Product Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0" style="font-size:0.87rem;">
+          <tr><td class="text-muted">Brand</td><td class="fw-semibold">{{ product.brand }}</td></tr>
+          <tr><td class="text-muted">Product</td><td>{{ product.product_name }}</td></tr>
+          <tr><td class="text-muted">Category</td><td>{{ product.category }}</td></tr>
+          <tr><td class="text-muted">Model No.</td><td>{{ product.model_number }}</td></tr>
+          <tr><td class="text-muted">Serial No.</td><td class="font-monospace">{{ product.serial_number }}</td></tr>
+          <tr><td class="text-muted">Purchased</td><td>{{ product.purchase_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted">Price</td><td>PKR {{ product.purchase_price|floatformat:0 }}</td></tr>
+          <tr><td class="text-muted">Retailer</td><td>{{ product.retailer|default:"—" }}</td></tr>
+          <tr><td class="text-muted">Age</td><td>{{ product.product_age_years }} year{{ product.product_age_years|floatformat:0|pluralize }}</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warranties -->
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-shield-check me-2 text-primary"></i>Warranties</span>
+      </div>
+      <div class="card-body p-0">
+        {% if warranties %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>Type</th><th>Provider</th><th>Start</th><th>Expiry</th><th>Status</th><th>Days Left</th></tr>
+            </thead>
+            <tbody>
+              {% for w in warranties %}
+              <tr>
+                <td>{{ w.get_warranty_type_display }}</td>
+                <td>{{ w.warranty_provider }}</td>
+                <td>{{ w.start_date|date:"M d, Y" }}</td>
+                <td>{{ w.expiry_date|date:"M d, Y" }}</td>
+                <td>
+                  {% if w.status == 'active' %}<span class="badge bg-success-subtle text-success">Active</span>
+                  {% elif w.status == 'expiring' %}<span class="badge bg-warning-subtle text-warning">Expiring Soon</span>
+                  {% else %}<span class="badge bg-danger-subtle text-danger">Expired</span>{% endif %}
+                </td>
+                <td>
+                  {% if w.remaining_days > 0 %}
+                    <span class="fw-semibold">{{ w.remaining_days }}d</span>
+                  {% else %}
+                    <span class="text-muted">—</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4 text-muted">No warranty records found.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Claims -->
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-file-earmark-text me-2 text-primary"></i>Claims ({{ claims|length }})</span>
+        <a href="{% url 'claims:submit' %}?product={{ product.pk }}" class="btn btn-sm btn-primary">
+          <i class="bi bi-plus me-1"></i>New
+        </a>
+      </div>
+      <div class="card-body p-0">
+        {% if claims %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>Reference</th><th>Fault</th><th>Status</th><th>Decision</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              {% for c in claims %}
+              <tr>
+                <td>
+                  <a href="{% url 'claims:detail' c.pk %}" class="text-primary fw-semibold text-decoration-none">
+                    {{ c.claim_reference|default:"—" }}
+                  </a>
+                </td>
+                <td class="text-truncate" style="max-width:160px;">{{ c.fault_description|truncatechars:30 }}</td>
+                <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+                <td>
+                  {% if c.final_decision == 'likely_valid' %}<span class="badge bg-success-subtle text-success">Likely Valid</span>
+                  {% elif c.final_decision == 'likely_invalid' %}<span class="badge bg-danger-subtle text-danger">Likely Invalid</span>
+                  {% elif c.final_decision == 'manual_review' %}<span class="badge bg-warning-subtle text-warning">Manual Review</span>
+                  {% else %}<span class="text-muted">Pending</span>{% endif %}
+                </td>
+                <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4 text-muted">No claims submitted for this product.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

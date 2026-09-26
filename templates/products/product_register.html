@@ -1,0 +1,114 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'products:list' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div>
+    <h4 class="page-title mb-0">{{ page_title }}</h4>
+    <p class="page-subtitle mb-0">
+      {% if is_edit %}Update product information{% else %}Register a new product to manage its warranty{% endif %}
+    </p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-box-seam me-2 text-primary"></i>Product Information
+      </div>
+      <div class="card-body">
+        <form method="post" novalidate data-loading>
+          {% csrf_token %}
+          <div class="row g-3">
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Product Name <span class="text-danger">*</span></label>
+              {{ form.product_name }}
+              {% if form.product_name.errors %}<div class="text-danger small">{{ form.product_name.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Brand <span class="text-danger">*</span></label>
+              {{ form.brand }}
+              {% if form.brand.errors %}<div class="text-danger small">{{ form.brand.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+              {{ form.category }}
+              {% if form.category.errors %}<div class="text-danger small">{{ form.category.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Model Number <span class="text-danger">*</span></label>
+              {{ form.model_number }}
+              {% if form.model_number.errors %}<div class="text-danger small">{{ form.model_number.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Serial Number <span class="text-danger">*</span></label>
+              {{ form.serial_number }}
+              <div class="text-muted small mt-1">Found on the product label, box, or receipt.</div>
+              {% if form.serial_number.errors %}<div class="text-danger small">{{ form.serial_number.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <hr class="col-12 my-1">
+            <div class="col-12"><small class="text-muted fw-semibold text-uppercase">Purchase Details</small></div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Purchase Date <span class="text-danger">*</span></label>
+              {{ form.purchase_date }}
+              {% if form.purchase_date.errors %}<div class="text-danger small">{{ form.purchase_date.errors.as_text }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Purchase Price (PKR)</label>
+              {{ form.purchase_price }}
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-semibold">Warranty Duration (Months)</label>
+              {{ form.warranty_duration_months }}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Retailer / Shop Name</label>
+              {{ form.retailer }}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Purchase City</label>
+              {{ form.purchase_city }}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Notes</label>
+              {{ form.notes }}
+            </div>
+
+          </div>
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger mt-3 py-2">{{ form.non_field_errors.as_text }}</div>
+          {% endif %}
+
+          <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary px-4">
+              <i class="bi bi-check2 me-1"></i>
+              {% if is_edit %}Save Changes{% else %}Register Product{% endif %}
+            </button>
+            <a href="{% url 'products:list' %}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

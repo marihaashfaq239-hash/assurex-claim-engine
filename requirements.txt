@@ -1,0 +1,51 @@
+# Core Framework
+Django==4.2.16
+django-crispy-forms==2.1
+crispy-bootstrap5==0.7
+django-extensions==3.2.3
+Pillow==10.4.0
+
+# Database
+psycopg2-binary==2.9.9
+dj-database-url==2.2.0
+
+# Authentication & Security
+djangorestframework==3.15.2
+PyJWT==2.9.0
+
+# ML / AI
+scikit-learn==1.5.2
+xgboost==2.1.1
+numpy==1.26.4
+pandas==2.2.3
+joblib==1.4.2
+imbalanced-learn==0.12.3
+
+# OCR
+pytesseract==0.3.13
+easyocr==1.7.1
+opencv-python-headless==4.10.0.84
+
+# Visualization / Reporting
+matplotlib==3.9.2
+seaborn==0.13.2
+reportlab==4.2.2
+openpyxl==3.1.5
+
+# Utilities
+python-dotenv==1.0.1
+requests==2.32.3
+whitenoise==6.7.0
+gunicorn==23.0.0
+
+# File processing — use python-magic-bin (includes libmagic binary, no system dep needed)
+python-magic-bin==0.4.14
+
+# Testing
+pytest==8.3.3
+pytest-django==4.9.0
+factory-boy==3.3.1
+
+# Dev tools
+black==24.8.0
+flake8==7.1.1

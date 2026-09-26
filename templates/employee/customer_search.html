@@ -1,0 +1,101 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Search Customer — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'dashboard:employee' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div>
+    <h4 class="page-title mb-0">Search Customer</h4>
+    <p class="page-subtitle mb-0">Find a customer to view their products or create a claim</p>
+  </div>
+</div>
+
+<!-- Search Form -->
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="get" class="row g-2 align-items-end">
+      <div class="col-md-8">
+        <label class="form-label fw-semibold">Customer Name, Email or Phone</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" name="q" value="{{ query }}" class="form-control form-control-lg"
+                 placeholder="e.g. Ahmed Khan, ahmed@email.com, +92 300..." autofocus>
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-lg px-4">Search</button>
+        {% if query %}
+          <a href="{% url 'claims:customer_search' %}" class="btn btn-outline-secondary btn-lg ms-1">Clear</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Results -->
+{% if query %}
+  {% if customers %}
+  <p class="text-muted mb-3">{{ customers|length }} result{{ customers|length|pluralize }} for "{{ query }}"</p>
+  <div class="row g-3">
+    {% for customer in customers %}
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="avatar-sm" style="background:var(--primary);">{{ customer.get_initials }}</div>
+            <div>
+              <div class="fw-semibold">{{ customer.get_full_name }}</div>
+              <small class="text-muted">{{ customer.email }}</small>
+            </div>
+          </div>
+          <div class="row g-1 mb-3" style="font-size:0.83rem;">
+            <div class="col-6">
+              <span class="text-muted">Phone:</span>
+              <span>{{ customer.phone|default:"—" }}</span>
+            </div>
+            <div class="col-6">
+              <span class="text-muted">City:</span>
+              <span>{{ customer.city|default:"—" }}</span>
+            </div>
+            <div class="col-6">
+              <span class="text-muted">Products:</span>
+              <span class="fw-semibold">{{ customer.products.count }}</span>
+            </div>
+            <div class="col-6">
+              <span class="text-muted">Joined:</span>
+              <span>{{ customer.date_joined|date:"M Y" }}</span>
+            </div>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="{% url 'claims:customer_detail' customer.pk %}" class="btn btn-sm btn-outline-primary flex-grow-1">
+              <i class="bi bi-person me-1"></i>View Details
+            </a>
+            <a href="{% url 'claims:employee_create' %}?customer={{ customer.pk }}" class="btn btn-sm btn-primary flex-grow-1">
+              <i class="bi bi-file-earmark-plus me-1"></i>Create Claim
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card">
+    <div class="card-body text-center py-5 text-muted">
+      <i class="bi bi-person-x fs-1 opacity-25 d-block mb-2"></i>
+      No customers found for "{{ query }}".
+    </div>
+  </div>
+  {% endif %}
+{% else %}
+<div class="card">
+  <div class="card-body text-center py-5 text-muted">
+    <i class="bi bi-search fs-1 opacity-25 d-block mb-2"></i>
+    Enter a name, email or phone number to search.
+  </div>
+</div>
+{% endif %}
+{% endblock %}

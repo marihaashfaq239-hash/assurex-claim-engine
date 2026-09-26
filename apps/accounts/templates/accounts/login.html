@@ -1,0 +1,111 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Sign In — AssureX{% endblock %}
+
+{% block auth_content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+
+    <!-- Logo -->
+    <div class="text-center mb-4">
+      <div class="auth-logo mb-2">
+        <i class="bi bi-shield-check"></i> AssureX
+      </div>
+      <p class="text-muted" style="font-size:0.9rem;">Claim Engine — Sign in to continue</p>
+    </div>
+
+    <!-- Messages -->
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show py-2 mb-3" role="alert">
+        <i class="bi bi-info-circle me-1"></i>{{ message }}
+        <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Form -->
+    <form method="post" action="{% url 'accounts:login' %}" novalidate data-loading>
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+          <div class="text-danger small mt-1">{{ form.username.errors.as_text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <label class="form-label fw-semibold mb-0">{{ form.password.label }}</label>
+        </div>
+        <div class="input-group">
+          {{ form.password }}
+          <button class="btn btn-outline-secondary" type="button" id="togglePwd" tabindex="-1">
+            <i class="bi bi-eye" id="eyeIcon"></i>
+          </button>
+        </div>
+        {% if form.password.errors %}
+          <div class="text-danger small mt-1">{{ form.password.errors.as_text }}</div>
+        {% endif %}
+      </div>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger py-2">
+          <i class="bi bi-exclamation-circle me-1"></i>
+          {{ form.non_field_errors.as_text }}
+        </div>
+      {% endif %}
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="remember_me" id="rememberMe">
+          <label class="form-check-label small" for="rememberMe">Keep me signed in</label>
+        </div>
+        <a href="{% url 'accounts:password_reset' %}" class="text-primary small fw-semibold">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+        Sign In
+      </button>
+    </form>
+
+    <hr class="my-4">
+
+    <p class="text-center text-muted small mb-0">
+      Don't have an account?
+      <a href="{% url 'accounts:register' %}" class="text-primary fw-semibold">Create one</a>
+    </p>
+
+    <!-- Demo credentials hint (dev only) -->
+    {% if debug %}
+    <div class="mt-3 p-2 rounded bg-light border" style="font-size:0.75rem;">
+      <strong>Demo accounts:</strong><br>
+      admin@assurex.com / Admin@123<br>
+      customer@assurex.com / Customer@123<br>
+      employee@assurex.com / Employee@123<br>
+      reviewer@assurex.com / Reviewer@123
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('togglePwd')?.addEventListener('click', function () {
+  const pwd  = document.querySelector('input[name="password"]');
+  const icon = document.getElementById('eyeIcon');
+  if (pwd.type === 'password') {
+    pwd.type  = 'text';
+    icon.className = 'bi bi-eye-slash';
+  } else {
+    pwd.type  = 'password';
+    icon.className = 'bi bi-eye';
+  }
+});
+</script>
+{% endblock %}

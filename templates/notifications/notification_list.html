@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+{% block title %}Notifications — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="page-title mb-0">Notifications</h4>
+  <span class="badge bg-primary rounded-pill">{{ notifications|length }}</span>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    {% if notifications %}
+    <ul class="list-group list-group-flush">
+      {% for n in notifications %}
+      <li class="list-group-item {% if not n.is_read %}bg-primary bg-opacity-5{% endif %}">
+        <div class="d-flex align-items-start gap-3">
+          <div class="mt-1">
+            {% if n.priority == 'high' or n.priority == 'critical' %}
+              <i class="bi bi-exclamation-circle-fill text-danger"></i>
+            {% elif n.notification_type == 'claim_approved' %}
+              <i class="bi bi-check-circle-fill text-success"></i>
+            {% elif n.notification_type == 'claim_rejected' %}
+              <i class="bi bi-x-circle-fill text-danger"></i>
+            {% elif n.notification_type == 'warranty_expiry' %}
+              <i class="bi bi-clock-fill text-warning"></i>
+            {% else %}
+              <i class="bi bi-bell-fill text-primary"></i>
+            {% endif %}
+          </div>
+          <div class="flex-grow-1">
+            <div class="fw-semibold" style="font-size:.9rem;">{{ n.title }}</div>
+            <div class="text-muted" style="font-size:.83rem;">{{ n.message }}</div>
+            <div class="text-muted mt-1" style="font-size:.75rem;">{{ n.created_at|timesince }} ago</div>
+          </div>
+          {% if not n.is_read %}
+            <span class="badge bg-primary rounded-pill align-self-center">New</span>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-bell-slash fs-1 opacity-25 d-block mb-2"></i>
+      No notifications yet.
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

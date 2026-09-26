@@ -1,0 +1,69 @@
+{% load static %}
+<ul class="nav flex-column px-1 mt-1">
+
+  <!-- ── Main ── -->
+  <li class="sidebar-section-title">Main</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'customer_dashboard' in request.resolver_match.url_name %}active{% endif %}"
+       href="{% url 'dashboard:customer' %}">
+      <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'notifications' in request.path %}active{% endif %}"
+       href="{% url 'notifications:list' %}">
+      <i class="bi bi-bell"></i>
+      <span>Notifications</span>
+      {% if unread_notifications_count %}
+        <span class="ms-auto badge rounded-pill sidebar-badge-alert">{{ unread_notifications_count }}</span>
+      {% endif %}
+    </a>
+  </li>
+
+  <!-- ── Products & Warranty ── -->
+  <li class="sidebar-section-title">Products &amp; Warranty</li>
+  <li class="nav-item">
+    <a class="nav-link {% if request.path == '/products/' %}active{% endif %}"
+       href="{% url 'products:list' %}">
+      <i class="bi bi-box-seam"></i><span>My Products</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'products/register' in request.path %}active{% endif %}"
+       href="{% url 'products:register' %}">
+      <i class="bi bi-plus-circle"></i><span>Register Product</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if request.path == '/warranties/' %}active{% endif %}"
+       href="{% url 'warranties:list' %}">
+      <i class="bi bi-shield-check"></i><span>My Warranties</span>
+    </a>
+  </li>
+
+  <!-- ── Claims ── -->
+  <li class="sidebar-section-title">Claims</li>
+  <li class="nav-item">
+    <a class="nav-link sidebar-highlight {% if 'claims/submit' in request.path %}active{% endif %}"
+       href="{% url 'claims:submit' %}">
+      <i class="bi bi-file-earmark-plus"></i>
+      <span class="fw-semibold">Submit New Claim</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'claims/my' in request.path %}active{% endif %}"
+       href="{% url 'claims:my_claims' %}">
+      <i class="bi bi-file-earmark-text"></i><span>My Claims</span>
+    </a>
+  </li>
+
+  <!-- ── Account ── -->
+  <li class="sidebar-section-title">Account</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'profile' in request.path %}active{% endif %}"
+       href="{% url 'accounts:profile' %}">
+      <i class="bi bi-person-gear"></i><span>My Profile</span>
+    </a>
+  </li>
+
+</ul>

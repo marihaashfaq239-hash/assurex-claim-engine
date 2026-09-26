@@ -1,0 +1,315 @@
+{% extends "base/base.html" %}
+{% load assurex_tags %}
+{% load static assurex_tags %}
+
+{% block title %}Review — {{ claim.claim_reference }} — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'reviewer:queue' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div class="flex-grow-1">
+    <h4 class="page-title mb-0">Reviewing — {{ claim.claim_reference }}</h4>
+    <span class="text-muted small">
+      {{ claim.claimant.get_full_name }} · {{ claim.product.brand }} {{ claim.product.product_name }}
+      · {{ claim.get_damage_type_display }}
+    </span>
+  </div>
+  <span class="badge-claim status-manual fs-6 px-3 py-2">Manual Review</span>
+</div>
+
+<div class="row g-4">
+
+  <!-- LEFT: Claim Evidence -->
+  <div class="col-lg-6">
+
+    <!-- Claim Details -->
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Claim Information</div>
+      <div class="card-body">
+        <div class="row g-2" style="font-size:0.87rem;">
+          <div class="col-6"><span class="text-muted">Reference</span><br><span class="fw-semibold font-monospace">{{ claim.claim_reference }}</span></div>
+          <div class="col-6"><span class="text-muted">Submitted</span><br><span>{{ claim.submission_date|date:"M d, Y H:i"|default:"—" }}</span></div>
+          <div class="col-6"><span class="text-muted">Product</span><br><span class="fw-semibold">{{ claim.product.brand }} {{ claim.product.product_name }}</span></div>
+          <div class="col-6"><span class="text-muted">Serial No.</span><br><span class="font-monospace">{{ claim.product.serial_number }}</span></div>
+          <div class="col-6"><span class="text-muted">Damage Type</span><br><span>{{ claim.get_damage_type_display }}</span></div>
+          <div class="col-6"><span class="text-muted">Fault Date</span><br><span>{{ claim.fault_date|date:"M d, Y" }}</span></div>
+          <div class="col-12"><span class="text-muted">Fault Description</span><br><p class="mb-0">{{ claim.fault_description }}</p></div>
+          <div class="col-6"><span class="text-muted">Warranty Active</span><br>
+            {% if claim.is_under_warranty %}<span class="badge bg-success-subtle text-success">Yes</span>
+            {% else %}<span class="badge bg-danger-subtle text-danger">No / Expired</span>{% endif %}
+          </div>
+          <div class="col-6"><span class="text-muted">Is Duplicate</span><br>
+            {% if claim.is_duplicate %}<span class="badge bg-danger">Yes</span>
+            {% else %}<span class="text-muted">No</span>{% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents -->
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-paperclip me-2 text-primary"></i>Documents ({{ documents|length }})</div>
+      <div class="card-body p-0">
+        {% if documents %}
+        <ul class="list-group list-group-flush">
+          {% for doc in documents %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <i class="bi bi-file-earmark me-2 text-primary"></i>
+              <span class="fw-semibold">{{ doc.get_doc_type_display }}</span>
+              <small class="text-muted ms-2">{{ doc.file_name }}</small>
+            </div>
+            <a href="{{ doc.file.url }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-eye me-1"></i>View
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-center py-3 text-muted small">No documents uploaded.</div>
+        {% endif %}
+        <!-- Missing documents warning -->
+        {% with missing=claim.missing_document_types %}
+        {% if missing %}
+        <div class="px-3 py-2 bg-warning bg-opacity-10 border-top border-warning" style="font-size:0.8rem;">
+          <i class="bi bi-exclamation-triangle text-warning me-1"></i>
+          <strong>Missing:</strong>
+          {% for m in missing %}{{ m|lower|title }}{% if not forloop.last %}, {% endif %}{% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+
+    <!-- Repair History -->
+    {% if repair_hist %}
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-tools me-2 text-primary"></i>Repair History</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          {% for r in repair_hist %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <span class="fw-semibold">{{ r.repair_center }}</span>
+              <span class="text-muted small">{{ r.repair_date|date:"M d, Y" }}</span>
+            </div>
+            <div class="text-muted small">{{ r.repair_description|truncatechars:80 }}</div>
+            {% if not r.is_authorized %}
+              <span class="badge bg-danger-subtle text-danger mt-1"><i class="bi bi-exclamation-triangle me-1"></i>Unauthorized</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <!-- RIGHT: AI Results + Rule Engine + Decision Form -->
+  <div class="col-lg-6">
+
+    <!-- AI Model Comparison -->
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-cpu me-2 text-primary"></i>AI Model Results</div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="p-3 rounded border text-center">
+              <div class="text-muted small mb-1">Python ML Model</div>
+              <div class="fw-bold fs-5
+                {% if claim.python_prediction == 'valid_claim' %}text-success
+                {% elif claim.python_prediction == 'invalid_claim' %}text-danger
+                {% else %}text-warning{% endif %}">
+                {{ claim.python_prediction|prediction_label }}
+              </div>
+              {% if claim.python_confidence_valid %}
+              <div class="mt-2" style="font-size:0.78rem;">
+                <div class="d-flex justify-content-between"><span>Valid</span><span>{{ claim.python_confidence_valid|floatformat:1 }}%</span></div>
+                <div class="confidence-bar my-1"><div class="confidence-fill bg-success" data-value="{{ claim.python_confidence_valid|floatformat:0 }}" style="width:0%"></div></div>
+                <div class="d-flex justify-content-between"><span>Invalid</span><span>{{ claim.python_confidence_invalid|floatformat:1 }}%</span></div>
+                <div class="confidence-bar my-1"><div class="confidence-fill bg-danger" data-value="{{ claim.python_confidence_invalid|floatformat:0 }}" style="width:0%"></div></div>
+                <div class="d-flex justify-content-between"><span>Manual</span><span>{{ claim.python_confidence_manual|floatformat:1 }}%</span></div>
+                <div class="confidence-bar"><div class="confidence-fill bg-warning" data-value="{{ claim.python_confidence_manual|floatformat:0 }}" style="width:0%"></div></div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="p-3 rounded border text-center">
+              <div class="text-muted small mb-1">Teachable Machine</div>
+              <div class="fw-bold fs-5
+                {% if claim.tm_prediction == 'valid_claim' %}text-success
+                {% elif claim.tm_prediction == 'invalid_claim' %}text-danger
+                {% else %}text-warning{% endif %}">
+                {{ claim.tm_prediction|prediction_label }}
+              </div>
+              {% if claim.tm_confidence_valid %}
+              <div class="mt-2" style="font-size:0.78rem;">
+                <div class="d-flex justify-content-between"><span>Valid</span><span>{{ claim.tm_confidence_valid|floatformat:1 }}%</span></div>
+                <div class="confidence-bar my-1"><div class="confidence-fill bg-success" data-value="{{ claim.tm_confidence_valid|floatformat:0 }}" style="width:0%"></div></div>
+                <div class="d-flex justify-content-between"><span>Invalid</span><span>{{ claim.tm_confidence_invalid|floatformat:1 }}%</span></div>
+                <div class="confidence-bar my-1"><div class="confidence-fill bg-danger" data-value="{{ claim.tm_confidence_invalid|floatformat:0 }}" style="width:0%"></div></div>
+                <div class="d-flex justify-content-between"><span>Manual</span><span>{{ claim.tm_confidence_manual|floatformat:1 }}%</span></div>
+                <div class="confidence-bar"><div class="confidence-fill bg-warning" data-value="{{ claim.tm_confidence_manual|floatformat:0 }}" style="width:0%"></div></div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!-- Consistency badge -->
+        {% if claim.model_consistency_status %}
+        <div class="mt-3 p-2 rounded text-center" style="background:#f8fafc;font-size:0.83rem;">
+          Model Consistency:
+          <span class="fw-semibold
+            {% if claim.model_consistency_status == 'strong_match' %}text-success
+            {% elif claim.model_consistency_status == 'acceptable_match' %}text-info
+            {% elif claim.model_consistency_status == 'weak_match' %}text-warning
+            {% else %}text-danger{% endif %}">
+            {{ claim.model_consistency_status|consistency_label }}
+          </span>
+          {% if claim.confidence_difference is not None %}
+            · Δ <strong>{{ claim.confidence_difference|floatformat:1 }}%</strong>
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Rule Engine -->
+    {% if rule_results %}
+    <div class="card mb-3">
+      <div class="card-header"><i class="bi bi-clipboard-check me-2 text-primary"></i>Warranty Rule Checks</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush" style="font-size:0.83rem;">
+          {% for r in rule_results %}
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2">
+            <div>
+              <span>{{ r.rule_name }}</span>
+              {% if r.description %}<br><small class="text-muted">{{ r.description }}</small>{% endif %}
+            </div>
+            {% if r.outcome == 'pass' %}<span class="badge bg-success-subtle text-success"><i class="bi bi-check"></i> Pass</span>
+            {% elif r.outcome == 'fail' %}<span class="badge bg-danger-subtle text-danger"><i class="bi bi-x"></i> Fail</span>
+            {% elif r.outcome == 'warning' %}<span class="badge bg-warning-subtle text-warning"><i class="bi bi-exclamation"></i> Warning</span>
+            {% else %}<span class="badge bg-secondary-subtle text-secondary">Skip</span>{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="px-3 py-2 d-flex gap-3" style="font-size:0.8rem;background:#f8fafc;">
+          <span class="text-success"><i class="bi bi-check-circle me-1"></i>{{ claim.rules_passed }} Passed</span>
+          <span class="text-danger"><i class="bi bi-x-circle me-1"></i>{{ claim.rules_failed }} Failed</span>
+          <span class="text-warning"><i class="bi bi-exclamation-circle me-1"></i>{{ claim.rules_warning }} Warnings</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- ── Reviewer Decision Form ── -->
+    <div class="card border-primary border-opacity-50">
+      <div class="card-header bg-primary bg-opacity-5">
+        <i class="bi bi-person-check me-2 text-primary"></i>
+        <strong>Your Decision</strong>
+        {% if review.decision != 'pending' %}
+          <span class="badge bg-success ms-2">Already Submitted</span>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <form method="post" action="{% url 'reviewer:detail' claim.pk %}" novalidate data-loading>
+          {% csrf_token %}
+
+          <!-- Decision buttons -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Decision <span class="text-danger">*</span></label>
+            <div class="d-flex gap-2">
+              <div class="form-check flex-fill text-center border rounded p-3" style="cursor:pointer;" onclick="selectDecision('approved',this)">
+                <input class="form-check-input visually-hidden" type="radio" name="decision" value="approved"
+                       id="dec_approved" {% if review.decision == 'approved' %}checked{% endif %}>
+                <label class="form-check-label w-100" for="dec_approved" style="cursor:pointer;">
+                  <i class="bi bi-check-circle-fill text-success fs-4 d-block mb-1"></i>
+                  <span class="fw-semibold">Approve</span>
+                </label>
+              </div>
+              <div class="form-check flex-fill text-center border rounded p-3" style="cursor:pointer;" onclick="selectDecision('rejected',this)">
+                <input class="form-check-input visually-hidden" type="radio" name="decision" value="rejected"
+                       id="dec_rejected" {% if review.decision == 'rejected' %}checked{% endif %}>
+                <label class="form-check-label w-100" for="dec_rejected" style="cursor:pointer;">
+                  <i class="bi bi-x-circle-fill text-danger fs-4 d-block mb-1"></i>
+                  <span class="fw-semibold">Reject</span>
+                </label>
+              </div>
+              <div class="form-check flex-fill text-center border rounded p-3" style="cursor:pointer;" onclick="selectDecision('more_info',this)">
+                <input class="form-check-input visually-hidden" type="radio" name="decision" value="more_info"
+                       id="dec_more" {% if review.decision == 'more_info' %}checked{% endif %}>
+                <label class="form-check-label w-100" for="dec_more" style="cursor:pointer;">
+                  <i class="bi bi-question-circle-fill text-warning fs-4 d-block mb-1"></i>
+                  <span class="fw-semibold">More Info</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviewer Comments -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Reviewer Comments <span class="text-danger">*</span></label>
+            <textarea name="reviewer_comments" class="form-control" rows="3"
+                      placeholder="Explain your decision clearly...">{{ review.reviewer_comments }}</textarea>
+          </div>
+
+          <!-- Additional Info request (shown if more_info selected) -->
+          <div class="mb-3" id="moreInfoSection" style="display:none;">
+            <label class="form-label fw-semibold">Information Required from Customer</label>
+            <textarea name="additional_info_request" class="form-control" rows="2"
+                      placeholder="Specify what documents or clarifications are needed...">{{ review.additional_info_request }}</textarea>
+          </div>
+
+          <!-- AI Override -->
+          <div class="mb-3 p-3 rounded border-warning border" style="background:#fffbeb;">
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" name="is_ai_override" id="isOverride"
+                     {% if review.is_ai_override %}checked{% endif %} onchange="toggleOverride(this)">
+              <label class="form-check-label fw-semibold text-warning" for="isOverride">
+                <i class="bi bi-pencil-square me-1"></i>Override AI Recommendation
+              </label>
+            </div>
+            <div id="overrideReason" style="display:{% if review.is_ai_override %}block{% else %}none{% endif %};">
+              <label class="form-label small fw-semibold">Reason for Override <span class="text-danger">*</span></label>
+              <textarea name="override_reason" class="form-control form-control-sm" rows="2"
+                        placeholder="Explain why the AI result is being overridden...">{{ review.override_reason }}</textarea>
+              <small class="text-muted">Original AI result: <strong>{{ claim.final_decision|decision_label }}</strong></small>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
+            <i class="bi bi-check2 me-1"></i>Submit Decision
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function selectDecision(val, el) {
+  document.querySelectorAll('.form-check[onclick]').forEach(c => c.classList.remove('border-primary','bg-primary','bg-opacity-10'));
+  el.classList.add('border-primary','bg-primary','bg-opacity-10');
+  document.getElementById('dec_' + val).checked = true;
+  document.getElementById('moreInfoSection').style.display = val === 'more_info' ? 'block' : 'none';
+}
+function toggleOverride(cb) {
+  document.getElementById('overrideReason').style.display = cb.checked ? 'block' : 'none';
+}
+// Restore state on load
+document.addEventListener('DOMContentLoaded', function () {
+  const checked = document.querySelector('input[name="decision"]:checked');
+  if (checked) {
+    const parent = checked.closest('.form-check[onclick]');
+    if (parent) parent.classList.add('border-primary','bg-primary','bg-opacity-10');
+    if (checked.value === 'more_info') document.getElementById('moreInfoSection').style.display = 'block';
+  }
+});
+</script>
+{% endblock %}

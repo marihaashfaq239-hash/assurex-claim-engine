@@ -1,0 +1,47 @@
+{
+  "claim_id": "SAMPLE-0000004",
+  "scenario": "Expired Warranty Claim",
+  "description": "Warranty expired 365 days ago. warranty_active rule hard fails.",
+  "expected_decision": "Likely Invalid",
+  "claimant_email": "customer04@example.com",
+  "product": {
+    "name": "Dawlance 1.5 Ton Air Conditioner",
+    "category": "Air Conditioner",
+    "brand": "Dawlance",
+    "model_number": "Inverter-15C",
+    "serial_number": "SN-AC-20200601-017",
+    "purchase_date": "2024-09-24",
+    "purchase_price": 95000,
+    "retailer": "Al-Fatah Electronics"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2024-09-24",
+    "expiry_date": "2025-09-24",
+    "remaining_days": 0,
+    "is_active": false
+  },
+  "claim": {
+    "fault_date": "2026-09-19",
+    "fault_description": "AC not cooling. Compressor starts but shuts down after 2 minutes.",
+    "damage_type": "electrical",
+    "fault_location": "Compressor"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": true,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": false,
+    "missing_doc_count": 0
+  },
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": false,
+    "repair_count": 0,
+    "claim_submission_delay_days": 5
+  },
+  "rule_triggered": "warranty_active (hard_fail) — WARRANTY EXPIRED",
+  "claim_summary_card": "SAMPLE-0000004_v0.png"
+}

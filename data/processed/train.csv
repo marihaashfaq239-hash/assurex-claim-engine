@@ -1,0 +1,1051 @@
+claim_id,label,product_category,brand,damage_type,warranty_type,purchase_date,warranty_expiry,fault_date,submission_date,purchase_price,product_age_months,remaining_warranty_days,days_since_fault,claim_submission_delay_days,has_purchase_receipt,has_warranty_card,has_product_image,has_fault_evidence,has_repair_report,serial_number_match,had_unauthorized_repair,is_duplicate_flag,repair_count,missing_doc_count
+CLM-0001354,manual_review,Small Appliance,Kenwood,manufacturing,third_party,2022-12-23,2023-12-23,2023-04-28,2023-05-17,209731.84,45.0,0,1245,19,1,0,0,1,1,1,0,0,2,1
+CLM-0001463,manual_review,Television,Super Asia,overheating,standard,2024-05-10,2025-05-10,2024-12-14,2024-12-26,119078.73,28.5,0,649,12,0,1,0,0,0,1,0,0,1,0
+CLM-0001218,manual_review,Microwave,TCL,electrical,extended,2021-04-28,2022-04-28,2022-04-19,2022-05-05,484286.43,64.9,0,1619,16,1,1,1,1,0,1,0,0,0,0
+CLM-0000232,valid_claim,Laptop,Philips,software,standard,2024-05-09,2025-10-31,2025-09-03,2025-09-10,209769.64,28.5,0,386,7,1,1,1,1,0,1,0,0,1,1
+CLM-0001087,manual_review,Generator,Samsung,water,extended,2023-06-05,2024-06-04,2023-10-22,2023-11-07,103201.88,39.7,0,1068,16,1,0,1,0,0,1,0,0,2,0
+CLM-0000045,valid_claim,Water Heater,PEL,electrical,standard,2023-12-28,2025-12-17,2025-01-09,2025-01-14,184217.55,32.9,0,623,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001385,manual_review,Microwave,Sony,mechanical,extended,2022-12-06,2023-12-06,2023-08-19,2023-09-07,469597.5,45.6,0,1132,19,0,1,0,1,1,1,0,0,1,1
+CLM-0001389,manual_review,Laptop,Haier,water,standard,2024-10-01,2025-10-01,2025-07-06,2025-07-18,232736.1,23.8,0,445,12,0,1,1,1,1,1,1,0,0,1
+CLM-0000140,valid_claim,Generator,Sony,mechanical,extended,2022-07-25,2024-01-16,2022-08-26,2022-09-04,90474.41,50.0,0,1490,9,1,1,1,0,1,1,0,0,0,1
+CLM-0000073,valid_claim,Television,Waves,software,extended,2023-08-28,2025-08-17,2024-01-22,2024-01-30,36221.18,36.9,0,976,8,1,1,1,1,1,1,0,0,0,0
+CLM-0000081,valid_claim,Microwave,TCL,electrical,extended,2022-03-30,2024-03-19,2023-08-11,2023-08-12,182414.31,53.8,0,1140,1,1,1,1,0,0,1,0,0,0,1
+CLM-0001148,manual_review,Small Appliance,Kenwood,display,standard,2021-11-19,2022-11-19,2022-10-26,2022-11-08,83075.7,58.1,0,1429,13,1,1,1,1,0,1,0,0,2,2
+CLM-0000988,invalid_claim,Washing Machine,Kenwood,software,standard,2021-04-03,2022-04-03,2021-06-13,2021-06-18,126243.93,65.7,0,1929,5,0,1,0,0,0,1,0,0,3,1
+CLM-0000618,invalid_claim,Washing Machine,LG,mechanical,standard,2022-07-23,2023-07-23,2023-11-02,2023-11-09,120562.98,50.1,0,1057,7,0,0,1,1,0,1,0,0,3,1
+CLM-0000757,invalid_claim,Water Heater,TCL,display,standard,2020-03-10,2021-03-10,2020-06-16,2020-06-29,70079.2,78.5,0,2291,13,1,1,1,1,0,1,1,0,2,2
+CLM-0001442,manual_review,Generator,Haier,manufacturing,standard,2024-07-05,2025-07-05,2024-12-04,2024-12-18,207375.05,26.6,0,659,14,0,1,0,1,1,1,1,0,1,2
+CLM-0001122,manual_review,Water Heater,Super Asia,electrical,standard,2022-02-24,2023-02-24,2023-02-09,2023-02-25,356432.34,55.0,0,1323,16,0,1,1,0,1,1,1,0,1,0
+CLM-0000449,valid_claim,Smartphone,Samsung,electrical,extended,2023-03-06,2024-08-27,2023-09-16,2023-09-22,96128.25,42.6,0,1104,6,1,1,1,1,1,1,0,0,0,1
+CLM-0000474,valid_claim,Refrigerator,Philips,mechanical,extended,2023-04-12,2026-03-27,2023-09-04,2023-09-10,194134.31,41.4,0,1116,6,1,1,1,1,1,1,0,0,0,1
+CLM-0000963,invalid_claim,Small Appliance,Sony,mechanical,standard,2022-08-02,2023-08-02,2024-03-26,2024-04-06,152530.07,49.7,0,912,11,1,0,1,1,0,1,0,0,3,1
+CLM-0000639,invalid_claim,Refrigerator,LG,physical,standard,2020-06-14,2021-06-14,2020-09-11,2020-09-21,22382.19,75.3,0,2204,10,0,0,0,1,0,1,0,0,3,2
+CLM-0000771,invalid_claim,Smartphone,Kenwood,manufacturing,standard,2019-07-20,2020-07-19,2020-05-03,2020-05-12,38793.88,86.2,0,2335,9,1,0,0,1,0,1,1,0,3,1
+CLM-0000005,valid_claim,Smartphone,Super Asia,electrical,standard,2024-07-17,2026-07-07,2025-01-29,2025-02-04,140522.87,26.2,0,603,6,1,1,1,1,1,1,0,0,0,0
+CLM-0000994,invalid_claim,Smartphone,Haier,water,standard,2019-11-09,2020-11-08,2021-05-31,2021-06-28,95096.91,82.5,0,1942,28,0,1,1,0,0,1,0,0,2,1
+CLM-0001073,manual_review,Air Conditioner,Kenwood,mechanical,extended,2022-04-20,2023-04-20,2023-04-17,2023-05-06,296572.35,53.2,0,1256,19,0,0,1,0,1,1,1,0,0,2
+CLM-0001129,manual_review,Refrigerator,Super Asia,mechanical,standard,2023-08-11,2024-08-10,2024-03-21,2024-04-09,153382.02,37.5,0,917,19,0,0,1,1,0,1,0,0,2,0
+CLM-0000520,invalid_claim,Water Heater,Orient,battery,standard,2021-05-22,2023-05-22,2021-05-01,2021-05-03,136905.81,64.1,0,1972,2,1,0,0,0,0,1,0,0,1,2
+CLM-0000635,invalid_claim,Refrigerator,Super Asia,overheating,standard,2021-09-02,2022-09-02,2022-04-18,2022-05-16,62303.28,60.7,0,1620,28,1,1,1,0,0,1,1,0,1,1
+CLM-0000878,invalid_claim,Washing Machine,TCL,mechanical,standard,2019-07-10,2020-07-09,2019-12-03,2019-12-16,60568.0,86.5,0,2487,13,1,0,1,0,0,1,1,0,2,2
+CLM-0000421,valid_claim,Small Appliance,Haier,electrical,standard,2022-09-07,2023-09-02,2022-11-20,2022-11-30,74533.9,48.6,0,1404,10,1,1,1,0,0,1,0,0,0,1
+CLM-0000258,valid_claim,Television,PEL,manufacturing,extended,2022-01-29,2024-01-19,2023-08-25,2023-08-29,45298.74,55.8,0,1126,4,1,1,1,1,1,1,0,0,0,0
+CLM-0001228,manual_review,Small Appliance,Orient,software,third_party,2021-04-13,2022-04-13,2021-09-28,2021-10-08,103061.29,65.4,0,1822,10,0,1,1,1,0,1,0,0,1,1
+CLM-0000179,valid_claim,Laptop,Super Asia,display,standard,2024-07-08,2027-06-23,2026-03-26,2026-04-02,40701.81,26.5,272,182,7,1,1,1,1,1,1,0,0,1,0
+CLM-0001311,manual_review,Small Appliance,PEL,software,standard,2022-06-27,2023-06-27,2023-03-20,2023-04-07,473431.39,50.9,0,1284,18,0,1,1,1,0,1,0,0,1,0
+CLM-0001414,manual_review,Air Conditioner,Kenwood,physical,third_party,2022-05-30,2023-05-30,2023-05-26,2023-06-08,460914.94,51.8,0,1217,13,0,1,1,1,0,1,0,0,1,1
+CLM-0000946,invalid_claim,Laptop,Philips,manufacturing,standard,2022-09-20,2023-09-20,2022-12-13,2023-01-04,17307.97,48.1,0,1381,22,1,0,0,1,0,1,1,0,4,1
+CLM-0001016,manual_review,Television,Philips,physical,third_party,2023-05-24,2024-05-23,2023-11-04,2023-11-19,450750.23,40.0,0,1055,15,1,1,1,1,0,0,1,0,1,0
+CLM-0001437,manual_review,Refrigerator,Sony,manufacturing,third_party,2023-12-24,2024-12-23,2024-12-11,2024-12-29,196142.75,33.0,0,652,18,1,1,0,1,1,1,0,0,1,0
+CLM-0000661,invalid_claim,Water Heater,Super Asia,mechanical,standard,2019-09-19,2020-09-18,2020-01-23,2020-01-24,133224.77,84.2,0,2436,1,1,0,1,0,0,0,0,0,3,3
+CLM-0000223,valid_claim,Laptop,Sony,display,extended,2024-12-12,2026-06-05,2025-11-29,2025-12-08,95848.02,21.4,0,299,9,1,1,1,1,1,1,0,0,0,1
+CLM-0001459,manual_review,Washing Machine,Dawlance,display,extended,2024-01-08,2025-01-07,2024-09-20,2024-10-09,276525.15,32.5,0,734,19,1,1,0,0,0,0,0,0,0,0
+CLM-0000604,invalid_claim,Refrigerator,Super Asia,software,standard,2022-07-10,2023-07-10,2023-01-23,2023-02-02,182203.61,50.5,0,1340,10,0,1,0,1,0,1,0,0,1,3
+CLM-0000049,valid_claim,Small Appliance,Dawlance,software,extended,2022-04-22,2024-04-11,2022-09-28,2022-10-06,118510.17,53.1,0,1457,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001254,manual_review,Small Appliance,TCL,other,third_party,2023-03-02,2024-03-01,2024-02-24,2024-03-14,281521.61,42.8,0,943,19,1,0,1,1,0,1,0,0,1,0
+CLM-0000739,invalid_claim,Air Conditioner,Haier,display,standard,2022-06-11,2023-06-11,2023-01-10,2023-01-28,149630.88,51.4,0,1353,18,0,1,1,1,0,1,1,0,2,1
+CLM-0000676,invalid_claim,Microwave,Samsung,other,standard,2020-01-29,2021-01-28,2020-11-21,2020-11-26,43930.48,79.8,0,2133,5,0,0,1,0,0,1,0,0,2,1
+CLM-0001178,manual_review,Laptop,TCL,overheating,third_party,2024-11-25,2025-11-25,2025-11-16,2025-11-26,328792.62,21.9,0,312,10,1,1,1,1,1,1,0,0,1,1
+CLM-0001035,manual_review,Television,Kenwood,manufacturing,standard,2023-08-08,2024-08-07,2023-11-29,2023-12-19,279994.72,37.5,0,1030,20,1,1,1,1,0,1,0,0,1,2
+CLM-0000652,invalid_claim,Washing Machine,Samsung,display,standard,2020-01-06,2021-01-05,2021-12-07,2021-12-30,92210.41,80.6,0,1752,23,1,1,1,0,1,1,0,0,3,1
+CLM-0001299,manual_review,Refrigerator,Kenwood,display,standard,2022-12-30,2023-12-30,2023-07-19,2023-08-07,109408.63,44.8,0,1163,19,1,1,1,1,0,0,0,0,1,1
+CLM-0000726,invalid_claim,Smartphone,Philips,electrical,standard,2021-01-15,2022-01-15,2021-03-20,2021-03-30,141366.84,68.3,0,2014,10,1,1,1,1,0,1,0,1,3,1
+CLM-0000075,valid_claim,Smartphone,Sony,electrical,standard,2023-09-11,2026-08-26,2024-02-07,2024-02-10,70178.01,36.4,0,960,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000289,valid_claim,Refrigerator,PEL,display,extended,2024-12-28,2025-12-23,2025-03-01,2025-03-05,166941.87,20.9,0,572,4,1,1,0,1,1,1,0,0,0,1
+CLM-0001313,manual_review,Smartphone,Super Asia,mechanical,extended,2022-03-05,2023-03-05,2022-09-13,2022-10-03,450131.07,54.7,0,1472,20,1,1,1,0,0,1,1,0,0,2
+CLM-0000628,invalid_claim,Microwave,Waves,manufacturing,standard,2019-05-24,2020-05-23,2021-01-21,2021-02-07,147943.24,88.0,0,2072,17,1,1,0,1,1,1,0,0,1,2
+CLM-0000029,valid_claim,Refrigerator,Super Asia,manufacturing,extended,2023-02-08,2025-01-28,2024-05-24,2024-05-26,171719.83,43.5,0,853,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000131,valid_claim,Air Conditioner,Samsung,mechanical,extended,2024-01-19,2025-07-12,2024-05-29,2024-06-08,203931.98,32.2,0,848,10,1,1,1,1,0,1,0,0,1,0
+CLM-0001030,manual_review,Microwave,Super Asia,mechanical,third_party,2021-05-08,2022-05-08,2022-04-07,2022-04-23,420280.68,64.6,0,1631,16,0,1,1,0,1,1,0,0,0,2
+CLM-0000548,invalid_claim,Generator,Super Asia,battery,standard,2021-10-18,2022-10-18,2022-05-28,2022-06-11,147684.81,59.2,0,1580,14,1,1,1,1,0,0,0,0,1,3
+CLM-0001064,manual_review,Water Heater,Kenwood,overheating,standard,2024-02-02,2025-02-01,2024-10-08,2024-10-22,169565.54,31.7,0,716,14,0,0,1,1,0,1,1,0,0,0
+CLM-0000194,valid_claim,Microwave,Sony,electrical,standard,2023-05-22,2026-05-06,2024-11-03,2024-11-06,109669.93,40.1,0,690,3,1,1,1,1,0,1,0,0,0,1
+CLM-0000766,invalid_claim,Water Heater,Sony,display,standard,2022-08-01,2023-08-01,2022-10-27,2022-11-05,39115.69,49.8,0,1428,9,0,1,1,0,0,1,1,0,3,2
+CLM-0001277,manual_review,Microwave,Waves,manufacturing,extended,2021-12-29,2022-12-29,2022-06-28,2022-07-11,461752.03,56.8,0,1549,13,1,1,1,0,0,1,0,0,1,1
+CLM-0001352,manual_review,Water Heater,Super Asia,mechanical,standard,2023-12-30,2024-12-29,2024-06-19,2024-07-03,268460.5,32.8,0,827,14,1,1,0,1,1,1,1,1,2,1
+CLM-0000538,invalid_claim,Smartphone,Orient,overheating,standard,2021-10-31,2022-10-31,2022-02-11,2022-02-14,75325.46,58.8,0,1686,3,0,0,1,0,0,1,0,0,2,1
+CLM-0000849,invalid_claim,Small Appliance,Sony,other,standard,2020-11-08,2021-11-08,2021-01-31,2021-02-02,35508.34,70.5,0,2062,2,1,0,1,0,0,1,1,0,3,2
+CLM-0000781,invalid_claim,Smartphone,Sony,electrical,standard,2021-05-20,2022-05-20,2021-08-25,2021-08-26,115020.77,64.2,0,1856,1,1,1,0,0,0,1,1,0,1,2
+CLM-0000774,invalid_claim,Smartphone,PEL,other,standard,2019-10-15,2020-10-14,2020-05-19,2020-06-18,104880.33,83.3,0,2319,30,1,0,1,1,0,1,0,1,4,1
+CLM-0000486,valid_claim,Microwave,Kenwood,software,extended,2023-07-01,2024-06-25,2024-03-27,2024-04-06,149546.58,38.8,0,911,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000350,valid_claim,Laptop,LG,electrical,standard,2024-10-15,2026-04-08,2025-09-23,2025-09-28,25287.66,23.3,0,366,5,1,1,0,1,1,1,0,0,0,1
+CLM-0000066,valid_claim,Microwave,LG,electrical,extended,2022-03-15,2023-03-10,2022-08-12,2022-08-17,54095.72,54.3,0,1504,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001421,manual_review,Refrigerator,LG,software,third_party,2023-07-14,2024-07-13,2023-12-04,2023-12-16,415848.62,38.4,0,1025,12,1,0,1,1,1,1,1,0,1,1
+CLM-0000627,invalid_claim,Small Appliance,Orient,mechanical,standard,2019-07-02,2020-07-01,2019-09-27,2019-10-18,57459.16,86.8,0,2554,21,1,0,0,1,1,1,1,0,4,1
+CLM-0001098,manual_review,Smartphone,Dawlance,physical,standard,2024-04-25,2025-04-25,2024-09-29,2024-10-16,350794.5,29.0,0,725,17,1,1,1,1,1,0,1,1,0,0
+CLM-0000966,invalid_claim,Generator,Samsung,software,standard,2019-06-18,2020-06-17,2019-11-07,2019-11-15,111857.51,87.2,0,2513,8,1,1,1,0,0,0,0,0,2,1
+CLM-0000831,invalid_claim,Smartphone,TCL,battery,standard,2020-03-24,2021-03-24,2021-06-19,2021-07-18,68452.42,78.0,0,1923,29,1,1,1,1,1,1,0,0,4,3
+CLM-0000145,valid_claim,Washing Machine,TCL,display,extended,2024-01-07,2025-06-30,2024-03-08,2024-03-10,177218.24,32.6,0,930,2,1,1,1,0,0,1,0,0,1,0
+CLM-0000669,invalid_claim,Water Heater,Haier,overheating,standard,2020-02-09,2021-02-08,2020-04-30,2020-05-17,29149.32,79.5,0,2338,17,1,1,0,1,0,1,1,0,3,2
+CLM-0000614,invalid_claim,Small Appliance,Kenwood,battery,standard,2019-05-19,2020-05-18,2019-10-11,2019-10-12,79562.42,88.2,0,2540,1,1,1,1,0,0,1,1,0,1,2
+CLM-0000361,valid_claim,Microwave,Dawlance,software,standard,2024-03-15,2027-02-28,2026-05-24,2026-06-03,46064.43,30.3,157,123,10,1,1,1,1,1,1,0,0,0,0
+CLM-0001301,manual_review,Air Conditioner,Philips,physical,extended,2021-08-31,2022-08-31,2022-03-26,2022-04-12,232638.26,60.8,0,1643,17,0,0,1,0,1,0,0,1,0,2
+CLM-0001455,manual_review,Air Conditioner,Haier,manufacturing,third_party,2023-05-09,2024-05-08,2024-01-07,2024-01-18,56715.96,40.5,0,991,11,0,1,0,1,0,1,1,0,1,0
+CLM-0001282,manual_review,Generator,LG,battery,third_party,2023-06-17,2024-06-16,2024-06-06,2024-06-16,136068.27,39.3,0,840,10,1,1,1,1,0,1,0,0,2,0
+CLM-0000021,valid_claim,Water Heater,Dawlance,electrical,standard,2023-08-07,2025-01-28,2024-04-17,2024-04-26,77149.49,37.6,0,890,9,1,1,1,1,1,1,0,0,0,0
+CLM-0000525,invalid_claim,Generator,Dawlance,other,standard,2021-04-09,2023-04-09,2021-01-12,2021-02-05,163560.83,65.5,0,2081,24,1,0,0,0,0,1,0,0,1,1
+CLM-0000779,invalid_claim,Water Heater,Dawlance,other,standard,2020-01-12,2021-01-11,2020-10-07,2020-10-15,137857.49,80.4,0,2178,8,0,0,1,0,1,1,1,0,2,1
+CLM-0000146,valid_claim,Small Appliance,Orient,software,extended,2023-03-29,2024-09-19,2023-07-05,2023-07-13,192977.37,41.9,0,1177,8,1,1,1,1,0,1,0,0,0,1
+CLM-0000374,valid_claim,Laptop,Haier,software,extended,2022-02-23,2024-02-13,2022-06-14,2022-06-22,126354.03,55.0,0,1563,8,1,1,1,1,0,1,0,0,0,1
+CLM-0000767,invalid_claim,Laptop,Kenwood,physical,standard,2019-03-26,2020-03-25,2019-10-20,2019-11-06,28977.45,90.0,0,2531,17,0,0,0,1,1,1,0,0,1,2
+CLM-0000395,valid_claim,Air Conditioner,Kenwood,manufacturing,standard,2022-06-28,2024-06-17,2023-11-18,2023-11-19,90406.89,50.9,0,1041,1,1,1,1,1,0,1,0,0,0,0
+CLM-0000060,valid_claim,Smartphone,Philips,manufacturing,extended,2022-08-21,2025-08-05,2025-05-16,2025-05-18,211160.13,49.1,0,496,2,1,1,0,1,0,1,0,0,0,1
+CLM-0001415,manual_review,Refrigerator,Waves,mechanical,standard,2021-03-22,2022-03-22,2022-02-21,2022-03-07,452497.4,66.1,0,1676,14,1,0,1,1,1,0,1,1,2,1
+CLM-0000820,invalid_claim,Microwave,Waves,battery,standard,2019-06-01,2020-05-31,2020-12-28,2021-01-12,149436.01,87.8,0,2096,15,1,0,0,0,0,1,0,0,1,1
+CLM-0000323,valid_claim,Generator,Haier,display,extended,2024-09-14,2026-09-04,2026-07-11,2026-07-17,108501.68,24.3,0,75,6,1,1,1,1,0,1,0,0,1,0
+CLM-0000937,invalid_claim,Smartphone,Orient,other,standard,2022-05-06,2023-05-06,2023-09-20,2023-10-18,85900.89,52.6,0,1100,28,1,1,0,0,0,1,0,0,2,2
+CLM-0000840,invalid_claim,Water Heater,Philips,software,standard,2021-09-16,2022-09-16,2022-01-26,2022-02-25,79569.63,60.2,0,1702,30,0,0,0,0,0,1,0,0,1,2
+CLM-0000415,valid_claim,Laptop,LG,mechanical,standard,2022-12-26,2024-12-15,2023-09-23,2023-10-01,211839.34,44.9,0,1097,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000955,invalid_claim,Generator,Dawlance,physical,standard,2022-12-24,2023-12-24,2023-08-18,2023-09-15,48803.52,45.0,0,1133,28,1,0,0,0,0,1,0,0,4,3
+CLM-0000129,valid_claim,Washing Machine,Dawlance,manufacturing,extended,2024-08-21,2026-08-11,2026-03-23,2026-03-24,100995.28,25.1,0,185,1,1,1,1,1,1,1,0,0,0,1
+CLM-0000213,valid_claim,Television,Philips,manufacturing,standard,2023-02-05,2024-07-29,2023-05-23,2023-05-24,238482.71,43.6,0,1220,1,1,1,1,1,0,1,0,0,1,0
+CLM-0001491,manual_review,Air Conditioner,Super Asia,display,extended,2023-04-09,2024-04-08,2024-02-04,2024-02-16,229054.36,41.5,0,963,12,1,1,1,1,1,0,0,0,0,2
+CLM-0000276,valid_claim,Air Conditioner,Philips,electrical,extended,2022-09-10,2025-08-25,2024-01-21,2024-01-31,212121.79,48.5,0,977,10,1,1,1,1,0,1,0,0,0,1
+CLM-0000333,valid_claim,Refrigerator,Sony,display,standard,2022-06-13,2023-12-05,2022-10-06,2022-10-13,21195.75,51.4,0,1449,7,1,1,1,1,1,1,0,0,0,0
+CLM-0000462,valid_claim,Air Conditioner,Dawlance,display,extended,2023-02-13,2024-08-06,2024-05-14,2024-05-21,131113.61,43.3,0,863,7,1,1,1,1,0,1,0,0,0,1
+CLM-0000416,valid_claim,Smartphone,LG,electrical,standard,2024-06-20,2025-12-12,2024-11-04,2024-11-14,124043.51,27.1,0,689,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000810,invalid_claim,Laptop,Philips,physical,standard,2020-06-14,2022-06-14,2020-05-03,2020-05-04,122112.87,75.3,0,2335,1,1,1,1,0,0,1,0,0,3,3
+CLM-0001215,manual_review,Water Heater,Samsung,overheating,extended,2023-08-08,2024-08-07,2024-08-04,2024-08-17,95749.9,37.5,0,781,13,1,0,1,0,0,1,0,0,1,1
+CLM-0000502,invalid_claim,Washing Machine,Kenwood,physical,standard,2020-05-26,2021-05-26,2020-12-04,2020-12-27,138721.91,76.0,0,2120,23,0,1,1,0,0,1,0,0,3,2
+CLM-0000372,valid_claim,Laptop,Haier,electrical,extended,2022-10-25,2024-04-17,2023-05-05,2023-05-07,221831.0,47.0,0,1238,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001150,manual_review,Microwave,TCL,other,standard,2023-12-02,2024-12-01,2024-11-24,2024-12-09,418177.54,33.7,0,669,15,0,1,1,1,0,1,0,0,1,1
+CLM-0000685,invalid_claim,Smartphone,Philips,electrical,standard,2020-03-27,2021-03-27,2020-08-09,2020-09-01,38366.27,77.9,0,2237,23,1,1,1,1,0,1,0,1,2,2
+CLM-0001195,manual_review,Water Heater,Haier,battery,standard,2021-07-29,2022-07-29,2022-02-14,2022-02-24,340439.14,61.9,0,1683,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000268,valid_claim,Generator,LG,software,extended,2024-02-17,2026-02-06,2025-12-04,2025-12-05,25803.5,31.2,0,294,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000303,valid_claim,Small Appliance,Samsung,display,standard,2023-04-02,2026-03-17,2024-04-27,2024-05-03,118376.19,41.8,0,880,6,1,1,1,1,1,1,0,0,1,1
+CLM-0000161,valid_claim,Washing Machine,PEL,manufacturing,standard,2023-03-30,2024-09-20,2023-05-07,2023-05-12,104262.35,41.9,0,1236,5,1,1,1,1,0,1,0,0,1,0
+CLM-0000903,invalid_claim,Television,Sony,software,standard,2020-11-26,2022-11-26,2020-10-29,2020-11-28,56579.0,69.9,0,2156,30,1,0,1,0,0,1,0,0,3,2
+CLM-0000675,invalid_claim,Refrigerator,Super Asia,display,standard,2022-12-17,2023-12-17,2023-09-03,2023-09-29,124164.59,45.2,0,1117,26,1,0,0,1,1,1,1,0,4,1
+CLM-0000964,invalid_claim,Television,Kenwood,physical,standard,2020-10-23,2021-10-23,2020-12-26,2020-12-30,65552.88,71.0,0,2098,4,1,0,1,0,1,1,0,0,1,1
+CLM-0001167,manual_review,Air Conditioner,Super Asia,mechanical,third_party,2022-09-21,2023-09-21,2023-03-07,2023-03-26,195360.2,48.1,0,1297,19,1,1,1,0,1,1,0,0,0,2
+CLM-0000116,valid_claim,Washing Machine,Kenwood,software,standard,2022-04-28,2023-04-23,2022-12-21,2022-12-27,44664.06,52.9,0,1373,6,1,1,1,1,0,1,0,0,0,0
+CLM-0000180,valid_claim,Air Conditioner,LG,manufacturing,standard,2022-04-01,2025-03-16,2025-01-15,2025-01-21,135008.92,53.8,0,617,6,1,1,1,1,0,1,0,0,1,0
+CLM-0000747,invalid_claim,Smartphone,Samsung,other,standard,2020-04-29,2021-04-29,2020-11-22,2020-11-23,197651.18,76.8,0,2132,1,0,1,0,1,0,1,1,0,1,2
+CLM-0001070,manual_review,Microwave,Kenwood,battery,standard,2022-08-19,2023-08-19,2023-07-15,2023-07-28,358921.48,49.2,0,1167,13,1,0,1,0,1,1,0,1,1,2
+CLM-0000659,invalid_claim,Microwave,LG,electrical,standard,2019-07-20,2020-07-19,2021-02-27,2021-03-07,39267.62,86.2,0,2035,8,0,1,0,1,0,1,0,0,3,3
+CLM-0001305,manual_review,Television,Super Asia,manufacturing,third_party,2024-06-29,2025-06-29,2025-06-15,2025-06-27,88085.93,26.8,0,466,12,1,0,1,1,1,1,1,0,1,1
+CLM-0001309,manual_review,Air Conditioner,Philips,physical,third_party,2022-12-04,2023-12-04,2023-05-26,2023-06-10,199418.19,45.7,0,1217,15,0,0,0,1,0,1,0,0,1,2
+CLM-0000184,valid_claim,Small Appliance,PEL,software,extended,2023-01-13,2024-07-06,2024-01-05,2024-01-12,106376.41,44.3,0,993,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000828,invalid_claim,Small Appliance,TCL,software,standard,2019-01-17,2021-01-16,2018-12-07,2018-12-12,136302.79,92.2,0,2848,5,1,1,0,0,0,1,0,0,2,3
+CLM-0000199,valid_claim,Washing Machine,Sony,electrical,standard,2024-06-30,2025-06-25,2024-08-03,2024-08-09,105021.43,26.8,0,782,6,1,1,1,1,0,1,0,0,0,1
+CLM-0001026,manual_review,Water Heater,Philips,manufacturing,standard,2022-08-29,2023-08-29,2023-08-27,2023-09-09,405819.19,48.9,0,1124,13,1,0,1,1,1,1,0,0,0,1
+CLM-0000571,invalid_claim,Microwave,Philips,physical,standard,2019-04-07,2020-04-06,2019-08-16,2019-09-15,92527.99,89.6,0,2596,30,1,1,1,0,1,1,0,0,2,3
+CLM-0001231,manual_review,Microwave,Dawlance,display,third_party,2022-12-30,2023-12-30,2023-09-04,2023-09-17,106275.96,44.8,0,1116,13,1,1,0,1,0,1,0,0,1,0
+CLM-0000153,valid_claim,Refrigerator,LG,display,standard,2022-03-07,2025-02-19,2023-12-26,2023-12-27,119913.65,54.6,0,1003,1,1,1,1,0,1,1,0,0,0,0
+CLM-0000537,invalid_claim,Laptop,Orient,mechanical,standard,2019-07-23,2020-07-22,2019-10-30,2019-11-20,28981.78,86.1,0,2521,21,1,0,0,1,0,1,0,1,4,2
+CLM-0000233,valid_claim,Air Conditioner,Orient,manufacturing,standard,2023-04-07,2024-09-28,2023-12-24,2023-12-26,32437.09,41.6,0,1005,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001028,manual_review,Laptop,Haier,water,third_party,2022-10-31,2023-10-31,2023-10-13,2023-10-30,218763.07,46.8,0,1077,17,1,1,1,1,0,0,0,0,2,0
+CLM-0000558,invalid_claim,Television,Kenwood,other,standard,2019-09-05,2020-09-04,2019-11-17,2019-11-24,51115.77,84.6,0,2503,7,1,0,0,1,0,1,1,0,4,1
+CLM-0000132,valid_claim,Small Appliance,Super Asia,manufacturing,extended,2022-10-14,2024-10-03,2024-08-01,2024-08-07,134219.02,47.3,0,784,6,1,1,1,1,0,1,0,0,0,1
+CLM-0001319,manual_review,Laptop,PEL,mechanical,standard,2024-11-16,2025-11-16,2025-08-20,2025-09-02,240452.08,22.2,0,400,13,1,1,1,1,0,1,0,0,1,2
+CLM-0000789,invalid_claim,Water Heater,Sony,software,standard,2019-05-28,2020-05-27,2019-10-22,2019-10-28,167318.57,87.9,0,2529,6,1,1,1,0,0,0,0,0,2,1
+CLM-0001441,manual_review,Smartphone,Waves,mechanical,standard,2023-02-21,2024-02-21,2023-12-03,2023-12-13,490311.23,43.1,0,1026,10,1,1,1,1,0,1,1,0,1,1
+CLM-0001453,manual_review,Water Heater,Philips,battery,third_party,2021-02-16,2022-02-16,2022-01-31,2022-02-12,385104.82,67.2,0,1697,12,1,0,1,1,1,1,0,0,2,2
+CLM-0000510,invalid_claim,Laptop,Sony,physical,standard,2021-10-28,2022-10-28,2022-05-02,2022-06-01,30724.31,58.9,0,1606,30,1,0,1,1,1,1,0,0,2,2
+CLM-0001320,manual_review,Washing Machine,PEL,overheating,standard,2021-09-05,2022-09-05,2022-06-27,2022-07-15,94401.63,60.6,0,1550,18,1,1,1,1,0,0,1,0,2,2
+CLM-0001380,manual_review,Laptop,Philips,electrical,standard,2023-12-31,2024-12-30,2024-11-08,2024-11-22,50245.15,32.8,0,685,14,0,1,1,0,1,1,0,0,0,2
+CLM-0000910,invalid_claim,Television,Dawlance,mechanical,standard,2022-03-06,2023-03-06,2022-09-15,2022-09-23,139491.31,54.6,0,1470,8,1,1,0,1,1,1,1,0,3,3
+CLM-0000814,invalid_claim,Air Conditioner,Kenwood,battery,standard,2019-09-06,2021-09-05,2019-06-21,2019-07-17,133543.56,84.6,0,2652,26,1,1,1,0,0,1,0,0,3,1
+CLM-0000750,invalid_claim,Laptop,Philips,physical,standard,2019-06-30,2020-06-29,2019-10-16,2019-11-09,197965.18,86.8,0,2535,24,0,0,1,0,1,1,0,0,3,1
+CLM-0000340,valid_claim,Water Heater,Samsung,mechanical,standard,2024-10-04,2026-03-28,2025-04-16,2025-04-17,81296.92,23.7,0,526,1,1,1,1,1,1,1,0,0,0,0
+CLM-0000944,invalid_claim,Microwave,Orient,physical,standard,2019-03-11,2021-03-10,2019-01-30,2019-02-05,116556.91,90.5,0,2794,6,1,1,0,0,0,1,0,0,4,1
+CLM-0001089,manual_review,Smartphone,Orient,water,third_party,2021-12-30,2022-12-30,2022-04-17,2022-04-29,307398.77,56.8,0,1621,12,1,0,1,1,0,0,0,0,0,0
+CLM-0001308,manual_review,Microwave,Orient,other,extended,2023-01-09,2024-01-09,2023-12-22,2024-01-04,496007.69,44.5,0,1007,13,1,1,0,0,1,0,0,0,0,0
+CLM-0000451,valid_claim,Television,Philips,electrical,extended,2022-12-04,2024-11-23,2023-04-27,2023-04-30,112886.11,45.7,0,1246,3,1,1,1,0,0,1,0,0,1,0
+CLM-0000432,valid_claim,Laptop,LG,display,standard,2023-03-28,2024-03-22,2023-08-08,2023-08-15,90573.62,41.9,0,1143,7,1,1,0,1,1,1,0,0,0,1
+CLM-0000734,invalid_claim,Refrigerator,Samsung,physical,standard,2020-10-22,2021-10-22,2021-02-11,2021-02-14,90297.1,71.1,0,2051,3,1,0,1,0,0,1,0,0,1,3
+CLM-0000168,valid_claim,Laptop,Samsung,mechanical,standard,2022-06-02,2024-05-22,2024-01-09,2024-01-19,191779.8,51.7,0,989,10,1,1,1,1,1,1,0,0,0,0
+CLM-0001189,manual_review,Refrigerator,PEL,mechanical,third_party,2024-04-15,2025-04-15,2025-01-05,2025-01-18,444817.28,29.3,0,627,13,0,0,0,0,1,1,1,1,0,2
+CLM-0000931,invalid_claim,Water Heater,Kenwood,physical,standard,2020-01-07,2021-01-06,2020-04-01,2020-04-02,156995.33,80.6,0,2367,1,0,0,0,1,0,1,0,0,2,3
+CLM-0001256,manual_review,Water Heater,PEL,software,third_party,2024-04-28,2025-04-28,2024-11-29,2024-12-11,406556.95,28.9,0,664,12,1,1,1,1,1,0,1,0,0,0
+CLM-0000719,invalid_claim,Television,Super Asia,battery,standard,2020-12-02,2021-12-02,2021-07-04,2021-07-20,27293.65,69.7,0,1908,16,0,1,1,0,1,1,0,0,2,2
+CLM-0000074,valid_claim,Television,Sony,electrical,extended,2024-01-25,2026-01-14,2025-10-14,2025-10-21,230085.14,32.0,0,345,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000409,valid_claim,Water Heater,Sony,software,extended,2024-07-22,2027-07-07,2026-05-21,2026-05-24,68049.12,26.1,286,126,3,1,1,1,1,0,1,0,0,1,1
+CLM-0000644,invalid_claim,Generator,Orient,overheating,standard,2021-03-14,2022-03-14,2021-08-07,2021-08-21,81257.3,66.4,0,1874,14,1,1,0,1,0,0,0,0,4,1
+CLM-0000377,valid_claim,Smartphone,Sony,software,extended,2024-03-21,2025-03-16,2025-01-30,2025-02-06,196814.1,30.1,0,602,7,1,1,1,1,1,1,0,0,0,0
+CLM-0001485,manual_review,Smartphone,Sony,water,standard,2023-04-01,2024-03-31,2023-08-11,2023-08-27,350500.91,41.8,0,1140,16,1,0,1,1,0,1,0,0,1,0
+CLM-0000842,invalid_claim,Small Appliance,PEL,physical,standard,2020-03-01,2021-03-01,2020-12-07,2020-12-23,21358.31,78.8,0,2117,16,1,0,1,0,0,1,0,0,1,2
+CLM-0001427,manual_review,Generator,Dawlance,physical,third_party,2023-12-13,2024-12-12,2024-09-06,2024-09-20,387140.65,33.4,0,748,14,1,0,0,0,1,1,1,0,0,0
+CLM-0000532,invalid_claim,Laptop,Sony,mechanical,standard,2022-10-10,2023-10-10,2023-05-25,2023-06-18,126259.26,47.5,0,1218,24,1,0,0,1,1,1,0,1,4,1
+CLM-0000064,valid_claim,Generator,LG,display,extended,2022-03-17,2023-09-08,2022-12-29,2023-01-08,18606.69,54.3,0,1365,10,1,1,1,0,0,1,0,0,0,0
+CLM-0000322,valid_claim,Refrigerator,LG,electrical,extended,2023-02-28,2024-08-21,2023-07-11,2023-07-15,159249.34,42.8,0,1171,4,1,1,1,1,1,1,0,0,0,0
+CLM-0000576,invalid_claim,Small Appliance,Kenwood,electrical,standard,2021-08-08,2022-08-08,2022-04-28,2022-05-12,71225.21,61.5,0,1610,14,0,0,1,1,1,1,1,0,1,1
+CLM-0000843,invalid_claim,Laptop,Haier,physical,standard,2021-04-23,2022-04-23,2021-09-09,2021-10-03,67681.38,65.0,0,1841,24,0,0,1,1,0,1,0,0,4,3
+CLM-0000480,valid_claim,Generator,Sony,display,extended,2024-11-30,2027-11-15,2027-03-21,2027-03-29,142472.96,21.8,417,0,8,1,1,1,1,1,1,0,0,0,0
+CLM-0001469,manual_review,Small Appliance,Sony,overheating,extended,2021-06-21,2022-06-21,2022-05-31,2022-06-15,399430.25,63.1,0,1577,15,1,0,0,1,1,1,0,0,2,1
+CLM-0000400,valid_claim,Refrigerator,Orient,software,extended,2023-10-28,2026-10-12,2025-04-09,2025-04-10,213755.07,34.9,18,533,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000141,valid_claim,Microwave,Sony,mechanical,extended,2023-04-21,2024-04-15,2023-08-18,2023-08-25,221034.64,41.1,0,1133,7,1,1,1,1,1,1,0,0,0,0
+CLM-0000861,invalid_claim,Water Heater,Samsung,physical,standard,2022-04-16,2023-04-16,2022-12-16,2022-12-28,188406.31,53.3,0,1378,12,1,0,0,1,0,1,0,0,2,3
+CLM-0000491,valid_claim,Microwave,Orient,electrical,standard,2024-08-05,2026-01-27,2025-01-05,2025-01-08,213802.24,25.6,0,627,3,1,1,1,1,1,1,0,0,0,1
+CLM-0000528,invalid_claim,Microwave,Samsung,physical,standard,2020-02-17,2021-02-16,2020-07-01,2020-07-20,70100.76,79.2,0,2276,19,1,0,1,1,0,1,0,0,3,1
+CLM-0000770,invalid_claim,Smartphone,Haier,software,standard,2022-02-22,2024-02-22,2022-01-24,2022-01-27,89249.9,55.0,0,1704,3,0,1,1,0,0,1,0,0,4,2
+CLM-0000389,valid_claim,Washing Machine,PEL,manufacturing,extended,2022-01-13,2023-01-08,2022-08-01,2022-08-07,231735.74,56.3,0,1515,6,1,1,1,1,1,1,0,0,1,0
+CLM-0000103,valid_claim,Generator,PEL,manufacturing,extended,2024-06-28,2026-06-18,2025-10-30,2025-11-03,123494.79,26.9,0,329,4,1,1,1,1,0,1,0,0,0,0
+CLM-0001384,manual_review,Air Conditioner,TCL,battery,extended,2021-09-27,2022-09-27,2022-06-07,2022-06-26,349369.32,59.9,0,1570,19,0,1,0,0,1,1,1,0,0,0
+CLM-0000426,valid_claim,Small Appliance,Philips,manufacturing,extended,2022-05-24,2023-11-15,2022-06-24,2022-07-01,175231.4,52.0,0,1553,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000745,invalid_claim,Small Appliance,Orient,software,standard,2020-11-04,2021-11-04,2022-03-23,2022-04-07,114519.91,70.6,0,1646,15,1,0,1,1,0,1,0,0,1,3
+CLM-0000288,valid_claim,Air Conditioner,Dawlance,mechanical,extended,2023-08-03,2024-07-28,2024-05-23,2024-05-29,135765.25,37.7,0,854,6,1,1,0,1,0,1,0,0,1,1
+CLM-0000102,valid_claim,Washing Machine,Haier,mechanical,standard,2024-12-14,2025-12-09,2025-07-04,2025-07-14,184478.0,21.3,0,447,10,1,1,1,1,0,1,0,0,0,1
+CLM-0001006,manual_review,Microwave,Haier,display,third_party,2021-08-31,2022-08-31,2022-04-24,2022-05-13,332907.12,60.8,0,1614,19,1,1,0,1,1,0,0,1,0,0
+CLM-0000248,valid_claim,Small Appliance,PEL,mechanical,standard,2022-07-05,2024-06-24,2022-09-01,2022-09-08,174258.38,50.7,0,1484,7,1,1,1,1,1,1,0,0,0,0
+CLM-0001059,manual_review,Generator,Waves,water,extended,2022-07-23,2023-07-23,2023-02-08,2023-02-22,426346.01,50.1,0,1324,14,1,0,0,1,0,0,0,0,2,2
+CLM-0000274,valid_claim,Refrigerator,Samsung,mechanical,extended,2023-03-31,2024-03-25,2023-10-21,2023-10-27,48005.56,41.8,0,1069,6,1,1,1,1,1,1,0,0,0,0
+CLM-0000729,invalid_claim,Microwave,PEL,software,standard,2019-03-08,2020-03-07,2019-10-24,2019-11-03,156491.65,90.6,0,2527,10,1,1,0,0,0,0,0,0,4,2
+CLM-0000293,valid_claim,Refrigerator,Samsung,electrical,extended,2023-08-28,2025-02-18,2024-02-26,2024-03-03,141230.73,36.9,0,941,6,1,1,0,1,0,1,0,0,0,0
+CLM-0000504,invalid_claim,Washing Machine,Samsung,overheating,standard,2020-02-11,2021-02-10,2020-06-17,2020-07-10,125510.79,79.4,0,2290,23,1,1,0,1,0,1,1,0,1,3
+CLM-0000298,valid_claim,Refrigerator,Super Asia,electrical,standard,2022-12-26,2023-12-21,2023-06-17,2023-06-20,214653.01,44.9,0,1195,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000212,valid_claim,Television,Dawlance,display,extended,2023-11-02,2024-10-27,2024-09-10,2024-09-18,188800.36,34.7,0,744,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000619,invalid_claim,Washing Machine,Kenwood,software,standard,2020-02-09,2022-02-08,2019-12-30,2020-01-13,64104.64,79.5,0,2460,14,1,0,1,0,0,1,0,0,3,2
+CLM-0000888,invalid_claim,Washing Machine,Waves,manufacturing,standard,2019-04-04,2021-04-03,2019-01-07,2019-01-20,58172.48,89.7,0,2817,13,1,1,1,1,0,1,0,0,3,1
+CLM-0001000,invalid_claim,Generator,TCL,display,standard,2020-09-06,2021-09-06,2020-12-11,2020-12-13,171078.31,72.6,0,2113,2,0,1,0,1,0,1,0,1,4,2
+CLM-0000509,invalid_claim,Smartphone,Philips,other,standard,2022-05-10,2024-05-09,2022-04-25,2022-04-26,79282.85,52.5,0,1613,1,0,0,1,0,1,1,0,0,2,2
+CLM-0000505,invalid_claim,Generator,Waves,battery,standard,2021-06-10,2022-06-10,2022-02-22,2022-03-24,28109.91,63.5,0,1675,30,0,1,0,0,0,0,0,0,4,2
+CLM-0000930,invalid_claim,Water Heater,Sony,software,standard,2022-10-13,2023-10-13,2023-06-26,2023-07-07,155135.93,47.4,0,1186,11,1,1,0,0,1,0,0,0,2,1
+CLM-0000014,valid_claim,Generator,TCL,mechanical,standard,2023-03-15,2024-09-05,2024-04-18,2024-04-28,37778.74,42.3,0,889,10,1,1,1,1,0,1,0,0,1,0
+CLM-0000858,invalid_claim,Smartphone,Dawlance,physical,standard,2021-03-26,2022-03-26,2021-06-05,2021-06-28,194372.44,66.0,0,1937,23,0,0,0,0,0,1,1,0,4,1
+CLM-0001154,manual_review,Small Appliance,Kenwood,overheating,third_party,2021-12-06,2022-12-06,2022-10-05,2022-10-24,307721.87,57.6,0,1450,19,1,0,1,1,0,1,0,0,1,0
+CLM-0001419,manual_review,Washing Machine,Samsung,mechanical,standard,2023-07-08,2024-07-07,2024-04-10,2024-04-30,64308.89,38.6,0,897,20,1,0,1,0,0,1,0,0,2,2
+CLM-0001115,manual_review,Refrigerator,Orient,water,extended,2021-10-23,2022-10-23,2022-03-09,2022-03-29,220426.09,59.0,0,1660,20,1,1,1,0,1,1,1,0,2,0
+CLM-0000716,invalid_claim,Laptop,Orient,electrical,standard,2021-11-15,2022-11-15,2022-08-18,2022-09-07,138029.17,58.3,0,1498,20,0,0,1,0,0,1,0,0,1,3
+CLM-0000264,valid_claim,Water Heater,LG,electrical,extended,2022-07-02,2023-06-27,2023-05-21,2023-05-29,166419.15,50.8,0,1222,8,1,1,1,0,1,1,0,0,0,0
+CLM-0001428,manual_review,Microwave,Kenwood,display,standard,2022-09-08,2023-09-08,2022-12-28,2023-01-07,226867.15,48.5,0,1366,10,0,0,0,0,0,1,1,0,1,0
+CLM-0000683,invalid_claim,Television,Super Asia,overheating,standard,2022-03-05,2023-03-05,2023-05-05,2023-05-31,101530.05,54.7,0,1238,26,1,0,1,1,0,1,0,0,4,2
+CLM-0000862,invalid_claim,Air Conditioner,Dawlance,other,standard,2019-06-21,2020-06-20,2019-10-03,2019-10-18,43743.26,87.1,0,2548,15,0,0,1,0,0,1,0,0,1,2
+CLM-0001349,manual_review,Smartphone,Sony,electrical,third_party,2021-04-06,2022-04-06,2021-08-16,2021-09-03,414274.74,65.6,0,1865,18,0,0,1,1,1,1,0,0,1,0
+CLM-0000551,invalid_claim,Generator,Samsung,physical,standard,2020-01-10,2021-01-09,2020-10-05,2020-10-29,28853.94,80.5,0,2180,24,1,0,1,0,0,1,0,0,3,2
+CLM-0001450,manual_review,Air Conditioner,Super Asia,software,standard,2021-04-30,2022-04-30,2022-04-23,2022-05-05,317603.53,64.8,0,1615,12,1,1,1,0,1,0,1,1,1,1
+CLM-0000981,invalid_claim,Laptop,PEL,water,standard,2022-10-01,2023-10-01,2024-08-09,2024-08-12,32569.37,47.8,0,776,3,0,1,0,1,1,1,0,0,4,3
+CLM-0000911,invalid_claim,Refrigerator,Haier,display,standard,2019-07-07,2020-07-06,2020-03-13,2020-03-20,64038.37,86.6,0,2386,7,0,1,1,0,0,1,0,0,1,3
+CLM-0001005,manual_review,Smartphone,LG,water,third_party,2021-11-05,2022-11-05,2022-10-16,2022-10-29,459160.52,58.6,0,1439,13,1,0,1,0,1,1,0,0,0,0
+CLM-0000928,invalid_claim,Refrigerator,Waves,overheating,standard,2022-06-03,2023-06-03,2023-01-15,2023-01-22,164462.37,51.7,0,1348,7,1,0,0,1,0,1,1,0,2,3
+CLM-0000267,valid_claim,Air Conditioner,Haier,electrical,extended,2024-09-06,2027-08-22,2026-08-01,2026-08-04,229138.29,24.6,332,54,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001317,manual_review,Microwave,Kenwood,water,extended,2022-02-11,2023-02-11,2023-02-07,2023-02-20,369134.29,55.4,0,1325,13,1,1,0,1,0,1,0,0,0,1
+CLM-0001003,manual_review,Generator,Samsung,software,extended,2023-11-26,2024-11-25,2024-06-23,2024-07-05,305326.81,33.9,0,823,12,1,0,1,0,0,1,0,0,1,1
+CLM-0000181,valid_claim,Air Conditioner,Sony,electrical,extended,2024-07-01,2026-06-21,2025-09-04,2025-09-12,112754.23,26.8,0,385,8,1,1,0,1,0,1,0,0,0,0
+CLM-0000391,valid_claim,Laptop,TCL,display,standard,2023-11-11,2025-10-31,2024-02-16,2024-02-19,149180.69,34.4,0,951,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000478,valid_claim,Water Heater,Dawlance,mechanical,extended,2023-07-14,2026-06-28,2024-08-11,2024-08-19,40388.62,38.4,0,774,8,1,1,1,1,0,1,0,0,1,1
+CLM-0000907,invalid_claim,Washing Machine,Kenwood,display,standard,2019-12-15,2020-12-14,2020-05-11,2020-06-01,66287.77,81.3,0,2327,21,1,0,1,1,0,0,0,0,2,2
+CLM-0001429,manual_review,Small Appliance,Philips,overheating,extended,2021-11-20,2022-11-20,2022-07-08,2022-07-21,173444.47,58.1,0,1539,13,1,0,1,1,1,1,0,0,0,0
+CLM-0001253,manual_review,Water Heater,LG,physical,third_party,2024-06-22,2025-06-22,2025-03-04,2025-03-21,358808.18,27.1,0,569,17,0,0,1,1,0,1,0,0,2,1
+CLM-0001085,manual_review,Smartphone,Orient,display,extended,2021-02-15,2022-02-15,2021-09-14,2021-10-01,274493.47,67.2,0,1836,17,0,1,0,1,0,1,1,0,0,0
+CLM-0000787,invalid_claim,Microwave,Haier,other,standard,2019-08-09,2020-08-08,2020-04-03,2020-04-18,113511.3,85.5,0,2365,15,0,1,1,0,0,1,0,0,2,2
+CLM-0000196,valid_claim,Small Appliance,Sony,manufacturing,standard,2024-10-10,2026-09-30,2025-10-05,2025-10-10,25796.59,23.5,6,354,5,1,1,1,1,1,1,0,0,0,0
+CLM-0000956,invalid_claim,Refrigerator,Dawlance,manufacturing,standard,2021-05-13,2022-05-13,2021-07-26,2021-08-16,181422.61,64.4,0,1886,21,1,1,0,1,0,1,1,0,1,1
+CLM-0001143,manual_review,Microwave,Super Asia,software,standard,2022-10-08,2023-10-08,2023-10-24,2023-11-04,412676.6,47.5,0,1066,11,1,0,1,1,0,1,1,0,0,2
+CLM-0000142,valid_claim,Water Heater,Sony,manufacturing,standard,2023-11-18,2025-11-07,2025-03-27,2025-04-05,205071.26,34.2,0,546,9,1,1,1,1,0,1,0,0,1,0
+CLM-0000337,valid_claim,Generator,Dawlance,electrical,extended,2022-10-07,2024-09-26,2023-08-26,2023-09-03,202521.72,47.6,0,1125,8,1,1,1,1,0,1,0,0,0,1
+CLM-0000586,invalid_claim,Laptop,Orient,physical,standard,2021-12-26,2022-12-26,2022-05-31,2022-06-23,121912.09,56.9,0,1577,23,0,1,1,0,1,1,0,0,3,1
+CLM-0001080,manual_review,Water Heater,Haier,physical,standard,2022-11-10,2023-11-10,2023-04-08,2023-04-22,115672.56,46.5,0,1265,14,0,1,1,1,0,1,0,0,1,1
+CLM-0000879,invalid_claim,Refrigerator,Orient,electrical,standard,2021-11-25,2023-11-25,2021-11-02,2021-11-17,132894.38,58.0,0,1787,15,1,0,1,1,0,1,0,0,4,1
+CLM-0000768,invalid_claim,Washing Machine,Philips,manufacturing,standard,2019-10-29,2021-10-28,2019-08-21,2019-09-12,126640.05,82.9,0,2591,22,1,1,1,0,1,1,0,0,1,1
+CLM-0000188,valid_claim,Laptop,Sony,display,standard,2022-12-21,2024-06-13,2023-09-27,2023-10-02,218397.72,45.1,0,1093,5,1,1,0,1,1,1,0,0,0,0
+CLM-0000680,invalid_claim,Refrigerator,Haier,other,standard,2021-02-25,2022-02-25,2021-05-18,2021-06-16,28469.1,66.9,0,1955,29,1,0,0,1,0,0,0,0,1,1
+CLM-0001102,manual_review,Generator,Orient,electrical,third_party,2022-07-08,2023-07-08,2023-07-02,2023-07-13,394699.91,50.6,0,1180,11,0,1,1,0,1,1,0,0,1,0
+CLM-0001333,manual_review,Microwave,Super Asia,physical,extended,2023-03-01,2024-02-29,2024-01-22,2024-02-06,436055.43,42.8,0,976,15,1,1,1,0,0,1,0,0,2,1
+CLM-0000531,invalid_claim,Small Appliance,Waves,water,standard,2020-04-20,2021-04-20,2020-10-26,2020-11-03,184738.44,77.1,0,2159,8,0,0,1,0,0,1,1,0,4,2
+CLM-0000379,valid_claim,Refrigerator,LG,electrical,extended,2023-02-18,2026-02-02,2023-06-20,2023-06-25,164007.02,43.2,0,1192,5,1,1,1,1,0,1,0,0,0,0
+CLM-0000527,invalid_claim,Microwave,Samsung,electrical,standard,2021-08-07,2022-08-07,2021-11-12,2021-11-28,37390.57,61.6,0,1777,16,0,1,0,0,0,1,0,0,4,3
+CLM-0000503,invalid_claim,Washing Machine,TCL,physical,standard,2019-06-22,2020-06-21,2019-12-05,2019-12-17,175896.05,87.1,0,2485,12,0,0,1,0,0,1,0,0,2,1
+CLM-0000390,valid_claim,Microwave,Super Asia,electrical,extended,2022-10-06,2025-09-20,2023-04-13,2023-04-21,147761.52,47.6,0,1260,8,1,1,1,1,1,1,0,0,0,1
+CLM-0001031,manual_review,Air Conditioner,PEL,software,standard,2022-04-07,2023-04-07,2022-11-15,2022-11-25,479489.46,53.6,0,1409,10,1,1,1,1,1,1,1,1,2,2
+CLM-0000228,valid_claim,Laptop,Dawlance,manufacturing,standard,2022-08-16,2024-08-05,2022-11-28,2022-12-04,244327.26,49.3,0,1396,6,1,1,1,1,0,1,0,0,1,0
+CLM-0001069,manual_review,Small Appliance,TCL,battery,third_party,2021-02-12,2022-02-12,2021-09-27,2021-10-15,142461.31,67.3,0,1823,18,1,1,0,0,1,1,1,0,1,0
+CLM-0001213,manual_review,Generator,TCL,physical,standard,2021-08-06,2022-08-06,2021-12-19,2022-01-02,69855.62,61.6,0,1740,14,1,1,0,1,1,0,0,0,0,0
+CLM-0000218,valid_claim,Television,Orient,software,standard,2022-03-24,2023-09-15,2023-06-24,2023-06-30,174138.09,54.0,0,1188,6,1,1,1,0,1,1,0,0,0,0
+CLM-0000788,invalid_claim,Television,LG,other,standard,2021-12-18,2022-12-18,2022-09-11,2022-10-07,9727.4,57.2,0,1474,26,0,1,1,1,1,1,0,1,4,3
+CLM-0000700,invalid_claim,Small Appliance,Super Asia,overheating,standard,2020-04-16,2021-04-16,2020-09-21,2020-09-24,107754.46,77.3,0,2194,3,0,0,1,1,0,0,0,0,2,1
+CLM-0000023,valid_claim,Refrigerator,LG,mechanical,standard,2022-09-25,2024-09-14,2023-04-08,2023-04-16,211129.83,48.0,0,1265,8,1,1,1,1,1,1,0,0,1,0
+CLM-0001368,manual_review,Air Conditioner,Orient,mechanical,extended,2021-01-08,2022-01-08,2021-12-28,2022-01-17,159922.31,68.5,0,1731,20,1,1,0,0,0,1,0,0,0,2
+CLM-0000250,valid_claim,Water Heater,Kenwood,software,standard,2023-12-16,2026-11-30,2024-09-29,2024-10-03,16726.68,33.3,67,725,4,1,1,0,0,0,1,0,0,1,0
+CLM-0000269,valid_claim,Television,Sony,manufacturing,extended,2024-12-10,2026-06-03,2025-12-17,2025-12-23,49933.8,21.5,0,281,6,1,1,1,0,0,1,0,0,0,1
+CLM-0000748,invalid_claim,Refrigerator,TCL,manufacturing,standard,2019-02-03,2021-02-02,2019-01-16,2019-02-01,58561.34,91.7,0,2808,16,0,1,1,1,0,1,0,0,4,2
+CLM-0000071,valid_claim,Refrigerator,Waves,electrical,extended,2023-12-23,2025-06-15,2024-12-12,2024-12-16,200323.46,33.0,0,651,4,1,1,1,1,1,1,0,0,0,0
+CLM-0000655,invalid_claim,Television,Haier,other,standard,2020-01-21,2021-01-20,2021-05-02,2021-05-12,112653.77,80.1,0,1971,10,1,1,0,1,0,1,0,0,3,2
+CLM-0000121,valid_claim,Water Heater,TCL,software,standard,2022-09-23,2023-09-18,2022-11-25,2022-11-30,44451.79,48.0,0,1399,5,1,1,1,1,0,1,0,0,1,1
+CLM-0000001,valid_claim,Refrigerator,Waves,display,standard,2022-08-17,2023-08-12,2023-02-03,2023-02-07,153765.74,49.2,0,1329,4,1,1,1,1,1,1,0,0,0,0
+CLM-0000926,invalid_claim,Generator,Samsung,display,standard,2021-04-21,2023-04-21,2021-02-16,2021-03-01,16755.84,65.1,0,2046,13,0,1,1,0,0,1,0,0,3,3
+CLM-0000411,valid_claim,Television,Sony,electrical,extended,2024-12-14,2026-12-04,2026-05-04,2026-05-13,159064.19,21.3,71,143,9,1,1,0,1,1,1,0,0,0,0
+CLM-0000122,valid_claim,Microwave,Philips,electrical,standard,2024-11-25,2026-11-15,2025-05-05,2025-05-14,136754.0,21.9,52,507,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001134,manual_review,Washing Machine,Haier,manufacturing,third_party,2023-12-06,2024-12-05,2024-11-03,2024-11-14,329744.73,33.6,0,690,11,1,1,1,1,1,1,1,0,0,1
+CLM-0000646,invalid_claim,Television,Super Asia,physical,standard,2020-03-22,2021-03-22,2020-12-12,2021-01-05,131991.41,78.1,0,2112,24,1,0,1,0,0,1,0,0,4,2
+CLM-0000324,valid_claim,Microwave,Waves,mechanical,extended,2024-05-16,2027-05-01,2027-02-02,2027-02-11,244479.19,28.3,219,0,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001420,manual_review,Generator,Kenwood,water,standard,2021-01-21,2022-01-21,2022-01-10,2022-01-27,76969.62,68.1,0,1718,17,1,1,0,1,1,0,1,0,0,0
+CLM-0000388,valid_claim,Air Conditioner,Waves,mechanical,extended,2024-04-29,2027-04-14,2024-07-14,2024-07-20,74788.12,28.8,202,802,6,1,1,1,1,0,1,0,0,0,0
+CLM-0001212,manual_review,Small Appliance,Waves,battery,extended,2023-04-11,2024-04-10,2024-03-20,2024-04-06,240435.11,41.5,0,918,17,0,0,1,1,0,1,1,0,0,1
+CLM-0000530,invalid_claim,Generator,LG,battery,standard,2020-07-02,2021-07-02,2022-06-28,2022-07-12,126425.85,74.7,0,1549,14,1,1,1,1,0,1,0,0,4,2
+CLM-0000615,invalid_claim,Small Appliance,LG,physical,standard,2021-05-27,2022-05-27,2022-02-04,2022-02-12,16684.99,63.9,0,1693,8,1,1,1,1,1,1,0,0,4,3
+CLM-0000960,invalid_claim,Laptop,LG,manufacturing,standard,2020-01-06,2021-01-05,2020-03-12,2020-04-02,184530.59,80.6,0,2387,21,0,0,0,1,0,0,0,0,3,2
+CLM-0000999,invalid_claim,Television,Haier,manufacturing,standard,2022-01-03,2023-01-03,2022-10-15,2022-10-27,129233.18,56.7,0,1440,12,1,0,0,0,0,1,1,0,1,2
+CLM-0001267,manual_review,Washing Machine,TCL,manufacturing,standard,2024-05-31,2025-05-31,2025-05-12,2025-05-28,123223.45,27.8,0,500,16,1,1,1,1,1,1,0,0,2,2
+CLM-0000713,invalid_claim,Television,Kenwood,other,standard,2022-10-30,2024-10-29,2022-09-01,2022-09-09,19624.67,46.8,0,1484,8,1,0,1,0,1,1,0,0,3,3
+CLM-0001302,manual_review,Water Heater,TCL,water,extended,2021-11-10,2022-11-10,2022-03-11,2022-03-30,77200.05,58.4,0,1658,19,1,0,0,1,1,0,0,0,1,2
+CLM-0001397,manual_review,Smartphone,Super Asia,display,third_party,2024-08-25,2025-08-25,2025-02-16,2025-03-04,183893.36,25.0,0,585,16,0,0,1,0,0,1,0,0,1,1
+CLM-0000574,invalid_claim,Air Conditioner,Samsung,overheating,standard,2022-03-31,2023-03-31,2022-06-30,2022-07-03,66089.49,53.8,0,1547,3,0,1,1,0,0,1,1,0,3,3
+CLM-0000160,valid_claim,Generator,LG,software,extended,2024-08-12,2026-08-02,2025-07-23,2025-07-28,229867.67,25.4,0,428,5,1,1,1,1,0,1,0,0,0,1
+CLM-0000506,invalid_claim,Small Appliance,PEL,physical,standard,2021-06-02,2022-06-02,2022-03-08,2022-03-15,199065.45,63.7,0,1661,7,1,0,1,1,1,1,0,0,3,2
+CLM-0000554,invalid_claim,Television,Kenwood,display,standard,2019-09-11,2021-09-10,2019-06-22,2019-06-25,117486.84,84.4,0,2651,3,1,0,1,1,0,1,0,0,1,3
+CLM-0001117,manual_review,Generator,Philips,electrical,third_party,2023-05-23,2024-05-22,2024-03-14,2024-03-24,254493.07,40.1,0,924,10,1,1,1,0,0,0,1,0,1,0
+CLM-0001170,manual_review,Laptop,TCL,physical,extended,2023-11-22,2024-11-21,2024-11-15,2024-12-03,153008.73,34.1,0,678,18,0,0,1,0,0,1,0,0,0,1
+CLM-0001244,manual_review,Smartphone,Philips,display,third_party,2021-07-09,2022-07-09,2022-06-27,2022-07-15,224710.22,62.5,0,1550,18,1,0,0,1,0,1,0,0,2,0
+CLM-0000296,valid_claim,Laptop,Kenwood,manufacturing,standard,2023-08-07,2024-08-01,2023-12-14,2023-12-20,147904.72,37.6,0,1015,6,1,1,1,1,0,1,0,0,1,1
+CLM-0000198,valid_claim,Television,TCL,electrical,standard,2022-06-18,2024-06-07,2023-01-03,2023-01-04,15255.28,51.2,0,1360,1,1,1,1,1,1,1,0,0,1,0
+CLM-0000454,valid_claim,Washing Machine,Haier,mechanical,standard,2023-08-06,2026-07-21,2026-05-11,2026-05-14,70907.75,37.6,0,136,3,1,1,1,1,1,1,0,0,0,0
+CLM-0001041,manual_review,Generator,Philips,mechanical,extended,2024-05-09,2025-05-09,2025-04-27,2025-05-14,346370.6,28.5,0,515,17,1,1,1,0,1,1,0,0,1,1
+CLM-0000500,valid_claim,Refrigerator,Haier,manufacturing,standard,2024-10-03,2027-09-18,2026-11-26,2026-12-03,97686.24,23.7,359,0,7,1,1,1,1,0,1,0,0,0,1
+CLM-0001255,manual_review,Smartphone,TCL,software,standard,2023-07-10,2024-07-09,2024-04-09,2024-04-21,414600.72,38.5,0,898,12,0,0,1,0,0,1,1,0,2,2
+CLM-0000028,valid_claim,Air Conditioner,Super Asia,software,standard,2024-06-12,2025-06-07,2025-01-25,2025-02-04,137181.28,27.4,0,607,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000367,valid_claim,Smartphone,Waves,manufacturing,standard,2023-07-10,2024-07-04,2024-04-03,2024-04-04,19483.41,38.5,0,904,1,1,1,1,1,1,1,0,0,0,1
+CLM-0000934,invalid_claim,Small Appliance,Orient,water,standard,2020-03-05,2021-03-05,2020-06-03,2020-06-19,85949.93,78.6,0,2304,16,1,1,1,1,0,1,0,1,4,1
+CLM-0000189,valid_claim,Generator,Haier,electrical,standard,2024-02-26,2027-02-10,2025-05-19,2025-05-27,202032.01,30.9,139,493,8,1,1,1,1,1,1,0,0,1,1
+CLM-0000866,invalid_claim,Refrigerator,Sony,water,standard,2022-11-29,2023-11-29,2023-05-20,2023-05-29,117845.75,45.8,0,1223,9,0,1,0,1,0,1,0,0,2,1
+CLM-0001092,manual_review,Air Conditioner,LG,physical,third_party,2023-08-03,2024-08-02,2023-12-19,2023-12-31,443813.73,37.7,0,1010,12,1,0,1,0,1,1,1,0,1,1
+CLM-0000135,valid_claim,Air Conditioner,Super Asia,mechanical,standard,2024-05-07,2025-10-29,2025-01-03,2025-01-07,146808.39,28.6,0,629,4,1,1,0,1,0,1,0,0,1,1
+CLM-0000214,valid_claim,Generator,Samsung,mechanical,extended,2023-09-22,2024-09-16,2024-02-04,2024-02-13,36861.26,36.1,0,963,9,1,1,0,0,0,1,0,0,0,1
+CLM-0000242,valid_claim,Microwave,Dawlance,software,extended,2022-07-25,2023-07-20,2023-06-08,2023-06-10,149425.46,50.0,0,1204,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000894,invalid_claim,Microwave,Kenwood,manufacturing,standard,2020-12-21,2021-12-21,2021-08-30,2021-09-06,67283.68,69.1,0,1851,7,1,1,0,0,0,1,1,0,3,3
+CLM-0000733,invalid_claim,Television,LG,mechanical,standard,2021-11-25,2022-11-25,2022-03-05,2022-03-19,103330.12,58.0,0,1664,14,0,0,0,0,0,1,0,0,3,3
+CLM-0001145,manual_review,Water Heater,Super Asia,display,standard,2023-08-04,2024-08-03,2024-07-17,2024-08-02,54802.37,37.7,0,799,16,1,0,0,1,1,0,1,0,2,2
+CLM-0001340,manual_review,Smartphone,Kenwood,overheating,extended,2021-01-21,2022-01-21,2021-05-11,2021-05-25,221675.65,68.1,0,1962,14,1,0,1,1,1,0,0,0,0,0
+CLM-0000210,valid_claim,Washing Machine,Samsung,display,extended,2023-05-16,2024-05-10,2024-02-11,2024-02-17,67761.1,40.3,0,956,6,1,1,1,0,0,1,0,0,1,0
+CLM-0000991,invalid_claim,Water Heater,Dawlance,manufacturing,standard,2022-11-24,2024-11-23,2022-09-25,2022-10-05,171824.08,46.0,0,1460,10,1,0,1,0,0,1,0,0,1,3
+CLM-0000501,invalid_claim,Air Conditioner,Waves,mechanical,standard,2022-11-24,2023-11-24,2023-01-30,2023-02-24,127880.49,46.0,0,1333,25,0,1,1,0,0,1,1,0,1,1
+CLM-0001037,manual_review,Television,TCL,water,standard,2021-04-20,2022-04-20,2022-04-08,2022-04-21,175990.41,65.1,0,1630,13,1,1,1,1,1,1,0,0,0,0
+CLM-0001335,manual_review,Television,TCL,manufacturing,standard,2021-11-26,2022-11-26,2022-10-10,2022-10-26,494351.66,57.9,0,1445,16,0,0,0,1,0,1,1,0,1,1
+CLM-0001470,manual_review,Refrigerator,Kenwood,physical,standard,2022-06-06,2023-06-06,2022-10-24,2022-11-09,424028.11,51.6,0,1431,16,1,1,1,1,0,0,0,0,0,2
+CLM-0000468,valid_claim,Washing Machine,Samsung,software,extended,2024-12-12,2025-12-07,2025-08-12,2025-08-20,88219.76,21.4,0,408,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001350,manual_review,Water Heater,Sony,electrical,extended,2023-04-28,2024-04-27,2024-03-27,2024-04-10,338986.9,40.9,0,911,14,1,1,1,1,0,1,0,0,0,1
+CLM-0000063,valid_claim,Generator,Super Asia,software,extended,2024-02-24,2025-08-17,2025-06-06,2025-06-13,247277.29,31.0,0,475,7,1,1,1,1,1,1,0,0,0,0
+CLM-0001165,manual_review,Laptop,Orient,mechanical,standard,2022-04-21,2023-04-21,2022-08-21,2022-09-02,205133.5,53.1,0,1495,12,0,1,1,1,1,0,0,0,0,0
+CLM-0000853,invalid_claim,Washing Machine,Philips,battery,standard,2019-06-09,2020-06-08,2020-03-24,2020-03-26,87954.12,87.5,0,2375,2,0,1,1,0,0,1,0,0,4,2
+CLM-0000056,valid_claim,Small Appliance,TCL,software,standard,2022-12-25,2025-12-09,2024-07-08,2024-07-16,125452.44,45.0,0,808,8,1,1,1,1,1,1,0,0,0,0
+CLM-0000363,valid_claim,Laptop,Waves,display,standard,2024-12-09,2026-06-02,2025-05-12,2025-05-14,41444.52,21.5,0,500,2,1,1,1,1,1,1,0,0,0,1
+CLM-0001023,manual_review,Small Appliance,Orient,software,standard,2022-07-29,2023-07-29,2023-03-28,2023-04-12,484463.26,49.9,0,1276,15,0,1,0,0,0,0,1,0,0,1
+CLM-0000813,invalid_claim,Washing Machine,TCL,electrical,standard,2022-04-08,2023-04-08,2022-06-15,2022-07-07,191259.97,53.5,0,1562,22,0,0,1,0,0,1,1,0,4,3
+CLM-0001141,manual_review,Smartphone,Dawlance,display,third_party,2023-02-12,2024-02-12,2023-08-09,2023-08-25,481987.27,43.4,0,1142,16,1,0,1,1,1,1,0,0,1,1
+CLM-0000905,invalid_claim,Smartphone,Super Asia,mechanical,standard,2021-01-12,2022-01-12,2021-09-11,2021-09-21,115689.79,68.4,0,1839,10,1,0,0,1,0,0,0,0,2,1
+CLM-0000819,invalid_claim,Microwave,Orient,mechanical,standard,2021-12-20,2022-12-20,2022-10-11,2022-10-24,83451.91,57.1,0,1444,13,1,0,1,0,0,1,0,1,1,3
+CLM-0000599,invalid_claim,Television,Dawlance,display,standard,2021-03-01,2022-03-01,2022-08-23,2022-08-30,18645.99,66.8,0,1493,7,1,0,1,0,0,1,0,0,2,1
+CLM-0001276,manual_review,Air Conditioner,TCL,manufacturing,third_party,2021-11-07,2022-11-07,2022-06-02,2022-06-20,245939.77,58.5,0,1575,18,0,1,1,1,0,1,1,0,0,2
+CLM-0000237,valid_claim,Washing Machine,Sony,electrical,extended,2022-07-06,2025-06-20,2023-02-10,2023-02-16,118339.0,50.6,0,1322,6,1,1,1,1,0,1,0,0,1,0
+CLM-0001196,manual_review,Small Appliance,Kenwood,other,standard,2022-01-08,2023-01-08,2022-06-01,2022-06-13,383447.56,56.5,0,1576,12,0,0,0,0,0,1,0,0,2,0
+CLM-0000897,invalid_claim,Small Appliance,PEL,mechanical,standard,2021-04-17,2022-04-17,2021-06-21,2021-07-02,116014.7,65.2,0,1921,11,1,1,1,0,0,0,0,0,4,3
+CLM-0001342,manual_review,Smartphone,PEL,manufacturing,third_party,2022-06-19,2023-06-19,2023-06-07,2023-06-25,197265.24,51.2,0,1205,18,1,1,1,1,1,0,1,0,1,0
+CLM-0001029,manual_review,Generator,LG,electrical,standard,2021-04-25,2022-04-25,2022-05-15,2022-05-27,118206.47,65.0,0,1593,12,1,0,1,0,0,1,0,0,1,1
+CLM-0000305,valid_claim,Washing Machine,Waves,display,standard,2024-04-21,2025-04-16,2024-09-22,2024-09-23,224337.45,29.1,0,732,1,1,1,1,1,0,1,0,0,0,0
+CLM-0000841,invalid_claim,Television,Sony,physical,standard,2022-03-29,2023-03-29,2022-06-03,2022-06-16,77115.22,53.9,0,1574,13,1,0,1,0,0,1,0,0,1,3
+CLM-0000516,invalid_claim,Air Conditioner,Orient,physical,standard,2020-07-05,2022-07-05,2020-04-10,2020-05-02,132953.69,74.6,0,2358,22,0,1,0,0,0,1,0,0,2,1
+CLM-0001140,manual_review,Laptop,Orient,manufacturing,standard,2024-07-17,2025-07-17,2025-02-01,2025-02-13,133965.09,26.2,0,600,12,0,0,1,1,1,1,0,0,2,0
+CLM-0000671,invalid_claim,Microwave,TCL,physical,standard,2020-08-06,2021-08-06,2020-10-15,2020-10-20,150065.18,73.6,0,2170,5,0,1,1,1,0,1,0,0,3,1
+CLM-0000272,valid_claim,Refrigerator,Kenwood,display,extended,2022-02-06,2023-02-01,2022-09-30,2022-10-07,224176.06,55.6,0,1455,7,1,1,1,1,0,1,0,0,0,0
+CLM-0001171,manual_review,Generator,PEL,overheating,third_party,2024-12-04,2025-12-04,2025-03-29,2025-04-14,400948.64,21.6,0,544,16,1,0,1,1,0,1,0,0,2,1
+CLM-0000902,invalid_claim,Generator,TCL,electrical,standard,2021-11-13,2022-11-13,2022-06-22,2022-07-13,25206.49,58.3,0,1555,21,0,0,1,0,0,1,1,0,3,2
+CLM-0000306,valid_claim,Refrigerator,PEL,software,extended,2024-11-24,2027-11-09,2026-08-29,2026-09-08,218816.06,22.0,411,26,10,1,1,1,1,0,1,0,0,0,0
+CLM-0001409,manual_review,Smartphone,TCL,manufacturing,standard,2022-11-17,2023-11-17,2023-07-12,2023-08-01,488890.8,46.2,0,1170,20,0,1,1,1,1,0,1,0,1,0
+CLM-0000949,invalid_claim,Refrigerator,Waves,mechanical,standard,2019-12-08,2020-12-07,2020-05-11,2020-05-17,128806.93,81.5,0,2327,6,0,1,0,0,0,0,0,0,4,1
+CLM-0001331,manual_review,Washing Machine,Samsung,mechanical,standard,2022-01-08,2023-01-08,2022-06-16,2022-06-27,313742.08,56.5,0,1561,11,1,1,1,0,1,1,0,0,1,1
+CLM-0001173,manual_review,Microwave,Sony,other,standard,2021-10-12,2022-10-12,2022-07-22,2022-08-10,300886.89,59.4,0,1525,19,1,0,1,1,0,0,0,0,0,0
+CLM-0001273,manual_review,Refrigerator,Philips,other,extended,2023-09-18,2024-09-17,2024-09-08,2024-09-28,302798.47,36.2,0,746,20,1,1,0,1,0,1,0,0,1,1
+CLM-0000785,invalid_claim,Air Conditioner,Super Asia,mechanical,standard,2021-04-06,2022-04-06,2021-06-22,2021-06-24,50182.34,65.6,0,1920,2,1,1,0,1,0,0,0,0,2,1
+CLM-0000290,valid_claim,Washing Machine,Dawlance,display,standard,2024-07-29,2026-07-19,2024-10-05,2024-10-07,150116.14,25.9,0,719,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000034,valid_claim,Washing Machine,Super Asia,software,extended,2024-08-09,2026-07-30,2025-12-05,2025-12-15,75910.01,25.5,0,293,10,1,1,1,1,0,1,0,0,1,1
+CLM-0000663,invalid_claim,Laptop,LG,electrical,standard,2019-06-28,2021-06-27,2019-05-10,2019-05-24,19955.18,86.9,0,2694,14,1,1,1,1,0,1,0,0,4,1
+CLM-0001187,manual_review,Smartphone,Dawlance,mechanical,standard,2023-07-11,2024-07-10,2024-03-04,2024-03-21,271720.34,38.5,0,934,17,1,1,0,0,0,1,0,0,1,2
+CLM-0000539,invalid_claim,Microwave,Sony,display,standard,2021-05-28,2022-05-28,2021-11-09,2021-12-09,159948.43,63.9,0,1780,30,1,1,1,1,0,1,0,1,1,1
+CLM-0000712,invalid_claim,Small Appliance,Waves,physical,standard,2021-10-24,2022-10-24,2022-05-04,2022-05-28,107040.98,59.0,0,1604,24,0,1,1,1,0,1,0,0,4,1
+CLM-0000072,valid_claim,Water Heater,Orient,display,extended,2023-08-28,2025-08-17,2024-11-25,2024-11-28,210161.07,36.9,0,668,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000721,invalid_claim,Washing Machine,LG,manufacturing,standard,2022-07-25,2023-07-25,2022-11-07,2022-11-10,83988.35,50.0,0,1417,3,0,1,0,0,0,1,0,0,3,1
+CLM-0001425,manual_review,Smartphone,Orient,water,third_party,2021-02-19,2022-02-19,2022-02-27,2022-03-11,293022.45,67.1,0,1670,12,1,1,1,1,1,0,0,0,0,0
+CLM-0000952,invalid_claim,Microwave,Kenwood,software,standard,2019-11-23,2020-11-22,2020-07-05,2020-07-19,53471.79,82.0,0,2272,14,1,1,0,1,0,1,0,1,2,1
+CLM-0000422,valid_claim,Refrigerator,Dawlance,electrical,extended,2023-07-21,2026-07-05,2025-07-28,2025-08-03,106318.75,38.1,0,423,6,1,1,0,1,0,1,0,0,0,0
+CLM-0000977,invalid_claim,Laptop,LG,mechanical,standard,2019-05-05,2020-05-04,2019-11-23,2019-11-25,5337.14,88.7,0,2497,2,0,1,1,1,0,0,0,0,3,1
+CLM-0000065,valid_claim,Refrigerator,Orient,display,extended,2022-06-03,2025-05-18,2024-09-10,2024-09-15,239222.8,51.7,0,744,5,1,1,1,0,0,1,0,0,0,1
+CLM-0000754,invalid_claim,Small Appliance,Philips,display,standard,2019-08-03,2020-08-02,2019-12-28,2020-01-04,172399.47,85.7,0,2462,7,0,1,1,1,0,1,1,0,2,1
+CLM-0000403,valid_claim,Washing Machine,Dawlance,software,standard,2024-09-23,2025-09-18,2025-06-17,2025-06-23,155590.91,24.0,0,464,6,1,1,1,1,0,1,0,0,0,1
+CLM-0001053,manual_review,Laptop,Waves,display,standard,2021-02-12,2022-02-12,2021-11-20,2021-12-08,238381.07,67.3,0,1769,18,1,1,0,1,1,0,0,0,2,0
+CLM-0000629,invalid_claim,Air Conditioner,Super Asia,mechanical,standard,2020-03-11,2021-03-11,2020-06-26,2020-07-03,162789.83,78.4,0,2281,7,1,0,0,1,0,0,0,0,1,3
+CLM-0001075,manual_review,Laptop,Kenwood,manufacturing,extended,2021-09-28,2022-09-28,2022-03-08,2022-03-27,160605.01,59.9,0,1661,19,1,1,1,1,0,1,0,1,1,2
+CLM-0001297,manual_review,Washing Machine,Super Asia,physical,standard,2022-02-06,2023-02-06,2022-11-12,2022-11-22,66252.06,55.6,0,1412,10,1,1,0,0,1,1,0,0,0,2
+CLM-0000714,invalid_claim,Generator,Orient,mechanical,standard,2019-06-28,2020-06-27,2020-01-01,2020-01-05,187140.91,86.9,0,2458,4,1,1,1,1,1,1,0,1,4,2
+CLM-0001088,manual_review,Small Appliance,TCL,electrical,standard,2021-11-23,2022-11-23,2022-08-03,2022-08-18,86942.69,58.0,0,1513,15,0,1,1,1,1,0,0,0,0,0
+CLM-0000085,valid_claim,Small Appliance,Dawlance,manufacturing,standard,2022-09-08,2025-08-23,2023-10-05,2023-10-12,150810.85,48.5,0,1085,7,1,1,1,1,1,1,0,0,0,0
+CLM-0000280,valid_claim,Microwave,Haier,electrical,standard,2024-05-04,2026-04-24,2025-08-09,2025-08-10,61977.07,28.7,0,411,1,1,1,1,1,1,1,0,0,0,0
+CLM-0000881,invalid_claim,Washing Machine,TCL,display,standard,2021-12-31,2022-12-31,2022-06-02,2022-06-06,153124.1,56.8,0,1575,4,0,0,1,1,0,1,0,0,3,1
+CLM-0000424,valid_claim,Small Appliance,Super Asia,manufacturing,extended,2024-06-23,2026-06-13,2024-11-05,2024-11-06,19409.73,27.0,0,688,1,1,1,1,1,1,1,0,0,0,0
+CLM-0000006,valid_claim,Microwave,Dawlance,electrical,standard,2023-03-26,2025-03-15,2023-06-21,2023-06-25,229586.99,42.0,0,1191,4,1,1,1,1,1,1,0,0,0,0
+CLM-0001417,manual_review,Air Conditioner,Kenwood,display,extended,2024-01-20,2025-01-19,2024-12-28,2025-01-14,117960.51,32.1,0,635,17,1,1,0,1,1,1,0,0,0,0
+CLM-0000857,invalid_claim,Air Conditioner,Kenwood,manufacturing,standard,2021-01-09,2022-01-09,2021-07-22,2021-07-29,69048.05,68.5,0,1890,7,0,0,1,1,0,1,1,0,3,3
+CLM-0000019,valid_claim,Television,Waves,manufacturing,standard,2023-05-20,2024-05-14,2023-07-30,2023-08-06,77419.41,40.2,0,1152,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000821,invalid_claim,Generator,TCL,water,standard,2022-04-30,2023-04-30,2024-03-28,2024-04-09,90524.47,52.8,0,910,12,1,0,0,1,0,1,0,0,3,1
+CLM-0000080,valid_claim,Refrigerator,Sony,software,extended,2022-12-23,2024-12-12,2023-03-16,2023-03-19,135610.92,45.0,0,1288,3,1,1,1,1,0,1,0,0,1,0
+CLM-0000057,valid_claim,Water Heater,Samsung,software,standard,2022-11-26,2024-11-15,2024-02-20,2024-02-28,88911.53,45.9,0,947,8,1,1,1,0,0,1,0,0,0,1
+CLM-0000445,valid_claim,Washing Machine,Orient,manufacturing,standard,2023-05-08,2024-05-02,2024-03-18,2024-03-19,167195.45,40.6,0,920,1,1,1,1,1,0,1,0,0,1,0
+CLM-0000348,valid_claim,Water Heater,Haier,software,extended,2023-12-14,2025-12-03,2025-05-06,2025-05-11,207563.36,33.3,0,506,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001055,manual_review,Microwave,Samsung,water,standard,2021-10-29,2022-10-29,2022-04-23,2022-05-05,279588.21,58.8,0,1615,12,1,1,1,1,1,0,1,0,1,0
+CLM-0000382,valid_claim,Microwave,Sony,electrical,standard,2024-10-07,2026-03-31,2025-02-25,2025-03-07,72507.6,23.6,0,576,10,1,1,1,1,0,1,0,0,1,1
+CLM-0000623,invalid_claim,Air Conditioner,LG,overheating,standard,2022-04-19,2024-04-18,2022-03-31,2022-04-14,186765.26,53.2,0,1638,14,1,0,0,0,0,1,0,0,3,3
+CLM-0000863,invalid_claim,Laptop,Sony,other,standard,2022-02-22,2023-02-22,2022-07-21,2022-07-25,168040.6,55.0,0,1526,4,0,1,0,1,0,1,0,0,2,3
+CLM-0000461,valid_claim,Air Conditioner,TCL,manufacturing,extended,2024-08-30,2026-08-20,2024-12-05,2024-12-15,56099.86,24.8,0,658,10,1,1,1,1,0,1,0,0,1,0
+CLM-0000633,invalid_claim,Washing Machine,Samsung,other,standard,2022-12-01,2023-12-01,2023-05-12,2023-06-05,28964.44,45.8,0,1231,24,1,0,0,1,0,1,1,0,4,3
+CLM-0000483,valid_claim,Small Appliance,Waves,manufacturing,extended,2022-11-17,2023-11-12,2023-07-05,2023-07-10,90313.45,46.2,0,1177,5,1,1,1,1,0,1,0,0,1,1
+CLM-0000855,invalid_claim,Generator,Super Asia,physical,standard,2021-06-14,2022-06-14,2022-01-03,2022-01-18,158848.19,63.3,0,1725,15,1,0,1,1,1,1,0,0,3,2
+CLM-0000429,valid_claim,Laptop,Samsung,manufacturing,standard,2023-09-23,2026-09-07,2025-04-21,2025-04-29,110294.35,36.0,0,521,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000978,invalid_claim,Generator,Haier,physical,standard,2020-01-22,2021-01-21,2020-08-31,2020-09-20,109366.73,80.1,0,2215,20,0,1,0,1,0,1,0,0,2,2
+CLM-0000794,invalid_claim,Small Appliance,LG,display,standard,2021-05-02,2022-05-02,2023-04-03,2023-04-27,98360.44,64.8,0,1270,24,1,0,1,1,0,1,0,0,3,2
+CLM-0000681,invalid_claim,Generator,PEL,display,standard,2022-06-21,2023-06-21,2022-11-15,2022-11-25,145550.05,51.1,0,1409,10,1,1,1,1,0,0,0,0,3,2
+CLM-0001379,manual_review,Air Conditioner,Orient,mechanical,standard,2024-08-03,2025-08-03,2025-03-22,2025-04-07,426062.42,25.7,0,551,16,0,1,1,1,1,1,0,1,2,0
+CLM-0001326,manual_review,Refrigerator,TCL,manufacturing,standard,2021-12-23,2022-12-23,2022-12-20,2023-01-04,84871.92,57.0,0,1374,15,0,0,1,1,0,1,0,0,0,2
+CLM-0001139,manual_review,Washing Machine,Samsung,software,extended,2022-09-22,2023-09-22,2023-04-14,2023-04-28,390415.75,48.1,0,1259,14,1,0,0,1,1,0,1,0,0,1
+CLM-0000569,invalid_claim,Water Heater,Super Asia,manufacturing,standard,2022-03-13,2023-03-13,2022-12-17,2022-12-25,42411.05,54.4,0,1377,8,0,0,0,0,0,1,0,0,3,3
+CLM-0000488,valid_claim,Television,Kenwood,electrical,standard,2023-03-15,2025-03-04,2024-01-10,2024-01-11,154088.19,42.3,0,988,1,1,1,1,1,0,1,0,0,0,1
+CLM-0001431,manual_review,Smartphone,LG,overheating,standard,2024-03-09,2025-03-09,2024-10-18,2024-10-29,60414.19,30.5,0,706,11,0,0,1,0,0,0,1,0,1,2
+CLM-0000791,invalid_claim,Smartphone,TCL,water,standard,2020-08-16,2021-08-16,2021-06-08,2021-07-05,18250.8,73.3,0,1934,27,0,0,1,0,0,1,0,1,3,2
+CLM-0001475,manual_review,Microwave,PEL,display,standard,2022-07-25,2023-07-25,2023-08-29,2023-09-15,292969.06,50.0,0,1122,17,0,1,1,0,1,1,1,0,2,1
+CLM-0000617,invalid_claim,Television,Waves,software,standard,2019-04-21,2020-04-20,2020-02-07,2020-03-08,123572.32,89.1,0,2421,30,1,1,1,1,0,0,0,0,1,1
+CLM-0001152,manual_review,Water Heater,Samsung,display,extended,2021-08-26,2022-08-26,2022-08-18,2022-09-01,401109.47,60.9,0,1498,14,1,1,0,0,0,1,0,0,2,1
+CLM-0001078,manual_review,Smartphone,TCL,software,standard,2024-04-24,2025-04-24,2025-02-20,2025-03-04,57370.12,29.0,0,581,12,1,1,1,1,0,0,0,0,0,0
+CLM-0001487,manual_review,Refrigerator,Dawlance,software,third_party,2021-10-13,2022-10-13,2022-02-15,2022-03-06,428592.3,59.4,0,1682,19,1,1,0,1,1,1,0,0,2,1
+CLM-0001130,manual_review,Air Conditioner,Philips,other,third_party,2022-04-20,2023-04-20,2022-12-08,2022-12-21,447989.46,53.2,0,1386,13,1,1,1,1,1,1,1,0,1,1
+CLM-0000634,invalid_claim,Laptop,Samsung,water,standard,2022-09-14,2023-09-14,2022-12-31,2023-01-01,175319.73,48.3,0,1363,1,0,0,0,1,0,1,1,0,1,2
+CLM-0000803,invalid_claim,Air Conditioner,PEL,software,standard,2021-02-22,2022-02-22,2022-10-06,2022-10-21,78968.76,67.0,0,1449,15,1,0,0,1,0,1,0,0,1,3
+CLM-0000710,invalid_claim,Washing Machine,Super Asia,electrical,standard,2021-03-11,2022-03-11,2021-11-11,2021-11-23,69607.05,66.5,0,1778,12,0,0,1,0,1,1,0,1,4,2
+CLM-0000979,invalid_claim,Generator,Samsung,other,standard,2019-12-30,2021-12-29,2019-10-17,2019-10-22,12560.98,80.8,0,2534,5,1,0,0,0,0,1,0,0,3,1
+CLM-0000982,invalid_claim,Water Heater,LG,water,standard,2022-04-25,2024-04-24,2022-04-03,2022-05-01,182814.07,53.0,0,1635,28,1,0,1,0,0,1,0,0,3,2
+CLM-0000380,valid_claim,Washing Machine,Orient,display,standard,2024-11-13,2026-05-07,2025-06-24,2025-07-03,53099.16,22.3,0,457,9,1,1,1,1,1,1,0,0,1,0
+CLM-0000431,valid_claim,Generator,Kenwood,mechanical,standard,2022-01-30,2023-07-24,2023-01-18,2023-01-19,207183.04,55.8,0,1345,1,1,1,1,1,0,1,0,0,0,0
+CLM-0000741,invalid_claim,Generator,TCL,display,standard,2022-02-03,2024-02-03,2021-12-18,2022-01-02,189537.41,55.7,0,1741,15,0,1,1,0,0,1,0,0,4,1
+CLM-0000341,valid_claim,Microwave,Dawlance,software,extended,2022-07-04,2023-12-26,2022-08-10,2022-08-18,123965.85,50.7,0,1506,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001166,manual_review,Refrigerator,PEL,overheating,standard,2021-12-01,2022-12-01,2022-06-19,2022-07-05,421325.32,57.8,0,1558,16,0,1,1,1,0,1,1,0,2,2
+CLM-0000694,invalid_claim,Water Heater,TCL,mechanical,standard,2022-01-20,2023-01-20,2023-07-20,2023-07-24,5236.03,56.1,0,1162,4,1,1,1,1,0,1,0,0,4,3
+CLM-0000475,valid_claim,Small Appliance,Super Asia,manufacturing,extended,2023-11-03,2026-10-18,2024-03-30,2024-04-06,68080.26,34.7,24,908,7,1,1,1,0,0,1,0,0,0,1
+CLM-0001168,manual_review,Water Heater,LG,mechanical,extended,2021-07-28,2022-07-28,2022-02-14,2022-03-03,383412.41,61.9,0,1683,17,1,1,0,1,0,1,0,0,2,2
+CLM-0001361,manual_review,Water Heater,Samsung,display,extended,2024-09-20,2025-09-20,2025-03-05,2025-03-24,93693.22,24.1,0,568,19,1,1,1,0,1,1,0,0,2,0
+CLM-0000665,invalid_claim,Laptop,PEL,display,standard,2022-12-09,2023-12-09,2023-06-23,2023-07-17,138395.23,45.5,0,1189,24,1,1,1,0,0,1,1,0,2,1
+CLM-0000876,invalid_claim,Microwave,Kenwood,overheating,standard,2022-10-13,2023-10-13,2023-06-16,2023-07-14,109152.46,47.4,0,1196,28,1,0,0,1,0,1,0,1,2,1
+CLM-0001225,manual_review,Refrigerator,Philips,overheating,extended,2024-09-16,2025-09-16,2025-05-04,2025-05-14,186851.33,24.2,0,508,10,1,0,1,0,1,1,0,0,1,2
+CLM-0000780,invalid_claim,Generator,Sony,manufacturing,standard,2022-12-03,2023-12-03,2023-06-20,2023-06-27,61442.56,45.7,0,1192,7,1,0,1,1,0,0,0,0,1,2
+CLM-0000717,invalid_claim,Water Heater,Samsung,mechanical,standard,2020-05-16,2021-05-16,2021-01-10,2021-02-06,171346.66,76.3,0,2083,27,1,1,1,1,0,1,0,1,4,3
+CLM-0001322,manual_review,Water Heater,Samsung,electrical,third_party,2021-10-18,2022-10-18,2022-09-26,2022-10-08,181416.62,59.2,0,1459,12,0,1,0,0,0,1,0,0,0,0
+CLM-0000216,valid_claim,Smartphone,PEL,electrical,standard,2023-10-08,2026-09-22,2025-10-24,2025-10-30,46986.28,35.5,0,335,6,1,1,1,1,1,1,0,0,0,1
+CLM-0000297,valid_claim,Laptop,Haier,manufacturing,extended,2022-01-10,2023-12-31,2022-10-19,2022-10-23,123769.37,56.4,0,1436,4,1,1,1,1,0,1,0,0,1,0
+CLM-0001341,manual_review,Laptop,Philips,other,extended,2023-08-04,2024-08-03,2024-02-05,2024-02-21,135641.56,37.7,0,962,16,1,0,0,0,0,1,0,0,2,0
+CLM-0001034,manual_review,Television,Haier,electrical,standard,2023-11-15,2024-11-14,2024-09-07,2024-09-23,224353.43,34.3,0,747,16,1,0,1,0,0,1,0,0,2,1
+CLM-0000594,invalid_claim,Microwave,PEL,software,standard,2021-11-15,2023-11-15,2021-10-17,2021-11-14,146050.5,58.3,0,1803,28,1,1,1,0,0,1,0,0,4,2
+CLM-0000984,invalid_claim,Air Conditioner,Philips,physical,standard,2020-08-11,2021-08-11,2021-04-25,2021-05-17,41675.39,73.4,0,1978,22,1,0,0,0,1,1,1,0,3,3
+CLM-0000638,invalid_claim,Television,Kenwood,other,standard,2022-11-17,2023-11-17,2023-04-11,2023-05-09,17610.07,46.2,0,1262,28,1,0,0,0,0,1,0,1,4,1
+CLM-0000514,invalid_claim,Small Appliance,PEL,other,standard,2020-07-12,2021-07-12,2021-02-01,2021-03-02,199610.89,74.4,0,2061,29,1,0,1,0,0,0,0,0,4,3
+CLM-0000640,invalid_claim,Small Appliance,Philips,software,standard,2019-01-04,2020-01-04,2019-05-23,2019-05-25,170188.13,92.6,0,2681,2,0,1,1,0,0,0,0,0,2,1
+CLM-0000042,valid_claim,Small Appliance,Samsung,manufacturing,extended,2023-02-11,2024-02-06,2023-07-15,2023-07-17,170457.52,43.4,0,1167,2,1,1,1,1,1,1,0,0,0,0
+CLM-0000764,invalid_claim,Air Conditioner,Orient,manufacturing,standard,2020-06-03,2021-06-03,2020-11-03,2020-11-18,143480.64,75.7,0,2151,15,0,0,0,0,0,1,1,0,1,2
+CLM-0000086,valid_claim,Small Appliance,PEL,software,standard,2022-08-10,2024-07-30,2024-03-31,2024-04-06,158113.81,49.5,0,907,6,1,1,1,1,1,1,0,0,0,0
+CLM-0000806,invalid_claim,Television,Philips,manufacturing,standard,2020-07-28,2021-07-28,2022-01-14,2022-01-17,70818.81,73.9,0,1714,3,1,0,1,0,0,1,0,0,1,1
+CLM-0000482,valid_claim,Generator,LG,display,extended,2022-12-03,2025-11-17,2024-03-18,2024-03-21,170118.47,45.7,0,920,3,1,1,1,1,0,1,0,0,0,1
+CLM-0000275,valid_claim,Television,Super Asia,manufacturing,standard,2023-02-06,2024-07-30,2023-05-08,2023-05-15,192930.1,43.6,0,1235,7,1,1,1,1,0,1,0,0,0,1
+CLM-0001132,manual_review,Refrigerator,Orient,mechanical,third_party,2024-09-23,2025-09-23,2025-09-22,2025-10-02,413587.46,24.0,0,367,10,1,1,1,0,1,0,0,0,2,2
+CLM-0000642,invalid_claim,Refrigerator,Dawlance,other,standard,2020-09-24,2021-09-24,2021-03-31,2021-04-23,98265.14,72.0,0,2003,23,0,0,1,0,0,1,0,0,3,1
+CLM-0000677,invalid_claim,Water Heater,TCL,physical,standard,2021-05-22,2022-05-22,2021-11-20,2021-11-22,64336.55,64.1,0,1769,2,0,1,1,1,0,1,0,0,3,1
+CLM-0000674,invalid_claim,Washing Machine,Super Asia,display,standard,2021-05-28,2022-05-28,2021-09-28,2021-10-18,41437.75,63.9,0,1822,20,1,1,1,0,0,1,0,1,4,1
+CLM-0001440,manual_review,Microwave,LG,water,standard,2021-09-18,2022-09-18,2022-05-21,2022-06-10,106292.05,60.2,0,1587,20,1,1,1,1,0,1,0,0,2,1
+CLM-0000637,invalid_claim,Laptop,TCL,manufacturing,standard,2019-03-01,2020-02-29,2019-06-10,2019-07-10,47973.33,90.8,0,2663,30,1,1,0,1,1,1,1,0,4,1
+CLM-0000971,invalid_claim,Water Heater,Waves,physical,standard,2019-02-15,2020-02-15,2019-09-06,2019-09-21,16221.42,91.3,0,2575,15,1,0,1,0,1,1,0,0,3,3
+CLM-0000442,valid_claim,Small Appliance,Haier,display,standard,2024-07-28,2027-07-13,2025-02-18,2025-02-24,150858.54,25.9,292,583,6,1,1,1,1,0,1,0,0,0,0
+CLM-0001160,manual_review,Washing Machine,PEL,other,extended,2022-07-01,2023-07-01,2023-01-19,2023-02-06,432393.59,50.8,0,1344,18,1,0,0,0,1,0,1,0,2,1
+CLM-0001476,manual_review,Small Appliance,PEL,mechanical,extended,2024-12-02,2025-12-02,2025-11-12,2025-11-25,365321.45,21.7,0,316,13,0,1,1,1,0,1,0,0,0,1
+CLM-0001116,manual_review,Microwave,Samsung,manufacturing,standard,2023-09-29,2024-09-28,2024-09-05,2024-09-19,244982.03,35.8,0,749,14,1,0,0,0,0,1,1,0,1,1
+CLM-0001227,manual_review,Water Heater,Sony,other,extended,2024-08-20,2025-08-20,2025-08-17,2025-08-29,406158.48,25.1,0,403,12,1,1,0,1,0,1,0,0,1,2
+CLM-0000459,valid_claim,Laptop,TCL,mechanical,extended,2024-11-14,2027-10-30,2025-07-01,2025-07-09,101863.04,22.3,401,450,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001493,manual_review,Washing Machine,Waves,physical,standard,2024-04-21,2025-04-21,2025-02-09,2025-02-23,432986.74,29.1,0,592,14,1,1,0,1,0,1,1,1,2,2
+CLM-0001250,manual_review,Water Heater,Samsung,electrical,third_party,2022-12-26,2023-12-26,2023-10-04,2023-10-14,402817.17,44.9,0,1086,10,0,0,1,0,1,1,0,0,1,2
+CLM-0001230,manual_review,Microwave,TCL,display,standard,2022-08-03,2023-08-03,2023-06-12,2023-07-01,374159.72,49.7,0,1200,19,0,1,1,1,1,1,1,0,1,0
+CLM-0000648,invalid_claim,Generator,Dawlance,other,standard,2019-09-01,2020-08-31,2021-01-31,2021-02-13,191138.3,84.8,0,2062,13,1,1,0,0,0,1,0,0,4,3
+CLM-0000689,invalid_claim,Microwave,Haier,physical,standard,2022-04-06,2023-04-06,2022-11-13,2022-12-09,91980.9,53.6,0,1411,26,0,1,1,1,0,1,0,0,4,1
+CLM-0001457,manual_review,Microwave,Kenwood,electrical,standard,2024-10-30,2025-10-30,2025-05-09,2025-05-20,310128.88,22.8,0,503,11,0,0,1,0,0,1,1,0,1,1
+CLM-0000007,valid_claim,Washing Machine,PEL,display,extended,2024-10-19,2027-10-04,2027-05-12,2027-05-20,190548.25,23.2,375,0,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001424,manual_review,Washing Machine,TCL,other,standard,2023-07-03,2024-07-02,2024-05-02,2024-05-19,143709.86,38.7,0,875,17,1,0,1,1,0,1,1,0,1,2
+CLM-0000050,valid_claim,Small Appliance,Waves,electrical,standard,2024-09-05,2025-08-31,2024-11-07,2024-11-14,50061.43,24.6,0,686,7,1,1,1,1,0,1,0,0,1,0
+CLM-0001343,manual_review,Television,Dawlance,battery,extended,2021-10-05,2022-10-05,2022-01-21,2022-02-03,132400.22,59.6,0,1707,13,1,0,1,1,0,1,0,0,2,1
+CLM-0000487,valid_claim,Laptop,TCL,mechanical,extended,2023-11-20,2026-11-04,2025-05-17,2025-05-23,164329.39,34.1,41,495,6,1,1,0,1,0,1,0,0,0,0
+CLM-0000593,invalid_claim,Water Heater,Dawlance,physical,standard,2022-05-22,2024-05-21,2022-04-25,2022-05-23,155164.84,52.1,0,1613,28,1,1,0,0,0,1,0,0,1,2
+CLM-0001394,manual_review,Laptop,TCL,battery,standard,2023-11-15,2024-11-14,2024-10-26,2024-11-06,181641.81,34.3,0,698,11,0,1,0,1,1,1,0,0,0,1
+CLM-0001232,manual_review,Water Heater,Sony,other,third_party,2023-03-21,2024-03-20,2023-10-29,2023-11-10,80667.44,42.1,0,1061,12,1,0,1,1,0,1,0,0,0,1
+CLM-0000890,invalid_claim,Air Conditioner,Orient,water,standard,2021-09-01,2022-09-01,2022-06-26,2022-07-14,67330.35,60.7,0,1551,18,0,1,0,1,0,1,1,0,2,3
+CLM-0000336,valid_claim,Generator,Dawlance,manufacturing,extended,2024-06-09,2026-05-30,2025-06-29,2025-07-07,76054.66,27.5,0,452,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001198,manual_review,Air Conditioner,Kenwood,water,extended,2023-03-17,2024-03-16,2023-09-07,2023-09-20,439444.93,42.3,0,1113,13,1,0,1,0,1,0,0,0,2,1
+CLM-0000241,valid_claim,Small Appliance,Kenwood,display,extended,2024-03-24,2026-03-14,2025-01-30,2025-02-08,41441.93,30.0,0,602,9,1,1,1,1,0,1,0,0,1,0
+CLM-0000285,valid_claim,Laptop,Philips,mechanical,standard,2022-04-15,2024-04-04,2023-09-29,2023-10-09,137342.48,53.3,0,1091,10,1,1,1,1,0,1,0,0,0,0
+CLM-0001357,manual_review,Small Appliance,Waves,overheating,third_party,2021-01-22,2022-01-22,2021-12-08,2021-12-23,357959.62,68.0,0,1751,15,1,0,1,0,0,1,0,0,1,2
+CLM-0001068,manual_review,Refrigerator,TCL,battery,extended,2022-03-14,2023-03-14,2022-08-20,2022-08-31,117673.49,54.4,0,1496,11,0,0,0,1,0,1,0,0,2,1
+CLM-0001393,manual_review,Laptop,Waves,electrical,extended,2024-02-11,2025-02-10,2024-09-09,2024-09-21,131692.67,31.4,0,745,12,1,1,1,0,0,1,0,0,2,0
+CLM-0000183,valid_claim,Television,Philips,mechanical,standard,2022-04-02,2023-03-28,2022-05-13,2022-05-19,92782.57,53.7,0,1595,6,1,1,1,1,0,1,0,0,0,0
+CLM-0000735,invalid_claim,Washing Machine,Sony,water,standard,2019-02-21,2020-02-21,2019-10-29,2019-11-22,41378.26,91.1,0,2522,24,1,1,1,0,0,1,1,0,4,2
+CLM-0000470,valid_claim,Television,LG,electrical,standard,2022-08-17,2023-08-12,2022-09-25,2022-10-03,125234.35,49.2,0,1460,8,1,1,0,1,0,1,0,0,1,0
+CLM-0000166,valid_claim,Refrigerator,Waves,electrical,standard,2024-04-11,2027-03-27,2025-12-10,2025-12-14,110240.4,29.4,184,288,4,1,1,1,1,0,1,0,0,0,0
+CLM-0001439,manual_review,Air Conditioner,Sony,other,standard,2023-03-26,2024-03-25,2023-08-02,2023-08-12,148578.47,42.0,0,1149,10,1,1,1,1,1,1,1,1,2,0
+CLM-0000610,invalid_claim,Refrigerator,PEL,electrical,standard,2020-11-21,2021-11-21,2022-03-29,2022-04-20,160400.21,70.1,0,1640,22,0,1,1,1,1,1,0,0,3,2
+CLM-0001224,manual_review,Small Appliance,Philips,other,third_party,2023-01-27,2024-01-27,2023-10-29,2023-11-17,448227.94,43.9,0,1061,19,0,1,1,1,0,0,0,0,2,2
+CLM-0001048,manual_review,Water Heater,LG,overheating,third_party,2023-08-28,2024-08-27,2024-07-13,2024-07-29,314206.12,36.9,0,803,16,0,0,1,0,1,0,0,1,1,2
+CLM-0000055,valid_claim,Refrigerator,PEL,display,standard,2022-06-14,2023-06-09,2023-02-20,2023-02-26,249899.52,51.3,0,1312,6,1,1,1,1,1,1,0,0,0,0
+CLM-0000307,valid_claim,Television,TCL,software,standard,2023-01-08,2024-12-28,2023-07-28,2023-08-03,40513.98,44.5,0,1154,6,1,1,1,0,0,1,0,0,1,0
+CLM-0000827,invalid_claim,Refrigerator,Super Asia,water,standard,2022-07-15,2023-07-15,2023-03-20,2023-04-06,178993.14,50.3,0,1284,17,1,1,0,0,1,1,1,0,1,3
+CLM-0001124,manual_review,Television,TCL,water,standard,2021-01-14,2022-01-14,2021-12-17,2022-01-03,89919.58,68.3,0,1742,17,1,0,1,1,1,1,0,0,0,2
+CLM-0000100,valid_claim,Laptop,Haier,display,standard,2024-03-13,2025-09-04,2025-02-10,2025-02-12,166815.83,30.4,0,591,2,1,1,1,1,0,1,0,0,0,1
+CLM-0000801,invalid_claim,Television,Haier,display,standard,2021-09-22,2022-09-22,2022-01-31,2022-02-03,49954.51,60.1,0,1697,3,0,1,1,0,1,0,0,0,2,3
+CLM-0000251,valid_claim,Smartphone,Waves,manufacturing,extended,2023-08-02,2025-07-22,2023-12-20,2023-12-28,76369.52,37.7,0,1009,8,1,1,1,0,1,1,0,0,0,0
+CLM-0000760,invalid_claim,Laptop,Waves,physical,standard,2019-12-17,2020-12-16,2020-09-03,2020-09-10,61158.55,81.2,0,2212,7,1,0,1,0,0,1,0,0,4,3
+CLM-0000130,valid_claim,Small Appliance,Waves,display,standard,2023-08-15,2024-08-09,2024-03-29,2024-04-07,45235.9,37.3,0,909,9,1,1,1,1,0,1,0,0,1,0
+CLM-0000898,invalid_claim,Washing Machine,Sony,water,standard,2020-01-31,2021-01-30,2020-11-03,2020-12-03,145996.72,79.8,0,2151,30,1,1,0,1,1,0,0,0,1,1
+CLM-0001346,manual_review,Television,PEL,mechanical,third_party,2022-11-21,2023-11-21,2023-09-03,2023-09-15,497307.33,46.1,0,1117,12,1,1,1,1,0,0,1,0,0,0
+CLM-0000595,invalid_claim,Television,TCL,overheating,standard,2019-06-25,2020-06-24,2019-11-12,2019-12-10,45869.03,87.0,0,2508,28,1,0,1,0,1,1,0,1,1,2
+CLM-0000591,invalid_claim,Laptop,Sony,water,standard,2021-08-15,2022-08-15,2022-02-01,2022-02-15,58238.8,61.3,0,1696,14,1,1,1,1,0,1,1,0,3,3
+CLM-0001390,manual_review,Generator,Sony,manufacturing,extended,2024-05-12,2025-05-12,2024-09-12,2024-09-26,262227.17,28.4,0,742,14,0,0,1,1,0,1,0,0,0,1
+CLM-0001125,manual_review,Smartphone,PEL,mechanical,standard,2024-07-08,2025-07-08,2025-06-19,2025-06-29,155398.8,26.5,0,462,10,1,1,0,1,1,1,0,0,0,0
+CLM-0000375,valid_claim,Refrigerator,Haier,software,extended,2022-01-31,2024-01-21,2023-04-28,2023-05-02,176647.74,55.7,0,1245,4,1,1,1,0,0,1,0,0,0,0
+CLM-0001445,manual_review,Washing Machine,PEL,water,extended,2022-09-10,2023-09-10,2023-08-25,2023-09-06,415262.76,48.5,0,1126,12,1,1,1,0,1,1,1,1,2,1
+CLM-0000469,valid_claim,Television,Haier,mechanical,standard,2024-12-07,2026-11-27,2025-07-01,2025-07-06,87245.66,21.6,64,450,5,1,1,1,0,0,1,0,0,0,0
+CLM-0001047,manual_review,Smartphone,Orient,overheating,extended,2021-01-22,2022-01-22,2021-10-27,2021-11-15,143801.78,68.0,0,1793,19,1,1,1,1,1,1,1,0,0,1
+CLM-0000818,invalid_claim,Smartphone,Philips,battery,standard,2019-12-08,2020-12-07,2021-03-08,2021-03-22,149856.53,81.5,0,2026,14,1,1,1,0,0,1,0,0,2,3
+CLM-0001292,manual_review,Television,TCL,mechanical,standard,2024-02-02,2025-02-01,2024-05-13,2024-05-25,341165.72,31.7,0,864,12,1,0,1,0,0,1,0,0,0,2
+CLM-0001050,manual_review,Water Heater,Sony,electrical,third_party,2024-10-14,2025-10-14,2025-11-17,2025-11-27,131554.97,23.3,0,311,10,1,1,0,1,0,1,1,0,0,1
+CLM-0001375,manual_review,Small Appliance,LG,mechanical,extended,2021-12-16,2022-12-16,2022-08-29,2022-09-13,251697.82,57.3,0,1487,15,1,1,1,0,1,1,1,0,2,0
+CLM-0000672,invalid_claim,Washing Machine,Orient,overheating,standard,2021-09-28,2022-09-28,2022-04-16,2022-05-02,102862.42,59.9,0,1622,16,0,0,1,1,1,1,1,0,1,1
+CLM-0000368,valid_claim,Television,Philips,software,standard,2024-02-19,2025-02-13,2024-08-28,2024-09-05,24341.81,31.1,0,757,8,1,1,0,1,0,1,0,0,0,0
+CLM-0000225,valid_claim,Laptop,Haier,mechanical,standard,2023-05-09,2025-04-28,2024-12-05,2024-12-06,154242.08,40.5,0,658,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000154,valid_claim,Washing Machine,Philips,manufacturing,standard,2022-04-01,2025-03-16,2023-07-24,2023-07-28,206709.77,53.8,0,1158,4,1,1,1,1,0,1,0,0,0,0
+CLM-0001378,manual_review,Generator,Philips,water,standard,2023-08-05,2024-08-04,2024-01-14,2024-01-28,229400.6,37.6,0,984,14,1,0,1,1,0,1,1,0,2,0
+CLM-0001001,manual_review,Generator,Orient,water,extended,2023-07-16,2024-07-15,2024-02-14,2024-03-01,349418.04,38.3,0,953,16,1,1,1,0,0,0,0,0,1,1
+CLM-0000133,valid_claim,Small Appliance,Dawlance,electrical,extended,2024-08-30,2025-08-25,2025-04-05,2025-04-11,77399.65,24.8,0,537,6,1,1,1,0,0,1,0,0,0,1
+CLM-0000137,valid_claim,Laptop,Philips,manufacturing,extended,2023-09-02,2025-08-22,2024-05-01,2024-05-09,43640.41,36.7,0,876,8,1,1,1,1,0,1,0,0,0,1
+CLM-0000354,valid_claim,Refrigerator,Haier,mechanical,extended,2024-04-30,2025-04-25,2025-03-21,2025-03-27,133602.8,28.8,0,552,6,1,1,1,1,0,1,0,0,1,1
+CLM-0001312,manual_review,Water Heater,Waves,electrical,extended,2024-10-26,2025-10-26,2025-10-25,2025-11-04,473066.01,22.9,0,334,10,0,0,1,1,1,1,1,0,1,1
+CLM-0000844,invalid_claim,Laptop,Sony,battery,standard,2020-10-03,2021-10-03,2021-05-17,2021-05-25,105314.07,71.7,0,1956,8,0,0,1,1,0,1,1,0,4,1
+CLM-0000301,valid_claim,Air Conditioner,Waves,mechanical,extended,2024-09-25,2026-03-19,2024-11-26,2024-12-01,106201.88,23.9,0,667,5,1,1,0,0,1,1,0,0,0,0
+CLM-0001236,manual_review,Water Heater,LG,software,extended,2023-06-26,2024-06-25,2024-06-16,2024-07-02,330146.38,39.0,0,830,16,0,0,0,1,0,1,0,0,2,1
+CLM-0000526,invalid_claim,Air Conditioner,Super Asia,physical,standard,2019-01-29,2020-01-29,2019-05-17,2019-05-21,194251.47,91.8,0,2687,4,0,1,0,0,0,1,0,0,2,1
+CLM-0000914,invalid_claim,Generator,Philips,manufacturing,standard,2019-12-28,2021-12-27,2019-11-06,2019-11-23,190529.96,80.9,0,2514,17,1,0,1,1,0,1,0,0,3,3
+CLM-0001110,manual_review,Washing Machine,LG,electrical,third_party,2022-07-06,2023-07-06,2023-04-21,2023-05-01,51804.25,50.6,0,1252,10,0,1,0,1,1,1,0,0,0,0
+CLM-0000162,valid_claim,Laptop,Haier,mechanical,extended,2023-11-23,2025-11-12,2025-05-06,2025-05-14,58251.23,34.0,0,506,8,1,1,1,0,0,1,0,0,1,0
+CLM-0000557,invalid_claim,Air Conditioner,Kenwood,water,standard,2021-04-14,2022-04-14,2021-12-03,2021-12-09,40384.28,65.3,0,1756,6,0,0,1,1,1,1,0,0,3,2
+CLM-0001471,manual_review,Washing Machine,Sony,electrical,standard,2021-12-26,2022-12-26,2022-12-02,2022-12-22,392709.53,56.9,0,1392,20,0,0,1,1,0,0,1,0,1,0
+CLM-0000606,invalid_claim,Refrigerator,Super Asia,mechanical,standard,2019-03-19,2020-03-18,2019-05-20,2019-05-29,68786.52,90.2,0,2684,9,0,1,1,0,0,1,1,0,4,1
+CLM-0000904,invalid_claim,Generator,Super Asia,manufacturing,standard,2022-11-12,2023-11-12,2023-05-04,2023-05-15,115805.08,46.4,0,1239,11,0,0,0,1,0,1,0,0,2,2
+CLM-0000545,invalid_claim,Air Conditioner,Sony,water,standard,2021-07-08,2022-07-08,2023-01-06,2023-01-25,196675.36,62.5,0,1357,19,0,0,1,0,0,1,0,0,2,2
+CLM-0000020,valid_claim,Water Heater,PEL,display,extended,2022-05-29,2023-05-24,2023-02-17,2023-02-27,46127.29,51.9,0,1315,10,1,1,1,1,1,1,0,0,0,0
+CLM-0001058,manual_review,Water Heater,TCL,mechanical,standard,2021-09-18,2022-09-18,2022-04-28,2022-05-17,319540.48,60.2,0,1610,19,1,0,1,1,1,1,0,0,2,0
+CLM-0000983,invalid_claim,Smartphone,Waves,physical,standard,2021-07-06,2022-07-06,2022-03-18,2022-03-25,88132.24,62.6,0,1651,7,1,1,1,1,0,1,0,0,4,2
+CLM-0000575,invalid_claim,Air Conditioner,Philips,physical,standard,2021-06-03,2023-06-03,2021-05-16,2021-05-20,62508.77,63.7,0,1957,4,1,1,0,1,0,1,0,0,1,2
+CLM-0001066,manual_review,Small Appliance,Dawlance,display,extended,2022-03-28,2023-03-28,2022-12-11,2022-12-30,428345.6,53.9,0,1383,19,1,1,1,1,0,0,1,0,0,0
+CLM-0000067,valid_claim,Television,Philips,software,standard,2022-04-25,2024-04-14,2023-05-27,2023-06-02,54946.16,53.0,0,1216,6,1,1,1,0,0,1,0,0,1,0
+CLM-0001500,manual_review,Air Conditioner,LG,battery,third_party,2023-11-14,2024-11-13,2024-10-26,2024-11-12,326973.1,34.3,0,698,17,1,1,1,0,1,1,1,0,0,1
+CLM-0000889,invalid_claim,Laptop,PEL,physical,standard,2020-04-05,2021-04-05,2020-06-08,2020-07-01,17425.88,77.6,0,2299,23,1,0,0,0,0,1,0,0,3,3
+CLM-0001184,manual_review,Washing Machine,Orient,other,standard,2022-02-19,2023-02-19,2022-06-26,2022-07-09,417892.47,55.1,0,1551,13,1,0,1,1,0,0,1,0,1,0
+CLM-0001306,manual_review,Laptop,Philips,software,standard,2023-01-19,2024-01-19,2023-10-16,2023-10-26,160485.16,44.2,0,1074,10,0,0,1,0,1,1,0,0,1,1
+CLM-0001280,manual_review,Television,Orient,manufacturing,third_party,2023-04-12,2024-04-11,2024-03-22,2024-04-06,473223.55,41.4,0,916,15,1,0,0,0,1,0,0,0,1,0
+CLM-0000541,invalid_claim,Smartphone,Super Asia,water,standard,2022-10-26,2023-10-26,2023-06-22,2023-07-10,182300.02,46.9,0,1190,18,1,1,1,0,0,1,1,0,4,3
+CLM-0000603,invalid_claim,Washing Machine,Kenwood,overheating,standard,2019-12-25,2020-12-24,2020-06-08,2020-06-16,94276.49,81.0,0,2299,8,0,1,1,1,0,0,0,0,2,1
+CLM-0001146,manual_review,Generator,Waves,battery,extended,2022-05-16,2023-05-16,2023-05-03,2023-05-18,378167.52,52.3,0,1240,15,0,1,0,0,0,0,0,0,2,1
+CLM-0000434,valid_claim,Air Conditioner,Haier,electrical,extended,2024-02-10,2025-08-03,2024-03-19,2024-03-27,112812.23,31.4,0,919,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000493,valid_claim,Smartphone,Waves,display,standard,2023-02-18,2024-08-11,2023-08-06,2023-08-09,166409.05,43.2,0,1145,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000359,valid_claim,Air Conditioner,Orient,manufacturing,extended,2022-07-15,2024-07-04,2022-09-21,2022-10-01,112882.6,50.3,0,1464,10,1,1,1,0,1,1,0,0,1,0
+CLM-0000448,valid_claim,Washing Machine,Orient,mechanical,standard,2024-01-19,2026-01-08,2024-08-15,2024-08-24,167524.02,32.2,0,770,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001188,manual_review,Washing Machine,Dawlance,other,standard,2022-08-13,2023-08-13,2023-04-15,2023-05-03,485435.48,49.4,0,1258,18,0,1,1,1,0,0,1,0,1,2
+CLM-0000805,invalid_claim,Smartphone,Philips,battery,standard,2021-03-05,2022-03-05,2021-11-04,2021-12-04,87647.83,66.7,0,1785,30,0,0,1,0,0,0,0,0,2,1
+CLM-0001413,manual_review,Small Appliance,Philips,display,standard,2022-02-20,2023-02-20,2023-02-10,2023-02-23,278265.71,55.1,0,1322,13,1,1,1,1,0,1,1,0,1,1
+CLM-0000068,valid_claim,Generator,Waves,manufacturing,extended,2023-05-09,2026-04-23,2025-12-28,2026-01-07,75001.78,40.5,0,270,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000918,invalid_claim,Microwave,Super Asia,manufacturing,standard,2022-08-31,2023-08-31,2023-03-31,2023-04-26,49601.1,48.8,0,1273,26,1,0,0,1,0,1,1,0,3,3
+CLM-0000097,valid_claim,Small Appliance,Waves,mechanical,extended,2022-07-04,2025-06-18,2023-11-19,2023-11-29,157176.37,50.7,0,1040,10,1,1,1,0,0,1,0,0,0,1
+CLM-0001018,manual_review,Television,Kenwood,mechanical,standard,2024-01-24,2025-01-23,2024-11-09,2024-11-22,360889.08,32.0,0,684,13,1,0,1,0,0,1,0,0,0,0
+CLM-0000892,invalid_claim,Small Appliance,Kenwood,mechanical,standard,2021-08-15,2023-08-15,2021-08-02,2021-08-07,126731.7,61.3,0,1879,5,1,1,0,0,0,1,0,0,4,1
+CLM-0000647,invalid_claim,Laptop,Sony,mechanical,standard,2019-12-11,2021-12-10,2019-11-24,2019-11-28,189287.32,81.4,0,2496,4,1,0,1,1,1,1,0,0,4,1
+CLM-0000039,valid_claim,Laptop,TCL,manufacturing,extended,2023-06-17,2026-06-01,2024-06-16,2024-06-20,74283.81,39.3,0,830,4,1,1,1,1,0,1,0,0,1,0
+CLM-0000522,invalid_claim,Microwave,LG,battery,standard,2019-08-09,2020-08-08,2020-02-15,2020-02-29,133866.77,85.5,0,2413,14,1,1,1,1,0,0,0,0,1,3
+CLM-0000765,invalid_claim,Microwave,PEL,mechanical,standard,2021-11-29,2023-11-29,2021-11-17,2021-11-22,74652.91,57.8,0,1772,5,1,0,0,1,0,1,0,0,1,1
+CLM-0000564,invalid_claim,Air Conditioner,Super Asia,physical,standard,2021-07-30,2022-07-30,2022-02-28,2022-03-11,31076.52,61.8,0,1669,11,0,0,1,1,1,1,0,0,4,2
+CLM-0001009,manual_review,Laptop,Dawlance,software,third_party,2024-04-23,2025-04-23,2025-02-23,2025-03-07,176110.63,29.0,0,578,12,1,0,1,0,1,1,1,0,1,1
+CLM-0000025,valid_claim,Laptop,TCL,mechanical,extended,2022-11-29,2024-05-22,2024-03-24,2024-03-31,52411.49,45.8,0,914,7,1,1,1,1,1,1,0,0,0,0
+CLM-0000004,valid_claim,Refrigerator,Samsung,mechanical,extended,2024-02-15,2025-02-09,2024-12-23,2024-12-28,246527.06,31.3,0,640,5,1,1,1,0,0,1,0,0,0,0
+CLM-0001266,manual_review,Generator,Sony,manufacturing,third_party,2022-10-06,2023-10-06,2023-05-24,2023-06-10,90595.55,47.6,0,1219,17,0,1,1,1,1,1,0,0,0,1
+CLM-0000893,invalid_claim,Small Appliance,LG,electrical,standard,2022-01-05,2023-01-05,2022-04-08,2022-04-21,82171.19,56.6,0,1630,13,1,1,1,0,0,1,1,0,4,3
+CLM-0001486,manual_review,Washing Machine,Waves,display,extended,2021-01-10,2022-01-10,2021-12-22,2022-01-10,191932.27,68.4,0,1737,19,1,1,1,1,1,1,1,1,0,1
+CLM-0000915,invalid_claim,Generator,Samsung,water,standard,2019-08-17,2020-08-16,2020-04-26,2020-05-02,179206.6,85.2,0,2342,6,1,1,1,0,0,1,1,0,1,2
+CLM-0000244,valid_claim,Smartphone,Super Asia,software,standard,2022-07-21,2024-01-12,2022-10-27,2022-11-01,59164.89,50.1,0,1428,5,1,1,1,1,0,1,0,0,1,0
+CLM-0001290,manual_review,Laptop,Kenwood,display,third_party,2022-11-17,2023-11-17,2023-10-28,2023-11-14,253016.42,46.2,0,1062,17,0,0,1,1,0,1,1,1,0,1
+CLM-0000394,valid_claim,Air Conditioner,Sony,software,standard,2023-11-02,2025-04-25,2024-12-29,2024-12-31,15965.82,34.7,0,634,2,1,1,0,1,0,1,0,0,0,0
+CLM-0001355,manual_review,Washing Machine,Haier,physical,extended,2022-03-28,2023-03-28,2022-11-25,2022-12-12,435719.76,53.9,0,1399,17,1,1,1,0,0,1,0,0,0,0
+CLM-0000776,invalid_claim,Small Appliance,Waves,display,standard,2019-05-05,2020-05-04,2019-08-04,2019-08-28,149175.87,88.7,0,2608,24,0,1,1,1,0,1,0,0,4,1
+CLM-0001300,manual_review,Small Appliance,Super Asia,display,standard,2024-05-30,2025-05-30,2024-09-17,2024-09-29,103699.24,27.8,0,737,12,0,1,0,0,0,1,0,0,2,0
+CLM-0000699,invalid_claim,Small Appliance,Waves,water,standard,2021-09-12,2022-09-12,2022-05-07,2022-05-21,31953.15,60.4,0,1601,14,0,0,1,0,0,1,1,0,4,3
+CLM-0001490,manual_review,Smartphone,Samsung,display,extended,2024-09-24,2025-09-24,2025-06-25,2025-07-11,336442.92,24.0,0,456,16,0,1,1,1,0,1,0,0,2,1
+CLM-0000485,valid_claim,Air Conditioner,Philips,manufacturing,standard,2022-06-23,2023-06-18,2022-12-26,2022-12-28,123313.71,51.1,0,1368,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000278,valid_claim,Microwave,Kenwood,display,extended,2024-03-25,2026-03-15,2025-02-19,2025-02-27,213122.49,30.0,0,582,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001484,manual_review,Smartphone,Waves,electrical,third_party,2023-02-26,2024-02-26,2024-02-20,2024-03-10,141417.26,42.9,0,947,19,1,0,0,1,1,1,0,1,1,0
+CLM-0000332,valid_claim,Washing Machine,Haier,electrical,standard,2024-03-20,2026-03-10,2025-07-18,2025-07-24,186026.52,30.2,0,433,6,1,1,1,0,0,1,0,0,1,1
+CLM-0001027,manual_review,Microwave,Philips,mechanical,third_party,2021-10-30,2022-10-30,2022-06-01,2022-06-21,249862.67,58.8,0,1576,20,1,0,1,1,0,1,0,0,0,0
+CLM-0001247,manual_review,Refrigerator,Waves,display,third_party,2021-12-25,2022-12-25,2022-09-30,2022-10-12,388030.35,57.0,0,1455,12,1,0,1,0,0,1,0,0,1,2
+CLM-0000440,valid_claim,Small Appliance,Sony,electrical,extended,2023-02-14,2026-01-29,2025-09-13,2025-09-17,49061.2,43.3,0,376,4,1,1,0,1,0,1,0,0,0,1
+CLM-0000446,valid_claim,Washing Machine,Orient,software,standard,2024-07-29,2025-07-24,2025-04-17,2025-04-25,217189.92,25.9,0,525,8,1,1,1,0,0,1,0,0,0,1
+CLM-0000568,invalid_claim,Generator,Haier,display,standard,2020-07-22,2021-07-22,2021-02-12,2021-03-01,42785.2,74.1,0,2050,17,0,0,0,1,0,1,0,1,1,1
+CLM-0000126,valid_claim,Washing Machine,Orient,display,standard,2023-11-28,2025-05-21,2024-06-05,2024-06-11,89992.23,33.9,0,841,6,1,1,1,1,1,1,0,0,0,1
+CLM-0000061,valid_claim,Smartphone,TCL,manufacturing,extended,2024-02-25,2025-08-18,2025-07-10,2025-07-20,207829.13,30.9,0,441,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000792,invalid_claim,Refrigerator,Kenwood,battery,standard,2019-04-27,2020-04-26,2019-11-12,2019-12-05,187700.74,88.9,0,2508,23,0,0,1,1,0,0,0,0,1,1
+CLM-0000811,invalid_claim,Microwave,Dawlance,mechanical,standard,2022-10-26,2023-10-26,2023-04-10,2023-04-13,9815.45,46.9,0,1263,3,0,0,1,0,0,1,0,0,3,2
+CLM-0000535,invalid_claim,Small Appliance,Waves,electrical,standard,2022-11-14,2023-11-14,2023-08-24,2023-09-10,142748.96,46.3,0,1127,17,0,1,1,0,1,1,0,1,1,3
+CLM-0001177,manual_review,Washing Machine,Haier,water,third_party,2023-06-13,2024-06-12,2024-05-07,2024-05-24,309561.92,39.4,0,870,17,1,0,0,1,0,1,0,0,0,1
+CLM-0000543,invalid_claim,Washing Machine,Philips,display,standard,2020-11-16,2021-11-16,2021-04-24,2021-05-18,60365.93,70.2,0,1979,24,1,0,1,0,1,0,0,0,1,3
+CLM-0000010,valid_claim,Laptop,Haier,display,standard,2023-01-01,2023-12-27,2023-07-02,2023-07-11,155751.98,44.7,0,1180,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001403,manual_review,Microwave,Samsung,electrical,standard,2022-02-04,2023-02-04,2022-06-16,2022-07-06,309052.97,55.6,0,1561,20,0,1,1,0,1,1,0,0,1,1
+CLM-0001495,manual_review,Refrigerator,Samsung,electrical,third_party,2021-02-08,2022-02-08,2022-01-31,2022-02-19,148822.71,67.5,0,1697,19,1,1,1,1,1,1,1,0,1,0
+CLM-0001388,manual_review,Washing Machine,Waves,battery,extended,2022-05-01,2023-05-01,2023-04-02,2023-04-22,120673.82,52.8,0,1271,20,0,1,1,1,1,1,0,0,0,0
+CLM-0000040,valid_claim,Television,PEL,electrical,standard,2023-12-18,2025-06-10,2024-12-14,2024-12-16,71058.06,33.2,0,649,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001126,manual_review,Smartphone,Waves,overheating,standard,2022-02-23,2023-02-23,2022-09-04,2022-09-24,359562.71,55.0,0,1481,20,0,1,1,1,1,1,0,0,0,0
+CLM-0001423,manual_review,Washing Machine,LG,overheating,standard,2021-09-27,2022-09-27,2022-02-21,2022-03-08,114831.83,59.9,0,1676,15,1,0,1,1,0,0,0,1,1,1
+CLM-0000484,valid_claim,Laptop,Orient,software,extended,2023-12-16,2024-12-10,2024-07-07,2024-07-14,28265.57,33.3,0,809,7,1,1,1,1,0,1,0,0,0,1
+CLM-0000200,valid_claim,Water Heater,Kenwood,electrical,standard,2023-09-05,2025-02-26,2024-04-17,2024-04-20,118423.36,36.6,0,890,3,1,1,1,1,1,1,0,0,0,0
+CLM-0001402,manual_review,Microwave,Kenwood,software,standard,2021-10-30,2022-10-30,2022-06-30,2022-07-16,420400.69,58.8,0,1547,16,1,0,1,0,0,1,0,0,0,2
+CLM-0000706,invalid_claim,Microwave,Haier,physical,standard,2020-07-10,2021-07-10,2020-10-01,2020-10-18,149911.27,74.5,0,2184,17,1,1,1,0,0,1,0,0,1,3
+CLM-0000090,valid_claim,Air Conditioner,PEL,manufacturing,standard,2024-12-15,2026-12-05,2025-03-01,2025-03-05,195327.14,21.3,72,572,4,1,1,1,1,1,1,0,0,1,0
+CLM-0001285,manual_review,Air Conditioner,TCL,battery,third_party,2023-03-06,2024-03-05,2023-07-02,2023-07-12,473256.6,42.6,0,1180,10,1,1,1,0,0,1,1,0,1,1
+CLM-0001123,manual_review,Television,LG,water,standard,2024-08-09,2025-08-09,2025-04-16,2025-05-03,325298.32,25.5,0,526,17,1,1,1,0,0,1,0,0,0,2
+CLM-0000625,invalid_claim,Small Appliance,Sony,mechanical,standard,2022-08-14,2024-08-13,2022-07-17,2022-07-26,54586.17,49.3,0,1530,9,1,0,0,1,0,1,0,0,4,2
+CLM-0000601,invalid_claim,Small Appliance,PEL,display,standard,2022-03-23,2023-03-23,2023-01-17,2023-01-27,144770.55,54.1,0,1346,10,1,1,0,1,0,0,0,0,2,3
+CLM-0000114,valid_claim,Microwave,LG,software,standard,2024-10-13,2027-09-28,2025-11-23,2025-12-02,143186.48,23.4,369,305,9,1,1,1,1,0,1,0,0,0,0
+CLM-0000927,invalid_claim,Refrigerator,Super Asia,electrical,standard,2020-08-01,2021-08-01,2021-02-24,2021-03-07,115234.83,73.8,0,2038,11,0,0,1,0,0,1,1,0,1,3
+CLM-0000684,invalid_claim,Air Conditioner,Haier,other,standard,2020-07-10,2021-07-10,2020-10-30,2020-11-05,47472.51,74.5,0,2155,6,1,0,0,1,0,0,0,0,3,2
+CLM-0001433,manual_review,Air Conditioner,Kenwood,other,third_party,2022-05-17,2023-05-17,2022-09-04,2022-09-14,174798.51,52.3,0,1481,10,1,1,0,0,1,1,0,0,0,1
+CLM-0001235,manual_review,Water Heater,Haier,manufacturing,third_party,2023-09-19,2024-09-18,2024-08-13,2024-08-24,292208.07,36.2,0,772,11,0,0,1,0,0,0,0,0,0,1
+CLM-0000597,invalid_claim,Small Appliance,Kenwood,physical,standard,2020-11-07,2021-11-07,2021-05-31,2021-06-21,116906.35,70.5,0,1942,21,1,1,0,1,0,1,0,0,4,1
+CLM-0000967,invalid_claim,Washing Machine,Samsung,manufacturing,standard,2022-08-19,2023-08-19,2023-05-13,2023-05-20,52517.64,49.2,0,1230,7,1,0,0,1,0,1,1,0,2,2
+CLM-0000666,invalid_claim,Laptop,Samsung,overheating,standard,2021-01-21,2022-01-21,2022-04-29,2022-05-16,101624.03,68.1,0,1609,17,1,0,1,0,0,1,0,0,1,2
+CLM-0001327,manual_review,Laptop,Haier,physical,extended,2023-07-13,2024-07-12,2024-03-09,2024-03-26,411542.65,38.4,0,929,17,0,1,1,0,0,1,0,0,0,2
+CLM-0000490,valid_claim,Generator,Dawlance,display,extended,2023-01-05,2023-12-31,2023-10-26,2023-10-29,234639.44,44.6,0,1064,3,1,1,1,1,1,1,0,0,1,0
+CLM-0001036,manual_review,Small Appliance,Dawlance,software,standard,2023-10-04,2024-10-03,2024-05-13,2024-05-31,327366.64,35.7,0,864,18,0,0,1,0,0,0,1,0,2,0
+CLM-0001366,manual_review,Refrigerator,LG,battery,third_party,2023-11-13,2024-11-12,2024-10-12,2024-10-31,250931.08,34.4,0,712,19,0,1,1,0,1,1,1,0,2,0
+CLM-0001422,manual_review,Refrigerator,Sony,electrical,third_party,2022-07-27,2023-07-27,2023-05-13,2023-05-29,125232.74,49.9,0,1230,16,0,0,1,1,1,1,1,0,0,1
+CLM-0000104,valid_claim,Air Conditioner,Waves,software,extended,2022-11-28,2024-05-21,2024-02-11,2024-02-21,145317.08,45.9,0,956,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000570,invalid_claim,Air Conditioner,Orient,overheating,standard,2021-07-18,2022-07-18,2021-09-16,2021-09-30,169646.6,62.2,0,1834,14,1,1,1,1,0,0,0,0,1,3
+CLM-0000220,valid_claim,Air Conditioner,LG,mechanical,extended,2024-03-31,2026-03-21,2026-02-04,2026-02-06,205185.19,29.8,0,232,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000437,valid_claim,Generator,Sony,mechanical,standard,2023-03-03,2025-02-20,2023-05-26,2023-05-30,172483.52,42.7,0,1217,4,1,1,1,1,1,1,0,0,0,0
+CLM-0001024,manual_review,Small Appliance,Orient,electrical,third_party,2021-07-15,2022-07-15,2022-05-09,2022-05-21,270923.21,62.3,0,1599,12,1,0,0,1,0,0,0,0,0,1
+CLM-0001221,manual_review,Microwave,Kenwood,display,third_party,2024-11-04,2025-11-04,2025-03-14,2025-03-30,181677.21,22.6,0,559,16,1,1,1,1,1,1,0,0,0,0
+CLM-0001451,manual_review,Refrigerator,Kenwood,battery,third_party,2022-05-08,2023-05-08,2023-05-04,2023-05-21,299649.15,52.6,0,1239,17,1,0,0,0,0,1,0,0,2,2
+CLM-0000839,invalid_claim,Smartphone,Dawlance,battery,standard,2021-11-15,2022-11-15,2022-07-23,2022-07-24,44520.01,58.3,0,1524,1,1,0,1,1,1,1,1,0,4,3
+CLM-0000369,valid_claim,Television,Philips,manufacturing,standard,2022-11-18,2023-11-13,2023-06-13,2023-06-19,162061.21,46.2,0,1199,6,1,1,1,0,0,1,0,0,0,0
+CLM-0001238,manual_review,Generator,Orient,software,third_party,2022-01-05,2023-01-05,2022-04-29,2022-05-19,467936.75,56.6,0,1609,20,0,1,1,1,0,1,1,0,2,1
+CLM-0000458,valid_claim,Smartphone,PEL,electrical,standard,2022-07-09,2024-06-28,2022-10-03,2022-10-13,141526.89,50.5,0,1452,10,1,1,1,1,1,1,0,0,0,0
+CLM-0000809,invalid_claim,Air Conditioner,PEL,physical,standard,2019-10-28,2020-10-27,2020-08-06,2020-08-26,27317.08,82.9,0,2240,20,1,0,0,0,1,1,0,0,2,1
+CLM-0001468,manual_review,Television,Haier,physical,third_party,2023-12-08,2024-12-07,2024-10-03,2024-10-22,200574.0,33.5,0,721,19,1,1,1,0,0,0,0,0,0,2
+CLM-0000226,valid_claim,Generator,Philips,manufacturing,standard,2022-02-27,2024-02-17,2023-10-31,2023-11-10,130252.56,54.9,0,1059,10,1,1,1,1,1,1,0,0,0,0
+CLM-0000195,valid_claim,Generator,Waves,manufacturing,standard,2024-07-20,2027-07-05,2025-07-20,2025-07-30,201984.31,26.1,284,431,10,1,1,1,0,0,1,0,0,0,0
+CLM-0001263,manual_review,Washing Machine,TCL,other,extended,2024-03-02,2025-03-02,2025-02-24,2025-03-12,403210.24,30.7,0,577,16,1,1,1,1,0,1,0,0,2,1
+CLM-0000783,invalid_claim,Laptop,Waves,other,standard,2019-12-24,2020-12-23,2021-12-23,2021-12-28,71161.76,81.0,0,1736,5,0,0,1,0,0,1,0,0,4,1
+CLM-0000511,invalid_claim,Microwave,Dawlance,manufacturing,standard,2020-07-29,2021-07-29,2021-04-06,2021-04-18,124521.66,73.9,0,1997,12,0,1,1,0,0,1,0,1,4,1
+CLM-0000651,invalid_claim,Water Heater,Philips,battery,standard,2021-03-17,2022-03-17,2023-01-25,2023-02-21,17466.67,66.3,0,1338,27,0,0,0,0,0,1,0,0,2,3
+CLM-0001499,manual_review,Generator,TCL,physical,extended,2023-03-07,2024-03-06,2023-10-26,2023-11-10,436393.88,42.6,0,1064,15,1,1,1,1,1,1,0,1,1,1
+CLM-0000695,invalid_claim,Refrigerator,PEL,electrical,standard,2019-08-19,2021-08-18,2019-06-08,2019-06-14,191510.97,85.2,0,2665,6,1,1,1,1,0,1,0,0,1,1
+CLM-0000529,invalid_claim,Small Appliance,Super Asia,other,standard,2021-03-29,2022-03-29,2021-09-29,2021-10-16,187379.79,65.9,0,1821,17,0,0,1,1,1,1,1,0,3,3
+CLM-0000691,invalid_claim,Microwave,LG,display,standard,2021-05-23,2022-05-23,2022-10-25,2022-11-09,31771.8,64.1,0,1430,15,0,1,1,1,1,1,0,0,1,3
+CLM-0000895,invalid_claim,Microwave,Sony,battery,standard,2021-12-26,2022-12-26,2022-06-04,2022-06-12,60825.27,56.9,0,1573,8,0,1,0,1,1,0,0,0,3,2
+CLM-0000418,valid_claim,Small Appliance,Waves,manufacturing,extended,2024-12-21,2025-12-16,2025-03-10,2025-03-19,78526.64,21.1,0,563,9,1,1,1,1,0,1,0,0,0,1
+CLM-0001071,manual_review,Smartphone,Orient,software,extended,2023-05-19,2024-05-18,2023-09-18,2023-10-04,214967.64,40.2,0,1102,16,0,1,1,0,0,1,0,0,1,1
+CLM-0001488,manual_review,Water Heater,Philips,software,third_party,2021-11-11,2022-11-11,2022-10-25,2022-11-05,418387.33,58.4,0,1430,11,1,0,0,1,1,1,0,1,2,1
+CLM-0001046,manual_review,Water Heater,Waves,electrical,standard,2022-09-13,2023-09-13,2023-07-21,2023-08-03,60577.53,48.4,0,1161,13,1,1,1,0,1,1,0,0,1,2
+CLM-0000095,valid_claim,Small Appliance,Waves,display,extended,2022-06-04,2023-11-26,2023-08-03,2023-08-11,218098.02,51.7,0,1148,8,1,1,1,1,1,1,0,0,1,1
+CLM-0000171,valid_claim,Washing Machine,TCL,mechanical,extended,2023-08-28,2025-02-18,2024-09-26,2024-09-28,89419.38,36.9,0,728,2,1,1,1,1,0,1,0,0,0,0
+CLM-0000573,invalid_claim,Laptop,Samsung,physical,standard,2019-08-09,2020-08-08,2020-02-06,2020-02-14,165218.59,85.5,0,2422,8,1,1,1,0,0,1,0,0,1,3
+CLM-0001464,manual_review,Television,Samsung,display,extended,2021-07-28,2022-07-28,2021-11-11,2021-11-28,105126.37,61.9,0,1778,17,1,1,1,1,0,1,0,1,0,1
+CLM-0001467,manual_review,Microwave,Sony,overheating,third_party,2022-11-24,2023-11-24,2023-04-26,2023-05-14,112263.42,46.0,0,1247,18,1,1,1,0,0,1,0,0,0,1
+CLM-0000219,valid_claim,Generator,LG,mechanical,standard,2024-04-08,2027-03-24,2025-11-28,2025-12-07,17809.88,29.5,181,300,9,1,1,1,0,1,1,0,0,0,0
+CLM-0000830,invalid_claim,Washing Machine,Dawlance,software,standard,2021-09-18,2022-09-18,2022-04-01,2022-04-23,175632.62,60.2,0,1637,22,0,0,1,0,0,1,0,0,4,2
+CLM-0000542,invalid_claim,Small Appliance,Waves,physical,standard,2022-01-19,2023-01-19,2022-08-26,2022-09-21,91218.04,56.1,0,1490,26,1,0,0,0,0,1,0,0,1,1
+CLM-0001295,manual_review,Smartphone,Samsung,electrical,third_party,2023-11-09,2024-11-08,2024-04-27,2024-05-12,112145.95,34.5,0,880,15,0,1,1,1,1,1,1,0,0,0
+CLM-0001042,manual_review,Water Heater,TCL,water,extended,2024-10-09,2025-10-09,2025-07-28,2025-08-14,88900.5,23.5,0,423,17,1,1,0,1,0,1,0,0,1,2
+CLM-0000969,invalid_claim,Washing Machine,Orient,software,standard,2021-01-01,2022-01-01,2021-03-21,2021-04-13,160133.63,68.7,0,2013,23,1,1,0,0,0,0,0,0,3,1
+CLM-0000427,valid_claim,Smartphone,Waves,mechanical,standard,2022-07-05,2024-06-24,2024-02-02,2024-02-08,145301.74,50.7,0,965,6,1,1,0,1,1,1,0,0,0,1
+CLM-0000316,valid_claim,Air Conditioner,Orient,mechanical,standard,2023-02-03,2024-01-29,2023-11-21,2023-11-30,244276.79,43.7,0,1038,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001062,manual_review,Water Heater,Orient,software,extended,2024-11-05,2025-11-05,2025-05-16,2025-06-03,311787.06,22.6,0,496,18,1,0,0,1,1,0,0,0,2,1
+CLM-0001091,manual_review,Washing Machine,Super Asia,battery,extended,2021-03-07,2022-03-07,2021-09-23,2021-10-08,211438.37,66.6,0,1827,15,1,1,0,1,0,1,0,0,1,0
+CLM-0001216,manual_review,Television,Samsung,physical,third_party,2023-04-01,2024-03-31,2023-08-23,2023-09-03,245793.24,41.8,0,1128,11,1,0,1,1,0,1,0,0,2,0
+CLM-0000613,invalid_claim,Refrigerator,Kenwood,water,standard,2022-03-11,2023-03-11,2022-06-22,2022-07-01,196376.1,54.5,0,1555,9,1,0,0,0,0,0,0,0,3,3
+CLM-0000518,invalid_claim,Microwave,Dawlance,mechanical,standard,2020-03-02,2021-03-02,2021-06-23,2021-07-06,28517.39,78.7,0,1919,13,1,1,0,1,0,1,0,0,2,2
+CLM-0001107,manual_review,Washing Machine,Super Asia,manufacturing,extended,2021-08-07,2022-08-07,2022-08-05,2022-08-19,499676.33,61.6,0,1511,14,1,0,0,0,1,1,0,0,0,1
+CLM-0000536,invalid_claim,Air Conditioner,Philips,electrical,standard,2019-07-28,2020-07-27,2020-04-23,2020-05-11,37574.03,85.9,0,2345,18,1,1,1,0,0,0,0,0,4,3
+CLM-0000473,valid_claim,Small Appliance,Haier,software,standard,2022-01-09,2023-01-04,2022-05-28,2022-06-06,57499.41,56.5,0,1580,9,1,1,1,1,1,1,0,0,1,0
+CLM-0001353,manual_review,Water Heater,TCL,other,standard,2021-03-27,2022-03-27,2021-12-12,2021-12-27,351324.34,65.9,0,1747,15,0,0,1,1,0,1,1,0,0,2
+CLM-0000567,invalid_claim,Television,PEL,battery,standard,2022-06-10,2023-06-10,2024-05-25,2024-06-04,193622.82,51.5,0,852,10,1,1,0,0,1,1,0,0,4,1
+CLM-0000746,invalid_claim,Laptop,PEL,software,standard,2021-05-13,2023-05-13,2021-03-09,2021-03-20,14683.65,64.4,0,2025,11,1,1,1,1,0,1,0,0,3,3
+CLM-0000703,invalid_claim,Small Appliance,Haier,physical,standard,2019-06-01,2020-05-31,2019-11-30,2019-12-27,33642.9,87.8,0,2490,27,1,1,1,0,0,0,0,0,2,2
+CLM-0000444,valid_claim,Water Heater,Samsung,software,extended,2022-11-02,2023-10-28,2023-07-03,2023-07-04,127628.29,46.7,0,1179,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000572,invalid_claim,Television,Haier,water,standard,2019-06-02,2020-06-01,2020-03-22,2020-03-30,65607.14,87.7,0,2377,8,1,1,1,0,0,1,1,0,3,2
+CLM-0000185,valid_claim,Television,Sony,electrical,extended,2022-05-09,2023-05-04,2023-03-09,2023-03-12,172614.84,52.5,0,1295,3,1,1,1,0,0,1,0,0,0,0
+CLM-0001438,manual_review,Small Appliance,LG,display,standard,2022-08-27,2023-08-27,2023-08-24,2023-09-05,298247.21,48.9,0,1127,12,1,1,1,0,0,0,0,0,0,1
+CLM-0000150,valid_claim,Washing Machine,Waves,software,extended,2022-05-22,2025-05-06,2022-07-23,2022-07-28,248321.3,52.1,0,1524,5,1,1,1,0,0,1,0,0,1,0
+CLM-0000913,invalid_claim,Generator,Waves,software,standard,2019-08-17,2020-08-16,2020-04-17,2020-05-16,119842.82,85.2,0,2351,29,1,0,0,1,0,1,1,0,3,2
+CLM-0001137,manual_review,Smartphone,Samsung,electrical,extended,2021-09-15,2022-09-15,2022-01-09,2022-01-19,163766.8,60.3,0,1719,10,1,0,0,0,1,1,0,0,2,1
+CLM-0001013,manual_review,Laptop,Waves,electrical,third_party,2024-04-08,2025-04-08,2024-12-24,2025-01-10,104890.28,29.5,0,639,17,0,1,0,1,1,0,1,0,0,0
+CLM-0001182,manual_review,Laptop,Samsung,other,extended,2022-06-23,2023-06-23,2023-04-17,2023-05-05,390194.56,51.1,0,1256,18,0,1,1,1,1,1,0,0,2,0
+CLM-0000519,invalid_claim,Television,Sony,battery,standard,2019-07-16,2021-07-15,2019-05-20,2019-06-06,177655.54,86.3,0,2684,17,1,0,1,0,0,1,0,0,2,2
+CLM-0001032,manual_review,Television,Kenwood,physical,standard,2024-02-01,2025-01-31,2024-05-28,2024-06-07,153277.7,31.7,0,849,10,1,1,1,0,0,0,0,0,0,2
+CLM-0001362,manual_review,Washing Machine,LG,mechanical,standard,2024-08-08,2025-08-08,2025-08-05,2025-08-17,217450.94,25.5,0,415,12,1,0,0,0,0,0,0,0,1,1
+CLM-0000397,valid_claim,Water Heater,Sony,electrical,standard,2023-08-04,2025-01-25,2023-11-29,2023-12-01,21813.28,37.7,0,1030,2,1,1,0,1,0,1,0,0,0,0
+CLM-0000867,invalid_claim,Water Heater,Kenwood,software,standard,2022-04-13,2023-04-13,2022-09-18,2022-09-23,198782.35,53.4,0,1467,5,1,0,0,1,0,1,0,1,3,1
+CLM-0000266,valid_claim,Laptop,Orient,mechanical,standard,2022-12-16,2024-12-05,2024-01-16,2024-01-24,109182.72,45.3,0,982,8,1,1,0,1,0,1,0,0,0,0
+CLM-0000724,invalid_claim,Generator,Orient,physical,standard,2021-07-28,2022-07-28,2022-05-23,2022-05-28,27153.34,61.9,0,1585,5,0,1,1,1,0,1,0,0,2,3
+CLM-0000286,valid_claim,Laptop,Orient,manufacturing,standard,2024-04-06,2025-04-01,2024-10-31,2024-11-04,238322.44,29.6,0,693,4,1,1,1,1,0,1,0,0,0,0
+CLM-0000381,valid_claim,Washing Machine,PEL,electrical,extended,2023-09-23,2025-09-12,2025-01-21,2025-01-26,17868.82,36.0,0,611,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001239,manual_review,Microwave,Super Asia,mechanical,standard,2023-05-13,2024-05-12,2023-11-09,2023-11-22,281600.5,40.4,0,1050,13,1,1,1,1,1,1,0,0,0,1
+CLM-0000208,valid_claim,Smartphone,Philips,electrical,extended,2022-09-17,2024-09-06,2023-02-14,2023-02-15,182395.96,48.2,0,1318,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000761,invalid_claim,Laptop,Waves,electrical,standard,2022-11-09,2023-11-09,2023-03-10,2023-03-16,37495.86,46.5,0,1294,6,0,1,1,0,0,1,0,0,4,2
+CLM-0000156,valid_claim,Microwave,Haier,display,extended,2024-02-20,2026-02-09,2025-05-21,2025-05-28,71627.52,31.1,0,491,7,1,1,1,0,1,1,0,0,0,0
+CLM-0000058,valid_claim,Television,Philips,manufacturing,extended,2024-11-19,2025-11-14,2025-09-22,2025-09-30,161971.05,22.1,0,367,8,1,1,1,1,0,1,0,0,1,0
+CLM-0000211,valid_claim,Television,Philips,electrical,extended,2022-06-09,2024-05-29,2022-11-08,2022-11-17,31197.71,51.5,0,1416,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001268,manual_review,Refrigerator,Philips,water,third_party,2022-06-30,2023-06-30,2023-05-30,2023-06-11,182141.81,50.8,0,1213,12,1,0,1,0,1,0,1,0,1,1
+CLM-0000817,invalid_claim,Refrigerator,LG,overheating,standard,2020-08-10,2021-08-10,2021-01-04,2021-01-15,87099.41,73.5,0,2089,11,0,0,1,0,0,1,0,0,2,2
+CLM-0000253,valid_claim,Water Heater,Dawlance,mechanical,standard,2022-03-14,2023-09-05,2022-10-05,2022-10-09,84039.25,54.4,0,1450,4,1,1,1,1,0,1,0,0,1,0
+CLM-0000008,valid_claim,Washing Machine,Waves,software,standard,2022-10-11,2025-09-25,2023-02-11,2023-02-12,105420.32,47.4,0,1321,1,1,1,1,1,1,1,0,0,0,0
+CLM-0000177,valid_claim,Refrigerator,Kenwood,mechanical,standard,2023-05-12,2025-05-01,2024-06-30,2024-07-05,175202.47,40.4,0,816,5,1,1,1,0,0,1,0,0,1,0
+CLM-0000182,valid_claim,Water Heater,Sony,manufacturing,extended,2022-10-18,2024-10-07,2023-10-02,2023-10-08,37941.41,47.2,0,1088,6,1,1,1,1,1,1,0,0,1,0
+CLM-0001209,manual_review,Water Heater,Orient,display,extended,2023-05-19,2024-05-18,2024-04-22,2024-05-07,224315.94,40.2,0,885,15,0,1,0,1,1,1,1,0,1,0
+CLM-0000299,valid_claim,Laptop,TCL,mechanical,extended,2023-03-12,2024-03-06,2024-01-18,2024-01-23,46462.1,42.4,0,980,5,1,1,1,1,0,1,0,0,1,0
+CLM-0000327,valid_claim,Television,Haier,mechanical,extended,2022-07-24,2024-07-13,2023-04-21,2023-04-30,204332.06,50.0,0,1252,9,1,1,1,1,0,1,0,0,1,1
+CLM-0000254,valid_claim,Smartphone,TCL,manufacturing,extended,2023-01-10,2024-12-30,2023-05-11,2023-05-15,76231.42,44.4,0,1232,4,1,1,1,0,0,1,0,0,0,0
+CLM-0001222,manual_review,Water Heater,Waves,other,third_party,2023-06-14,2024-06-13,2023-11-07,2023-11-20,180097.65,39.4,0,1052,13,1,1,1,0,1,0,1,0,2,0
+CLM-0000622,invalid_claim,Water Heater,Super Asia,physical,standard,2020-01-24,2021-01-23,2020-03-25,2020-03-26,146442.35,80.0,0,2374,1,1,0,0,0,0,1,0,0,4,2
+CLM-0000588,invalid_claim,Water Heater,Orient,battery,standard,2021-03-05,2022-03-05,2021-11-12,2021-12-11,106184.01,66.7,0,1777,29,1,0,1,1,0,0,0,0,4,2
+CLM-0000880,invalid_claim,Microwave,Samsung,manufacturing,standard,2022-09-01,2023-09-01,2023-04-20,2023-05-03,87871.33,48.8,0,1253,13,0,1,0,0,0,1,1,0,4,3
+CLM-0000636,invalid_claim,Water Heater,Sony,mechanical,standard,2019-06-28,2020-06-27,2019-11-12,2019-12-09,179799.67,86.9,0,2508,27,0,1,1,1,1,1,1,0,1,1
+CLM-0001279,manual_review,Refrigerator,Sony,display,extended,2022-04-24,2023-04-24,2023-04-20,2023-05-01,92639.63,53.0,0,1253,11,0,1,1,1,0,1,1,0,0,2
+CLM-0001401,manual_review,Laptop,Kenwood,physical,standard,2024-01-09,2025-01-08,2024-05-08,2024-05-22,382049.82,32.5,0,869,14,1,0,0,0,0,1,1,0,0,1
+CLM-0001142,manual_review,Air Conditioner,Waves,water,standard,2021-10-02,2022-10-02,2022-05-09,2022-05-28,180363.29,59.7,0,1599,19,1,0,1,1,1,0,0,0,2,1
+CLM-0001264,manual_review,Laptop,Kenwood,overheating,standard,2021-05-29,2022-05-29,2022-03-18,2022-03-28,213359.61,63.9,0,1651,10,0,1,0,1,0,1,0,0,2,1
+CLM-0000777,invalid_claim,Washing Machine,Dawlance,physical,standard,2022-10-15,2023-10-15,2023-05-26,2023-06-23,127506.7,47.3,0,1217,28,0,0,0,0,0,1,0,0,1,1
+CLM-0000720,invalid_claim,Microwave,Samsung,water,standard,2019-03-06,2020-03-05,2019-10-05,2019-10-30,158964.03,90.6,0,2546,25,0,1,1,1,0,0,0,0,4,2
+CLM-0001051,manual_review,Small Appliance,Orient,overheating,standard,2021-11-30,2022-11-30,2022-03-20,2022-04-03,359063.31,57.8,0,1649,14,0,1,1,1,1,1,0,0,1,0
+CLM-0000649,invalid_claim,Generator,Orient,physical,standard,2020-07-17,2021-07-17,2021-02-23,2021-03-16,28400.08,74.2,0,2039,21,1,1,0,0,1,1,1,0,4,2
+CLM-0000107,valid_claim,Air Conditioner,Dawlance,mechanical,standard,2022-10-12,2025-09-26,2024-02-13,2024-02-23,143969.0,47.4,0,954,10,1,1,1,1,1,1,0,0,0,0
+CLM-0001090,manual_review,Small Appliance,Dawlance,other,third_party,2023-10-02,2024-10-01,2024-02-06,2024-02-20,82257.49,35.7,0,961,14,1,1,1,0,1,0,0,0,0,2
+CLM-0001399,manual_review,Television,Waves,other,extended,2022-09-05,2023-09-05,2023-04-28,2023-05-16,454421.16,48.6,0,1245,18,1,0,0,1,0,1,1,1,1,0
+CLM-0001020,manual_review,Generator,TCL,mechanical,extended,2022-11-22,2023-11-22,2023-04-21,2023-05-01,423400.17,46.1,0,1252,10,0,1,1,1,0,1,0,0,2,0
+CLM-0000467,valid_claim,Refrigerator,PEL,mechanical,standard,2023-07-31,2025-07-20,2025-01-07,2025-01-14,210419.79,37.8,0,625,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000935,invalid_claim,Refrigerator,Orient,water,standard,2021-02-17,2022-02-17,2022-10-20,2022-11-02,189417.7,67.2,0,1435,13,0,1,0,1,0,1,0,0,1,3
+CLM-0001479,manual_review,Washing Machine,Haier,electrical,extended,2021-12-18,2022-12-18,2022-12-05,2022-12-15,399483.28,57.2,0,1389,10,0,0,1,1,1,1,1,0,0,1
+CLM-0000407,valid_claim,Washing Machine,Sony,mechanical,standard,2023-10-14,2026-09-28,2025-01-01,2025-01-08,145524.07,35.3,4,631,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000144,valid_claim,Microwave,PEL,software,extended,2022-10-15,2025-09-29,2023-10-11,2023-10-15,239198.18,47.3,0,1079,4,1,1,1,1,1,1,0,0,0,0
+CLM-0000376,valid_claim,Water Heater,LG,software,extended,2022-03-27,2025-03-11,2024-05-02,2024-05-08,209347.37,53.9,0,875,6,1,1,1,0,0,1,0,0,1,0
+CLM-0000009,valid_claim,Smartphone,TCL,mechanical,extended,2022-01-24,2023-01-19,2022-11-24,2022-11-29,15762.65,56.0,0,1400,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001344,manual_review,Laptop,Super Asia,mechanical,third_party,2021-02-27,2022-02-27,2021-09-23,2021-10-11,437159.95,66.9,0,1827,18,1,1,1,0,0,1,0,0,1,0
+CLM-0001109,manual_review,Water Heater,LG,display,third_party,2022-09-30,2023-09-30,2023-08-11,2023-08-29,441635.19,47.8,0,1140,18,1,0,1,1,0,0,1,0,0,2
+CLM-0000277,valid_claim,Small Appliance,Kenwood,manufacturing,extended,2022-12-29,2024-06-21,2024-02-06,2024-02-09,113386.22,44.8,0,961,3,1,1,1,1,1,1,0,0,0,1
+CLM-0000707,invalid_claim,Microwave,TCL,mechanical,standard,2021-09-04,2022-09-04,2022-01-22,2022-02-12,15660.97,60.6,0,1706,21,1,1,1,1,0,1,1,0,3,1
+CLM-0000612,invalid_claim,Refrigerator,Waves,manufacturing,standard,2020-03-11,2021-03-11,2020-09-04,2020-09-12,131739.27,78.4,0,2211,8,1,1,1,1,0,1,1,0,1,3
+CLM-0000357,valid_claim,Water Heater,Philips,display,standard,2023-03-31,2024-09-21,2024-07-11,2024-07-17,37157.47,41.8,0,805,6,1,1,1,1,1,1,0,0,0,0
+CLM-0001138,manual_review,Microwave,Super Asia,software,third_party,2022-05-25,2023-05-25,2023-01-12,2023-01-25,341484.15,52.0,0,1351,13,1,1,1,1,0,1,0,0,2,2
+CLM-0000362,valid_claim,Washing Machine,Sony,display,standard,2024-03-28,2026-03-18,2024-07-23,2024-07-30,129647.36,29.9,0,793,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000553,invalid_claim,Air Conditioner,Waves,physical,standard,2021-03-20,2022-03-20,2021-08-13,2021-08-31,178558.42,66.2,0,1868,18,0,0,0,0,0,1,0,0,3,3
+CLM-0000507,invalid_claim,Television,Orient,physical,standard,2022-06-19,2023-06-19,2022-12-11,2023-01-10,118666.1,51.2,0,1383,30,1,1,1,0,0,1,0,0,4,3
+CLM-0001158,manual_review,Refrigerator,Haier,other,third_party,2022-12-07,2023-12-07,2023-11-23,2023-12-13,245366.69,45.6,0,1036,20,1,0,0,1,0,1,1,0,0,2
+CLM-0000249,valid_claim,Television,Dawlance,display,extended,2022-01-19,2025-01-03,2024-09-08,2024-09-11,182494.01,56.1,0,746,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000974,invalid_claim,Washing Machine,Super Asia,software,standard,2021-12-20,2022-12-20,2023-08-18,2023-09-11,53515.91,57.1,0,1133,24,1,0,1,1,0,1,0,0,4,3
+CLM-0000954,invalid_claim,Refrigerator,Super Asia,water,standard,2022-06-03,2024-06-02,2022-03-27,2022-04-01,175670.92,51.7,0,1642,5,0,1,0,1,0,1,0,0,4,3
+CLM-0000477,valid_claim,Laptop,PEL,display,extended,2024-03-31,2025-03-26,2024-07-25,2024-07-27,43849.11,29.8,0,791,2,1,1,1,1,1,1,0,0,0,0
+CLM-0000546,invalid_claim,Small Appliance,Waves,mechanical,standard,2020-08-05,2021-08-05,2021-03-23,2021-04-18,144298.44,73.6,0,2011,26,0,0,1,1,0,1,0,0,3,2
+CLM-0000125,valid_claim,Microwave,Dawlance,software,standard,2024-10-16,2026-10-06,2026-09-03,2026-09-08,176824.19,23.3,12,21,5,1,1,1,1,0,1,0,0,1,0
+CLM-0000492,valid_claim,Air Conditioner,PEL,manufacturing,extended,2023-04-29,2026-04-13,2024-01-28,2024-01-30,129064.85,40.9,0,970,2,1,1,0,1,0,1,0,0,0,0
+CLM-0000017,valid_claim,Generator,Dawlance,software,extended,2022-05-01,2023-10-23,2022-12-11,2022-12-12,51377.25,52.8,0,1383,1,1,1,1,0,0,1,0,0,1,0
+CLM-0000012,valid_claim,Microwave,Waves,manufacturing,extended,2024-05-16,2025-11-07,2025-10-03,2025-10-12,226409.31,28.3,0,356,9,1,1,1,1,1,1,0,0,0,0
+CLM-0001161,manual_review,Air Conditioner,LG,overheating,third_party,2023-03-12,2024-03-11,2024-01-05,2024-01-16,140926.4,42.4,0,993,11,1,1,1,0,0,1,0,0,0,2
+CLM-0000743,invalid_claim,Refrigerator,Sony,physical,standard,2022-03-07,2023-03-07,2022-08-04,2022-08-16,37613.57,54.6,0,1512,12,1,0,1,1,0,1,0,0,3,2
+CLM-0001203,manual_review,Small Appliance,Super Asia,water,third_party,2024-08-09,2025-08-09,2025-04-13,2025-04-25,60813.48,25.5,0,529,12,1,1,1,0,1,1,1,1,1,1
+CLM-0001194,manual_review,Generator,Haier,overheating,standard,2024-02-26,2025-02-25,2024-11-12,2024-11-26,438231.98,30.9,0,681,14,0,1,1,1,0,1,0,0,2,0
+CLM-0000246,valid_claim,Generator,Samsung,manufacturing,standard,2023-01-30,2024-07-23,2024-05-02,2024-05-03,79384.71,43.8,0,875,1,1,1,1,1,0,1,0,0,0,0
+CLM-0000688,invalid_claim,Small Appliance,LG,overheating,standard,2022-09-08,2023-09-08,2023-06-17,2023-07-12,189402.98,48.5,0,1195,25,1,0,0,1,0,0,0,0,3,2
+CLM-0000797,invalid_claim,Air Conditioner,PEL,physical,standard,2020-12-03,2021-12-03,2021-05-23,2021-06-22,50246.52,69.7,0,1950,30,1,1,0,0,0,1,0,0,1,1
+CLM-0000398,valid_claim,Smartphone,Orient,mechanical,standard,2022-06-26,2025-06-10,2023-08-31,2023-09-03,243815.24,51.0,0,1120,3,1,1,1,1,1,1,0,0,1,0
+CLM-0001008,manual_review,Small Appliance,Dawlance,overheating,standard,2021-05-22,2022-05-22,2021-10-14,2021-10-26,99937.32,64.1,0,1806,12,0,0,1,1,1,0,0,0,1,0
+CLM-0000157,valid_claim,Microwave,PEL,manufacturing,standard,2024-08-06,2025-08-01,2025-06-19,2025-06-26,92611.8,25.6,0,462,7,1,1,1,1,0,1,0,0,1,0
+CLM-0001097,manual_review,Smartphone,Philips,battery,standard,2023-07-21,2024-07-20,2024-07-01,2024-07-19,178018.55,38.1,0,815,18,1,1,0,1,0,1,0,0,2,0
+CLM-0000088,valid_claim,Laptop,Dawlance,manufacturing,standard,2023-03-17,2026-03-01,2024-06-18,2024-06-26,222585.41,42.3,0,828,8,1,1,1,1,1,1,0,0,0,0
+CLM-0000980,invalid_claim,Water Heater,Haier,electrical,standard,2022-10-30,2023-10-30,2023-02-13,2023-03-04,102041.95,46.8,0,1319,19,0,0,0,0,0,1,0,0,4,2
+CLM-0000245,valid_claim,Smartphone,Super Asia,display,extended,2024-11-23,2026-11-13,2025-02-18,2025-02-27,46877.71,22.0,50,583,9,1,1,1,0,1,1,0,0,0,0
+CLM-0001065,manual_review,Water Heater,Dawlance,mechanical,standard,2022-07-23,2023-07-23,2023-07-19,2023-08-06,466586.51,50.1,0,1163,18,1,1,0,1,1,1,0,0,1,0
+CLM-0000885,invalid_claim,Air Conditioner,LG,water,standard,2021-12-08,2022-12-08,2022-07-01,2022-07-16,77695.09,57.5,0,1546,15,1,0,0,0,0,1,0,1,1,2
+CLM-0000037,valid_claim,Microwave,TCL,display,standard,2022-02-10,2025-01-25,2023-07-13,2023-07-14,129733.93,55.4,0,1169,1,1,1,1,1,0,1,0,0,0,0
+CLM-0000314,valid_claim,Generator,Kenwood,software,standard,2022-04-17,2023-10-09,2022-12-02,2022-12-03,30058.91,53.3,0,1392,1,1,1,1,1,1,1,0,0,0,0
+CLM-0001049,manual_review,Refrigerator,Sony,overheating,third_party,2021-06-19,2022-06-19,2022-06-11,2022-07-01,201822.21,63.2,0,1566,20,1,1,1,1,0,1,0,1,2,0
+CLM-0000481,valid_claim,Laptop,TCL,software,extended,2022-03-06,2025-02-18,2024-09-22,2024-09-24,23455.56,54.6,0,732,2,1,1,1,1,0,1,0,0,1,1
+CLM-0000417,valid_claim,Washing Machine,Philips,software,standard,2024-12-26,2026-06-19,2025-08-07,2025-08-14,82866.17,20.9,0,413,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000320,valid_claim,Water Heater,Philips,electrical,extended,2023-03-28,2024-09-18,2024-06-09,2024-06-15,73340.54,41.9,0,837,6,1,1,1,1,0,1,0,0,1,0
+CLM-0000852,invalid_claim,Generator,PEL,mechanical,standard,2022-06-15,2023-06-15,2023-02-01,2023-03-03,5520.8,51.3,0,1331,30,1,1,0,0,1,1,0,1,4,1
+CLM-0001197,manual_review,Laptop,Super Asia,software,third_party,2021-12-08,2022-12-08,2022-06-09,2022-06-29,435064.54,57.5,0,1568,20,1,1,0,1,1,1,0,0,1,0
+CLM-0001261,manual_review,Smartphone,LG,electrical,standard,2024-09-30,2025-09-30,2025-04-17,2025-05-03,457244.19,23.8,0,525,16,1,1,0,0,0,0,0,0,0,1
+CLM-0000378,valid_claim,Washing Machine,Kenwood,display,standard,2022-04-22,2023-10-14,2023-01-14,2023-01-22,107370.68,53.1,0,1349,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000650,invalid_claim,Microwave,Sony,overheating,standard,2019-07-13,2021-07-12,2019-04-19,2019-04-25,63180.85,86.4,0,2715,6,1,1,0,0,0,1,0,0,4,3
+CLM-0000513,invalid_claim,Generator,Sony,battery,standard,2020-12-31,2021-12-31,2021-08-29,2021-09-16,26935.72,68.8,0,1852,18,0,1,1,1,0,1,1,0,2,3
+CLM-0001452,manual_review,Small Appliance,Waves,manufacturing,third_party,2023-11-06,2024-11-05,2024-10-27,2024-11-07,259996.7,34.6,0,697,11,1,0,0,1,1,0,1,0,0,2
+CLM-0000667,invalid_claim,Television,Samsung,other,standard,2021-09-16,2022-09-16,2022-01-29,2022-02-07,81756.19,60.2,0,1699,9,0,0,0,0,0,1,0,0,1,2
+CLM-0000349,valid_claim,Small Appliance,PEL,manufacturing,standard,2024-11-02,2027-10-18,2026-12-23,2026-12-26,169698.01,22.7,389,0,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001252,manual_review,Microwave,Orient,mechanical,extended,2023-11-20,2024-11-19,2024-10-16,2024-10-27,164346.17,34.1,0,708,11,0,0,1,1,0,1,0,0,0,1
+CLM-0001348,manual_review,Washing Machine,Dawlance,water,standard,2022-05-26,2023-05-26,2023-04-21,2023-05-01,75222.52,52.0,0,1252,10,0,1,1,1,0,0,1,1,1,2
+CLM-0000024,valid_claim,Refrigerator,Orient,display,extended,2023-09-24,2025-09-13,2023-12-03,2023-12-09,243851.7,36.0,0,1026,6,1,1,1,0,1,1,0,0,0,0
+CLM-0000366,valid_claim,Microwave,Kenwood,display,standard,2023-02-22,2025-02-11,2024-10-05,2024-10-13,75032.24,43.0,0,719,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001371,manual_review,Air Conditioner,LG,software,standard,2024-02-05,2025-02-04,2024-08-01,2024-08-12,348720.8,31.6,0,784,11,0,1,1,1,1,1,0,0,1,0
+CLM-0000864,invalid_claim,Air Conditioner,Haier,physical,standard,2020-01-16,2021-01-15,2021-07-26,2021-08-14,47417.54,80.3,0,1886,19,1,1,0,1,0,1,0,0,2,3
+CLM-0001461,manual_review,Refrigerator,Dawlance,battery,extended,2021-01-07,2022-01-07,2021-12-27,2022-01-06,166809.5,68.5,0,1732,10,0,1,0,1,0,0,1,0,1,1
+CLM-0000392,valid_claim,Generator,PEL,manufacturing,extended,2023-09-24,2025-09-13,2023-11-25,2023-11-30,209922.51,36.0,0,1034,5,1,1,1,1,1,1,0,0,1,0
+CLM-0000566,invalid_claim,Generator,Orient,physical,standard,2022-11-28,2023-11-28,2023-01-29,2023-02-02,187568.33,45.9,0,1334,4,1,1,1,1,0,1,0,0,3,1
+CLM-0000338,valid_claim,Television,Haier,software,extended,2023-01-22,2026-01-06,2025-08-12,2025-08-21,66839.22,44.1,0,408,9,1,1,1,1,0,1,0,0,1,1
+CLM-0001162,manual_review,Small Appliance,LG,water,standard,2022-07-26,2023-07-26,2022-11-23,2022-12-07,253911.61,50.0,0,1401,14,0,0,1,0,0,1,0,1,1,0
+CLM-0000260,valid_claim,Small Appliance,Philips,mechanical,standard,2022-02-09,2023-08-03,2022-07-03,2022-07-06,101148.99,55.5,0,1544,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001002,manual_review,Smartphone,PEL,overheating,standard,2023-04-17,2024-04-16,2024-02-06,2024-02-26,261604.6,41.3,0,961,20,1,1,0,0,0,1,1,0,0,2
+CLM-0001462,manual_review,Refrigerator,Sony,battery,extended,2021-08-16,2022-08-16,2021-12-29,2022-01-16,413231.0,61.3,0,1730,18,1,1,0,1,1,1,1,0,2,0
+CLM-0001219,manual_review,Television,Philips,display,standard,2024-09-03,2025-09-03,2025-02-17,2025-03-08,419246.35,24.7,0,584,19,1,0,0,0,0,1,0,0,1,0
+CLM-0001447,manual_review,Water Heater,Haier,battery,standard,2024-01-25,2025-01-24,2024-09-21,2024-10-02,51134.65,32.0,0,733,11,1,1,1,0,0,1,0,0,2,0
+CLM-0000664,invalid_claim,Washing Machine,Sony,battery,standard,2022-10-18,2023-10-18,2023-04-26,2023-05-26,105427.24,47.2,0,1247,30,0,0,0,1,0,1,1,0,1,3
+CLM-0000265,valid_claim,Laptop,TCL,electrical,standard,2022-04-13,2023-04-08,2022-08-10,2022-08-11,215042.79,53.4,0,1506,1,1,1,1,1,1,1,0,0,0,0
+CLM-0000759,invalid_claim,Refrigerator,Philips,electrical,standard,2022-03-24,2023-03-24,2023-09-06,2023-09-14,58714.6,54.0,0,1114,8,0,0,1,1,0,1,0,0,3,2
+CLM-0000077,valid_claim,Microwave,Dawlance,mechanical,standard,2024-01-13,2025-01-07,2024-08-18,2024-08-27,238017.54,32.4,0,767,9,1,1,1,1,1,1,0,0,0,0
+CLM-0000799,invalid_claim,Refrigerator,LG,manufacturing,standard,2021-09-07,2022-09-07,2022-04-23,2022-04-27,187982.18,60.5,0,1615,4,1,0,0,0,0,1,1,0,4,3
+CLM-0001482,manual_review,Air Conditioner,Philips,physical,extended,2024-04-27,2025-04-27,2024-11-22,2024-12-04,303948.79,28.9,0,671,12,0,0,1,1,0,1,1,0,2,0
+CLM-0001432,manual_review,Generator,Super Asia,other,standard,2024-10-10,2025-10-10,2025-09-11,2025-09-30,224692.06,23.5,0,378,19,1,0,1,0,0,0,0,0,1,1
+CLM-0000834,invalid_claim,Washing Machine,Philips,software,standard,2021-04-19,2022-04-19,2021-08-13,2021-09-01,157012.64,65.2,0,1868,19,1,0,0,1,0,1,1,0,1,2
+CLM-0000939,invalid_claim,Water Heater,TCL,other,standard,2019-10-23,2021-10-22,2019-08-22,2019-08-24,145891.93,83.0,0,2590,2,1,1,1,1,0,1,0,0,1,1
+CLM-0000317,valid_claim,Refrigerator,Philips,manufacturing,extended,2024-03-20,2027-03-05,2025-12-10,2025-12-14,96656.65,30.2,162,288,4,1,1,1,1,0,1,0,0,0,0
+CLM-0000235,valid_claim,Microwave,Kenwood,display,extended,2023-06-28,2025-06-17,2024-05-27,2024-05-31,51093.63,38.9,0,850,4,1,1,1,1,1,1,0,0,0,0
+CLM-0000062,valid_claim,Laptop,Philips,display,extended,2024-09-29,2026-03-23,2025-06-14,2025-06-23,122005.98,23.8,0,467,9,1,1,1,1,0,1,0,0,1,0
+CLM-0001241,manual_review,Generator,Sony,water,third_party,2022-10-07,2023-10-07,2023-05-03,2023-05-18,451608.62,47.6,0,1240,15,1,0,1,1,1,0,0,1,0,0
+CLM-0001111,manual_review,Small Appliance,Super Asia,electrical,third_party,2021-12-11,2022-12-11,2022-05-07,2022-05-27,415511.7,57.4,0,1601,20,1,0,1,0,0,1,1,0,2,2
+CLM-0001483,manual_review,Microwave,Orient,other,third_party,2022-11-14,2023-11-14,2023-09-02,2023-09-21,326654.63,46.3,0,1118,19,0,1,1,1,1,1,1,0,0,0
+CLM-0001275,manual_review,Washing Machine,Orient,display,third_party,2022-06-13,2023-06-13,2023-06-02,2023-06-12,324848.24,51.4,0,1210,10,1,1,1,1,0,0,0,0,2,0
+CLM-0000313,valid_claim,Generator,Super Asia,mechanical,standard,2023-12-07,2026-11-21,2026-01-28,2026-01-31,65397.66,33.6,58,239,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000311,valid_claim,Laptop,TCL,manufacturing,standard,2024-12-06,2025-12-01,2025-09-28,2025-09-29,51372.97,21.6,0,361,1,1,1,1,1,0,1,0,0,1,0
+CLM-0000742,invalid_claim,Television,Super Asia,battery,standard,2022-04-18,2023-04-18,2022-09-04,2022-09-10,89526.98,53.2,0,1481,6,1,0,1,1,1,0,0,0,4,2
+CLM-0000257,valid_claim,Microwave,TCL,software,extended,2022-12-12,2024-06-04,2023-09-18,2023-09-20,105079.36,45.4,0,1102,2,1,1,1,1,0,1,0,0,0,1
+CLM-0000521,invalid_claim,Generator,Dawlance,mechanical,standard,2021-06-14,2022-06-14,2021-09-02,2021-10-02,196916.32,63.3,0,1848,30,1,1,1,1,0,1,1,0,1,1
+CLM-0000958,invalid_claim,Small Appliance,LG,other,standard,2022-09-29,2023-09-29,2023-03-05,2023-03-07,168450.1,47.8,0,1299,2,1,1,1,0,0,0,0,0,4,2
+CLM-0000923,invalid_claim,Refrigerator,Orient,overheating,standard,2021-08-24,2022-08-24,2022-11-30,2022-12-29,165740.59,61.0,0,1394,29,0,0,1,0,0,1,0,0,3,3
+CLM-0000238,valid_claim,Water Heater,Samsung,software,extended,2022-11-06,2023-11-01,2023-01-18,2023-01-24,241922.51,46.6,0,1345,6,1,1,1,0,0,1,0,0,1,0
+CLM-0000692,invalid_claim,Refrigerator,Dawlance,mechanical,standard,2019-09-28,2020-09-27,2021-03-03,2021-03-28,188026.69,83.9,0,2031,25,1,0,1,0,0,1,0,0,3,3
+CLM-0000450,valid_claim,Television,Sony,electrical,standard,2024-12-25,2026-12-15,2026-05-01,2026-05-11,106810.39,21.0,82,146,10,1,1,1,0,1,1,0,0,0,0
+CLM-0000579,invalid_claim,Washing Machine,Samsung,software,standard,2019-01-17,2020-01-17,2019-07-28,2019-08-16,103886.03,92.2,0,2615,19,0,0,0,1,1,1,0,0,2,3
+CLM-0000215,valid_claim,Microwave,LG,display,standard,2024-02-02,2027-01-17,2026-11-25,2026-11-27,117220.98,31.7,115,0,2,1,1,0,1,1,1,0,0,0,0
+CLM-0001449,manual_review,Television,Samsung,electrical,third_party,2022-07-26,2023-07-26,2022-11-24,2022-12-06,230651.86,50.0,0,1400,12,1,0,1,1,0,1,1,0,2,1
+CLM-0000384,valid_claim,Small Appliance,Orient,electrical,standard,2022-11-27,2024-11-16,2024-09-12,2024-09-22,195600.32,45.9,0,742,10,1,1,1,0,0,1,0,0,0,1
+CLM-0000076,valid_claim,Small Appliance,TCL,manufacturing,standard,2024-05-08,2025-10-30,2025-09-03,2025-09-10,177215.96,28.5,0,386,7,1,1,1,1,1,1,0,0,0,1
+CLM-0001293,manual_review,Refrigerator,LG,display,extended,2024-03-04,2025-03-04,2024-07-06,2024-07-22,145146.2,30.7,0,810,16,1,1,1,1,1,1,0,0,2,2
+CLM-0001387,manual_review,Smartphone,Orient,water,standard,2021-06-17,2022-06-17,2022-05-31,2022-06-12,95732.32,63.2,0,1577,12,0,0,1,1,1,1,1,1,0,2
+CLM-0001288,manual_review,Small Appliance,Samsung,mechanical,third_party,2024-01-06,2025-01-05,2024-06-19,2024-07-01,476161.23,32.6,0,827,12,0,1,0,1,0,1,0,1,0,2
+CLM-0001304,manual_review,Water Heater,Super Asia,water,extended,2024-09-24,2025-09-24,2025-02-06,2025-02-21,353077.76,24.0,0,595,15,1,1,1,0,1,1,0,0,2,2
+CLM-0000851,invalid_claim,Small Appliance,LG,physical,standard,2020-07-27,2021-07-27,2020-11-09,2020-11-18,29707.3,73.9,0,2145,9,1,0,1,0,0,1,0,0,3,3
+CLM-0000294,valid_claim,Washing Machine,PEL,display,extended,2023-12-06,2025-05-29,2024-08-03,2024-08-12,60666.66,33.6,0,782,9,1,1,1,1,0,1,0,0,0,0
+CLM-0001104,manual_review,Television,Kenwood,battery,third_party,2023-04-05,2024-04-04,2023-12-15,2023-12-27,386480.45,41.7,0,1014,12,1,0,1,0,0,1,0,0,2,1
+CLM-0000922,invalid_claim,Generator,PEL,manufacturing,standard,2022-11-09,2023-11-09,2023-08-28,2023-09-20,197451.19,46.5,0,1123,23,1,1,1,1,0,1,1,0,4,2
+CLM-0000106,valid_claim,Air Conditioner,Orient,electrical,extended,2024-02-05,2025-07-29,2024-09-19,2024-09-21,200974.45,31.6,0,735,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001281,manual_review,Refrigerator,Orient,electrical,extended,2021-11-20,2022-11-20,2022-11-06,2022-11-16,146569.45,58.1,0,1418,10,0,1,0,0,0,1,1,0,2,1
+CLM-0000550,invalid_claim,Laptop,Dawlance,physical,standard,2019-08-30,2020-08-29,2020-02-01,2020-02-11,62326.35,84.8,0,2427,10,1,1,0,1,0,1,0,0,3,2
+CLM-0000900,invalid_claim,Air Conditioner,Super Asia,physical,standard,2021-08-04,2022-08-04,2022-04-05,2022-04-08,11302.9,61.7,0,1633,3,1,0,0,0,1,1,0,0,4,2
+CLM-0000919,invalid_claim,Small Appliance,TCL,overheating,standard,2021-07-10,2022-07-10,2021-11-25,2021-12-09,6106.14,62.5,0,1764,14,0,0,1,1,0,1,0,0,2,2
+CLM-0001497,manual_review,Laptop,Samsung,physical,third_party,2022-03-24,2023-03-24,2022-12-30,2023-01-17,196503.99,54.0,0,1364,18,1,1,1,1,0,1,1,0,0,1
+CLM-0000016,valid_claim,Water Heater,Samsung,electrical,standard,2022-06-04,2025-05-19,2024-10-08,2024-10-17,54083.11,51.7,0,716,9,1,1,1,1,0,1,0,0,0,0
+CLM-0000263,valid_claim,Air Conditioner,Philips,software,standard,2023-06-23,2024-12-14,2024-01-22,2024-01-29,176727.92,39.1,0,976,7,1,1,1,1,1,1,0,0,0,0
+CLM-0000401,valid_claim,Smartphone,Philips,software,extended,2024-11-06,2025-11-01,2025-07-01,2025-07-03,153775.95,22.6,0,450,2,1,1,1,1,1,1,0,0,0,0
+CLM-0001372,manual_review,Water Heater,Sony,water,third_party,2024-05-13,2025-05-13,2025-02-23,2025-03-06,472053.01,28.4,0,578,11,0,0,1,0,0,1,1,0,2,1
+CLM-0000562,invalid_claim,Washing Machine,Super Asia,display,standard,2021-11-11,2022-11-11,2022-03-23,2022-03-25,114800.91,58.4,0,1646,2,1,1,1,1,0,1,0,1,3,2
+CLM-0000948,invalid_claim,Air Conditioner,PEL,water,standard,2022-10-25,2023-10-25,2023-02-18,2023-03-15,107487.06,47.0,0,1314,25,0,0,1,1,0,1,0,1,2,3
+CLM-0001251,manual_review,Small Appliance,PEL,water,standard,2023-10-28,2024-10-27,2024-06-21,2024-07-05,446493.46,34.9,0,825,14,1,0,0,0,0,1,0,0,1,2
+CLM-0000032,valid_claim,Small Appliance,LG,software,extended,2023-02-12,2024-08-05,2023-03-26,2023-03-27,223242.17,43.4,0,1278,1,1,1,1,1,0,1,0,0,0,1
+CLM-0001347,manual_review,Generator,Sony,electrical,third_party,2022-02-09,2023-02-09,2022-07-23,2022-08-08,361516.1,55.5,0,1524,16,1,1,1,0,1,0,1,0,2,1
+CLM-0000555,invalid_claim,Television,PEL,other,standard,2020-01-04,2021-01-03,2020-03-08,2020-03-17,91624.75,80.7,0,2391,9,0,0,1,1,0,0,0,0,1,2
+CLM-0000865,invalid_claim,Microwave,Super Asia,manufacturing,standard,2019-09-29,2020-09-28,2020-02-15,2020-02-17,39710.79,83.8,0,2413,2,1,1,1,1,0,1,0,1,2,2
+CLM-0001474,manual_review,Air Conditioner,Orient,physical,standard,2023-03-31,2024-03-30,2024-03-23,2024-04-09,181042.38,41.8,0,915,17,1,1,0,1,0,1,1,0,1,0
+CLM-0000611,invalid_claim,Television,Philips,overheating,standard,2022-07-07,2023-07-07,2022-10-23,2022-11-12,188090.03,50.6,0,1432,20,1,1,1,1,0,0,0,0,3,1
+CLM-0000406,valid_claim,Water Heater,Orient,electrical,extended,2023-08-26,2024-08-20,2024-04-01,2024-04-10,218434.71,37.0,0,906,9,1,1,1,1,0,1,0,0,0,0
+CLM-0000512,invalid_claim,Generator,Samsung,software,standard,2022-09-08,2023-09-08,2023-04-18,2023-05-14,33981.06,48.5,0,1255,26,1,1,1,0,0,0,0,0,4,1
+CLM-0000975,invalid_claim,Microwave,Kenwood,overheating,standard,2020-11-10,2021-11-10,2022-01-24,2022-01-28,161958.22,70.4,0,1704,4,1,1,0,1,0,1,0,0,2,3
+CLM-0001392,manual_review,Water Heater,Kenwood,mechanical,extended,2022-02-16,2023-02-16,2022-07-27,2022-08-16,471352.59,55.2,0,1520,20,1,1,0,0,0,1,1,0,0,0
+CLM-0001106,manual_review,Small Appliance,Haier,battery,extended,2024-02-24,2025-02-23,2025-03-26,2025-04-06,299113.28,31.0,0,547,11,1,0,1,0,0,1,1,0,1,1
+CLM-0000149,valid_claim,Small Appliance,LG,electrical,extended,2023-09-24,2024-09-18,2024-05-13,2024-05-18,95964.28,36.0,0,864,5,1,1,1,0,0,1,0,0,0,0
+CLM-0001081,manual_review,Air Conditioner,Philips,other,standard,2022-10-31,2023-10-31,2023-07-30,2023-08-14,447589.87,46.8,0,1152,15,0,1,1,0,0,1,0,0,0,1
+CLM-0000224,valid_claim,Air Conditioner,Sony,display,extended,2022-02-23,2024-02-13,2023-11-26,2023-11-30,195207.91,55.0,0,1033,4,1,1,0,0,1,1,0,0,0,0
+CLM-0000287,valid_claim,Air Conditioner,Waves,manufacturing,extended,2022-01-19,2023-01-14,2022-08-14,2022-08-22,230244.12,56.1,0,1502,8,1,1,0,1,0,1,0,0,0,0
+CLM-0000383,valid_claim,Air Conditioner,Haier,electrical,extended,2023-03-02,2024-02-25,2023-07-04,2023-07-07,92811.11,42.8,0,1178,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001356,manual_review,Television,PEL,manufacturing,extended,2021-01-04,2022-01-04,2021-10-08,2021-10-26,185918.86,68.6,0,1812,18,0,0,1,0,0,1,0,1,1,0
+CLM-0001210,manual_review,Washing Machine,Sony,software,third_party,2021-09-10,2022-09-10,2022-03-21,2022-04-09,272685.69,60.4,0,1648,19,1,1,1,0,0,1,0,1,0,0
+CLM-0001246,manual_review,Television,Super Asia,battery,extended,2022-02-22,2023-02-22,2023-02-05,2023-02-19,152589.18,55.0,0,1327,14,1,1,1,0,1,1,0,0,1,1
+CLM-0000552,invalid_claim,Washing Machine,Philips,battery,standard,2022-05-25,2023-05-25,2022-08-26,2022-09-20,153527.36,52.0,0,1490,25,1,1,0,1,0,1,1,0,4,2
+CLM-0000607,invalid_claim,Washing Machine,Samsung,other,standard,2020-07-25,2021-07-25,2021-04-26,2021-05-02,24600.45,74.0,0,1977,6,1,0,1,1,0,1,1,0,3,1
+CLM-0001144,manual_review,Television,Haier,overheating,third_party,2024-07-16,2025-07-16,2025-07-09,2025-07-26,195359.08,26.3,0,442,17,1,0,0,0,0,0,0,0,1,1
+CLM-0001119,manual_review,Smartphone,PEL,display,third_party,2021-08-08,2022-08-08,2022-04-26,2022-05-10,308486.15,61.5,0,1612,14,0,0,1,0,1,0,1,0,2,1
+CLM-0001114,manual_review,Air Conditioner,Super Asia,electrical,third_party,2021-03-24,2022-03-24,2021-08-30,2021-09-12,227623.45,66.0,0,1851,13,0,1,1,1,1,1,0,0,1,0
+CLM-0001310,manual_review,Washing Machine,LG,software,standard,2023-03-25,2024-03-24,2023-09-18,2023-10-05,253940.15,42.0,0,1102,17,0,1,1,0,0,1,0,0,1,0
+CLM-0000972,invalid_claim,Generator,TCL,mechanical,standard,2019-02-26,2020-02-26,2019-10-26,2019-11-15,197310.29,90.9,0,2525,20,0,1,1,0,0,1,0,0,3,1
+CLM-0000472,valid_claim,Refrigerator,Kenwood,electrical,standard,2023-12-14,2025-12-03,2024-06-25,2024-07-04,183215.73,33.3,0,821,9,1,1,0,1,0,1,0,0,0,0
+CLM-0001208,manual_review,Microwave,LG,physical,standard,2023-01-22,2024-01-22,2024-01-04,2024-01-19,372053.0,44.1,0,994,15,1,1,0,1,0,0,1,0,0,1
+CLM-0000751,invalid_claim,Microwave,Dawlance,mechanical,standard,2020-11-05,2021-11-05,2021-06-29,2021-07-19,185347.39,70.6,0,1913,20,0,0,1,1,1,1,0,0,4,3
+CLM-0000722,invalid_claim,Microwave,Orient,manufacturing,standard,2019-04-21,2020-04-20,2019-07-13,2019-08-11,37083.99,89.1,0,2630,29,1,1,1,0,1,1,0,1,4,2
+CLM-0001206,manual_review,Air Conditioner,Dawlance,other,standard,2024-06-29,2025-06-29,2025-04-16,2025-04-29,244151.85,26.8,0,526,13,1,1,1,1,0,0,0,0,1,0
+CLM-0000708,invalid_claim,Refrigerator,LG,physical,standard,2020-07-31,2021-07-31,2020-11-09,2020-11-27,46322.44,73.8,0,2145,18,1,0,1,1,0,1,0,0,2,2
+CLM-0001436,manual_review,Air Conditioner,Haier,display,standard,2021-10-10,2022-10-10,2022-07-05,2022-07-25,359923.25,59.5,0,1542,20,1,1,1,1,0,1,1,0,1,0
+CLM-0000775,invalid_claim,Water Heater,Sony,physical,standard,2022-10-04,2023-10-04,2022-12-04,2022-12-19,21508.52,47.7,0,1390,15,1,0,1,0,0,1,1,0,4,3
+CLM-0000497,valid_claim,Smartphone,Haier,manufacturing,extended,2022-08-20,2024-08-09,2024-03-30,2024-04-06,183182.74,49.1,0,908,7,1,1,1,1,0,1,0,0,1,0
+CLM-0000836,invalid_claim,Laptop,TCL,software,standard,2019-11-27,2020-11-26,2020-09-15,2020-09-27,112825.48,81.9,0,2200,12,1,1,0,0,0,1,0,1,4,2
+CLM-0000798,invalid_claim,Refrigerator,Samsung,mechanical,standard,2020-05-26,2021-05-26,2021-02-18,2021-02-20,90518.4,76.0,0,2044,2,1,1,0,0,0,1,0,1,2,3
+CLM-0001011,manual_review,Water Heater,TCL,overheating,third_party,2023-02-08,2024-02-08,2023-08-12,2023-08-27,203957.91,43.5,0,1139,15,0,0,1,1,1,0,0,1,2,1
+CLM-0000420,valid_claim,Television,Samsung,electrical,standard,2022-08-01,2025-07-16,2023-08-25,2023-08-29,28367.25,49.8,0,1126,4,1,1,1,0,1,1,0,0,0,0
+CLM-0001303,manual_review,Laptop,Samsung,manufacturing,third_party,2022-04-06,2023-04-06,2022-12-07,2022-12-23,322033.28,53.6,0,1387,16,1,1,0,1,0,0,1,0,1,0
+CLM-0001416,manual_review,Refrigerator,Kenwood,software,standard,2024-04-26,2025-04-26,2025-03-06,2025-03-20,171825.17,28.9,0,567,14,0,1,1,1,0,1,1,0,0,0
+CLM-0000331,valid_claim,Refrigerator,Haier,manufacturing,standard,2023-11-22,2026-11-06,2025-09-28,2025-10-08,88668.28,34.1,43,361,10,1,1,1,1,0,1,0,0,1,0
+CLM-0000412,valid_claim,Smartphone,Dawlance,mechanical,standard,2024-07-18,2027-07-03,2026-03-27,2026-04-02,178337.02,26.2,282,181,6,1,1,1,1,0,1,0,0,1,0
+CLM-0000796,invalid_claim,Microwave,Super Asia,mechanical,standard,2019-04-17,2020-04-16,2019-09-23,2019-10-18,88795.14,89.3,0,2558,25,1,1,1,0,0,1,1,0,3,2
+CLM-0000630,invalid_claim,Microwave,LG,physical,standard,2019-06-13,2020-06-12,2019-10-26,2019-10-29,58968.63,87.4,0,2525,3,1,0,1,0,1,1,0,0,1,2
+CLM-0000917,invalid_claim,Washing Machine,Orient,mechanical,standard,2022-06-02,2023-06-02,2022-09-23,2022-10-12,42421.29,51.7,0,1462,19,0,1,1,1,0,1,0,0,3,3
+CLM-0001243,manual_review,Smartphone,Haier,battery,extended,2021-08-31,2022-08-31,2022-01-22,2022-02-03,483950.29,60.8,0,1706,12,1,0,1,1,1,1,1,1,1,2
+CLM-0001057,manual_review,Microwave,Waves,water,standard,2021-12-04,2022-12-04,2022-08-24,2022-09-13,422589.04,57.7,0,1492,20,1,0,1,1,1,1,0,0,1,2
+CLM-0000815,invalid_claim,Laptop,Super Asia,electrical,standard,2021-01-11,2022-01-11,2021-05-10,2021-05-25,140149.26,68.4,0,1963,15,1,0,1,1,0,1,0,1,1,2
+CLM-0000402,valid_claim,Microwave,Kenwood,manufacturing,standard,2024-09-14,2027-08-30,2024-12-20,2024-12-26,55675.08,24.3,340,643,6,1,1,1,1,0,1,0,0,0,1
+CLM-0000312,valid_claim,Microwave,Philips,display,extended,2024-05-17,2026-05-07,2026-03-04,2026-03-09,56999.11,28.3,0,204,5,1,1,1,1,0,1,0,0,1,0
+CLM-0000498,valid_claim,Laptop,Waves,electrical,standard,2022-03-13,2023-03-08,2022-08-12,2022-08-17,216547.08,54.4,0,1504,5,1,1,1,0,0,1,0,0,1,0
+CLM-0000173,valid_claim,Refrigerator,Super Asia,display,standard,2023-10-27,2026-10-11,2023-12-08,2023-12-13,149410.7,34.9,17,1021,5,1,1,1,1,1,1,0,0,1,1
+CLM-0001220,manual_review,Water Heater,Samsung,other,extended,2022-06-08,2023-06-08,2023-05-19,2023-06-07,340962.83,51.5,0,1224,19,1,1,0,0,0,1,1,1,1,2
+CLM-0000869,invalid_claim,Refrigerator,Waves,water,standard,2019-03-11,2020-03-10,2019-07-31,2019-08-23,174519.17,90.5,0,2612,23,1,1,1,0,1,0,0,0,3,2
+CLM-0000164,valid_claim,Air Conditioner,Philips,manufacturing,extended,2024-09-16,2027-09-01,2024-11-01,2024-11-02,19028.51,24.2,342,692,1,1,1,1,1,0,1,0,0,1,0
+CLM-0001358,manual_review,Laptop,TCL,software,extended,2022-03-05,2023-03-05,2022-07-23,2022-08-11,133243.94,54.7,0,1524,19,0,1,0,1,1,1,0,0,1,2
+CLM-0001374,manual_review,Television,Philips,manufacturing,extended,2024-04-01,2025-04-01,2025-02-13,2025-03-03,347333.52,29.8,0,588,18,1,0,0,0,1,1,0,0,1,2
+CLM-0000178,valid_claim,Generator,Haier,manufacturing,standard,2023-03-06,2026-02-18,2025-06-29,2025-07-04,74380.2,42.6,0,452,5,1,1,1,1,0,1,0,0,0,1
+CLM-0001226,manual_review,Water Heater,Haier,physical,standard,2023-06-16,2024-06-15,2024-05-19,2024-05-29,166775.31,39.3,0,858,10,1,1,1,1,0,0,0,1,2,1
+CLM-0000360,valid_claim,Water Heater,Kenwood,mechanical,extended,2022-01-24,2025-01-08,2022-04-19,2022-04-24,133064.38,56.0,0,1619,5,1,1,1,1,0,1,0,0,0,0
+CLM-0001386,manual_review,Generator,TCL,manufacturing,third_party,2022-06-14,2023-06-14,2023-05-29,2023-06-12,179858.17,51.3,0,1214,14,0,1,1,1,1,0,0,0,1,0
+CLM-0001201,manual_review,Small Appliance,Sony,water,third_party,2023-11-29,2024-11-28,2024-07-14,2024-08-01,144763.58,33.8,0,802,18,0,0,1,1,1,1,0,1,0,0
+CLM-0001086,manual_review,Water Heater,Philips,water,extended,2021-11-10,2022-11-10,2022-10-13,2022-10-24,384135.61,58.4,0,1442,11,1,1,1,1,0,0,1,0,0,1
+CLM-0001458,manual_review,Generator,Samsung,software,standard,2023-03-07,2024-03-06,2023-07-03,2023-07-13,213790.4,42.6,0,1179,10,0,0,1,0,0,1,0,0,2,0
+CLM-0000682,invalid_claim,Microwave,LG,battery,standard,2022-07-13,2023-07-13,2023-03-13,2023-03-17,86705.81,50.4,0,1291,4,0,0,1,0,0,1,1,0,2,2
+CLM-0000094,valid_claim,Laptop,Super Asia,mechanical,standard,2022-12-11,2023-12-06,2023-09-28,2023-09-30,39159.06,45.4,0,1092,2,1,1,1,1,1,1,0,0,0,0
+CLM-0000169,valid_claim,Washing Machine,Super Asia,electrical,extended,2022-11-29,2024-05-22,2023-10-15,2023-10-22,27618.66,45.8,0,1075,7,1,1,1,1,0,1,0,0,0,1
+CLM-0000030,valid_claim,Microwave,Philips,electrical,extended,2023-01-28,2026-01-12,2025-01-07,2025-01-14,82424.72,43.9,0,625,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000353,valid_claim,Television,Philips,software,standard,2022-05-25,2024-05-14,2022-09-11,2022-09-15,60383.07,52.0,0,1474,4,1,1,1,1,0,1,0,0,0,0
+CLM-0000099,valid_claim,Smartphone,Dawlance,display,standard,2022-04-18,2024-04-07,2022-07-24,2022-07-30,93340.08,53.2,0,1523,6,1,1,1,1,0,1,0,0,0,1
+CLM-0000084,valid_claim,Refrigerator,Super Asia,manufacturing,standard,2024-08-29,2025-08-24,2024-11-13,2024-11-15,145747.12,24.8,0,680,2,1,1,1,1,0,1,0,0,0,1
+CLM-0000808,invalid_claim,Small Appliance,Philips,water,standard,2022-04-01,2023-04-01,2023-06-10,2023-06-19,190892.19,53.8,0,1202,9,1,1,0,1,0,1,0,0,2,3
+CLM-0000343,valid_claim,Refrigerator,Philips,mechanical,extended,2024-06-26,2025-12-18,2025-08-07,2025-08-08,106443.9,26.9,0,413,1,1,1,0,0,1,1,0,0,0,1
+CLM-0000105,valid_claim,Microwave,LG,mechanical,extended,2023-08-07,2024-08-01,2023-11-27,2023-12-02,222888.0,37.6,0,1032,5,1,1,0,1,0,1,0,0,1,0
+CLM-0000990,invalid_claim,Television,LG,electrical,standard,2021-07-08,2023-07-08,2021-06-12,2021-07-04,27479.29,62.5,0,1930,22,0,1,1,1,0,1,0,0,3,3
+CLM-0000022,valid_claim,Water Heater,Sony,manufacturing,standard,2023-08-01,2025-01-22,2024-09-01,2024-09-07,36690.14,37.8,0,753,6,1,1,1,1,1,1,0,0,0,0
+CLM-0001260,manual_review,Air Conditioner,Sony,overheating,standard,2021-03-13,2022-03-13,2022-03-12,2022-03-25,51578.74,66.4,0,1657,13,0,1,1,0,1,0,1,0,0,1
+CLM-0000321,valid_claim,Small Appliance,Dawlance,mechanical,standard,2022-06-05,2023-11-27,2023-03-05,2023-03-11,132264.84,51.6,0,1299,6,1,1,1,1,0,1,0,0,0,0
+CLM-0000036,valid_claim,Microwave,TCL,manufacturing,extended,2023-04-19,2026-04-03,2025-04-28,2025-05-01,112706.95,41.2,0,514,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001248,manual_review,Laptop,Super Asia,mechanical,standard,2022-08-08,2023-08-08,2023-05-01,2023-05-18,430479.48,49.5,0,1242,17,1,1,1,0,0,1,0,0,2,1
+CLM-0000419,valid_claim,Washing Machine,Orient,display,standard,2024-08-02,2026-01-24,2025-09-11,2025-09-21,173108.44,25.7,0,378,10,1,1,1,1,1,1,0,0,0,0
+CLM-0000270,valid_claim,Refrigerator,Sony,manufacturing,standard,2022-01-24,2023-07-18,2022-11-08,2022-11-16,92760.29,56.0,0,1416,8,1,1,1,1,0,1,0,0,1,0
+CLM-0000489,valid_claim,Microwave,Waves,display,extended,2024-05-24,2025-11-15,2024-12-17,2024-12-19,62018.09,28.0,0,646,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001473,manual_review,Water Heater,Samsung,electrical,extended,2023-04-27,2024-04-26,2024-04-07,2024-04-26,132973.13,40.9,0,900,19,1,1,1,1,1,1,0,0,0,0
+CLM-0000582,invalid_claim,Microwave,PEL,overheating,standard,2020-11-09,2021-11-09,2021-08-02,2021-08-26,40927.68,70.5,0,1879,24,0,1,1,1,1,1,0,1,3,2
+CLM-0000945,invalid_claim,Generator,LG,manufacturing,standard,2022-06-26,2023-06-26,2022-10-31,2022-11-18,132814.8,51.0,0,1424,18,1,1,0,1,0,1,1,0,4,3
+CLM-0001334,manual_review,Refrigerator,LG,other,third_party,2022-01-17,2023-01-17,2022-12-01,2022-12-18,211142.03,56.2,0,1393,17,1,1,1,1,1,1,1,0,0,0
+CLM-0001074,manual_review,Washing Machine,Haier,display,standard,2023-08-06,2024-08-05,2024-07-18,2024-08-02,160540.94,37.6,0,798,15,1,0,0,1,1,1,1,0,0,1
+CLM-0000046,valid_claim,Television,TCL,mechanical,extended,2024-10-02,2027-09-17,2027-01-21,2027-01-22,171030.61,23.7,358,0,1,1,1,1,1,0,1,0,0,0,0
+CLM-0001294,manual_review,Air Conditioner,Super Asia,physical,extended,2023-02-21,2024-02-21,2024-02-03,2024-02-21,462725.53,43.1,0,964,18,1,0,1,0,1,0,0,0,2,1
+CLM-0000355,valid_claim,Microwave,Super Asia,manufacturing,standard,2023-12-23,2025-12-12,2025-08-07,2025-08-13,147339.01,33.0,0,413,6,1,1,1,1,0,1,0,0,0,1
+CLM-0001153,manual_review,Laptop,Sony,physical,third_party,2021-09-12,2022-09-12,2022-04-13,2022-04-24,420015.59,60.4,0,1625,11,1,0,1,1,1,1,0,0,1,1
+CLM-0001257,manual_review,Water Heater,PEL,mechanical,standard,2023-11-21,2024-11-20,2024-06-20,2024-07-09,104506.96,34.1,0,826,19,0,1,1,0,1,1,0,0,0,0
+CLM-0000856,invalid_claim,Microwave,PEL,other,standard,2022-10-04,2023-10-04,2023-03-01,2023-03-25,114159.83,47.7,0,1303,24,0,0,1,1,0,1,0,1,1,1
+CLM-0000291,valid_claim,Water Heater,Samsung,display,standard,2024-04-08,2027-03-24,2025-03-27,2025-03-28,192650.74,29.5,181,546,1,1,1,1,1,1,1,0,0,1,0
+CLM-0000643,invalid_claim,Television,Super Asia,physical,standard,2020-03-07,2021-03-07,2020-12-09,2021-01-02,185015.78,78.6,0,2115,24,0,0,0,1,0,1,0,1,2,1
+CLM-0000709,invalid_claim,Small Appliance,Sony,physical,standard,2022-03-13,2023-03-13,2024-01-26,2024-01-28,14369.54,54.4,0,972,2,1,1,0,0,0,1,0,0,2,2
+CLM-0001217,manual_review,Small Appliance,TCL,mechanical,extended,2022-02-12,2023-02-12,2022-11-10,2022-11-23,464886.16,55.4,0,1414,13,0,0,1,1,1,1,1,0,1,0
+CLM-0000026,valid_claim,Television,PEL,electrical,standard,2024-08-21,2026-02-12,2024-12-31,2025-01-08,108639.5,25.1,0,632,8,1,1,1,1,0,1,0,0,0,0
+CLM-0000002,valid_claim,Generator,Kenwood,manufacturing,standard,2022-02-24,2023-08-18,2023-03-27,2023-04-05,193319.73,55.0,0,1277,9,1,1,1,1,1,1,0,0,1,0
+CLM-0000976,invalid_claim,Washing Machine,Dawlance,overheating,standard,2020-05-31,2021-05-31,2020-12-04,2020-12-07,44118.42,75.8,0,2120,3,1,0,1,1,1,1,1,0,3,1
+CLM-0000344,valid_claim,Laptop,Samsung,mechanical,standard,2022-03-28,2023-03-23,2022-09-03,2022-09-11,70451.97,53.9,0,1482,8,1,1,1,1,0,1,0,0,0,0
+CLM-0001325,manual_review,Air Conditioner,Philips,manufacturing,third_party,2021-12-24,2022-12-24,2022-07-14,2022-08-03,229683.41,57.0,0,1533,20,1,0,1,1,1,1,0,0,1,2
+CLM-0000886,invalid_claim,Air Conditioner,Haier,manufacturing,standard,2020-09-10,2022-09-10,2020-07-08,2020-07-21,145710.82,72.4,0,2269,13,0,1,0,0,0,1,0,0,3,2
+CLM-0000262,valid_claim,Microwave,LG,display,standard,2022-01-20,2024-01-10,2023-04-25,2023-04-27,81436.09,56.1,0,1248,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001465,manual_review,Water Heater,Samsung,mechanical,extended,2022-09-21,2023-09-21,2023-09-06,2023-09-19,183428.08,48.1,0,1114,13,1,1,0,0,0,1,1,0,1,1
+CLM-0001133,manual_review,Laptop,Orient,overheating,third_party,2021-02-22,2022-02-22,2022-03-13,2022-03-25,101820.9,67.0,0,1656,12,0,0,0,1,1,0,0,0,1,1
+CLM-0001223,manual_review,Water Heater,Sony,display,standard,2022-03-15,2023-03-15,2023-02-28,2023-03-10,97561.03,54.3,0,1304,10,1,0,1,0,0,1,1,0,2,0
+CLM-0001405,manual_review,Television,TCL,overheating,standard,2022-12-04,2023-12-04,2023-11-17,2023-12-04,461755.67,45.7,0,1042,17,1,0,1,1,0,1,1,0,2,0
+CLM-0000657,invalid_claim,Water Heater,Kenwood,mechanical,standard,2022-02-28,2023-02-28,2022-10-14,2022-11-04,86838.86,54.8,0,1441,21,0,1,0,1,1,1,0,0,2,1
+CLM-0001181,manual_review,Television,Super Asia,software,extended,2021-12-18,2022-12-18,2022-10-17,2022-11-05,288383.41,57.2,0,1438,19,0,1,1,0,0,1,0,0,2,1
+CLM-0001370,manual_review,Television,Sony,overheating,third_party,2024-10-10,2025-10-10,2025-08-08,2025-08-21,87485.8,23.5,0,412,13,1,1,1,1,0,0,0,0,0,0
+CLM-0000011,valid_claim,Generator,LG,display,standard,2023-09-22,2025-03-15,2023-11-20,2023-11-24,45171.99,36.1,0,1039,4,1,1,1,1,1,1,0,0,0,0
+CLM-0001265,manual_review,Water Heater,Haier,overheating,standard,2024-07-16,2025-07-16,2025-03-06,2025-03-25,186226.55,26.3,0,567,19,1,0,0,0,0,0,0,0,1,1
+CLM-0000697,invalid_claim,Smartphone,Super Asia,electrical,standard,2022-09-17,2023-09-17,2023-02-18,2023-03-20,158826.94,48.2,0,1314,30,0,0,0,1,1,1,1,0,4,3
+CLM-0000950,invalid_claim,Microwave,Philips,overheating,standard,2019-04-11,2020-04-10,2019-09-20,2019-09-30,179280.18,89.5,0,2561,10,0,1,1,0,1,1,0,0,3,3
+CLM-0000255,valid_claim,Water Heater,Dawlance,software,standard,2022-05-26,2025-05-10,2024-12-21,2024-12-25,219649.55,52.0,0,642,4,1,1,1,0,0,1,0,0,0,1
+CLM-0000807,invalid_claim,Smartphone,Haier,battery,standard,2022-03-10,2023-03-10,2022-10-25,2022-11-05,95231.23,54.5,0,1430,11,0,1,1,0,0,1,0,0,2,2
+CLM-0000544,invalid_claim,Smartphone,Super Asia,overheating,standard,2020-06-13,2021-06-13,2020-10-12,2020-11-08,197456.17,75.4,0,2173,27,1,1,1,0,0,0,0,0,1,3
+CLM-0001040,manual_review,Television,Super Asia,battery,standard,2022-07-11,2023-07-11,2023-06-22,2023-07-05,498126.85,50.5,0,1190,13,1,1,0,1,0,0,0,0,1,1
+CLM-0000654,invalid_claim,Generator,Super Asia,water,standard,2021-06-30,2022-06-30,2021-10-03,2021-10-22,106919.92,62.8,0,1817,19,0,1,1,1,1,0,0,0,1,1
+CLM-0000476,valid_claim,Generator,Waves,electrical,extended,2022-05-23,2025-05-07,2025-02-07,2025-02-13,117943.71,52.1,0,594,6,1,1,1,1,1,1,0,0,0,0
+CLM-0000187,valid_claim,Water Heater,TCL,software,standard,2023-05-04,2025-04-23,2023-09-30,2023-10-03,150079.42,40.7,0,1090,3,1,1,1,1,0,1,0,0,0,0
+CLM-0000230,valid_claim,Small Appliance,LG,software,standard,2024-03-12,2025-03-07,2024-07-13,2024-07-23,92824.58,30.4,0,803,10,1,1,1,1,0,1,0,0,0,0
+CLM-0001038,manual_review,Generator,Haier,physical,standard,2024-10-28,2025-10-28,2025-08-26,2025-09-05,88742.87,22.9,0,394,10,1,0,1,1,1,1,0,0,0,0
+CLM-0000965,invalid_claim,Microwave,Dawlance,mechanical,standard,2019-07-05,2020-07-04,2021-06-05,2021-07-05,144598.18,86.7,0,1937,30,1,1,0,1,0,1,0,0,3,3
+CLM-0001229,manual_review,Television,Orient,overheating,extended,2024-11-16,2025-11-16,2025-07-15,2025-08-02,98154.0,22.2,0,436,18,0,1,0,0,0,1,0,0,1,2
+CLM-0001283,manual_review,Small Appliance,PEL,manufacturing,third_party,2021-01-20,2022-01-20,2022-01-07,2022-01-21,55492.17,68.1,0,1721,14,1,1,1,1,0,0,0,0,2,1
+CLM-0000631,invalid_claim,Air Conditioner,LG,software,standard,2019-01-15,2020-01-15,2019-09-02,2019-09-21,106855.24,92.3,0,2579,19,1,0,0,0,0,1,0,1,4,2
+CLM-0000191,valid_claim,Generator,Dawlance,manufacturing,standard,2023-03-24,2026-03-08,2023-08-05,2023-08-09,118181.43,42.0,0,1146,4,1,1,0,1,1,1,0,0,0,0
+CLM-0000838,invalid_claim,Microwave,Samsung,physical,standard,2019-06-01,2020-05-31,2021-03-15,2021-04-08,149817.14,87.8,0,2019,24,1,0,1,0,0,1,0,0,3,2
+CLM-0000155,valid_claim,Smartphone,Dawlance,electrical,standard,2023-10-19,2025-04-11,2024-04-20,2024-04-23,162108.39,35.2,0,887,3,1,1,1,1,0,1,0,0,0,1
+CLM-0000365,valid_claim,Air Conditioner,Orient,electrical,extended,2022-06-25,2023-06-20,2022-08-21,2022-08-25,120764.47,51.0,0,1495,4,1,1,1,1,0,1,0,0,0,0
+CLM-0000281,valid_claim,Water Heater,Samsung,manufacturing,extended,2023-05-29,2024-11-19,2024-08-30,2024-08-31,39082.8,39.9,0,755,1,1,1,1,1,0,1,0,0,0,0
+CLM-0001214,manual_review,Generator,Haier,overheating,third_party,2023-03-28,2024-03-27,2023-09-14,2023-09-25,69180.55,41.9,0,1106,11,1,1,0,1,1,1,0,0,1,2
+CLM-0000715,invalid_claim,Generator,Waves,mechanical,standard,2020-06-08,2021-06-08,2021-02-18,2021-03-19,188266.75,75.5,0,2044,29,0,1,1,1,0,1,1,0,2,2
+CLM-0001337,manual_review,Generator,Dawlance,software,third_party,2022-06-14,2023-06-14,2022-12-01,2022-12-20,446412.89,51.3,0,1393,19,0,1,1,0,0,1,1,1,1,2
+CLM-0001192,manual_review,Washing Machine,PEL,electrical,standard,2024-01-18,2025-01-17,2024-11-19,2024-11-30,140081.49,32.2,0,674,11,1,0,1,1,1,1,1,1,0,1
+CLM-0000929,invalid_claim,Microwave,Samsung,overheating,standard,2020-11-26,2021-11-26,2021-05-21,2021-06-07,117073.88,69.9,0,1952,17,1,0,1,1,0,0,0,0,3,1
+CLM-0000048,valid_claim,Television,Dawlance,mechanical,extended,2023-03-20,2026-03-04,2024-01-27,2024-02-06,57168.76,42.2,0,971,10,1,1,1,1,1,1,0,0,0,0
+CLM-0000457,valid_claim,Washing Machine,Waves,display,standard,2022-10-29,2025-10-13,2023-11-09,2023-11-11,87399.32,46.8,0,1050,2,1,1,1,1,0,1,0,0,1,0
+CLM-0000997,invalid_claim,Microwave,Kenwood,electrical,standard,2022-02-26,2023-02-26,2023-04-26,2023-05-23,172115.59,54.9,0,1247,27,0,1,1,1,0,1,0,0,4,3
+CLM-0001127,manual_review,Refrigerator,TCL,software,third_party,2021-05-30,2022-05-30,2021-10-16,2021-11-01,415669.8,63.8,0,1804,16,1,1,1,0,0,0,0,0,1,1
+CLM-0001287,manual_review,Microwave,Haier,water,extended,2023-03-16,2024-03-15,2024-02-28,2024-03-16,53622.47,42.3,0,939,17,1,1,1,1,0,1,1,0,1,0
+CLM-0000559,invalid_claim,Television,Samsung,manufacturing,standard,2019-03-01,2020-02-29,2019-08-12,2019-09-02,113044.68,90.8,0,2600,21,1,1,0,0,1,1,1,0,4,2
+CLM-0000315,valid_claim,Washing Machine,Waves,software,extended,2024-02-27,2027-02-11,2025-12-16,2025-12-25,17516.94,30.9,140,282,9,1,1,1,0,0,1,0,0,0,0
+CLM-0000563,invalid_claim,Laptop,Waves,physical,standard,2022-06-04,2023-06-04,2022-12-10,2023-01-05,189354.65,51.7,0,1384,26,1,0,0,1,0,1,0,0,3,2
+CLM-0000083,valid_claim,Generator,TCL,software,standard,2023-03-17,2026-03-01,2024-07-21,2024-07-25,88448.86,42.3,0,795,4,1,1,1,1,0,1,0,0,1,0
+CLM-0000626,invalid_claim,Television,TCL,mechanical,standard,2022-04-15,2024-04-14,2022-03-26,2022-04-12,166801.17,53.3,0,1643,17,1,1,0,0,0,1,0,0,3,3
+CLM-0000753,invalid_claim,Television,Waves,software,standard,2020-12-23,2021-12-23,2022-11-03,2022-11-30,140518.19,69.0,0,1421,27,1,1,1,0,0,1,0,0,4,1
+CLM-0000970,invalid_claim,Laptop,Super Asia,display,standard,2022-05-22,2023-05-22,2022-09-17,2022-10-11,165110.12,52.1,0,1468,24,1,1,0,1,0,1,0,1,4,1
+CLM-0000079,valid_claim,Refrigerator,Waves,electrical,standard,2022-01-06,2023-12-27,2022-07-03,2022-07-06,18492.18,56.6,0,1544,3,1,1,1,1,0,1,0,0,0,0
+CLM-0001191,manual_review,Smartphone,Waves,overheating,standard,2024-07-29,2025-07-29,2025-05-26,2025-06-12,386105.05,25.9,0,486,17,1,0,0,0,0,1,0,1,0,0
+CLM-0001316,manual_review,Television,LG,overheating,standard,2022-01-17,2023-01-17,2022-07-17,2022-08-03,321896.89,56.2,0,1530,17,1,1,0,0,1,1,0,0,1,0
+CLM-0000217,valid_claim,Television,Sony,manufacturing,extended,2024-07-09,2027-06-24,2025-06-25,2025-07-02,77276.86,26.5,273,456,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000698,invalid_claim,Refrigerator,Kenwood,overheating,standard,2021-09-06,2022-09-06,2022-06-01,2022-06-04,192119.14,60.6,0,1576,3,1,1,0,1,0,1,0,1,3,2
+CLM-0000800,invalid_claim,Smartphone,Waves,software,standard,2021-01-21,2022-01-21,2021-10-07,2021-10-25,107734.62,68.1,0,1813,18,0,1,0,0,1,1,0,0,4,3
+CLM-0000259,valid_claim,Washing Machine,Orient,software,extended,2022-04-04,2024-03-24,2023-02-25,2023-03-05,191277.16,53.7,0,1307,8,1,1,1,0,0,1,0,0,0,1
+CLM-0000942,invalid_claim,Small Appliance,LG,software,standard,2019-07-14,2020-07-13,2021-03-06,2021-03-16,49113.56,86.4,0,2028,10,1,0,1,0,0,1,0,0,3,1
+CLM-0000479,valid_claim,Air Conditioner,Haier,software,extended,2022-10-03,2023-09-28,2022-12-22,2022-12-23,50893.11,47.7,0,1372,1,1,1,1,1,1,1,0,0,0,1
+CLM-0000108,valid_claim,Microwave,Waves,display,extended,2023-08-14,2025-02-04,2024-02-14,2024-02-16,29759.68,37.4,0,953,2,1,1,1,1,0,1,0,0,0,0
+CLM-0001291,manual_review,Washing Machine,Sony,water,extended,2022-01-02,2023-01-02,2022-11-02,2022-11-12,284297.34,56.7,0,1422,10,1,1,1,1,0,1,0,1,1,0
+CLM-0000727,invalid_claim,Washing Machine,Philips,physical,standard,2021-07-28,2022-07-28,2022-01-13,2022-01-25,121003.9,61.9,0,1715,12,1,1,0,0,0,1,0,0,3,3
+CLM-0000159,valid_claim,Television,Super Asia,display,standard,2022-02-01,2023-07-26,2023-06-25,2023-06-29,108208.53,55.7,0,1187,4,1,1,1,1,1,1,0,0,0,1
+CLM-0000508,invalid_claim,Microwave,Super Asia,physical,standard,2022-12-31,2023-12-31,2023-06-07,2023-06-30,121453.21,44.8,0,1205,23,1,0,1,0,0,1,0,0,3,3
+CLM-0000835,invalid_claim,Laptop,Philips,electrical,standard,2022-12-14,2023-12-14,2024-07-01,2024-07-31,132711.66,45.3,0,815,30,1,1,1,1,0,1,0,0,2,2
+CLM-0000605,invalid_claim,Washing Machine,Dawlance,software,standard,2020-10-29,2021-10-29,2021-04-11,2021-04-26,103682.59,70.8,0,1992,15,1,1,0,0,0,1,0,1,4,1
+CLM-0000119,valid_claim,Generator,LG,manufacturing,extended,2022-09-09,2024-03-02,2023-12-19,2023-12-21,181742.01,48.5,0,1010,2,1,1,1,1,1,1,0,0,1,0
+CLM-0001052,manual_review,Small Appliance,Sony,software,third_party,2022-01-10,2023-01-10,2022-06-16,2022-07-01,250099.89,56.4,0,1561,15,0,0,1,1,0,0,0,0,1,2
+CLM-0000829,invalid_claim,Microwave,LG,battery,standard,2021-11-23,2022-11-23,2023-04-11,2023-04-12,113758.75,58.0,0,1262,1,1,1,1,1,0,1,0,0,2,3
+CLM-0000163,valid_claim,Washing Machine,Waves,mechanical,standard,2024-12-09,2025-12-04,2025-02-15,2025-02-16,181184.85,21.5,0,586,1,1,1,1,1,0,1,0,0,0,1
+CLM-0000723,invalid_claim,Air Conditioner,Philips,other,standard,2022-03-14,2024-03-13,2022-01-14,2022-02-10,43719.2,54.4,0,1714,27,0,0,1,0,0,1,0,0,3,1
+CLM-0000174,valid_claim,Microwave,Dawlance,software,extended,2023-09-09,2025-08-29,2025-02-24,2025-02-27,128794.36,36.5,0,577,3,1,1,1,1,1,1,0,0,0,0
+CLM-0000590,invalid_claim,Refrigerator,Haier,physical,standard,2021-02-05,2022-02-05,2021-06-10,2021-06-28,151566.44,67.6,0,1932,18,1,0,1,1,0,1,0,0,3,2
+CLM-0001079,manual_review,Smartphone,Orient,physical,extended,2024-08-03,2025-08-03,2025-07-05,2025-07-16,259290.24,25.7,0,446,11,1,0,1,1,1,1,0,0,1,0
+CLM-0000309,valid_claim,Water Heater,TCL,mechanical,extended,2022-01-03,2024-12-18,2023-07-21,2023-07-28,200545.56,56.7,0,1161,7,1,1,1,1,0,1,0,0,0,0
+CLM-0000993,invalid_claim,Washing Machine,Sony,other,standard,2022-06-14,2023-06-14,2022-11-15,2022-11-30,154979.68,51.3,0,1409,15,1,0,0,0,0,1,1,0,1,3
+CLM-0000330,valid_claim,Refrigerator,TCL,display,extended,2022-12-24,2024-12-13,2024-01-21,2024-01-27,123981.74,45.0,0,977,6,1,1,0,0,0,1,0,0,1,1
+CLM-0000744,invalid_claim,Laptop,TCL,mechanical,standard,2019-08-23,2020-08-22,2020-12-22,2021-01-17,74760.18,85.1,0,2102,26,1,0,1,0,1,1,0,0,3,3
+CLM-0000229,valid_claim,Small Appliance,Haier,software,extended,2024-09-24,2026-09-14,2025-04-20,2025-04-29,187488.82,24.0,0,522,9,1,1,1,1,1,1,0,0,0,0
+CLM-0000854,invalid_claim,Laptop,Dawlance,display,standard,2021-02-28,2022-02-28,2021-10-26,2021-11-11,66809.53,66.8,0,1794,16,1,0,1,1,0,1,0,1,3,3
+CLM-0000118,valid_claim,Smartphone,Dawlance,software,standard,2022-08-21,2023-08-16,2022-12-24,2023-01-01,249145.8,49.1,0,1370,8,1,1,1,0,0,1,0,0,1,0
+CLM-0001193,manual_review,Water Heater,Sony,water,standard,2023-09-30,2024-09-29,2024-02-17,2024-03-01,289630.9,35.8,0,950,13,0,1,0,0,1,1,0,0,1,2
+CLM-0001460,manual_review,Microwave,Sony,water,third_party,2021-07-26,2022-07-26,2022-02-05,2022-02-16,297522.28,62.0,0,1692,11,1,1,0,1,0,0,0,0,2,0
+CLM-0001172,manual_review,Microwave,Waves,water,standard,2024-10-12,2025-10-12,2025-03-01,2025-03-12,399778.96,23.4,0,572,11,1,1,1,1,0,1,0,0,0,0
+CLM-0000136,valid_claim,Smartphone,Kenwood,software,standard,2022-12-21,2025-12-05,2025-08-11,2025-08-20,239974.29,45.1,0,409,9,1,1,1,1,0,1,0,0,0,0
+CLM-0000413,valid_claim,Smartphone,Super Asia,display,standard,2023-06-18,2024-06-12,2024-03-16,2024-03-26,82401.68,39.2,0,922,10,1,1,1,1,0,1,0,0,0,0
+CLM-0001363,manual_review,Water Heater,Orient,manufacturing,third_party,2021-08-01,2022-08-01,2022-07-13,2022-07-24,291755.18,61.8,0,1534,11,1,0,0,0,0,1,0,0,2,1
+CLM-0001131,manual_review,Refrigerator,Philips,mechanical,third_party,2021-10-14,2022-10-14,2022-08-15,2022-08-28,249056.44,59.3,0,1501,13,1,0,1,0,0,1,0,0,0,0
+CLM-0001274,manual_review,Generator,LG,overheating,third_party,2024-05-03,2025-05-03,2024-10-15,2024-10-29,89640.85,28.7,0,709,14,1,0,0,0,1,1,0,0,2,0
+CLM-0000804,invalid_claim,Smartphone,Kenwood,software,standard,2020-11-19,2021-11-19,2021-09-11,2021-10-08,152664.18,70.1,0,1839,27,1,0,1,1,0,1,0,1,1,1
+CLM-0001033,manual_review,Water Heater,Orient,display,extended,2024-06-29,2025-06-29,2024-12-18,2025-01-01,121938.49,26.8,0,645,14,1,0,1,1,1,1,1,1,2,2
+CLM-0001101,manual_review,Television,Super Asia,mechanical,extended,2021-11-28,2022-11-28,2022-10-25,2022-11-10,93921.94,57.9,0,1430,16,0,1,1,1,1,0,0,0,0,0
+CLM-0000279,valid_claim,Washing Machine,Super Asia,mechanical,extended,2023-03-22,2024-09-12,2023-08-06,2023-08-16,181932.89,42.1,0,1145,10,1,1,1,1,0,1,0,0,0,0
+CLM-0000236,valid_claim,Smartphone,LG,software,standard,2024-09-10,2026-03-04,2024-11-28,2024-11-29,87463.05,24.4,0,665,1,1,1,1,1,0,1,0,0,0,0
+CLM-0001136,manual_review,Water Heater,Super Asia,physical,third_party,2024-03-27,2025-03-27,2024-10-09,2024-10-19,261396.15,29.9,0,715,10,1,1,1,1,0,1,0,0,2,2
+CLM-0001240,manual_review,Air Conditioner,Dawlance,overheating,extended,2024-04-03,2025-04-03,2024-12-23,2025-01-04,357083.79,29.7,0,640,12,1,0,0,1,0,1,1,0,0,0
+CLM-0000465,valid_claim,Microwave,Waves,manufacturing,standard,2022-10-05,2024-09-24,2023-04-20,2023-04-21,83116.21,47.6,0,1253,1,1,1,1,0,0,1,0,0,0,0
+CLM-0000339,valid_claim,Refrigerator,Haier,mechanical,extended,2023-07-11,2025-06-30,2025-02-04,2025-02-09,40933.74,38.5,0,597,5,1,1,1,1,0,1,0,0,1,0

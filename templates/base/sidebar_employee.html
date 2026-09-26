@@ -1,0 +1,57 @@
+{% load static %}
+<ul class="nav flex-column px-1 mt-1">
+
+  <!-- ── Main ── -->
+  <li class="sidebar-section-title">Main</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'employee_dashboard' in request.resolver_match.url_name %}active{% endif %}"
+       href="{% url 'dashboard:employee' %}">
+      <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'notifications' in request.path %}active{% endif %}"
+       href="{% url 'notifications:list' %}">
+      <i class="bi bi-bell"></i>
+      <span>Notifications</span>
+      {% if unread_notifications_count %}
+        <span class="ms-auto badge rounded-pill sidebar-badge-alert">{{ unread_notifications_count }}</span>
+      {% endif %}
+    </a>
+  </li>
+
+  <!-- ── Customers ── -->
+  <li class="sidebar-section-title">Customers</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'customer/search' in request.path %}active{% endif %}"
+       href="{% url 'claims:customer_search' %}">
+      <i class="bi bi-person-search"></i><span>Search Customer</span>
+    </a>
+  </li>
+
+  <!-- ── Claims ── -->
+  <li class="sidebar-section-title">Claims</li>
+  <li class="nav-item">
+    <a class="nav-link sidebar-highlight {% if 'employee/create' in request.path %}active{% endif %}"
+       href="{% url 'claims:employee_create' %}">
+      <i class="bi bi-file-earmark-plus"></i>
+      <span class="fw-semibold">Create Claim</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'employee' in request.path and 'create' not in request.path and 'search' not in request.path %}active{% endif %}"
+       href="{% url 'claims:employee_list' %}">
+      <i class="bi bi-file-earmark-text"></i><span>All Claims</span>
+    </a>
+  </li>
+
+  <!-- ── Account ── -->
+  <li class="sidebar-section-title">Account</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'profile' in request.path %}active{% endif %}"
+       href="{% url 'accounts:profile' %}">
+      <i class="bi bi-person-gear"></i><span>My Profile</span>
+    </a>
+  </li>
+
+</ul>

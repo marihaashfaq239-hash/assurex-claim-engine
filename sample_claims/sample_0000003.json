@@ -1,0 +1,46 @@
+{
+  "claim_id": "SAMPLE-0000003",
+  "scenario": "Manual Review Claim",
+  "description": "Borderline case. Warranty expiring soon, missing warranty card, serial mismatch.",
+  "expected_decision": "Manual Review Required",
+  "claimant_email": "customer03@example.com",
+  "product": {
+    "name": "LG Refrigerator Double Door",
+    "category": "Refrigerator",
+    "brand": "LG",
+    "model_number": "GL-B257DPZY",
+    "serial_number": "SN-RF-20230810-042",
+    "purchase_date": "2025-10-04",
+    "purchase_price": 70000,
+    "retailer": "Home Mart"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2025-10-04",
+    "expiry_date": "2026-10-04",
+    "remaining_days": 10,
+    "is_active": true
+  },
+  "claim": {
+    "fault_date": "2026-09-16",
+    "fault_description": "Compressor noise, temperature not maintained. Cooling unreliable.",
+    "damage_type": "mechanical",
+    "fault_location": "Compressor unit"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": false,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": false,
+    "missing_doc_count": 1
+  },
+  "flags": {
+    "serial_number_match": false,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": false,
+    "repair_count": 1,
+    "claim_submission_delay_days": 8
+  },
+  "claim_summary_card": "SAMPLE-0000003_v0.png"
+}

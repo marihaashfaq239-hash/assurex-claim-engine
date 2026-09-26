@@ -1,0 +1,48 @@
+{
+  "claim_id": "SAMPLE-0000007",
+  "scenario": "Contradictory Claim",
+  "description": "Fault date (3 years ago) is BEFORE purchase date (2 years ago). Timeline impossible.",
+  "expected_decision": "Likely Invalid",
+  "claimant_email": "customer07@example.com",
+  "product": {
+    "name": "Sony Xperia Smartphone",
+    "category": "Smartphone",
+    "brand": "Sony",
+    "model_number": "Xperia-XZ3",
+    "serial_number": "SN-SP-20220901-133",
+    "purchase_date": "2024-09-24",
+    "purchase_price": 65000,
+    "retailer": "Mobile World"
+  },
+  "warranty": {
+    "type": "standard",
+    "start_date": "2024-09-24",
+    "expiry_date": "2025-09-24",
+    "remaining_days": 0,
+    "is_active": false
+  },
+  "claim": {
+    "fault_date": "2023-09-25",
+    "fault_description": "Battery draining rapidly. Phone shuts down unexpectedly.",
+    "damage_type": "battery",
+    "fault_location": "Battery"
+  },
+  "documents": {
+    "has_purchase_receipt": true,
+    "has_warranty_card": true,
+    "has_product_image": true,
+    "has_fault_evidence": true,
+    "has_repair_report": false,
+    "missing_doc_count": 0
+  },
+  "flags": {
+    "serial_number_match": true,
+    "had_unauthorized_repair": false,
+    "is_duplicate_flag": false,
+    "repair_count": 0,
+    "claim_submission_delay_days": 0
+  },
+  "contradiction": "fault_date (3 years ago) is BEFORE purchase_date (2 years ago)",
+  "rule_triggered": "date_contradiction (hard_fail) — FAULT BEFORE PURCHASE",
+  "claim_summary_card": "SAMPLE-0000007_v0.png"
+}

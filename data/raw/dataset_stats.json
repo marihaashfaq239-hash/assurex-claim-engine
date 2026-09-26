@@ -1,0 +1,13 @@
+{
+  "total": 1500,
+  "label_counts": {
+    "valid_claim": 500,
+    "manual_review": 500,
+    "invalid_claim": 500
+  },
+  "label_pct": {
+    "valid_claim": 33.3,
+    "manual_review": 33.3,
+    "invalid_claim": 33.3
+  }
+}

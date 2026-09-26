@@ -1,0 +1,100 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}My Claims — Employee — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">Claims — Created by Me</h4>
+    <p class="page-subtitle mb-0">All warranty claims you have submitted on behalf of customers</p>
+  </div>
+  <a href="{% url 'claims:employee_create' %}" class="btn btn-primary">
+    <i class="bi bi-file-earmark-plus me-1"></i>Create Claim
+  </a>
+</div>
+
+<!-- Filter bar -->
+<div class="card mb-3">
+  <div class="card-body py-3">
+    <form method="get" class="row g-2 align-items-end">
+      <div class="col-md-5">
+        <input type="text" name="q" value="{{ search }}" class="form-control"
+               placeholder="Search reference, customer email, serial...">
+      </div>
+      <div class="col-md-3">
+        <select name="status" class="form-select">
+          <option value="">All Statuses</option>
+          {% for val, label in status_choices %}
+            <option value="{{ val }}" {% if status_filter == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{% url 'claims:employee_list' %}" class="btn btn-outline-secondary ms-1">Clear</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    {% if claims %}
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Damage</th>
+            <th>Status</th>
+            <th>AI Decision</th>
+            <th>Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in claims %}
+          <tr>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+                {{ c.claim_reference|default:"—" }}
+              </a>
+            </td>
+            <td>
+              <div>{{ c.claimant.get_full_name }}</div>
+              <small class="text-muted">{{ c.claimant.email }}</small>
+            </td>
+            <td>{{ c.product.brand }} {{ c.product.product_name|truncatechars:18 }}</td>
+            <td>{{ c.get_damage_type_display }}</td>
+            <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+            <td>
+              {% if c.final_decision == 'likely_valid' %}<span class="badge bg-success-subtle text-success rounded-pill">Likely Valid</span>
+              {% elif c.final_decision == 'likely_invalid' %}<span class="badge bg-danger-subtle text-danger rounded-pill">Likely Invalid</span>
+              {% elif c.final_decision == 'manual_review' %}<span class="badge bg-warning-subtle text-warning rounded-pill">Manual Review</span>
+              {% else %}<span class="text-muted small">Pending</span>{% endif %}
+            </td>
+            <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+            <td>
+              <a href="{% url 'claims:detail' c.pk %}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-eye"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-file-earmark-x fs-1 opacity-25 d-block mb-2"></i>
+      {% if search or status_filter %}No claims match your filters.
+      {% else %}No claims created yet. <a href="{% url 'claims:employee_create' %}">Create one</a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

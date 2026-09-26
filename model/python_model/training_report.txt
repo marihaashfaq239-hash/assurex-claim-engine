@@ -1,0 +1,46 @@
+============================================================
+AssureX Claim Engine — ML Training Report
+Generated: 2026-09-24T14:31:44.672280
+============================================================
+
+Dataset:
+  Training:   1050 records
+  Validation: 225 records
+  Testing:    225 records
+  Classes:    [np.str_('invalid_claim'), np.str_('manual_review'), np.str_('valid_claim')]
+  Features:   19
+
+Model Comparison:
+------------------------------------------------------------
+
+  Random Forest:
+    Validation Accuracy:  98.67%
+    Validation F1-Score:  98.67%
+    CV Accuracy:          98.59% ± 0.4%
+    Test Accuracy:        98.22%
+      valid_claim          P=0.99 R=1.00 F1=0.99
+      invalid_claim        P=0.97 R=0.99 F1=0.98
+      manual_review        P=0.99 R=0.96 F1=0.97
+
+  Logistic Regression:
+    Validation Accuracy:  96.89%
+    Validation F1-Score:  96.88%
+    CV Accuracy:          96.94% ± 1.52%
+    Test Accuracy:        95.56%
+      valid_claim          P=0.95 R=1.00 F1=0.97
+      invalid_claim        P=0.96 R=0.95 F1=0.95
+      manual_review        P=0.96 R=0.92 F1=0.94
+
+  Gradient Boosting:
+    Validation Accuracy:  97.78%
+    Validation F1-Score:  97.78%
+    CV Accuracy:          98.27% ± 0.64%
+    Test Accuracy:        97.33%
+      valid_claim          P=0.99 R=1.00 F1=0.99
+      invalid_claim        P=0.97 R=0.96 F1=0.97
+      manual_review        P=0.96 R=0.96 F1=0.96
+
+------------------------------------------------------------
+BEST MODEL: Random Forest
+SRS 85% target: MET
+============================================================

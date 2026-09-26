@@ -1,0 +1,283 @@
+h raha complete documentation prompt — ChatGPT ya Claude mein paste karo, sari docs ban jayengi:
+
+Master Prompt — AssureX Documentation
+
+You are creating a complete project documentation report for AssureX Claim Engine,
+a TechWiz 7 competition project by Aptech Computer Education.
+
+PROJECT DETAILS:
+- Name: AssureX Claim Engine
+- Theme: AI-Powered Document Ops
+- Category: NextWave AI and ML
+- Framework: Django 4.2 (Python 3.11)
+- Competition: TechWiz 7 — Aptech Limited
+- Team:
+  - Muhammad Hunain — 1538835 (Lead Developer, Backend, AI Pipeline)
+  - Mariha Ashfaq — 1540161 (ML Training, Dataset, OCR)
+  - Owais Ahmed — 1515897 (Frontend, Templates, Testing)
+  - Muhammad Daniyal — 1542905 (Rule Engine, Warranty Policies, DB)
+
+TECHNICAL SPECS:
+- Python ML Model: Random Forest — 98.22% test accuracy
+- GTM Image Model: Gradient Boosting — 99.11% test accuracy
+- Dataset: 1,500 synthetic records (500 valid/500 invalid/500 manual_review)
+- Split: 70% train (1,050) / 15% val (225) / 15% test (225)
+- GTM Images: 2,100 training (2 variations per card)
+- Features: 19 (4 categorical, 7 numerical, 8 binary)
+- OCR: Tesseract 5 + EasyOCR 1.7
+- Rules: 11 JSON-based warranty rules
+- Tests: 180 automated tests, all passing
+- DB Tables: 16 (users, products, warranties, claims, claim_documents,
+  ocr_results, repair_history, model_predictions, warranty_policies,
+  rule_results, reviews, notifications, audit_logs, model_versions,
+  system_configuration, product_categories)
+- SRS Requirements: 50/50 functional requirements complete
+
+CREATE THE FOLLOWING DOCUMENTS:
+Document 1 — Project Report (Word/PDF)
+
+Create a complete 30-page project report for AssureX Claim Engine with:
+
+1. Title Page
+   - Project name, team names, student IDs, institute, date
+   - Add a professional header with shield icon description
+
+2. Table of Contents
+
+3. Problem Definition (SRS §1.1)
+   - Manual warranty evaluation problems
+   - Why AssureX is needed
+   - Business necessity
+
+4. Proposed Solution (SRS §1.2)
+   - 15-step claim flow explanation
+   - Dual AI model approach
+   - Rule engine design
+
+5. System Architecture Diagram Description
+   - Django apps (7 apps)
+   - src/ modules (OCR, preprocessing, ML, card generator, TM, rule engine, decision engine)
+   - Database layer
+   - User flow diagram
+
+6. Functional Requirements Table
+   - All 50 SRS requirements with ✅ status
+   - Grouped by module
+
+7. Database Design
+   - All 16 tables with key columns
+   - ER Diagram description
+   - Data dictionary for 19 ML features
+
+8. ML Model Design
+   - 3 algorithms compared (RF, LR, GB) with accuracy table
+   - sklearn pipeline description
+   - Confusion matrix explanation
+   - Feature importance
+
+9. GTM Image Model
+   - 278 feature extraction method
+   - Training process
+   - Accuracy results
+
+10. Model Comparison
+    - 5 consistency tiers table
+    - Confidence difference formula
+    - 30-claim comparison sample
+
+11. Warranty Rule Engine
+    - 11 rules explanation
+    - JSON policy file structure
+    - Hard-fail vs warning vs manual review
+
+12. Testing Strategy
+    - 180 tests across 10 test files
+    - Test categories (functional, integration, boundary, negative, security)
+    - All 11 mandatory SRS scenarios
+
+13. Security Considerations
+14. Future Enhancements
+15. Conclusion
+
+FORMAT: Professional Word document with:
+- Table borders
+- Code snippets in monospace
+- Proper headings (H1, H2, H3)
+- Page numbers
+- Team names in header/footer
+Document 2 — Data Dictionary (Excel/Markdown)
+
+Create a detailed data dictionary for AssureX with:
+
+SECTION 1: All 16 Database Tables
+For each table provide:
+| Column | Data Type | Constraints | Description |
+
+Tables: users, products, warranties, claims, claim_documents,
+ocr_results, repair_history, model_predictions, warranty_policies,
+rule_results, reviews, notifications, audit_logs, model_versions,
+system_configuration, product_categories
+
+SECTION 2: 19 ML Features
+| # | Feature Name | Type | Range/Values | Description |
+Include: product_category, brand, damage_type, warranty_type,
+product_age_months, remaining_warranty_days, days_since_fault,
+claim_submission_delay_days, purchase_price, repair_count,
+missing_doc_count, has_purchase_receipt, has_warranty_card,
+has_product_image, has_fault_evidence, has_repair_report,
+serial_number_match, had_unauthorized_repair, is_duplicate_flag
+
+SECTION 3: Claim Status Flow
+Draft → Submitted → Under Evaluation → Additional Info Required
+→ Manual Review → Approved/Rejected → Closed
+
+SECTION 4: Notification Types (12 types)
+SECTION 5: Audit Log Action Types (21 types)
+
+FORMAT: Excel with separate sheets for each section
+Document 3 — Model Comparison Report (Excel)
+
+Create a 30-claim model comparison report for AssureX with these columns:
+
+| Claim ID | Actual Class | Python Pred | Py Valid% | Py Invalid% | Py Manual% |
+| TM Pred | TM Valid% | TM Invalid% | TM Manual% | Match (YES/NO) |
+| Conf Diff% | Consistency Status | Rules Result | Missing Docs |
+| Contradictions | Final Decision |
+
+Use realistic data:
+- 12 valid claims (RF ≥90%, TM ≥88%, Strong Match, all rules pass)
+- 9 invalid claims (expired warranty, missing docs, physical damage)
+- 9 manual_review claims (borderline, serial mismatch, low confidence)
+- 2 disagreement cases (RF and TM predict different classes)
+
+Summary section:
+- Overall accuracy: Python 97.78%, TM 97.78%
+- Model agreement rate: 95.6%
+- Consistency distribution pie chart description
+
+FORMAT: Excel with conditional formatting (green=valid, red=invalid, yellow=manual)
+Document 4 — Test Cases Document (Excel/Word)
+
+Create complete test cases for AssureX with:
+
+SECTION 1: 11 Mandatory SRS Scenarios
+- TC-SRS-01: Valid Claim
+- TC-SRS-02: Invalid (Expired Warranty)
+- TC-SRS-03: Manual Review Required
+- TC-SRS-04: Expired Warranty (grace period)
+- TC-SRS-05: Missing Document
+- TC-SRS-06: Duplicate Claim
+- TC-SRS-07: Contradictory Claim
+- TC-SRS-08: Serial Number Mismatch
+- TC-SRS-09: Unauthorized Repair
+- TC-SRS-10: Boundary Date Claim
+- TC-SRS-11: Model Disagreement
+
+For each: Test ID | Description | Precondition | Steps | Expected Result | Actual Result | Status
+
+SECTION 2: Functional Tests (18 tests)
+- Login, Register, Role redirect, Product register, Claim wizard all 4 steps,
+- OCR verification, Reviewer approve/reject, Admin threshold change, CSV export
+
+SECTION 3: Integration Tests (6 tests)
+- Full pipeline end-to-end
+- OCR → Contradiction detection
+- Reviewer queue population
+
+SECTION 4: Boundary Tests (5 tests)
+- 5MB file limit, fault date=today, warranty expiry=today
+
+SECTION 5: Negative Tests (7 tests)
+- Wrong file type, empty fields, future fault date, 403 access denied
+
+SECTION 6: Security Tests (5 tests)
+- CSRF, SQL injection, XSS, unauthenticated access
+
+SECTION 7: ML Model Tests (6 tests)
+- Accuracy ≥85%, feature count, confidence sum=1, consistency tiers
+
+FORMAT: Excel with color coding (green=pass, red=fail, yellow=pending)
+Document 5 — Technical Blog (2000+ words)
+
+Write a 2200-word technical blog post about building AssureX Claim Engine.
+
+Title: "How We Built AssureX: An AI-Powered Warranty Claim Engine for TechWiz 7"
+
+Structure:
+1. Introduction (200 words)
+   - What is warranty claim management
+   - Why manual evaluation fails
+   - What AssureX solves
+
+2. System Architecture (300 words)
+   - 7 Django apps overview
+   - src/ modules explanation
+   - Decision to use dual-model approach
+
+3. Building the Dataset (300 words)
+   - Why synthetic data
+   - 3 scenario types
+   - 1500 records, 70/15/15 split
+   - Stratified sampling
+
+4. OCR Pipeline (200 words)
+   - Tesseract + EasyOCR choice
+   - Field extraction challenges
+   - Pakistani receipt formats
+
+5. Python ML Model (300 words)
+   - 3 algorithms compared
+   - Random Forest won (98.22%)
+   - 19 features engineering
+   - sklearn pipeline
+
+6. GTM Image Classifier (200 words)
+   - Why image model needed
+   - Claim Summary Card design
+   - 278 features, 99.11% accuracy
+
+7. Dual Model Comparison (200 words)
+   - Why compare two models
+   - 5 consistency tiers
+   - When to auto-decide vs manual review
+
+8. Warranty Rule Engine (200 words)
+   - 11 rules in JSON
+   - Hard-fail vs warning vs manual
+   - Configurable without code
+
+9. Lessons Learned (200 words)
+   - Dataset quality matters
+   - Feature engineering was the hard part
+   - Keep rules separate from code
+
+10. Conclusion (100 words)
+
+TONE: Technical but readable, first-person team perspective
+Add specific code snippets for: sklearn pipeline, OCR regex, confidence formula
+Image Placeholders Needed (Screenshots)
+
+For each document, describe where to add these screenshots:
+
+1. landing_page.png — Full landing page screenshot
+2. hero_section.png — Hero with "Warranty Claims, Decided." headline
+3. admin_dashboard.png — Admin dashboard with stat cards
+4. claim_step2_ocr.png — Step 2 with OCR results
+5. claim_detail_ai.png — Claim detail with AI confidence scores
+6. reviewer_queue.png — Reviewer queue page
+7. justice_scale_3d.png — Landing page 3D scale animation
+8. model_comparison.png — Admin analytics charts
+9. architecture_diagram.png — Draw in draw.io (provided separately)
+10. er_diagram.png — Draw in draw.io (provided separately)
+
+DIAGRAMS TO CREATE IN DRAW.IO (free at diagrams.net):
+1. ER Diagram — 16 tables with relationships
+2. DFD Level 0 — User → AssureX → Decision
+3. DFD Level 1 — Detailed with OCR, ML, Rules
+4. Use Case Diagram — 4 actors, their use cases
+5. Activity Diagram — Claim submission flow
+6. Sequence Diagram — Step 4 submit → AI pipeline
+7. System Architecture — Django + src/ + DB layers
+Yeh prompts ChatGPT 4 ya Claude mein paste karo — ek ek document alag generate karo. Jo diagrams hain wo diagrams.net (draw.io) mein free mein banao.
+
+Est. Credits Used: 

@@ -1,0 +1,670 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AssureX — AI-Powered Warranty Claim Engine</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --g:#013E37;--g2:#012e29;--g3:#025248;--g4:#036657;
+  --b:#FFEFB3;--b2:#fff5cc;
+  --bm:rgba(255,239,179,.55);--bl:rgba(255,239,179,.28);
+  --w:#f4f1ea;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--g2);color:var(--b);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--b);color:var(--g)}
+a{text-decoration:none;color:inherit}
+
+/* BG */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1}
+
+/* TICKER */
+.ticker{position:fixed;top:0;left:0;right:0;z-index:600;height:30px;background:var(--g);display:flex;align-items:center;overflow:hidden}
+.tk{display:flex;gap:3.5rem;white-space:nowrap;animation:tkr 35s linear infinite;width:max-content;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,239,179,.4);font-weight:500}
+.tk b{color:var(--b);margin:0 .15rem}
+@keyframes tkr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* NAV — Olympe: logo left · links center · cta right */
+.nav{
+  position:fixed;top:30px;left:0;right:0;z-index:500;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:.9rem 4vw;
+  transition:background .3s,backdrop-filter .3s;
+}
+.nav.scrolled{background:rgba(1,30,26,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,239,179,.06)}
+.nav-logo{display:flex;align-items:center;gap:.55rem;justify-self:start}
+.nav-logo-icon{width:30px;height:30px;background:rgba(255,239,179,.1);border:1px solid rgba(255,239,179,.22);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--b);transition:all .25s}
+.nav-logo:hover .nav-logo-icon{background:rgba(255,239,179,.18);border-color:rgba(255,239,179,.45)}
+.nav-logo-wrap{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-name{font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--b)}
+.nav-logo-sub{font-size:.42rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,239,179,.3)}
+.nav-links{display:flex;align-items:center;gap:.1rem;justify-self:center;background:rgba(255,239,179,.06);border:1px solid rgba(255,239,179,.1);border-radius:999px;padding:.22rem .28rem}
+.nav-links a{color:rgba(255,239,179,.55);font-size:.75rem;padding:.3rem .85rem;border-radius:999px;transition:background .15s,color .15s;white-space:nowrap}
+.nav-links a:hover{background:rgba(255,239,179,.1);color:var(--b)}
+.nav-right{justify-self:end}
+.nav-cta{display:inline-flex;align-items:center;gap:.42rem;background:var(--b);color:var(--g);padding:.48rem .52rem .48rem 1.1rem;border-radius:999px;font-weight:700;font-size:.76rem;box-shadow:0 4px 16px rgba(255,239,179,.18),0 1px 0 rgba(255,255,255,.4) inset;transition:transform .2s,box-shadow .2s}
+.nav-cta-arr{width:22px;height:22px;background:var(--g);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;color:var(--b);transition:transform .25s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(255,239,179,.28);color:var(--g)}
+.nav-cta:hover .nav-cta-arr{transform:rotate(45deg)}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes mqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes floatUD{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* SCROLL REVEAL */
+[rv]{opacity:0;transform:translateY(36px);transition:opacity .85s ease,transform .85s ease}
+[rv].on{opacity:1;transform:translateY(0)}
+[rv=l]{transform:translateX(-40px)}[rv=l].on{opacity:1;transform:translateX(0)}
+[rv=r]{transform:translateX(40px)}[rv=r].on{opacity:1;transform:translateX(0)}
+[rv=s]{transform:scale(.88)}[rv=s].on{opacity:1;transform:scale(1)}
+[d1]{transition-delay:.08s}[d2]{transition-delay:.16s}[d3]{transition-delay:.24s}
+[d4]{transition-delay:.32s}[d5]{transition-delay:.4s}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;
+  padding:8rem 4vw 5rem;
+  background:linear-gradient(158deg,#010f0d 0%,var(--g2) 35%,var(--g) 72%,var(--g3) 100%);
+  overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 65% 45%,rgba(255,239,179,.025) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 55% at 10% 65%,rgba(2,82,72,.4) 0%,transparent 60%);
+}
+#hero-c{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.35}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1100px}
+.h-eyebrow{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.62rem;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,239,179,.3);margin-bottom:1.5rem;
+  animation:fadeUp .7s .2s both;
+}
+.h-eyebrow::before{content:'';width:20px;height:1px;background:rgba(255,239,179,.28)}
+.h-headline{
+  font-size:clamp(4.5rem,10.5vw,12.5rem);
+  font-weight:800;line-height:.9;letter-spacing:-3px;
+  margin-bottom:0;
+}
+.h-w{display:block;overflow:hidden}
+.h-w span{display:block;animation:fadeUp .9s both}
+.h-w:nth-child(1) span{color:var(--b);animation-delay:.28s}
+.h-w:nth-child(2) span{color:transparent;-webkit-text-stroke:1.5px rgba(255,239,179,.24);animation-delay:.46s}
+.h-w:nth-child(3) span{color:var(--b);animation-delay:.64s}
+.h-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:1.5rem;
+  width:100%;
+  margin-top:2.5rem;padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.07);
+  animation:fadeUp .7s .82s both;
+}
+.h-desc{font-size:.86rem;color:rgba(255,239,179,.4);line-height:1.9;max-width:380px;font-weight:300}
+.h-btns{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center}
+.btn-p{background:var(--b);color:var(--g);padding:.82rem 2rem;border-radius:3px;font-weight:700;font-size:.83rem;box-shadow:0 4px 20px rgba(255,239,179,.2);transition:transform .2s,box-shadow .2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,239,179,.36);color:var(--g)}
+.btn-s{background:transparent;color:var(--w);border:1px solid rgba(255,255,255,.16);padding:.82rem 2rem;border-radius:3px;font-size:.83rem;transition:border-color .2s,color .2s}
+.btn-s:hover{border-color:rgba(255,239,179,.4);color:var(--b)}
+.h-scroll{display:flex;flex-direction:column;align-items:center;gap:.38rem;color:rgba(255,239,179,.25);font-size:.58rem;letter-spacing:2px;text-transform:uppercase}
+.h-scroll-line{width:1px;height:34px;background:linear-gradient(to bottom,rgba(255,239,179,.38),transparent);animation:scLine 2.2s infinite}
+
+/* SECTION LABEL */
+.slbl{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--bl);display:flex;align-items:center;gap:.6rem;margin-bottom:2.5rem}
+.slbl::before{content:'';width:16px;height:1px;background:rgba(255,239,179,.18)}
+.slbl.dk{color:rgba(1,62,55,.32)}
+.slbl.dk::before{background:rgba(1,62,55,.18)}
+
+/* PROBLEM */
+.s-prob{position:relative;z-index:1;background:var(--g);padding:9vw 4vw}
+.prob-big{font-size:clamp(2.5rem,6vw,6.5rem);font-weight:800;color:var(--b);line-height:1.05;letter-spacing:-2px;max-width:900px}
+.prob-big em{font-style:italic;color:rgba(255,239,179,.32)}
+.prob-row{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,239,179,.07)}
+.prob-note{font-size:.84rem;color:rgba(255,239,179,.3);font-weight:300;line-height:1.88;max-width:340px}
+.prob-list{display:flex;flex-direction:column;gap:.6rem}
+.prob-item{font-size:.8rem;color:rgba(255,239,179,.38);display:flex;align-items:flex-start;gap:.6rem;line-height:1.55}
+.prob-item::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(255,239,179,.35);flex-shrink:0;margin-top:.42rem}
+
+/* NUMBERS — butter bg */
+.s-nums{position:relative;z-index:1;background:var(--b);padding:6vw 4vw}
+.nums-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(1,62,55,.1)}
+.nc{padding:2.5rem 0 2.5rem 2rem;border-right:1px solid rgba(1,62,55,.1);transition:background .3s}
+.nc:first-child{padding-left:0}
+.nc:last-child{border-right:none}
+.nc:hover{background:rgba(1,62,55,.04)}
+.nc-n{font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:800;color:var(--g);line-height:1;letter-spacing:-2px}
+.nc-l{font-size:.65rem;color:rgba(1,62,55,.4);letter-spacing:1.5px;text-transform:uppercase;margin-top:.4rem}
+
+/* MARQUEE */
+.s-mq{position:relative;z-index:1;background:var(--g2);padding:1.5rem 0;overflow:hidden;border-top:1px solid rgba(255,239,179,.05);border-bottom:1px solid rgba(255,239,179,.05)}
+.mq-t{display:flex;gap:2rem;white-space:nowrap;animation:mqScroll 28s linear infinite;width:max-content;font-size:clamp(2.5rem,4.8vw,4.5rem);font-weight:800;letter-spacing:-1px;color:transparent;-webkit-text-stroke:1px rgba(255,239,179,.11)}
+.mq-t .hi{-webkit-text-stroke:0;color:rgba(255,239,179,.4);font-style:italic}
+
+/* SCALE — 2 col fullscreen */
+.s-scale{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;background:var(--g2)}
+.scale-l{display:flex;flex-direction:column;justify-content:center;padding:5vw 4vw;border-right:1px solid rgba(255,239,179,.07)}
+.scale-eye{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,239,179,.25);margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
+.scale-eye::before{content:'';width:16px;height:1px;background:rgba(255,239,179,.16)}
+.scale-h{font-size:clamp(2.5rem,4vw,5rem);font-weight:800;color:var(--b);line-height:1.04;letter-spacing:-1.5px}
+.scale-h em{font-style:italic;color:rgba(255,239,179,.3)}
+.scale-desc{font-size:.85rem;color:rgba(255,239,179,.34);line-height:1.9;margin-top:1.5rem;max-width:380px;font-weight:300}
+.scale-pills{display:flex;gap:.42rem;flex-wrap:wrap;margin-top:1.8rem}
+.pill{padding:.26rem .72rem;border:1px solid rgba(255,239,179,.1);border-radius:999px;font-size:.59rem;color:rgba(255,239,179,.33);letter-spacing:1.5px;text-transform:uppercase}
+.scale-r{display:flex;align-items:center;justify-content:center;overflow:hidden}
+#scale-c{width:100%;height:100%;min-height:100vh}
+
+/* FLOW */
+.s-flow{position:relative;z-index:1;background:var(--g);padding:7vw 4vw}
+.flow-h{font-size:clamp(2.5rem,5vw,5rem);font-weight:800;color:var(--b);letter-spacing:-1.5px;margin-bottom:3.5rem}
+.flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(255,239,179,.07)}
+.fb{background:var(--g);padding:1.8rem 1.5rem;transition:background .25s}
+.fb:hover{background:rgba(255,239,179,.04)}
+.fb-n{font-size:2.5rem;font-weight:800;color:rgba(255,239,179,.06);line-height:1;margin-bottom:.5rem}
+.fb-t{font-size:.88rem;font-weight:700;color:var(--b);margin-bottom:.35rem}
+.fb-d{font-size:.73rem;color:rgba(255,239,179,.28);line-height:1.72}
+
+/* ROLES — butter bg */
+.s-roles{position:relative;z-index:1;background:var(--b);padding:7vw 4vw}
+.roles-h{font-size:clamp(2.5rem,5vw,5rem);font-weight:800;color:var(--g);letter-spacing:-1.5px;margin-bottom:3rem}
+.roles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
+.rb{background:var(--g);border-radius:6px;padding:2rem;transition:transform .3s,box-shadow .3s}
+.rb:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(1,62,55,.25)}
+.rb-ic{width:36px;height:36px;border:1px solid rgba(255,239,179,.14);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.88rem;color:var(--b);margin-bottom:1.1rem;background:rgba(255,239,179,.05)}
+.rb-n{font-size:.93rem;font-weight:700;color:var(--b);margin-bottom:.4rem}
+.rb-d{font-size:.75rem;color:rgba(255,239,179,.34);line-height:1.7}
+.rb-list{margin-top:.85rem;display:flex;flex-direction:column;gap:.26rem}
+.rb-li{font-size:.7rem;color:rgba(255,239,179,.26);display:flex;align-items:flex-start;gap:.38rem;line-height:1.45}
+.rb-li::before{content:'→';flex-shrink:0;color:rgba(255,239,179,.18);font-size:.6rem;margin-top:.08rem}
+
+/* TECH */
+.s-tech{position:relative;z-index:1;background:var(--g2);padding:7vw 4vw}
+.tech-h{font-size:clamp(2.5rem,5vw,5rem);font-weight:800;color:var(--b);letter-spacing:-1.5px;margin-bottom:3rem}
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,239,179,.06)}
+.tb{background:var(--g2);padding:2.2rem;transition:background .25s}
+.tb:hover{background:rgba(255,239,179,.03)}
+.tb-cat{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,239,179,.24);margin-bottom:.8rem}
+.tb-tags{display:flex;flex-wrap:wrap;gap:.38rem}
+.tt{padding:.24rem .68rem;background:rgba(255,239,179,.06);border:1px solid rgba(255,239,179,.09);border-radius:4px;font-size:.69rem;color:rgba(255,239,179,.5);letter-spacing:.3px}
+
+/* AI */
+.s-ai{position:relative;z-index:1;background:var(--g3);padding:7vw 4vw}
+.ai-h{font-size:clamp(2.5rem,5vw,5rem);font-weight:800;color:var(--b);letter-spacing:-1.5px;margin-bottom:3rem}
+.ai-h em{font-style:italic;color:rgba(255,239,179,.3)}
+.ai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,239,179,.07)}
+.ab{background:var(--g3);padding:2.5rem;transition:background .25s}
+.ab:hover{background:rgba(255,239,179,.04)}
+.ab-v{font-size:clamp(2.4rem,4vw,4rem);font-weight:800;color:var(--b);letter-spacing:-1px}
+.ab-l{font-size:.64rem;color:rgba(255,239,179,.28);letter-spacing:1.5px;text-transform:uppercase;margin-top:.4rem;line-height:1.55}
+
+/* CTA — butter */
+.s-cta{position:relative;z-index:1;background:var(--b);padding:8vw 4vw;display:flex;flex-direction:column;align-items:flex-start}
+.cta-h{font-size:clamp(4.5rem,10vw,11rem);font-weight:800;color:var(--g);line-height:.9;letter-spacing:-4px;margin-bottom:3rem}
+.cta-row{display:flex;justify-content:space-between;align-items:flex-end;width:100%;padding-top:2rem;border-top:1px solid rgba(1,62,55,.12);flex-wrap:wrap;gap:1.5rem}
+.cta-note{font-size:.81rem;color:rgba(1,62,55,.42);font-weight:300;line-height:1.88;max-width:360px}
+.cta-btns{display:flex;gap:.7rem;flex-wrap:wrap}
+.btn-dk{background:var(--g);color:var(--b);padding:.82rem 2.4rem;border-radius:3px;font-weight:700;font-size:.85rem;box-shadow:0 4px 18px rgba(1,62,55,.22);transition:transform .2s,box-shadow .2s}
+.btn-dk:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(1,62,55,.4);color:var(--b)}
+.btn-dko{background:transparent;color:var(--g);border:1px solid rgba(1,62,55,.2);padding:.82rem 2.4rem;border-radius:3px;font-size:.85rem;transition:all .2s}
+.btn-dko:hover{border-color:var(--g);background:rgba(1,62,55,.06);color:var(--g)}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--g);padding:4rem 4vw 2.5rem;border-top:1px solid rgba(255,239,179,.07)}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;margin-bottom:3rem}
+.ft-logo{font-size:1.2rem;font-weight:800;color:var(--b);display:flex;align-items:center;gap:.5rem}
+.ft-logo em{font-style:italic;color:rgba(255,239,179,.38)}
+.ft-links{display:flex;gap:2.8rem;flex-wrap:wrap}
+.fc-h{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,239,179,.24);margin-bottom:.9rem}
+.fc a{display:block;font-size:.78rem;color:rgba(255,239,179,.36);margin-bottom:.4rem;transition:color .18s}
+.fc a:hover{color:var(--b)}
+.ft-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;padding-top:2rem;border-top:1px solid rgba(255,239,179,.06);font-size:.68rem;color:rgba(255,239,179,.18)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .nums-grid,.flow-grid,.roles-grid,.ai-grid,.tech-grid{grid-template-columns:1fr 1fr}
+  .s-scale{grid-template-columns:1fr}
+  #scale-c{min-height:75vw}
+  .nav-links{display:none}
+}
+@media(max-width:680px){
+  .nav{padding:.8rem 1.5rem}
+  .hero,.s-prob,.s-nums,.s-flow,.s-roles,.s-tech,.s-ai,.s-cta,footer,.scale-l{padding-left:1.5rem;padding-right:1.5rem}
+  .h-headline{font-size:clamp(3.5rem,13vw,7rem);letter-spacing:-2px}
+  .h-bottom{flex-direction:column;align-items:flex-start}
+  .nums-grid,.flow-grid,.roles-grid,.ai-grid,.tech-grid{grid-template-columns:1fr}
+  .cta-h{letter-spacing:-2px}
+  .prob-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="tk">
+    <span>TechWiz 7 <b>★</b></span><span>Aptech Computer Education <b>★</b></span>
+    <span>Random Forest 98.22% <b>★</b></span><span>GTM Image Model 99.11% <b>★</b></span>
+    <span>1,500 Training Records <b>★</b></span><span>180 Tests Passing <b>★</b></span>
+    <span>50/50 SRS Requirements <b>★</b></span><span>Django 4.2 · sklearn 1.5 <b>★</b></span>
+    <span>TechWiz 7 <b>★</b></span><span>Aptech Computer Education <b>★</b></span>
+    <span>Random Forest 98.22% <b>★</b></span><span>GTM Image Model 99.11% <b>★</b></span>
+    <span>1,500 Training Records <b>★</b></span><span>180 Tests Passing <b>★</b></span>
+    <span>50/50 SRS Requirements <b>★</b></span><span>Django 4.2 · sklearn 1.5 <b>★</b></span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="{% url 'landing' %}" class="nav-logo">
+    <div class="nav-logo-icon"><i class="bi bi-shield-check-fill"></i></div>
+    <div class="nav-logo-wrap">
+      <span class="nav-logo-name">AssureX</span>
+      <span class="nav-logo-sub">Claim Engine</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#scale">Scale</a>
+    <a href="#flow">Flow</a>
+    <a href="#roles">Roles</a>
+    <a href="#ai">AI</a>
+  </div>
+  <div class="nav-right">
+    <a href="{% url 'accounts:login' %}" class="nav-cta">
+      Sign In
+      <span class="nav-cta-arr"><i class="bi bi-arrow-up-right"></i></span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas id="hero-c"></canvas>
+  <div class="hero-inner">
+    <p class="h-eyebrow">TechWiz 7 — Aptech Computer Education &nbsp;·&nbsp; NextWave AI &amp; ML &nbsp;·&nbsp; 2026</p>
+    <div class="h-headline">
+      <div class="h-w"><span>Warranty</span></div>
+      <div class="h-w"><span>Claims,</span></div>
+      <div class="h-w"><span>Decided.</span></div>
+    </div>
+    <div class="h-bottom">
+      <p class="h-desc">AssureX automates warranty claim validation — dual AI models (Random Forest + GTM), Tesseract + EasyOCR extraction, 11-rule configurable engine — delivering Likely Valid, Likely Invalid, or Manual Review every time.</p>
+      <div class="h-btns">
+        <a href="{% url 'accounts:register' %}" class="btn-p">Get Started Free</a>
+        <a href="{% url 'accounts:login' %}"    class="btn-s">Sign In</a>
+      </div>
+      <div class="h-scroll"><div class="h-scroll-line"></div>Scroll</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="s-prob" id="problem">
+  <div class="slbl" rv>SRS §1.1 — Background &amp; Necessity</div>
+  <div class="prob-big" rv d1>Manual warranty evaluation.<br>Inconsistent decisions.<br><em>AssureX fixes this.</em></div>
+  <div class="prob-row">
+    <p class="prob-note" rv d2>Traditional evaluation requires staff to manually examine purchase details, product age, fault descriptions, repair history, and warranty conditions — time-consuming, inconsistent, and susceptible to fraudulent claims.</p>
+    <div class="prob-list" rv d3>
+      <div class="prob-item">Inconsistent decisions cause customer dissatisfaction</div>
+      <div class="prob-item">Duplicate claims and missed exclusions result in losses</div>
+      <div class="prob-item">Long wait times with no transparency into claim status</div>
+      <div class="prob-item">Service centers need faster, reliable claim triage</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="s-nums">
+  <div class="slbl dk" rv>Verified Model Performance</div>
+  <div class="nums-grid">
+    <div class="nc" rv="s" d1><div class="nc-n" data-count="98.22">0</div><div class="nc-l">Random Forest Accuracy %</div></div>
+    <div class="nc" rv="s" d2><div class="nc-n" data-count="99.11">0</div><div class="nc-l">GTM Image Model %</div></div>
+    <div class="nc" rv="s" d3><div class="nc-n" data-count="1500">0</div><div class="nc-l">Training Records</div></div>
+    <div class="nc" rv="s" d4><div class="nc-n" data-count="180">0</div><div class="nc-l">Tests — All Passing</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="s-mq">
+  <div class="mq-t">
+    <span>Random Forest&nbsp;</span><span class="hi">★&nbsp;</span><span>98.22%&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>GTM&nbsp;</span><span class="hi">★&nbsp;</span><span>99.11%&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>19 Features&nbsp;</span><span class="hi">★&nbsp;</span><span>11 Rules&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>4 Roles&nbsp;</span><span class="hi">★&nbsp;</span><span>50 SRS&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>Random Forest&nbsp;</span><span class="hi">★&nbsp;</span><span>98.22%&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>GTM&nbsp;</span><span class="hi">★&nbsp;</span><span>99.11%&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>19 Features&nbsp;</span><span class="hi">★&nbsp;</span><span>11 Rules&nbsp;</span><span class="hi">★&nbsp;</span>
+    <span>4 Roles&nbsp;</span><span class="hi">★&nbsp;</span><span>50 SRS&nbsp;</span><span class="hi">★&nbsp;</span>
+  </div>
+</div>
+
+<!-- JUSTICE SCALE -->
+<section class="s-scale" id="scale">
+  <div class="scale-l">
+    <div class="scale-eye" rv>SRS §1.2 — Proposed Solution</div>
+    <h2 class="scale-h" rv d1>Every claim<br><em>weighed fairly.</em></h2>
+    <p class="scale-desc" rv d2>Like a justice scale, AssureX weighs every claim — OCR extracts documents, Random Forest processes 19 structured features, GTM reads the Claim Summary Card, and 11 warranty rules validate policy compliance. Both models must agree for auto-decision.</p>
+    <div class="scale-pills" rv d3>
+      <span class="pill">RF 98.22%</span><span class="pill">GTM 99.11%</span>
+      <span class="pill">11 Rules</span><span class="pill">19 Features</span>
+      <span class="pill">5 Tiers</span><span class="pill">3 Outcomes</span>
+    </div>
+  </div>
+  <div class="scale-r"><canvas id="scale-c"></canvas></div>
+</section>
+
+<!-- 15-STEP FLOW -->
+<section class="s-flow" id="flow">
+  <div class="slbl" rv>SRS §1.2 — Complete 15-Step Claim Flow</div>
+  <h2 class="flow-h" rv d1>From registration to decision.</h2>
+  <div class="flow-grid">
+    <div class="fb" rv d1><div class="fb-n">01</div><div class="fb-t">User Registration</div><div class="fb-d">Email-based auth, 4 roles assigned, role-based dashboard on login.</div></div>
+    <div class="fb" rv d2><div class="fb-n">02</div><div class="fb-t">Product Registration</div><div class="fb-d">Brand, model, serial, purchase date, warranty duration. Auto warranty record.</div></div>
+    <div class="fb" rv d3><div class="fb-n">03</div><div class="fb-t">Warranty Record</div><div class="fb-d">Start/expiry dates, coverage, exclusions. Status: Active/Expiring/Expired.</div></div>
+    <div class="fb" rv d4><div class="fb-n">04</div><div class="fb-t">Claim Creation</div><div class="fb-d">Fault description, damage type, fault date, repair history. CLM-0000001.</div></div>
+    <div class="fb" rv d5><div class="fb-n">05</div><div class="fb-t">Document Upload &amp; OCR</div><div class="fb-d">Tesseract + EasyOCR: invoice, serial, purchase date, amount, retailer.</div></div>
+    <div class="fb" rv d1><div class="fb-n">06</div><div class="fb-t">Data Validation</div><div class="fb-d">Mandatory fields, file types, 23-point contradiction detection, missing docs.</div></div>
+    <div class="fb" rv d2><div class="fb-n">07</div><div class="fb-t">Pre-Processing</div><div class="fb-d">19 features: product_age, warranty_days, has_receipt, serial_match, etc.</div></div>
+    <div class="fb" rv d3><div class="fb-n">08</div><div class="fb-t">Python ML Model</div><div class="fb-d">Random Forest 98.22%. OneHotEncoder + StandardScaler + RFC(200). 3-class scores.</div></div>
+    <div class="fb" rv d4><div class="fb-n">09</div><div class="fb-t">Claim Summary Card</div><div class="fb-d">600×420px PNG by Pillow. Product age, warranty, fault type. No prediction on card.</div></div>
+    <div class="fb" rv d5><div class="fb-n">10</div><div class="fb-t">GTM Image Model</div><div class="fb-d">99.11%. Gradient Boosting on 278 image features. 3-class confidence scores.</div></div>
+    <div class="fb" rv d1><div class="fb-n">11</div><div class="fb-t">Model Comparison</div><div class="fb-d">Diff=|Python%−GTM%|. 5 tiers: Strong(≤5%), Acceptable, Weak, Uncertain, Disagree.</div></div>
+    <div class="fb" rv d2><div class="fb-n">12</div><div class="fb-t">Rule Engine</div><div class="fb-d">11 JSON rules: warranty_active, claim_period, purchase_proof, serial_match...</div></div>
+    <div class="fb" rv d3><div class="fb-n">13</div><div class="fb-t">Final Decision</div><div class="fb-d">Likely Valid · Likely Invalid · Manual Review. Model agreement + rules + docs.</div></div>
+    <div class="fb" rv d4><div class="fb-n">14</div><div class="fb-t">Manual Review</div><div class="fb-d">Reviewer: full AI scores, OCR, rules. Approve / Reject / Override with reason.</div></div>
+    <div class="fb" rv d5><div class="fb-n">15</div><div class="fb-t">Status &amp; Notify</div><div class="fb-d">8 stages: Draft→Submitted→Evaluation→Manual→Info→Approved/Rejected→Closed.</div></div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section class="s-roles" id="roles">
+  <div class="slbl dk" rv>SRS §1.1 — 4 User Roles</div>
+  <h2 class="roles-h" rv d1>4 roles. One system.</h2>
+  <div class="roles-grid">
+    <div class="rb" rv="s" d1>
+      <div class="rb-ic"><i class="bi bi-person"></i></div>
+      <div class="rb-n">Customer</div>
+      <div class="rb-d">Register products, submit 4-step claims, track 8-stage status.</div>
+      <div class="rb-list"><div class="rb-li">Register product + warranty</div><div class="rb-li">4-step claim wizard</div><div class="rb-li">Upload docs (OCR auto)</div><div class="rb-li">Track status + report</div></div>
+    </div>
+    <div class="rb" rv="s" d2>
+      <div class="rb-ic"><i class="bi bi-tools"></i></div>
+      <div class="rb-n">Service Center Employee</div>
+      <div class="rb-d">Search customers, create claims on their behalf.</div>
+      <div class="rb-list"><div class="rb-li">Search customer by email</div><div class="rb-li">View products + warranties</div><div class="rb-li">Create claim on behalf</div><div class="rb-li">Upload fault evidence</div></div>
+    </div>
+    <div class="rb" rv="s" d3>
+      <div class="rb-ic"><i class="bi bi-search"></i></div>
+      <div class="rb-n">Claim Reviewer</div>
+      <div class="rb-d">Manual review queue, full AI scores, override capability.</div>
+      <div class="rb-list"><div class="rb-li">View review queue</div><div class="rb-li">See AI confidence scores</div><div class="rb-li">Review OCR + docs</div><div class="rb-li">Approve / Reject / Override</div></div>
+    </div>
+    <div class="rb" rv="s" d4>
+      <div class="rb-ic"><i class="bi bi-gear"></i></div>
+      <div class="rb-n">Administrator</div>
+      <div class="rb-d">Manage users, configure AI, analytics, model versions.</div>
+      <div class="rb-list"><div class="rb-li">Manage users + roles</div><div class="rb-li">Configure AI thresholds</div><div class="rb-li">Analytics + CSV export</div><div class="rb-li">Warranty policies</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="s-tech" id="tech">
+  <div class="slbl" rv>SRS §1.9.2 — Technology Stack</div>
+  <h2 class="tech-h" rv d1>Built with proven tools.</h2>
+  <div class="tech-grid">
+    <div class="tb" rv d1><div class="tb-cat">Backend</div><div class="tb-tags"><span class="tt">Django 4.2</span><span class="tt">Python 3.11</span><span class="tt">DRF</span><span class="tt">Gunicorn</span><span class="tt">Whitenoise</span></div></div>
+    <div class="tb" rv d2><div class="tb-cat">Machine Learning</div><div class="tb-tags"><span class="tt">scikit-learn 1.5</span><span class="tt">Random Forest</span><span class="tt">Gradient Boosting</span><span class="tt">XGBoost</span><span class="tt">NumPy · Pandas</span></div></div>
+    <div class="tb" rv d3><div class="tb-cat">OCR &amp; Image</div><div class="tb-tags"><span class="tt">Tesseract 5</span><span class="tt">EasyOCR 1.7</span><span class="tt">Pillow 10.4</span><span class="tt">OpenCV 4.10</span></div></div>
+    <div class="tb" rv d1><div class="tb-cat">Database</div><div class="tb-tags"><span class="tt">SQLite (dev)</span><span class="tt">PostgreSQL (prod)</span><span class="tt">psycopg2</span></div></div>
+    <div class="tb" rv d2><div class="tb-cat">Frontend</div><div class="tb-tags"><span class="tt">Bootstrap 5.3</span><span class="tt">Chart.js 4.4</span><span class="tt">Three.js r160</span></div></div>
+    <div class="tb" rv d3><div class="tb-cat">Deploy &amp; Test</div><div class="tb-tags"><span class="tt">Railway</span><span class="tt">GitHub</span><span class="tt">pytest 8.3</span></div></div>
+  </div>
+</section>
+
+<!-- AI -->
+<section class="s-ai" id="ai">
+  <div class="slbl" rv>SRS §1.7 — ≥85% Accuracy Target</div>
+  <h2 class="ai-h" rv d1>AI accuracy<br><em>above target.</em></h2>
+  <div class="ai-grid">
+    <div class="ab" rv="s" d1><div class="ab-v">98.22%</div><div class="ab-l">Random Forest<br>CV: 98.59% ± 0.4%</div></div>
+    <div class="ab" rv="s" d2><div class="ab-v">99.11%</div><div class="ab-l">GTM Image Model<br>278 features</div></div>
+    <div class="ab" rv="s" d3><div class="ab-v">95.6%</div><div class="ab-l">Model Agreement<br>45-claim report</div></div>
+    <div class="ab" rv="s" d4><div class="ab-v">50/50</div><div class="ab-l">SRS Requirements<br>All implemented</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="s-cta">
+  <div class="cta-h" rv>Start today.</div>
+  <div class="cta-row">
+    <p class="cta-note" rv d1>
+      Muhammad Hunain (1538835) · Mariha Ashfaq (1540161)<br>
+      Owais Ahmed (1515897) · Muhammad Daniyal (1542905)<br>
+      <span style="color:rgba(1,62,55,.28);font-size:.74rem;display:block;margin-top:.3rem">Aptech Computer Education — TechWiz 7 — September 2026</span>
+    </p>
+    <div class="cta-btns" rv d2>
+      <a href="{% url 'accounts:register' %}" class="btn-dk">Create Account</a>
+      <a href="{% url 'accounts:login' %}"    class="btn-dko">Sign In</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div class="ft-logo"><i class="bi bi-shield-check-fill me-2"></i>Assure<em>X</em></div>
+    <div class="ft-links">
+      <div class="fc"><div class="fc-h">Account</div><a href="{% url 'accounts:login' %}">Sign In</a><a href="{% url 'accounts:register' %}">Register</a><a href="{% url 'accounts:password_reset' %}">Forgot Password</a></div>
+      <div class="fc"><div class="fc-h">Platform</div><a href="#problem">Problem</a><a href="#scale">Scale</a><a href="#flow">15-Step Flow</a><a href="#roles">Roles</a><a href="#ai">AI</a></div>
+      <div class="fc"><div class="fc-h">Team</div><a>M. Hunain — 1538835</a><a>Mariha Ashfaq — 1540161</a><a>Owais Ahmed — 1515897</a><a>M. Daniyal — 1542905</a></div>
+      <div class="fc"><div class="fc-h">Competition</div><a>TechWiz 7</a><a>Aptech Computer Education</a><a>NextWave AI &amp; ML</a></div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2026 AssureX — TechWiz 7 — Aptech Computer Education</span>
+    <span>Django 4.2 · sklearn 1.5 · Tesseract · Three.js</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+<script>
+/* ══ DYNAMIC BG — hex grid + particles + mouse ══ */
+(function(){
+  const c=document.getElementById('bg');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H,pts,mouse={x:-999,y:-999};
+
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+
+  function mkPt(){return{
+    x:Math.random()*W,y:Math.random()*H,
+    vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,
+    r:Math.random()*.85+.2,a:Math.random()*.16+.04,
+    phase:Math.random()*Math.PI*2
+  }}
+
+  function init(){resize();pts=Array.from({length:Math.floor(W*H/9500)},mkPt)}
+
+  function drawHex(){
+    const s=68,h=s*Math.sqrt(3);
+    ctx.strokeStyle='rgba(255,239,179,0.026)';ctx.lineWidth=.75;
+    for(let row=-1;row<H/h+2;row++){
+      for(let col=-1;col<W/(s*1.5)+2;col++){
+        const cx=col*s*1.5,cy=row*h+(col%2===0?0:h/2);
+        ctx.beginPath();
+        for(let i=0;i<6;i++){
+          const a=Math.PI/180*(60*i-30);
+          i===0?ctx.moveTo(cx+s*Math.cos(a),cy+s*Math.sin(a)):ctx.lineTo(cx+s*Math.cos(a),cy+s*Math.sin(a));
+        }
+        ctx.closePath();ctx.stroke();
+      }
+    }
+  }
+
+  function drawPts(){
+    const t=Date.now()/1000;
+    // connection lines
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle=`rgba(255,239,179,${.038*(1-d/120)})`;ctx.lineWidth=.38;ctx.stroke();
+      }
+    }
+    // dots
+    pts.forEach(p=>{
+      const pulse=.5+.5*Math.sin(t*1.1+p.phase);
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1+pulse*.25),0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,239,179,${p.a*(0.55+pulse*.45)})`;ctx.fill();
+    });
+  }
+
+  function update(){
+    pts.forEach(p=>{
+      const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<160){p.vx+=dx/d*.008;p.vy+=dy/d*.008;}
+      p.vx*=.985;p.vy*=.985;p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    });
+  }
+
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+  window.addEventListener('resize',init);
+  init();
+  (function loop(){
+    ctx.clearRect(0,0,W,H);
+    drawHex();drawPts();update();
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ══ HERO CANVAS ══ */
+(function(){
+  const c=document.getElementById('hero-c');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H,pts,mouse={x:-999,y:-999};
+  function resize(){W=c.width=c.offsetWidth||window.innerWidth;H=c.height=c.offsetHeight||window.innerHeight}
+  function mk(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*.65+.15,a:Math.random()*.12+.03,phase:Math.random()*Math.PI*2}}
+  function init(){resize();pts=Array.from({length:Math.floor(W*H/7500)},mk)}
+  function frame(){
+    ctx.clearRect(0,0,W,H);const t=Date.now()/1000;
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<105){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(255,239,179,${.032*(1-d/105)})`;ctx.lineWidth=.32;ctx.stroke();}
+    }
+    pts.forEach(p=>{
+      const pulse=.5+.5*Math.sin(t+p.phase);
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*(1+pulse*.2),0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,239,179,${p.a*(0.6+pulse*.4)})`;ctx.fill();
+      const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<140){p.vx+=dx/d*.007;p.vy+=dy/d*.007;}
+      p.vx*=.986;p.vy*=.986;p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    });
+  }
+  document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+  window.addEventListener('resize',init);
+  init();(function loop(){frame();requestAnimationFrame(loop)})();
+})();
+
+/* ══ JUSTICE SCALE ══ */
+(function(){
+  const canvas=document.getElementById('scale-c');
+  if(!canvas||typeof THREE==='undefined')return;
+  function rsz(){canvas.width=canvas.clientWidth;canvas.height=canvas.clientHeight}rsz();
+  const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setSize(canvas.clientWidth,canvas.clientHeight);R.shadowMap.enabled=true;
+  const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,canvas.clientWidth/canvas.clientHeight,.1,200);
+  cam.position.set(0,1.5,16);cam.lookAt(0,0,0);
+  S.add(new THREE.AmbientLight(0xffffff,.25));
+  const kl=new THREE.SpotLight(0xFFEFB3,3.8,50,Math.PI/6,.3);kl.position.set(-4,12,8);kl.castShadow=true;S.add(kl);
+  const fl=new THREE.SpotLight(0xffffff,1.6,40,Math.PI/5,.4);fl.position.set(8,8,-4);S.add(fl);
+  const rl=new THREE.DirectionalLight(0xFFEFB3,.75);rl.position.set(0,-3,6);S.add(rl);
+  const G=new THREE.MeshStandardMaterial({color:0xd4af37,metalness:.92,roughness:.12});
+  const GD=new THREE.MeshStandardMaterial({color:0x8a6e10,metalness:.85,roughness:.2});
+  const CR=new THREE.MeshStandardMaterial({color:0xfff8dc,roughness:.9});
+  const GRN=new THREE.MeshStandardMaterial({color:0x013E37,metalness:.4,roughness:.5});
+  const BLD=new THREE.MeshStandardMaterial({color:0xd4af37,metalness:.3,roughness:.7,transparent:true,opacity:.15});
+  const LM=new THREE.MeshStandardMaterial({color:0x013E37,roughness:.9});
+  const GG=new THREE.Group();S.add(GG);
+  function add(g,geo,mat,px=0,py=0,pz=0,rx=0,ry=0,rz=0){const m=new THREE.Mesh(geo,mat);m.position.set(px,py,pz);m.rotation.set(rx,ry,rz);g.add(m);return m;}
+  add(GG,new THREE.CylinderGeometry(1.4,1,.22,32),G,0,-3.5);
+  add(GG,new THREE.CylinderGeometry(.1,.1,7,16),G,0,-.2);
+  add(GG,new THREE.SphereGeometry(.22,16,16),G,0,3.2);
+  const bm=add(GG,new THREE.CylinderGeometry(.05,.05,6.4,12),G,0,2.8,0,0,0,Math.PI/2);
+  add(GG,new THREE.SphereGeometry(.14,12,12),G,0,2.8);
+  function chain(x){const cg=new THREE.Group();for(let i=0;i<7;i++){const l=new THREE.Mesh(new THREE.TorusGeometry(.06,.016,8,12),G);l.position.y=-i*.22;l.rotation.x=i%2?Math.PI/2:0;cg.add(l);}cg.position.set(x,2.8,0);GG.add(cg);}
+  chain(-3.1);chain(3.1);
+  function pan(x){const pg=new THREE.Group();add(pg,new THREE.CylinderGeometry(1.1,.9,.09,32),G,0,-1.7);add(pg,new THREE.TorusGeometry(1.,.045,8,32),G,0,-1.65,0,Math.PI/2);for(let i=0;i<3;i++){const a=i*(Math.PI*2/3);add(pg,new THREE.CylinderGeometry(.014,.014,1.5,6),GD,Math.cos(a)*.8,-.95,Math.sin(a)*.8);}pg.position.x=x;GG.add(pg);return pg;}
+  const pL=pan(-3.1),pR=pan(3.1);
+  const dg=new THREE.Group();add(dg,new THREE.BoxGeometry(.95,.05,.7),CR,0,-1.68);add(dg,new THREE.BoxGeometry(.95,.055,.12),new THREE.MeshStandardMaterial({color:0x013E37,metalness:.3,roughness:.5}),0,-1.655,.24);for(let i=0;i<4;i++)add(dg,new THREE.BoxGeometry(.6,.012,.055),LM,-.1,-1.65,.12-i*.14);dg.position.x=-3.1;GG.add(dg);
+  const sg=new THREE.Group();const sh=new THREE.Shape();sh.moveTo(0,.7);sh.bezierCurveTo(.55,.7,.6,.35,.6,0);sh.bezierCurveTo(.6,-.55,0,-.9,0,-.9);sh.bezierCurveTo(0,-.9,-.6,-.55,-.6,0);sh.bezierCurveTo(-.6,.35,-.55,.7,0,.7);add(sg,new THREE.ExtrudeGeometry(sh,{depth:.1,bevelEnabled:true,bevelThickness:.035,bevelSize:.035,bevelSegments:2}),GRN);add(sg,new THREE.TorusGeometry(.22,.04,8,12,Math.PI),G,0,-.08,.12,0,0,-Math.PI/4);sg.scale.set(.55,.55,.55);sg.position.set(3.1,-1.43,0);GG.add(sg);
+  const gv=new THREE.Group();add(gv,new THREE.CylinderGeometry(.2,.2,.85,16),G,0,0,0,0,0,Math.PI/2);add(gv,new THREE.CylinderGeometry(.055,.055,1.5,10),new THREE.MeshStandardMaterial({color:0x3d1502,roughness:.9}),.28,-.28,0,0,0,Math.PI/4);gv.position.set(0,5.5,-1);S.add(gv);
+  const mg=new THREE.Group();mg.add(new THREE.Mesh(new THREE.TorusGeometry(.55,.065,12,32),G));mg.add(new THREE.Mesh(new THREE.CircleGeometry(.48,32),BLD));add(mg,new THREE.CylinderGeometry(.065,.065,.8,10),G,.49,-.49,0,0,0,Math.PI/4);mg.position.set(7,-1,-2);mg.scale.set(.8,.8,.8);S.add(mg);
+  const lk=new THREE.Group();lk.add(new THREE.Mesh(new THREE.BoxGeometry(.75,.7,.38),GRN));add(lk,new THREE.TorusGeometry(.28,.07,8,16,Math.PI),G,0,.5,0,Math.PI);lk.position.set(-7,-1,-2);lk.scale.set(.8,.8,.8);S.add(lk);
+  let mx=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)});
+  window.addEventListener('resize',()=>{canvas.width=canvas.clientWidth;canvas.height=canvas.clientHeight;R.setSize(canvas.clientWidth,canvas.clientHeight);cam.aspect=canvas.clientWidth/canvas.clientHeight;cam.updateProjectionMatrix();});
+  const clk=new THREE.Clock();
+  (function anim(){
+    requestAnimationFrame(anim);const t=clk.getElapsedTime();
+    GG.rotation.y+=(mx*.22-GG.rotation.y)*.04;
+    const tilt=Math.sin(t*.45)*.1;
+    bm.rotation.z=Math.PI/2+tilt;pL.rotation.z=tilt*.9;pR.rotation.z=-tilt*.9;
+    dg.position.y=Math.sin(t*.45)*.18;sg.position.y=-1.43-Math.sin(t*.45)*.18;
+    gv.rotation.z=Math.sin(t*.35)*.12;gv.position.y=5.5+Math.sin(t*.6)*.3;
+    mg.rotation.z=t*.4;mg.position.y=-1+Math.cos(t*.5)*.35;
+    lk.rotation.y=-t*.3;lk.position.y=-1+Math.sin(t*.4)*.35;
+    R.render(S,cam);
+  })();
+})();
+
+/* ══ NAVBAR ══ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>80);
+},{passive:true});
+
+/* ══ SCROLL REVEAL ══ */
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');} });
+},{threshold:0.07})
+.observe=function(){};
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');}});
+},{threshold:0.07});
+document.querySelectorAll('[rv]').forEach(el=>io.observe(el));
+
+/* ══ COUNTERS ══ */
+const cio=new IntersectionObserver(entries=>{
+  if(!entries[0].isIntersecting)return;
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const t=parseFloat(el.dataset.count),isDec=String(t).includes('.');
+    const dur=1900,start=performance.now();
+    (function tick(now){
+      const p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3);
+      el.textContent=isDec?(t*ease).toFixed(2):Math.round(t*ease);
+      if(p<1)requestAnimationFrame(tick);
+      else el.textContent=isDec?t.toFixed(2):String(t);
+    })(start);
+  });
+  cio.disconnect();
+},{threshold:0.15});
+const ns=document.querySelector('.s-nums');
+if(ns)cio.observe(ns);
+</script>
+</body>
+</html>

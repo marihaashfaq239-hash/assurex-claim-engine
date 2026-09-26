@@ -1,0 +1,109 @@
+{% extends "base/base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Add Warranty — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'warranties:list' %}" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div>
+    <h4 class="page-title mb-0">Add Warranty</h4>
+    <p class="page-subtitle mb-0">Attach an extended or third-party warranty to your product</p>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-shield-plus me-2 text-primary"></i>Warranty Details
+      </div>
+      <div class="card-body">
+
+        {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show py-2" role="alert">
+            <i class="bi bi-info-circle me-1"></i>{{ message }}
+            <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"></button>
+          </div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <!-- Product selection -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Product <span class="text-danger">*</span></label>
+            {{ form.product }}
+            {% if form.product.errors %}<div class="text-danger small mt-1">{{ form.product.errors.as_text }}</div>{% endif %}
+            <div class="form-text">Select the product this warranty covers.</div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold">Warranty Type <span class="text-danger">*</span></label>
+              {{ form.warranty_type }}
+              {% if form.warranty_type.errors %}<div class="text-danger small mt-1">{{ form.warranty_type.errors.as_text }}</div>{% endif %}
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold">Provider / Company <span class="text-danger">*</span></label>
+              {{ form.warranty_provider }}
+              {% if form.warranty_provider.errors %}<div class="text-danger small mt-1">{{ form.warranty_provider.errors.as_text }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Authorized Service Center</label>
+            {{ form.service_center }}
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
+              {{ form.start_date }}
+              {% if form.start_date.errors %}<div class="text-danger small mt-1">{{ form.start_date.errors.as_text }}</div>{% endif %}
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label fw-semibold">Expiry Date <span class="text-danger">*</span></label>
+              {{ form.expiry_date }}
+              {% if form.expiry_date.errors %}<div class="text-danger small mt-1">{{ form.expiry_date.errors.as_text }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Coverage Description</label>
+            {{ form.coverage_description }}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Exclusions</label>
+            {{ form.exclusions }}
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">{{ form.warranty_card.label }}</label>
+            {{ form.warranty_card }}
+            <div class="form-text">Upload warranty certificate/card (PDF, JPG, PNG — max 5MB).</div>
+          </div>
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger py-2">{{ form.non_field_errors.as_text }}</div>
+          {% endif %}
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary px-4 fw-semibold">
+              <i class="bi bi-shield-plus me-1"></i> Add Warranty
+            </button>
+            <a href="{% url 'warranties:list' %}" class="btn btn-outline-secondary px-4">Cancel</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

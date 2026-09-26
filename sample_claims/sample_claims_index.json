@@ -1,0 +1,72 @@
+{
+  "description": "AssureX Sample Claims — one file per required claim type (SRS Section 1.10)",
+  "total": 11,
+  "claims": [
+    {
+      "file": "sample_0000001.json",
+      "claim_id": "SAMPLE-0000001",
+      "scenario": "Valid Claim",
+      "expected_decision": "Likely Valid"
+    },
+    {
+      "file": "sample_0000002.json",
+      "claim_id": "SAMPLE-0000002",
+      "scenario": "Invalid Claim",
+      "expected_decision": "Likely Invalid"
+    },
+    {
+      "file": "sample_0000003.json",
+      "claim_id": "SAMPLE-0000003",
+      "scenario": "Manual Review Claim",
+      "expected_decision": "Manual Review Required"
+    },
+    {
+      "file": "sample_0000004.json",
+      "claim_id": "SAMPLE-0000004",
+      "scenario": "Expired Warranty Claim",
+      "expected_decision": "Likely Invalid"
+    },
+    {
+      "file": "sample_0000005.json",
+      "claim_id": "SAMPLE-0000005",
+      "scenario": "Missing Document Claim",
+      "expected_decision": "Likely Invalid"
+    },
+    {
+      "file": "sample_0000006.json",
+      "claim_id": "SAMPLE-0000006",
+      "scenario": "Duplicate Claim",
+      "expected_decision": "Manual Review Required"
+    },
+    {
+      "file": "sample_0000007.json",
+      "claim_id": "SAMPLE-0000007",
+      "scenario": "Contradictory Claim",
+      "expected_decision": "Likely Invalid"
+    },
+    {
+      "file": "sample_0000008.json",
+      "claim_id": "SAMPLE-0000008",
+      "scenario": "Serial Number Mismatch",
+      "expected_decision": "Manual Review Required"
+    },
+    {
+      "file": "sample_0000009.json",
+      "claim_id": "SAMPLE-0000009",
+      "scenario": "Unauthorized Repair Claim",
+      "expected_decision": "Likely Invalid"
+    },
+    {
+      "file": "sample_0000010.json",
+      "claim_id": "SAMPLE-0000010",
+      "scenario": "Tricky Boundary-Date Claim",
+      "expected_decision": "Manual Review Required"
+    },
+    {
+      "file": "sample_0000011.json",
+      "claim_id": "SAMPLE-0000011",
+      "scenario": "Model Disagreement Case",
+      "expected_decision": "Manual Review Required"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{% load static %}
+<ul class="nav flex-column px-1 mt-1">
+
+  <!-- ── Main ── -->
+  <li class="sidebar-section-title">Main</li>
+  <li class="nav-item">
+    <a class="nav-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}"
+       href="{% url 'dashboard:admin' %}">
+      <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+    </a>
+  </li>
+
+  <!-- ── Management ── -->
+  <li class="sidebar-section-title">Management</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'users' in request.path %}active{% endif %}"
+       href="{% url 'administrator:users' %}">
+      <i class="bi bi-people"></i><span>User Management</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'warranty-policies' in request.path %}active{% endif %}"
+       href="{% url 'administrator:warranty_policies' %}">
+      <i class="bi bi-shield-exclamation"></i><span>Warranty Policies</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'administrator/claims' in request.path %}active{% endif %}"
+       href="{% url 'administrator:all_claims' %}">
+      <i class="bi bi-file-earmark-text"></i><span>All Claims</span>
+    </a>
+  </li>
+
+  <!-- ── AI & Models ── -->
+  <li class="sidebar-section-title">AI &amp; Models</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'model-versions' in request.path %}active{% endif %}"
+       href="{% url 'administrator:model_versions' %}">
+      <i class="bi bi-cpu"></i><span>Model Versions</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link sidebar-highlight {% if 'thresholds' in request.path %}active{% endif %}"
+       href="{% url 'administrator:thresholds' %}">
+      <i class="bi bi-sliders"></i>
+      <span class="fw-medium">AI Thresholds</span>
+    </a>
+  </li>
+
+  <!-- ── Analytics ── -->
+  <li class="sidebar-section-title">Analytics</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'analytics' in request.path %}active{% endif %}"
+       href="{% url 'administrator:analytics' %}">
+      <i class="bi bi-bar-chart-line"></i><span>Analytics</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'reports' in request.path %}active{% endif %}"
+       href="{% url 'administrator:reports' %}">
+      <i class="bi bi-download"></i><span>Export Reports</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'audit-logs' in request.path %}active{% endif %}"
+       href="{% url 'administrator:audit_logs' %}">
+      <i class="bi bi-journal-text"></i><span>Audit Logs</span>
+    </a>
+  </li>
+
+  <!-- ── System ── -->
+  <li class="sidebar-section-title">System</li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'monitoring' in request.path %}active{% endif %}"
+       href="{% url 'administrator:monitoring' %}">
+      <i class="bi bi-activity"></i><span>Monitoring</span>
+      {% if anomaly_count %}
+        <span class="ms-auto badge rounded-pill sidebar-badge-alert">{{ anomaly_count }}</span>
+      {% endif %}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if 'profile' in request.path %}active{% endif %}"
+       href="{% url 'accounts:profile' %}">
+      <i class="bi bi-person-gear"></i><span>My Profile</span>
+    </a>
+  </li>
+
+</ul>

@@ -1,0 +1,95 @@
+{
+  "policy_id": "POL-LAPTOP-001",
+  "name": "Laptop & Notebook Warranty Policy",
+  "product_category": "Laptop",
+  "version": "1.0",
+  "description": "Warranty policy for laptops, notebooks, and ultrabooks.",
+
+  "coverage": {
+    "standard_duration_months": 12,
+    "extended_duration_months": 24,
+    "battery_warranty_months": 6,
+    "accidental_damage_covered": false,
+    "claim_reporting_period_days": 14,
+    "warranty_start_conditions": "From date of purchase",
+    "grace_period_days": 7
+  },
+
+  "covered_faults": [
+    "electrical",
+    "mechanical",
+    "manufacturing",
+    "software",
+    "display",
+    "Keyboard key failure (manufacturing)",
+    "Trackpad malfunction",
+    "RAM or storage failure",
+    "Motherboard failure",
+    "Overheating due to manufacturing defect in cooling system",
+    "USB/port failure (manufacturing)",
+    "Hinge failure within 6 months"
+  ],
+
+  "exclusions": [
+    "physical",
+    "water",
+    "Spill damage (liquid ingress)",
+    "Screen cracks due to physical impact",
+    "Software viruses or malware",
+    "Damage from dropping",
+    "Damage from incorrect voltage adapter",
+    "Battery wear after 6 months of normal use",
+    "Damage to ports from excessive force",
+    "Theft or loss",
+    "Damage due to unauthorized hardware upgrades"
+  ],
+
+  "mandatory_documents": [
+    "purchase_receipt",
+    "product_image",
+    "fault_evidence",
+    "serial_photo"
+  ],
+
+  "repair_conditions": {
+    "authorized_repair_required": true,
+    "max_repair_count": 2,
+    "void_if_unauthorized_repair": true,
+    "data_backup_customer_responsibility": true,
+    "replacement_allowed": true,
+    "replacement_conditions": "Same fault occurs twice within 90 days or repair cost exceeds device value",
+    "carry_in_service": true,
+    "on_site_service": false
+  },
+
+  "authorized_service_requirements": [
+    "Must be repaired at manufacturer-authorized service center",
+    "Opening the device chassis without authorization voids warranty",
+    "Memory/storage upgrades must be manufacturer-approved"
+  ],
+
+  "hard_fail_rules": [
+    "warranty_expired_at_fault_date",
+    "unauthorized_repair_voids_warranty",
+    "excluded_damage_type",
+    "fault_date_before_purchase_date",
+    "purchase_receipt_missing",
+    "chassis_opened_unauthorized"
+  ],
+
+  "warning_rules": [
+    "claim_submitted_late",
+    "battery_claim_after_6_months",
+    "missing_serial_photo",
+    "high_temperature_environment_reported"
+  ],
+
+  "manual_review_rules": [
+    "serial_number_mismatch",
+    "duplicate_claim_detected",
+    "motherboard_replacement_request",
+    "model_predictions_disagree",
+    "low_confidence_prediction",
+    "data_recovery_requested"
+  ]
+}

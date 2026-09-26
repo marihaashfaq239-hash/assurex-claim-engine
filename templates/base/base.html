@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static assurex_tags %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AssureX Claim Engine{% endblock %}</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts: Syne + Inter + JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- AssureX Premium CSS -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+  <!-- Favicon (inline SVG shield) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🛡️</text></svg>">
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% if user.is_authenticated %}
+
+<!-- ════════════════════════════════════════════
+     AUTHENTICATED LAYOUT
+     ════════════════════════════════════════════ -->
+<div class="d-flex" id="wrapper">
+
+  <!-- ── SIDEBAR ── -->
+  <nav id="sidebar" class="sidebar d-flex flex-column" role="navigation" aria-label="Main navigation">
+
+    <!-- Brand -->
+    <a href="{% url 'dashboard:index' %}" class="sidebar-brand text-decoration-none">
+      <i class="bi bi-shield-check-fill"></i>
+      <span>AssureX</span>
+    </a>
+
+    <!-- Nav Menu -->
+    <div class="flex-grow-1 py-2 overflow-y-auto" style="scrollbar-width:none;">
+      {% block sidebar_menu %}
+        {% if sidebar_template %}{% include sidebar_template %}{% endif %}
+      {% endblock %}
+    </div>
+
+    <!-- User Info Footer -->
+    <div class="p-2 pb-3">
+      <div class="sidebar-user-info">
+        <div class="d-flex align-items-center gap-2">
+          <div class="avatar-sm flex-shrink-0">{{ user.get_initials }}</div>
+          <div class="min-w-0 flex-grow-1" style="overflow:hidden;">
+            <div class="fw-semibold text-white text-truncate" style="font-size:.82rem;max-width:140px;">
+              {{ user.get_full_name }}
+            </div>
+            <div class="role-badge d-inline-block mt-0">{{ user.get_role_display }}</div>
+          </div>
+        </div>
+        <a href="{% url 'accounts:logout' %}"
+           class="btn btn-sm btn-outline-danger mt-2 w-100 d-flex align-items-center justify-content-center gap-1"
+           style="font-size:.78rem;border-color:rgba(244,63,94,.4);color:rgba(255,255,255,.7);">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Sign Out</span>
+        </a>
+      </div>
+    </div>
+
+  </nav>
+  <!-- ── /SIDEBAR ── -->
+
+  <!-- ── PAGE CONTENT ── -->
+  <div id="page-content-wrapper" class="flex-grow-1 d-flex flex-column" style="min-width:0;">
+
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top px-3 py-2" style="z-index:100;">
+      <!-- Sidebar toggle -->
+      <button class="btn btn-sm btn-outline-secondary me-3" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="bi bi-list fs-5"></i>
+      </button>
+
+      <!-- Breadcrumb / Page title slot -->
+      <div class="d-none d-md-block flex-grow-1">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0" style="font-size:.78rem;">
+            {% block breadcrumb %}
+            <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}" class="text-decoration-none text-muted">Home</a></li>
+            {% endblock %}
+          </ol>
+        </nav>
+      </div>
+
+      <!-- Right side controls -->
+      <div class="ms-auto d-flex align-items-center gap-2">
+
+        <!-- Quick Submit (customers & employees) -->
+        {% if user.is_customer or user.is_employee %}
+        <a href="{% url 'claims:submit' %}" class="btn btn-primary btn-sm d-none d-md-flex align-items-center gap-1">
+          <i class="bi bi-plus-lg"></i><span>New Claim</span>
+        </a>
+        {% endif %}
+
+        <!-- Notification Bell -->
+        <a href="{% url 'notifications:list' %}" class="position-relative text-secondary d-flex align-items-center justify-content-center"
+           style="width:36px;height:36px;border-radius:.5rem;background:rgba(1,62,55,.08);text-decoration:none;"
+           aria-label="Notifications">
+          <i class="bi bi-bell fs-5" style="color:var(--green-800,#013E37);"></i>
+          {% if unread_notifications_count %}
+          <span class="position-absolute notification-count-badge"
+                style="top:3px;right:3px;width:8px;height:8px;background:#f43f5e;border-radius:50%;border:2px solid #fff;"></span>
+          {% endif %}
+        </a>
+
+        <!-- User Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-sm d-flex align-items-center gap-2 py-1 px-2"
+                  style="background:rgba(1,62,55,.07);border:1.5px solid rgba(1,62,55,.15);border-radius:.625rem;"
+                  type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div style="width:26px;height:26px;background:linear-gradient(135deg,#013E37,#025248);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFEFB3;font-size:.7rem;font-weight:700;">
+              {{ user.get_initials }}
+            </div>
+            <span style="font-size:.82rem;font-weight:600;color:#012e29;">{{ user.first_name }}</span>
+            <i class="bi bi-chevron-down" style="font-size:.65rem;color:#5a9085;"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end mt-1" style="min-width:200px;">
+            <li>
+              <div class="px-3 py-2 border-bottom" style="font-size:.78rem;">
+                <div class="fw-semibold">{{ user.get_full_name }}</div>
+                <div class="text-muted">{{ user.email }}</div>
+              </div>
+            </li>
+            <li><a class="dropdown-item d-flex align-items-center gap-2 mt-1" href="{% url 'accounts:profile' %}">
+              <i class="bi bi-person-circle" style="color:#013E37;"></i> My Profile
+            </a></li>
+            {% if user.is_administrator %}
+            <li><a class="dropdown-item d-flex align-items-center gap-2" href="{% url 'administrator:thresholds' %}">
+              <i class="bi bi-sliders" style="color:#013E37;"></i> AI Settings
+            </a></li>
+            {% endif %}
+            <li><hr class="dropdown-divider my-1"></li>
+            <li><a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="{% url 'accounts:logout' %}">
+              <i class="bi bi-box-arrow-right"></i> Sign Out
+            </a></li>
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+    <!-- /Top Navbar -->
+
+    <!-- Main Content -->
+    <main class="p-4 flex-grow-1">
+
+      <!-- Flash Messages -->
+      {% if messages %}
+      <div class="mb-3" id="flash-messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show d-flex align-items-center gap-2"
+             role="alert" style="border-radius:.75rem;">
+          {% if 'success' in message.tags %}<i class="bi bi-check-circle-fill flex-shrink-0"></i>
+          {% elif 'error' in message.tags or 'danger' in message.tags %}<i class="bi bi-x-circle-fill flex-shrink-0"></i>
+          {% elif 'warning' in message.tags %}<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i>
+          {% else %}<i class="bi bi-info-circle-fill flex-shrink-0"></i>{% endif %}
+          <span>{{ message }}</span>
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- Footer bar -->
+    <footer class="px-4 py-2 d-flex align-items-center justify-content-between"
+            style="border-top:1px solid rgba(37,99,235,.07);background:rgba(255,255,255,.6);font-size:.73rem;color:#94a3b8;">
+      <span>&copy; {% now "Y" %} AssureX Claim Engine &mdash; AI-Powered Warranty Validation</span>
+      <span class="d-none d-md-block">
+        <i class="bi bi-circle-fill text-success me-1" style="font-size:.4rem;vertical-align:middle;"></i>System Online
+      </span>
+    </footer>
+
+  </div>
+  <!-- ── /PAGE CONTENT ── -->
+
+</div><!-- /#wrapper -->
+
+{% else %}
+
+<!-- ════════════════════════════════════════════
+     UNAUTHENTICATED LAYOUT
+     ════════════════════════════════════════════ -->
+<main>
+  {% if messages %}
+    <div style="position:fixed;top:1rem;right:1rem;z-index:9999;max-width:380px;">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show d-flex align-items-center gap-2 mb-2"
+           role="alert" style="border-radius:.75rem;box-shadow:0 4px 16px rgba(0,0,0,.12);">
+        {% if 'success' in message.tags %}<i class="bi bi-check-circle-fill flex-shrink-0"></i>
+        {% elif 'error' in message.tags or 'danger' in message.tags %}<i class="bi bi-x-circle-fill flex-shrink-0"></i>
+        {% elif 'warning' in message.tags %}<i class="bi bi-exclamation-triangle-fill flex-shrink-0"></i>
+        {% else %}<i class="bi bi-info-circle-fill flex-shrink-0"></i>{% endif %}
+        <span>{{ message }}</span>
+        <button type="button" class="btn-close ms-auto btn-close-sm" data-bs-dismiss="alert"></button>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% block auth_content %}{% endblock %}
+</main>
+
+{% endif %}
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/cursor.js' %}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

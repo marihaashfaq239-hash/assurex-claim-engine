@@ -1,0 +1,166 @@
+{% extends "base/base.html" %}
+{% load assurex_tags %}
+{% load static assurex_tags %}
+
+{% block title %}Submit Claim — Documents — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:submit' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div>
+    <h4 class="page-title mb-0">{{ claim.claim_reference|default:"New Claim" }} — Documents</h4>
+    <p class="page-subtitle mb-0">{{ claim.product.brand }} {{ claim.product.product_name }}</p>
+  </div>
+</div>
+
+<!-- Stepper -->
+<div class="claim-stepper mb-4">
+  <div class="stepper-step done"><div class="step-circle"><i class="bi bi-check" style="font-size:.8rem;"></i></div><div class="step-label">Fault Details</div></div>
+  <div class="stepper-step active"><div class="step-circle">2</div><div class="step-label">Documents</div></div>
+  <div class="stepper-step"><div class="step-circle">3</div><div class="step-label">Repair History</div></div>
+  <div class="stepper-step"><div class="step-circle">4</div><div class="step-label">Review</div></div>
+</div>
+
+<!-- Required documents checklist -->
+<div class="card mb-3">
+  <div class="card-header"><i class="bi bi-clipboard-check me-2 text-primary"></i>Required Documents</div>
+  <div class="card-body">
+    <div class="row g-2">
+      {% with required="purchase_receipt,warranty_card,product_image,fault_evidence" %}
+      {% endwith %}
+
+      <div class="col-auto">
+        <span class="badge {% if 'purchase_receipt' in uploaded_types %}bg-success{% else %}bg-danger-subtle text-danger border border-danger{% endif %} py-2 px-3">
+          <i class="bi bi-{% if 'purchase_receipt' in uploaded_types %}check-circle{% else %}x-circle{% endif %} me-1"></i>Purchase Receipt
+        </span>
+      </div>
+      <div class="col-auto">
+        <span class="badge {% if 'product_image' in uploaded_types %}bg-success{% else %}bg-warning-subtle text-warning border border-warning{% endif %} py-2 px-3">
+          <i class="bi bi-{% if 'product_image' in uploaded_types %}check-circle{% else %}exclamation-circle{% endif %} me-1"></i>Product Image
+        </span>
+      </div>
+      <div class="col-auto">
+        <span class="badge {% if 'fault_evidence' in uploaded_types %}bg-success{% else %}bg-warning-subtle text-warning border border-warning{% endif %} py-2 px-3">
+          <i class="bi bi-{% if 'fault_evidence' in uploaded_types %}check-circle{% else %}exclamation-circle{% endif %} me-1"></i>Fault Evidence
+        </span>
+      </div>
+      <div class="col-auto">
+        <span class="badge {% if 'warranty_card' in uploaded_types %}bg-success{% else %}bg-secondary-subtle text-secondary{% endif %} py-2 px-3">
+          <i class="bi bi-{% if 'warranty_card' in uploaded_types %}check-circle{% else %}dash-circle{% endif %} me-1"></i>Warranty Card
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+
+  <!-- Upload Form -->
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-upload me-2 text-primary"></i>Upload Document</div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Document Type</label>
+            {{ form.doc_type }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">File <span class="text-danger">*</span></label>
+            <div class="upload-zone" id="uploadZone">
+              {{ form.file }}
+              <div class="mt-2 text-muted small">
+                <i class="bi bi-cloud-upload fs-4 d-block mb-1"></i>
+                Click or drag & drop — PDF, JPG, PNG (max 5MB)
+              </div>
+              <div class="upload-label text-primary small fw-semibold mt-1"></div>
+            </div>
+            {% if form.file.errors %}<div class="text-danger small">{{ form.file.errors.as_text }}</div>{% endif %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Note (optional)</label>
+            {{ form.description }}
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-upload me-1"></i>Upload & Extract Data
+          </button>
+        </form>
+        <div class="mt-2 text-muted" style="font-size:.78rem;">
+          <i class="bi bi-cpu me-1"></i>OCR will automatically extract data from receipts and warranty cards.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Uploaded Documents + OCR Results -->
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-files me-2 text-primary"></i>Uploaded ({{ documents|length }})</div>
+      <div class="card-body p-0">
+        {% if documents %}
+        <ul class="list-group list-group-flush">
+          {% for doc in documents %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <div class="fw-semibold">
+                  <i class="bi bi-file-earmark me-2 text-primary"></i>{{ doc.get_doc_type_display }}
+                </div>
+                <small class="text-muted">{{ doc.file_name }} · {{ doc.file_size|filesizeformat }}</small>
+              </div>
+              <a href="{{ doc.file.url }}" target="_blank" class="btn btn-sm btn-outline-secondary ms-2">
+                <i class="bi bi-eye"></i>
+              </a>
+            </div>
+
+            <!-- OCR Results -->
+            {% if doc.pk in ocr_results %}
+            {% with ocr=ocr_results|get_item:doc.pk %}
+            <div class="mt-2 p-2 rounded bg-light" style="font-size:.8rem;">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <strong><i class="bi bi-cpu me-1 text-primary"></i>OCR Extracted</strong>
+                <div class="d-flex gap-1">
+                  <span class="badge {% if ocr.status == 'success' %}bg-success{% elif ocr.status == 'partial' %}bg-warning text-dark{% else %}bg-danger{% endif %}">
+                    {{ ocr.status|title }} ({{ ocr.confidence|floatformat:0 }}%)
+                  </span>
+                  <a href="{% url 'claims:verify_ocr' claim.pk ocr.pk %}" class="badge bg-primary text-decoration-none">
+                    <i class="bi bi-pencil me-1"></i>Edit
+                  </a>
+                </div>
+              </div>
+              <div class="row g-1">
+                {% if ocr.invoice_number %}<div class="col-6"><span class="text-muted">Invoice:</span> {{ ocr.invoice_number }}</div>{% endif %}
+                {% if ocr.purchase_date %}<div class="col-6"><span class="text-muted">Date:</span> {{ ocr.purchase_date|date:"M d, Y" }}</div>{% endif %}
+                {% if ocr.serial_number %}<div class="col-6"><span class="text-muted">Serial:</span> <span class="font-monospace">{{ ocr.serial_number }}</span></div>{% endif %}
+                {% if ocr.purchase_amount %}<div class="col-6"><span class="text-muted">Amount:</span> PKR {{ ocr.purchase_amount|floatformat:0 }}</div>{% endif %}
+                {% if ocr.retailer %}<div class="col-6"><span class="text-muted">Retailer:</span> {{ ocr.retailer }}</div>{% endif %}
+              </div>
+            </div>
+            {% endwith %}
+            {% endif %}
+
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="text-center py-4 text-muted small">
+          <i class="bi bi-file-earmark-x d-block fs-2 opacity-25 mb-1"></i>No documents uploaded yet.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="d-flex justify-content-between mt-3">
+      <a href="{% url 'claims:submit' %}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i>Back
+      </a>
+      <a href="{% url 'claims:submit_step3' claim.pk %}" class="btn btn-primary">
+        Next: Repair History <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{
+  "policy_id": "POL-AC-001",
+  "name": "Air Conditioner Warranty Policy",
+  "product_category": "Air Conditioner",
+  "version": "1.0",
+  "description": "Warranty policy for split and window air conditioning units.",
+
+  "coverage": {
+    "standard_duration_months": 12,
+    "extended_duration_months": 36,
+    "compressor_warranty_months": 60,
+    "claim_reporting_period_days": 14,
+    "warranty_start_conditions": "From date of installation or 30 days after purchase, whichever is earlier",
+    "grace_period_days": 7
+  },
+
+  "covered_faults": [
+    "electrical",
+    "mechanical",
+    "manufacturing",
+    "overheating",
+    "Compressor failure (5-year coverage)",
+    "PCB board failure",
+    "Fan motor failure",
+    "Refrigerant leakage due to manufacturing defect",
+    "Thermostat malfunction",
+    "Remote control failure (first 90 days)"
+  ],
+
+  "exclusions": [
+    "physical",
+    "water",
+    "Damage due to improper installation",
+    "Damage from power fluctuations (voltage spikes)",
+    "Refrigerant leakage due to external damage",
+    "Filters and cleaning-related issues",
+    "Damage due to use with incorrect voltage",
+    "Normal wear and tear of plastic parts",
+    "Damage from insects or rodents",
+    "Units used in commercial settings without commercial warranty"
+  ],
+
+  "mandatory_documents": [
+    "purchase_receipt",
+    "warranty_card",
+    "product_image",
+    "fault_evidence"
+  ],
+
+  "repair_conditions": {
+    "authorized_repair_required": true,
+    "max_repair_count": 3,
+    "void_if_unauthorized_repair": true,
+    "replacement_allowed": true,
+    "replacement_conditions": "If same fault occurs 3 times within warranty period and is unrepairable",
+    "on_site_service": true
+  },
+
+  "authorized_service_requirements": [
+    "Only manufacturer-authorized technicians may open sealed components",
+    "Compressor replacement requires factory-authorized center",
+    "Proof of authorized installation required for extended warranty claims"
+  ],
+
+  "hard_fail_rules": [
+    "warranty_expired_at_fault_date",
+    "unauthorized_repair_voids_warranty",
+    "excluded_damage_type",
+    "fault_date_before_purchase_date",
+    "purchase_receipt_missing",
+    "improper_installation_detected"
+  ],
+
+  "warning_rules": [
+    "claim_submitted_late",
+    "missing_warranty_card",
+    "voltage_irregularity_reported",
+    "filter_maintenance_not_performed"
+  ],
+
+  "manual_review_rules": [
+    "serial_number_mismatch",
+    "duplicate_claim_detected",
+    "compressor_claim_within_90_days",
+    "third_claim_on_same_unit",
+    "model_predictions_disagree",
+    "low_confidence_prediction"
+  ]
+}

@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}My Products — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="page-title mb-0">My Products</h4>
+    <p class="page-subtitle mb-0">{{ products|length }} product{{ products|length|pluralize }} registered</p>
+  </div>
+  <a href="{% url 'products:register' %}" class="btn btn-primary">
+    <i class="bi bi-plus-circle me-1"></i>Register Product
+  </a>
+</div>
+
+{% if products %}
+<div class="row g-3">
+  {% for p in products %}
+  <div class="col-md-6 col-lg-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="stat-icon bg-primary bg-opacity-10 text-primary" style="width:44px;height:44px;border-radius:10px;">
+            <i class="{{ p.category.icon }}"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="fw-semibold text-truncate">{{ p.brand }} {{ p.product_name }}</div>
+            <small class="text-muted">{{ p.category }}</small>
+          </div>
+        </div>
+
+        <table class="table table-sm table-borderless mb-3" style="font-size:0.82rem;">
+          <tr><td class="text-muted ps-0">Model</td><td class="fw-medium">{{ p.model_number }}</td></tr>
+          <tr><td class="text-muted ps-0">Serial No.</td><td class="font-monospace">{{ p.serial_number }}</td></tr>
+          <tr><td class="text-muted ps-0">Purchased</td><td>{{ p.purchase_date|date:"M d, Y" }}</td></tr>
+          <tr><td class="text-muted ps-0">Warranty</td>
+            <td>
+              {% if p.active_warranty %}
+                <span class="badge bg-success-subtle text-success">
+                  Active · {{ p.active_warranty.remaining_days }}d left
+                </span>
+              {% else %}
+                <span class="badge bg-danger-subtle text-danger">Expired</span>
+              {% endif %}
+            </td>
+          </tr>
+          <tr><td class="text-muted ps-0">Open Claims</td>
+            <td>
+              {% if p.open_claims %}
+                <span class="badge bg-warning-subtle text-warning">{{ p.open_claims }} open</span>
+              {% else %}
+                <span class="text-muted">—</span>
+              {% endif %}
+            </td>
+          </tr>
+        </table>
+
+        <div class="d-flex gap-2">
+          <a href="{% url 'products:detail' p.pk %}" class="btn btn-sm btn-outline-primary flex-grow-1">
+            <i class="bi bi-eye me-1"></i>View
+          </a>
+          <a href="{% url 'claims:submit' %}?product={{ p.pk }}" class="btn btn-sm btn-primary flex-grow-1">
+            <i class="bi bi-file-earmark-plus me-1"></i>Claim
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card">
+  <div class="card-body text-center py-5">
+    <i class="bi bi-box fs-1 text-muted opacity-25 d-block mb-3"></i>
+    <h5 class="text-muted">No products yet</h5>
+    <p class="text-muted mb-3">Register your first product to start managing warranties and claims.</p>
+    <a href="{% url 'products:register' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i>Register Product
+    </a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

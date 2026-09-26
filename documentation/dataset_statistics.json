@@ -1,0 +1,29 @@
+{
+  "title": "AssureX Dataset Statistics",
+  "splits": {
+    "train": {
+      "total": 1050,
+      "classes": {
+        "manual_review": 350,
+        "valid_claim": 350,
+        "invalid_claim": 350
+      }
+    },
+    "validation": {
+      "total": 225,
+      "classes": {
+        "manual_review": 75,
+        "invalid_claim": 75,
+        "valid_claim": 75
+      }
+    },
+    "test": {
+      "total": 225,
+      "classes": {
+        "valid_claim": 75,
+        "invalid_claim": 75,
+        "manual_review": 75
+      }
+    }
+  }
+}

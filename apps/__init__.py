@@ -1,0 +1,1 @@
+# AssureX apps package

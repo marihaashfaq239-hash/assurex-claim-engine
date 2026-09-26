@@ -1,0 +1,64 @@
+{% extends "base/base.html" %}
+{% block title %}Monitoring — AssureX{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+{% block content %}
+<h4 class="page-title mb-4">System Monitoring</h4>
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="stat-card" style="border-left-color:#dc2626;">
+      <div class="stat-label">Duplicate Claims</div>
+      <div class="stat-value text-danger">{{ duplicate_claims }}</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card" style="border-left-color:#6b21a8;">
+      <div class="stat-label">Model Disagreements</div>
+      <div class="stat-value" style="color:#6b21a8;">{{ model_disagreements }}</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card" style="border-left-color:#d97706;">
+      <div class="stat-label">Low Confidence Claims</div>
+      <div class="stat-value text-warning">{{ low_confidence }}</div>
+    </div>
+  </div>
+</div>
+{% if recent_anomalies %}
+<div class="card mb-4">
+  <div class="card-header text-danger"><i class="bi bi-exclamation-triangle me-2"></i>Recent Anomalies</div>
+  <div class="card-body p-0">
+    <ul class="list-group list-group-flush">
+      {% for log in recent_anomalies %}
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between">
+          <span>{{ log.description }}</span>
+          <small class="text-muted">{{ log.created_at|date:"M d, Y H:i" }}</small>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+<div class="card">
+  <div class="card-header"><i class="bi bi-activity me-2 text-primary"></i>System Health</div>
+  <div class="card-body">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <span class="badge bg-success rounded-pill">OK</span>
+      <span>Database connection</span>
+    </div>
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <span class="badge {% if duplicate_claims > 0 %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill">
+        {% if duplicate_claims > 0 %}WARN{% else %}OK{% endif %}
+      </span>
+      <span>Duplicate claim detection — {{ duplicate_claims }} flagged</span>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <span class="badge {% if model_disagreements > 0 %}bg-warning text-dark{% else %}bg-success{% endif %} rounded-pill">
+        {% if model_disagreements > 0 %}WARN{% else %}OK{% endif %}
+      </span>
+      <span>Model agreement — {{ model_disagreements }} disagreements</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

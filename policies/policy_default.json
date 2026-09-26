@@ -1,0 +1,79 @@
+{
+  "policy_id": "POL-DEFAULT-001",
+  "name": "Default Warranty Policy",
+  "product_category": "General",
+  "version": "1.0",
+  "description": "Standard default warranty policy applied when no category-specific policy is found.",
+
+  "coverage": {
+    "standard_duration_months": 12,
+    "extended_duration_months": 0,
+    "claim_reporting_period_days": 14,
+    "warranty_start_conditions": "From date of original purchase by end user",
+    "grace_period_days": 7
+  },
+
+  "covered_faults": [
+    "electrical",
+    "mechanical",
+    "manufacturing",
+    "software",
+    "display",
+    "battery",
+    "overheating"
+  ],
+
+  "exclusions": [
+    "physical",
+    "water",
+    "Damage caused by accident, misuse, or negligence",
+    "Damage caused by unauthorized modification",
+    "Normal wear and tear",
+    "Consumable parts (filters, bulbs, batteries unless factory defect)",
+    "Cosmetic damage not affecting functionality",
+    "Damage caused by power surges or fluctuations"
+  ],
+
+  "mandatory_documents": [
+    "purchase_receipt",
+    "product_image",
+    "fault_evidence"
+  ],
+
+  "repair_conditions": {
+    "authorized_repair_required": true,
+    "max_repair_count": 2,
+    "void_if_unauthorized_repair": true,
+    "replacement_allowed": false,
+    "replacement_conditions": "Only if repair is not possible after 3 attempts"
+  },
+
+  "authorized_service_requirements": [
+    "Repair must be performed by manufacturer-authorized service center",
+    "Repair receipt from authorized center must be provided"
+  ],
+
+  "hard_fail_rules": [
+    "warranty_expired_at_fault_date",
+    "unauthorized_repair_voids_warranty",
+    "excluded_damage_type",
+    "fault_date_before_purchase_date",
+    "purchase_receipt_missing"
+  ],
+
+  "warning_rules": [
+    "claim_submitted_late",
+    "missing_optional_documents",
+    "multiple_prior_repairs",
+    "product_age_exceeds_5_years"
+  ],
+
+  "manual_review_rules": [
+    "serial_number_mismatch",
+    "duplicate_claim_detected",
+    "missing_2_or_more_required_documents",
+    "model_predictions_disagree",
+    "low_confidence_prediction",
+    "near_warranty_expiry_claim"
+  ]
+}

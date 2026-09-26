@@ -1,0 +1,155 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}{{ customer.get_full_name }} — Customer Details{% endblock %}
+{% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a href="{% url 'claims:customer_search' %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div class="flex-grow-1">
+    <h4 class="page-title mb-0">{{ customer.get_full_name }}</h4>
+    <span class="text-muted small">{{ customer.email }}</span>
+  </div>
+  <a href="{% url 'claims:employee_create' %}?customer={{ customer.pk }}" class="btn btn-primary">
+    <i class="bi bi-file-earmark-plus me-1"></i>Create Claim
+  </a>
+</div>
+
+<div class="row g-4">
+
+  <!-- Customer Info Card -->
+  <div class="col-lg-3">
+    <div class="card mb-4">
+      <div class="card-body text-center py-4">
+        <div class="avatar-sm mx-auto mb-2" style="width:56px;height:56px;font-size:1.3rem;background:var(--primary);">
+          {{ customer.get_initials }}
+        </div>
+        <div class="fw-semibold">{{ customer.get_full_name }}</div>
+        <div class="text-muted small">{{ customer.email }}</div>
+        {% if customer.phone %}
+          <div class="text-muted small">{{ customer.phone }}</div>
+        {% endif %}
+        {% if customer.city %}
+          <div class="text-muted small mt-1"><i class="bi bi-geo-alt me-1"></i>{{ customer.city }}, {{ customer.country }}</div>
+        {% endif %}
+      </div>
+      <div class="card-footer bg-transparent text-center">
+        <small class="text-muted">Customer since {{ customer.date_joined|date:"M Y" }}</small>
+      </div>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="card">
+      <div class="card-body p-3">
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-muted small">Products</span>
+          <span class="fw-semibold">{{ products|length }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-muted small">Total Claims</span>
+          <span class="fw-semibold">{{ claims|length }}</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="text-muted small">Active Warranties</span>
+          <span class="fw-semibold text-success">{{ warranties|length }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products + Claims -->
+  <div class="col-lg-9">
+
+    <!-- Products -->
+    <div class="card mb-4">
+      <div class="card-header"><i class="bi bi-box-seam me-2 text-primary"></i>Products ({{ products|length }})</div>
+      <div class="card-body p-0">
+        {% if products %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>Product</th><th>Model / Serial</th><th>Purchased</th><th>Warranty</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              {% for p in products %}
+              <tr>
+                <td>
+                  <div class="fw-semibold">{{ p.brand }} {{ p.product_name }}</div>
+                  <small class="text-muted">{{ p.category }}</small>
+                </td>
+                <td class="font-monospace small">{{ p.model_number }}<br>{{ p.serial_number }}</td>
+                <td class="text-muted small">{{ p.purchase_date|date:"M d, Y" }}</td>
+                <td>
+                  {% with w=p.warranties.first %}
+                    {% if w %}
+                      {% if w.is_expired %}
+                        <span class="badge bg-danger-subtle text-danger">Expired</span>
+                      {% elif w.is_expiring_soon %}
+                        <span class="badge bg-warning-subtle text-warning">Expiring</span>
+                      {% else %}
+                        <span class="badge bg-success-subtle text-success">Active</span>
+                      {% endif %}
+                    {% else %}
+                      <span class="text-muted small">—</span>
+                    {% endif %}
+                  {% endwith %}
+                </td>
+                <td>
+                  <a href="{% url 'claims:employee_create' %}?customer={{ customer.pk }}&product={{ p.pk }}"
+                     class="btn btn-sm btn-primary">
+                    <i class="bi bi-file-earmark-plus me-1"></i>New Claim
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4 text-muted small">No products registered for this customer.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Recent Claims -->
+    <div class="card">
+      <div class="card-header"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Recent Claims ({{ claims|length }})</div>
+      <div class="card-body p-0">
+        {% if claims %}
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr><th>Reference</th><th>Product</th><th>Status</th><th>Decision</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+              {% for c in claims %}
+              <tr>
+                <td>
+                  <a href="{% url 'claims:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+                    {{ c.claim_reference|default:"—" }}
+                  </a>
+                </td>
+                <td>{{ c.product.brand }} {{ c.product.product_name|truncatechars:20 }}</td>
+                <td><span class="badge-claim status-{{ c.status }}">{{ c.get_status_display }}</span></td>
+                <td>
+                  {% if c.final_decision == 'likely_valid' %}<span class="badge bg-success-subtle text-success">Likely Valid</span>
+                  {% elif c.final_decision == 'likely_invalid' %}<span class="badge bg-danger-subtle text-danger">Likely Invalid</span>
+                  {% elif c.final_decision == 'manual_review' %}<span class="badge bg-warning-subtle text-warning">Manual Review</span>
+                  {% else %}<span class="text-muted">—</span>{% endif %}
+                </td>
+                <td class="text-muted small">{{ c.created_at|date:"M d, Y" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4 text-muted small">No claims found.</div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
