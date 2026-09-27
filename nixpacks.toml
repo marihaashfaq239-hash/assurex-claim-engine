@@ -4,6 +4,7 @@ nixPkgs = [
   "python311",
   "gcc",
   "file",
+  "python311Packages.pip",
 ]
 
 [phases.install]
