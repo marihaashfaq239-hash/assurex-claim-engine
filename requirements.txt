@@ -38,8 +38,8 @@ requests==2.32.3
 whitenoise==6.7.0
 gunicorn==23.0.0
 
-# File processing — use python-magic-bin (includes libmagic binary, no system dep needed)
-python-magic-bin==0.4.14
+# File processing (using python-magic for Linux compatibility)
+python-magic==0.4.27
 
 # Testing
 pytest==8.3.3
