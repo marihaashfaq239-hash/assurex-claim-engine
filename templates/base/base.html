@@ -85,13 +85,9 @@
 
       <!-- Breadcrumb / Page title slot -->
       <div class="d-none d-md-block flex-grow-1">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0" style="font-size:.78rem;">
-            {% block breadcrumb %}
-            <li class="breadcrumb-item"><a href="{% url 'dashboard:index' %}" class="text-decoration-none text-muted">Home</a></li>
-            {% endblock %}
-          </ol>
-        </nav>
+        <div class="navbar-page-title">
+          {% block breadcrumb %}Admin Dashboard{% endblock %}
+        </div>
       </div>
 
       <!-- Right side controls -->
@@ -106,9 +102,9 @@
 
         <!-- Notification Bell -->
         <a href="{% url 'notifications:list' %}" class="position-relative text-secondary d-flex align-items-center justify-content-center"
-           style="width:36px;height:36px;border-radius:.5rem;background:rgba(1,62,55,.08);text-decoration:none;"
+           style="width:36px;height:36px;border-radius:.5rem;background:rgba(0,54,49,.08);text-decoration:none;"
            aria-label="Notifications">
-          <i class="bi bi-bell fs-5" style="color:var(--green-800,#013E37);"></i>
+          <i class="bi bi-bell fs-5" style="color:var(--green-800,#003631);"></i>
           {% if unread_notifications_count %}
           <span class="position-absolute notification-count-badge"
                 style="top:3px;right:3px;width:8px;height:8px;background:#f43f5e;border-radius:50%;border:2px solid #fff;"></span>
@@ -118,13 +114,13 @@
         <!-- User Dropdown -->
         <div class="dropdown">
           <button class="btn btn-sm d-flex align-items-center gap-2 py-1 px-2"
-                  style="background:rgba(1,62,55,.07);border:1.5px solid rgba(1,62,55,.15);border-radius:.625rem;"
+                  style="background:rgba(0,54,49,.07);border:1.5px solid rgba(0,54,49,.15);border-radius:.625rem;"
                   type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <div style="width:26px;height:26px;background:linear-gradient(135deg,#013E37,#025248);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFEFB3;font-size:.7rem;font-weight:700;">
+            <div style="width:26px;height:26px;background:linear-gradient(135deg,#003631,#004d46);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#FFEDA8;font-size:.7rem;font-weight:700;">
               {{ user.get_initials }}
             </div>
-            <span style="font-size:.82rem;font-weight:600;color:#012e29;">{{ user.first_name }}</span>
-            <i class="bi bi-chevron-down" style="font-size:.65rem;color:#5a9085;"></i>
+            <span style="font-size:.82rem;font-weight:600;color:#002622;">{{ user.first_name }}</span>
+            <i class="bi bi-chevron-down" style="font-size:.65rem;color:#3d7e72;"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end mt-1" style="min-width:200px;">
             <li>
@@ -134,11 +130,11 @@
               </div>
             </li>
             <li><a class="dropdown-item d-flex align-items-center gap-2 mt-1" href="{% url 'accounts:profile' %}">
-              <i class="bi bi-person-circle" style="color:#013E37;"></i> My Profile
+              <i class="bi bi-person-circle" style="color:#003631;"></i> My Profile
             </a></li>
             {% if user.is_administrator %}
             <li><a class="dropdown-item d-flex align-items-center gap-2" href="{% url 'administrator:thresholds' %}">
-              <i class="bi bi-sliders" style="color:#013E37;"></i> AI Settings
+              <i class="bi bi-sliders" style="color:#003631;"></i> AI Settings
             </a></li>
             {% endif %}
             <li><hr class="dropdown-divider my-1"></li>

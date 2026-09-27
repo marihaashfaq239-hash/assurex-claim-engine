@@ -4,9 +4,7 @@
 {% block title %}Dashboard — AssureX{% endblock %}
 {% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
 
-{% block breadcrumb %}
-<li class="breadcrumb-item active">Dashboard</li>
-{% endblock %}
+{% block breadcrumb %}Dashboard{% endblock %}
 
 {% block content %}
 
@@ -14,7 +12,7 @@
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
   <div>
     <h4 class="page-title mb-0">
-      Welcome back, <span class="text-gradient-blue">{{ user.first_name }}</span> 👋
+      Welcome back, <span class="text-gradient-green">{{ user.first_name }}</span> 👋
     </h4>
     <p class="page-subtitle mb-0 mt-1">Your warranty &amp; claims command center</p>
   </div>
@@ -30,21 +28,21 @@
 <div class="row g-3 mb-4">
 
   <div class="col-6 col-xl-3">
-    <div class="stat-card stat-blue animate-in animate-in-delay-1">
-      <div class="d-flex align-items-center justify-content-between">
+    <div class="stat-card stat-blue animate-in animate-in-delay-1 h-100">
+      <div class="d-flex align-items-center justify-content-between h-100">
         <div>
           <div class="stat-label">Registered Products</div>
           <div class="stat-value" data-count="{{ total_products }}">{{ total_products }}</div>
           <div class="stat-delta up mt-1"><i class="bi bi-box-seam me-1"></i>Total registered</div>
         </div>
-        <div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+        <div class="stat-icon flex-shrink-0"><i class="bi bi-box-seam"></i></div>
       </div>
     </div>
   </div>
 
   <div class="col-6 col-xl-3">
-    <div class="stat-card stat-green animate-in animate-in-delay-2">
-      <div class="d-flex align-items-center justify-content-between">
+    <div class="stat-card stat-green animate-in animate-in-delay-2 h-100">
+      <div class="d-flex align-items-center justify-content-between h-100">
         <div>
           <div class="stat-label">Active Warranties</div>
           <div class="stat-value" data-count="{{ active_warranties }}">{{ active_warranties }}</div>
@@ -54,14 +52,14 @@
           <div class="stat-delta up mt-1"><i class="bi bi-shield-check me-1"></i>All covered</div>
           {% endif %}
         </div>
-        <div class="stat-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="stat-icon flex-shrink-0"><i class="bi bi-shield-check"></i></div>
       </div>
     </div>
   </div>
 
   <div class="col-6 col-xl-3">
-    <div class="stat-card stat-amber animate-in animate-in-delay-3">
-      <div class="d-flex align-items-center justify-content-between">
+    <div class="stat-card stat-amber animate-in animate-in-delay-3 h-100">
+      <div class="d-flex align-items-center justify-content-between h-100">
         <div>
           <div class="stat-label">Pending Claims</div>
           <div class="stat-value" data-count="{{ pending_claims }}">{{ pending_claims }}</div>
@@ -69,14 +67,14 @@
             <i class="bi bi-hourglass-split me-1"></i>Under review
           </div>
         </div>
-        <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+        <div class="stat-icon flex-shrink-0"><i class="bi bi-hourglass-split"></i></div>
       </div>
     </div>
   </div>
 
   <div class="col-6 col-xl-3">
-    <div class="stat-card stat-green animate-in animate-in-delay-4">
-      <div class="d-flex align-items-center justify-content-between">
+    <div class="stat-card stat-green animate-in animate-in-delay-4 h-100">
+      <div class="d-flex align-items-center justify-content-between h-100">
         <div>
           <div class="stat-label">Approved Claims</div>
           <div class="stat-value" data-count="{{ approved_claims }}">{{ approved_claims }}</div>
@@ -84,7 +82,7 @@
             <i class="bi bi-check-circle me-1"></i>of {{ total_claims }} total
           </div>
         </div>
-        <div class="stat-icon"><i class="bi bi-check-circle"></i></div>
+        <div class="stat-icon flex-shrink-0"><i class="bi bi-check-circle"></i></div>
       </div>
     </div>
   </div>

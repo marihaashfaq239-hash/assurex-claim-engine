@@ -1,0 +1,172 @@
+<mxfile host="diagrams.net" modified="2026-09-27" version="21.0.0">
+  <diagram name="System Architecture — AssureX" id="sys-arch">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="AssureX Claim Engine — System Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;fontColor=#003631;" vertex="1" parent="1">
+          <mxGeometry x="327" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ── LAYER 1: USERS ── -->
+        <mxCell id="layer1_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#003631;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="1574" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="layer1_label" value="👥  USER LAYER" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=13;fontColor=#003631;" vertex="1" parent="1">
+          <mxGeometry x="60" y="85" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="u_cust" value="🧑‍💼 Customer&#xa;(Submit Claims)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#003631;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u_emp" value="👷 Employee&#xa;(On-behalf Claims)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#003631;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="370" y="120" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u_rev" value="🔍 Reviewer&#xa;(Manual Review)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#003631;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="620" y="120" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u_adm" value="⚙️ Administrator&#xa;(System Management)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#003631;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="870" y="120" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="u_browser" value="🌐 Web Browser&#xa;(Chrome / Edge / Firefox)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#004a42;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="120" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ── LAYER 2: WEB LAYER ── -->
+        <mxCell id="layer2_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="1574" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="layer2_label" value="🌐  WEB LAYER — Django 4.2 (Python 3.11)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=13;fontColor=#1565c0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="245" width="500" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="app_acc" value="accounts&#xa;Auth · Profiles&#xa;Role Decorators" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_prod" value="products&#xa;Registration&#xa;Categories" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_war" value="warranties&#xa;Tracking&#xa;Expiry Alerts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="420" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_cl" value="claims&#xa;4-Step Wizard&#xa;OCR · AI Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d47a1;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="275" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="app_rev" value="reviewer&#xa;Queue&#xa;Decisions · Override" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="780" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_adm" value="administrator&#xa;Dashboard&#xa;Analytics · Config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="950" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_notif" value="notifications&#xa;In-app Alerts&#xa;Expiry · Status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="app_tmpl" value="templates/&#xa;Bootstrap 5.3&#xa;HTML5 · JS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1565c0;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1300" y="285" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ── LAYER 3: AI PIPELINE ── -->
+        <mxCell id="layer3_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57f17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="480" width="1574" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="layer3_label" value="🤖  AI PIPELINE LAYER — src/ (Framework-Independent Python)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=13;fontColor=#f57f17;" vertex="1" parent="1">
+          <mxGeometry x="60" y="485" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ai_ocr" value="📄 OCR&#xa;Tesseract 5&#xa;+ EasyOCR 1.7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f57f17;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="525" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_pre" value="⚙️ Preprocessing&#xa;19 Features&#xa;OneHot · Scale" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f57f17;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="270" y="525" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_ml" value="🧠 Python ML&#xa;Random Forest&#xa;98.22% accuracy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e65100;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="515" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_card" value="🃏 Card Generator&#xa;600×420 PNG&#xa;Claim Summary Card" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f57f17;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="670" y="525" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_tm" value="👁️ GTM Proxy&#xa;Gradient Boosting&#xa;99.11% accuracy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e65100;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="880" y="515" width="160" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_rule" value="📋 Rule Engine&#xa;11 JSON Rules&#xa;Hard/Warn/Manual" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f57f17;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="525" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ai_dec" value="⚖️ Decision Engine&#xa;Compare · Merge&#xa;Final Verdict" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bf360c;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="515" width="170" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ── LAYER 4: DATA LAYER ── -->
+        <mxCell id="layer4_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#880e4f;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="1574" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="layer4_label" value="🗄️  DATA LAYER" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=13;fontColor=#880e4f;" vertex="1" parent="1">
+          <mxGeometry x="60" y="725" width="300" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="db_sqlite" value="🗄️ SQLite (Dev)&#xa;database/assurex_dev.db&#xa;16 Tables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#880e4f;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="120" y="760" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_pg" value="🐘 PostgreSQL (Prod)&#xa;Railway DATABASE_URL&#xa;16 Tables" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#880e4f;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="760" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_models" value="📦 Model Files&#xa;model/python_model/*.pkl&#xa;model/teachable_machine/*.pkl" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#880e4f;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="760" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_media" value="📁 Media Files&#xa;media/claim_documents/&#xa;media/claim_cards/" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#880e4f;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="940" y="760" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="db_pol" value="📜 Policy Files&#xa;policies/*.json&#xa;11 Warranty Rules" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#880e4f;fontColor=#fff;strokeColor=#fff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="760" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows User → Web -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#003631;strokeWidth=2;" edge="1" source="u_cust" target="app_cl" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#003631;strokeWidth=2;" edge="1" source="u_browser" target="app_tmpl" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows Web → AI -->
+        <mxCell id="a3" value="trigger_ai_pipeline()" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#f57f17;strokeWidth=2;fontStyle=2;fontSize=10;" edge="1" source="app_cl" target="ai_pre" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows within AI Pipeline -->
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#f57f17;strokeWidth=1.5;" edge="1" source="ai_ocr" target="ai_pre" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#f57f17;strokeWidth=1.5;" edge="1" source="ai_pre" target="ai_ml" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#f57f17;strokeWidth=1.5;" edge="1" source="ai_pre" target="ai_card" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#f57f17;strokeWidth=1.5;" edge="1" source="ai_card" target="ai_tm" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a8" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#bf360c;strokeWidth=2;" edge="1" source="ai_ml" target="ai_dec" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a9" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#bf360c;strokeWidth=2;" edge="1" source="ai_tm" target="ai_dec" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a10" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#bf360c;strokeWidth=2;" edge="1" source="ai_rule" target="ai_dec" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- AI → DB -->
+        <mxCell id="a11" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#880e4f;strokeWidth=2;" edge="1" source="ai_dec" target="db_sqlite" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Web → DB -->
+        <mxCell id="a12" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#880e4f;strokeWidth=1.5;" edge="1" source="app_acc" target="db_sqlite" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

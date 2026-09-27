@@ -5,6 +5,17 @@
 
 ---
 
+## Usage Breakdown
+
+| Contributor | Contribution % | Details |
+|---|---|---|
+| **Team (Human)** | **70%** | Architecture decisions, ML training, dataset design, OCR regex, bug fixes, testing, deployment, UI theme, all JSON policies, all diagrams, documentation |
+| **Kiro AI (AI Tool)** | **30%** | Code scaffolding, boilerplate, initial form/model structure, test boilerplate, template structure |
+
+> The final claim decision is produced by our own trained Python ML model + GTM proxy + rule engine — **not** by any external AI API.
+
+---
+
 ## Why We Used AI Tools
 
 Honestly, this project has a lot of moving parts — Django backend, two ML models, OCR pipeline, warranty rule engine, 40+ templates. We used Kiro (an AI coding assistant in our IDE) to speed up repetitive code like model definitions, form widgets, and test boilerplate. But we didn't just copy-paste — we ran everything, broke things, fixed them, and made changes where the AI got it wrong (which happened more than a few times).

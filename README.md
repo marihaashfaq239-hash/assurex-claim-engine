@@ -226,8 +226,17 @@ python database/register_model_version.py
 - [x] Model version tracking
 - [x] CSV export
 - [x] Responsive UI (Bootstrap 5)
+- [x] Minimum 2,000-word technical blog — [Read Blog →](https://assurex-techwiz7.blogspot.com/2026/09/how-we-built-assurex-ai-powered.html)
 - [ ] Mandatory demonstration video *(to be recorded)*
-- [ ] Minimum 2,000-word technical blog *(to be written)*
+
+---
+
+## 📝 Technical Blog
+
+**Published on Blogger:**
+[How We Built AssureX: An AI-Powered Warranty Claim Engine for TechWiz 7](https://assurex-techwiz7.blogspot.com/2026/09/how-we-built-assurex-ai-powered.html)
+
+*By Team AssureX — Muhammad Hunain, Mariha Ashfaq, Owais Ahmed, Muhammad Daniyal*
 - [ ] AI_USAGE.md *(see AI_USAGE.md)*
 
 ---

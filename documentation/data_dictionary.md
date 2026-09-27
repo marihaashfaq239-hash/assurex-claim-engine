@@ -1,17 +1,28 @@
 # AssureX Claim Engine — Data Dictionary
 
-**Project:** AssureX Claim Engine — NextWave AI and ML  
-**Team:** Muhammad Hunain (1538835), Mariha Ashfaq (1540161), Owais Ahmed (1515897), Muhammad Daniyal (1542905)  
+**Project:** AssureX Claim Engine · NextWave AI and ML
+**Team:** Muhammad Hunain (1538835) · Mariha Ashfaq (1540161) · Owais Ahmed (1515897) · Muhammad Daniyal (1542905)
+**Institute / Competition:** Aptech Computer Education · TechWiz 7
 **Version:** 1.0
 
 ---
 
-## Section 1 — Database Tables (15 Tables)
+## Contents
 
-### Table 1: users
+1. [DB Tables](#section-1--database-tables-16-tables) — All 16 database tables with full column-level detail
+2. [ML Features](#section-2--ml-feature-dictionary-19-features) — 19 features used by the Python classification model
+3. [Claim Status Flow](#section-3--claim-status-flow) — Full lifecycle of a claim
+4. [Notification Types](#section-4--notification-types-12-types) — 12 in-app notification categories
+5. [Audit Log Types](#section-5--audit-log-action-types-21-types) — 21 audit trail action types
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+---
+
+## Section 1 — Database Tables (16 Tables)
+
+### Table 01 · `users` · 17 columns
+
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Django internal ID |
 | user_id | UUID | UNIQUE, NOT NULL | System-wide unique user identifier |
 | email | VARCHAR(254) | UNIQUE, NOT NULL | Login email (USERNAME_FIELD) |
@@ -32,10 +43,10 @@
 
 ---
 
-### Table 2: products (product_categories)
+### Table 02 · `product_categories` · 6 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | name | VARCHAR(100) | UNIQUE | Category name (e.g., Air Conditioner) |
 | description | TEXT | NULLABLE | Category description |
@@ -45,10 +56,10 @@
 
 ---
 
-### Table 3: products
+### Table 03 · `products` · 18 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | product_id | UUID | UNIQUE | System-wide product identifier |
 | owner_id | FK(users) | NOT NULL | Customer who owns the product |
@@ -70,10 +81,10 @@
 
 ---
 
-### Table 4: warranties
+### Table 04 · `warranties` · 16 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | warranty_id | UUID | UNIQUE | Warranty identifier |
 | product_id | FK(products) | NOT NULL | Associated product |
@@ -93,10 +104,10 @@
 
 ---
 
-### Table 5: claims
+### Table 05 · `claims` · 38 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | claim_id | UUID | UNIQUE | Claim UUID |
 | claim_reference | VARCHAR(20) | UNIQUE | Human-readable (e.g., CLM-0000001) |
@@ -113,9 +124,9 @@
 | final_decision | VARCHAR(20) | DEFAULT 'pending' | likely_valid/likely_invalid/manual_review/pending |
 | decision_reason | TEXT | NULLABLE | Explanation of decision |
 | python_prediction | VARCHAR(30) | NULLABLE | ML model class prediction |
-| python_confidence_valid | FLOAT | NULLABLE | Confidence for valid_claim (0-1) |
-| python_confidence_invalid | FLOAT | NULLABLE | Confidence for invalid_claim (0-1) |
-| python_confidence_manual | FLOAT | NULLABLE | Confidence for manual_review (0-1) |
+| python_confidence_valid | FLOAT | NULLABLE | Confidence for valid_claim (0–1) |
+| python_confidence_invalid | FLOAT | NULLABLE | Confidence for invalid_claim (0–1) |
+| python_confidence_manual | FLOAT | NULLABLE | Confidence for manual_review (0–1) |
 | tm_prediction | VARCHAR(30) | NULLABLE | TM model class prediction |
 | tm_confidence_valid | FLOAT | NULLABLE | TM confidence for valid_claim |
 | tm_confidence_invalid | FLOAT | NULLABLE | TM confidence for invalid_claim |
@@ -138,10 +149,10 @@
 
 ---
 
-### Table 6: claim_documents
+### Table 06 · `claim_documents` · 12 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | doc_id | UUID | UNIQUE | Document identifier |
 | claim_id | FK(claims) | NOT NULL | Associated claim |
@@ -157,10 +168,10 @@
 
 ---
 
-### Table 7: ocr_results
+### Table 07 · `ocr_results` · 23 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | ocr_id | UUID | UNIQUE | OCR result identifier |
 | document_id | FK(claim_documents) | UNIQUE (1-to-1) | Document that was OCR'd |
@@ -176,8 +187,8 @@
 | warranty_duration | VARCHAR(50) | NULLABLE | Warranty duration text |
 | raw_text | TEXT | NULLABLE | Full OCR raw text |
 | extracted_data | JSON | DEFAULT {} | All extracted fields as JSON |
-| status | VARCHAR(10) | NOT NULL | success/partial/failed |
-| confidence | FLOAT | NULLABLE | OCR confidence score (0-1) |
+| status | VARCHAR(10) | NOT NULL | success / partial / failed |
+| confidence | FLOAT | NULLABLE | OCR confidence score (0–1) |
 | ocr_engine | VARCHAR(50) | DEFAULT 'tesseract' | OCR engine used |
 | is_verified | BOOLEAN | DEFAULT False | User verified the data |
 | verified_by_id | FK(users) | NULLABLE | Who verified |
@@ -187,10 +198,10 @@
 
 ---
 
-### Table 8: repair_history
+### Table 08 · `repair_history` · 13 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | repair_id | UUID | UNIQUE | Repair identifier |
 | claim_id | FK(claims) | NOT NULL | Associated claim |
@@ -201,35 +212,35 @@
 | replaced_parts | TEXT | NULLABLE | Parts replaced |
 | repair_description | TEXT | NOT NULL | What was done |
 | repair_cost | DECIMAL(10,2) | NULLABLE | Cost of repair |
-| outcome | VARCHAR(20) | NOT NULL | fixed/partial/failed/replaced/pending |
+| outcome | VARCHAR(20) | NOT NULL | fixed / partial / failed / replaced / pending |
 | repair_report_file | VARCHAR(255) | NULLABLE | Repair report document |
 | created_at | DATETIME | AUTO | Entry timestamp |
 
 ---
 
-### Table 9: model_predictions
+### Table 09 · `model_predictions` · 12 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | prediction_id | UUID | UNIQUE | Prediction identifier |
 | claim_id | FK(claims) | NOT NULL | Claim evaluated |
 | model_type | VARCHAR(30) | NOT NULL | python_ml / teachable_machine |
 | model_version_id | FK(model_versions) | NULLABLE | Model version used |
-| predicted_class | VARCHAR(20) | NOT NULL | valid_claim/invalid_claim/manual_review |
-| confidence_valid | FLOAT | NOT NULL | Confidence for valid_claim (0-1) |
-| confidence_invalid | FLOAT | NOT NULL | Confidence for invalid_claim (0-1) |
-| confidence_manual_review | FLOAT | NOT NULL | Confidence for manual_review (0-1) |
+| predicted_class | VARCHAR(20) | NOT NULL | valid_claim / invalid_claim / manual_review |
+| confidence_valid | FLOAT | NOT NULL | Confidence for valid_claim (0–1) |
+| confidence_invalid | FLOAT | NOT NULL | Confidence for invalid_claim (0–1) |
+| confidence_manual_review | FLOAT | NOT NULL | Confidence for manual_review (0–1) |
 | input_data | JSON | DEFAULT {} | Feature vector fed to model |
 | processing_time_ms | INTEGER | NULLABLE | Prediction time in ms |
 | created_at | DATETIME | AUTO | Prediction timestamp |
 
 ---
 
-### Table 10: warranty_policies
+### Table 10 · `warranty_policies` · 22 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | policy_id | UUID | UNIQUE | Policy identifier |
 | name | VARCHAR(200) | NOT NULL | Policy name |
@@ -255,10 +266,10 @@
 
 ---
 
-### Table 11: rule_results
+### Table 11 · `rule_results` · 8 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | claim_id | FK(claims) | NOT NULL | Claim evaluated |
 | rule_name | VARCHAR(200) | NOT NULL | Name of the rule checked |
@@ -270,10 +281,10 @@
 
 ---
 
-### Table 12: reviews
+### Table 12 · `reviews` · 15 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | review_id | UUID | UNIQUE | Review identifier |
 | claim_id | FK(claims) | UNIQUE (1-to-1) | Claim being reviewed |
@@ -281,7 +292,7 @@
 | python_prediction | VARCHAR(30) | NULLABLE | Python model result shown to reviewer |
 | tm_prediction | VARCHAR(30) | NULLABLE | TM result shown to reviewer |
 | model_consistency | VARCHAR(30) | NULLABLE | Consistency status shown |
-| decision | VARCHAR(20) | DEFAULT 'pending' | approved/rejected/more_info/pending |
+| decision | VARCHAR(20) | DEFAULT 'pending' | approved / rejected / more_info / pending |
 | reviewer_comments | TEXT | NOT NULL | Reviewer's comments |
 | additional_info_request | TEXT | NULLABLE | What additional info was requested |
 | is_ai_override | BOOLEAN | DEFAULT False | Did reviewer override AI? |
@@ -292,15 +303,15 @@
 
 ---
 
-### Table 13: notifications
+### Table 13 · `notifications` · 14 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | notification_id | UUID | UNIQUE | Notification identifier |
 | recipient_id | FK(users) | NOT NULL | Who receives it |
-| notification_type | VARCHAR(30) | NOT NULL | claim_submitted/claim_evaluated/warranty_expiry/reviewer_assigned/claim_approved/claim_rejected/more_info_requested/status_changed/duplicate_detected/model_disagreement/system/general |
-| priority | VARCHAR(10) | DEFAULT 'medium' | low/medium/high/critical |
+| notification_type | VARCHAR(30) | NOT NULL | See Notification Types section |
+| priority | VARCHAR(10) | DEFAULT 'medium' | low / medium / high / critical |
 | title | VARCHAR(200) | NOT NULL | Notification title |
 | message | TEXT | NOT NULL | Full notification message |
 | link | VARCHAR(500) | NULLABLE | URL to navigate to |
@@ -313,14 +324,14 @@
 
 ---
 
-### Table 14: audit_logs
+### Table 14 · `audit_logs` · 11 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | log_id | UUID | UNIQUE | Log entry identifier |
 | user_id | FK(users) | NULLABLE | Who performed the action |
-| action_type | VARCHAR(50) | NOT NULL | account_created/login/logout/product_registered/warranty_added/document_uploaded/ocr_extracted/data_corrected/claim_created/claim_submitted/claim_status_changed/model_predicted/reviewer_action/final_decision/ai_override/report_exported/user_managed/policy_updated/threshold_updated/anomaly_detected/profile_updated |
+| action_type | VARCHAR(50) | NOT NULL | See Audit Log Action Types section |
 | description | TEXT | NOT NULL | Human-readable description |
 | ip_address | INET | NULLABLE | Client IP address |
 | user_agent | VARCHAR(300) | NULLABLE | Browser user agent |
@@ -331,17 +342,17 @@
 
 ---
 
-### Table 15: model_versions
+### Table 15 · `model_versions` · 11 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | version_id | UUID | UNIQUE | Version identifier |
 | model_type | VARCHAR(30) | NOT NULL | python_ml / teachable_machine |
 | version_name | VARCHAR(100) | NOT NULL | Version label (e.g., v1.0) |
 | description | TEXT | NULLABLE | Version notes |
 | file_path | VARCHAR(500) | NULLABLE | Path to saved model file |
-| accuracy | FLOAT | NULLABLE | Test accuracy (0-1) |
+| accuracy | FLOAT | NULLABLE | Test accuracy (0–1) |
 | is_active | BOOLEAN | DEFAULT True | Currently active version |
 | trained_at | DATETIME | NULLABLE | Training timestamp |
 | created_at | DATETIME | AUTO | Registration timestamp |
@@ -349,15 +360,15 @@
 
 ---
 
-### Table 16: system_configuration
+### Table 16 · `system_configuration` · 8 columns
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
+| Column | Data Type | Constraints | Description |
+|--------|-----------|-------------|-------------|
 | id | INTEGER | PK, Auto | Internal ID |
 | config_id | UUID | UNIQUE | Config identifier |
 | key | VARCHAR(100) | UNIQUE | Config key (e.g., confidence_threshold_min) |
 | value | TEXT | NOT NULL | Config value |
-| value_type | VARCHAR(10) | NOT NULL | str/int/float/bool/json |
+| value_type | VARCHAR(10) | NOT NULL | str / int / float / bool / json |
 | description | TEXT | NULLABLE | What this setting controls |
 | updated_by_id | FK(users) | NULLABLE | Last updated by |
 | updated_at | DATETIME | AUTO_UPDATE | Last update |
@@ -366,10 +377,8 @@
 
 ## Section 2 — ML Feature Dictionary (19 Features)
 
-These are the features used by the Python classification model and for generating the Claim Summary Card.
-
-| # | Feature Name | Type | Range/Values | Description |
-|---|-------------|------|--------------|-------------|
+| # | Feature Name | Type | Range / Values | Description |
+|---|-------------|------|----------------|-------------|
 | 1 | product_category | String (Categorical) | Air Conditioner, Refrigerator, Washing Machine, Television, Smartphone, Laptop, Microwave, Generator, Water Heater, Small Appliance | Product type |
 | 2 | brand | String (Categorical) | Samsung, LG, Haier, PEL, Dawlance, Orient, TCL, Sony, etc. | Manufacturer brand |
 | 3 | damage_type | String (Categorical) | physical, electrical, mechanical, software, manufacturing, water, overheating, battery, display, other | Primary fault type |
@@ -390,17 +399,86 @@ These are the features used by the Python classification model and for generatin
 | 18 | purchase_price_pkr | Float | 0–2,000,000 | Purchase price in PKR |
 | 19 | claim_reporting_within_period | Binary (0/1) | 0 or 1 | Reported within policy deadline |
 
-**Encoding:** String categoricals use `OneHotEncoder` via sklearn `ColumnTransformer`. Numerical features use `StandardScaler`. Binary features pass through unchanged.
+> **Encoding:** String categoricals → `OneHotEncoder` via sklearn `ColumnTransformer`. Numerical features → `StandardScaler`. Binary features pass through unchanged.
 
----
-
-## Section 3 — Claim Classes
+### Claim Classes
 
 | Class | Label | Description | Dataset Count |
 |-------|-------|-------------|---------------|
-| Valid Claim | valid_claim | Claim meets all criteria — warranty active, documents present, no contradictions | 500 records |
-| Invalid Claim | invalid_claim | Claim fails validation — expired warranty, physical damage, unauthorized repair, duplicate | 500 records |
-| Manual Review | manual_review | Borderline case — low confidence, conflicting info, missing key documents | 500 records |
+| Valid Claim | `valid_claim` | Claim meets all criteria — warranty active, documents present, no contradictions | 500 records |
+| Invalid Claim | `invalid_claim` | Claim fails validation — expired warranty, physical damage, unauthorized repair, duplicate | 500 records |
+| Manual Review | `manual_review` | Borderline case — low confidence, conflicting info, missing key documents | 500 records |
 
-**Total:** 1,500 records  
-**Split:** 70% train (1,050) / 15% validation (225) / 15% test (225)
+> **Total:** 1,500 records · **Split:** 70% train (1,050) · 15% validation (225) · 15% test (225)
+
+---
+
+## Section 3 — Claim Status Flow
+
+| Step | Status | Description |
+|------|--------|-------------|
+| 1 | **Draft** | Claim created but not yet submitted by the claimant. |
+| 2 | **Submitted** | Claim has been submitted and is queued for AI evaluation. |
+| 3 | **Under Evaluation** | OCR, ML models, and rule engine are actively processing the claim. |
+| 4 | **Additional Info Required** | System or reviewer has requested more documents/details from the claimant. |
+| 5 | **Manual Review** | Claim routed to a human reviewer due to model disagreement, low confidence, or rule warning. |
+| 6a | **Approved** | Reviewer or AI confirmed the claim as valid (final). |
+| 6b | **Rejected** | Reviewer or AI confirmed the claim as invalid (final). |
+| 7 | **Closed** | Claim lifecycle complete; no further action possible. |
+
+```
+Draft → Submitted → Under Evaluation → Additional Info Required
+                                     ↓
+                              Manual Review → Approved / Rejected → Closed
+```
+
+---
+
+## Section 4 — Notification Types (12 Types)
+
+| # | Notification Type | Description |
+|---|-------------------|-------------|
+| 1 | `claim_submitted` | Sent to claimant when their claim is successfully submitted. |
+| 2 | `claim_evaluated` | Sent when the AI pipeline finishes evaluating a claim. |
+| 3 | `warranty_expiry` | Sent when a product's warranty is nearing or has reached expiry. |
+| 4 | `reviewer_assigned` | Sent to a reviewer when a claim is assigned to their queue. |
+| 5 | `claim_approved` | Sent to claimant when their claim is approved. |
+| 6 | `claim_rejected` | Sent to claimant when their claim is rejected. |
+| 7 | `more_info_requested` | Sent when a reviewer requests additional information. |
+| 8 | `status_changed` | Sent whenever a claim's status transitions. |
+| 9 | `duplicate_detected` | Sent when the system flags a claim as a possible duplicate. |
+| 10 | `model_disagreement` | Sent internally when the two AI models disagree on a claim. |
+| 11 | `system` | General system-level notification (maintenance, updates, etc.). |
+| 12 | `general` | Miscellaneous/uncategorized notification. |
+
+---
+
+## Section 5 — Audit Log Action Types (21 Types)
+
+| # | Action Type | Description |
+|---|-------------|-------------|
+| 1 | `account_created` | A new user account was registered. |
+| 2 | `login` | A user logged into the system. |
+| 3 | `logout` | A user logged out of the system. |
+| 4 | `product_registered` | A new product was registered under a customer. |
+| 5 | `warranty_added` | A warranty record was created for a product. |
+| 6 | `document_uploaded` | A claim document was uploaded. |
+| 7 | `ocr_extracted` | OCR extraction was run on an uploaded document. |
+| 8 | `data_corrected` | A claimant corrected OCR-extracted data. |
+| 9 | `claim_created` | A new claim record (draft) was created. |
+| 10 | `claim_submitted` | A claim was submitted for evaluation. |
+| 11 | `claim_status_changed` | A claim's status field was updated. |
+| 12 | `model_predicted` | An AI model produced a prediction for a claim. |
+| 13 | `reviewer_action` | A reviewer took an action on a claim. |
+| 14 | `final_decision` | The system recorded a claim's final decision. |
+| 15 | `ai_override` | A reviewer overrode the AI's recommendation. |
+| 16 | `report_exported` | A report or data export was generated. |
+| 17 | `user_managed` | An administrator created, edited, or deactivated a user. |
+| 18 | `policy_updated` | A warranty policy JSON file was updated. |
+| 19 | `threshold_updated` | An AI confidence threshold was changed by an admin. |
+| 20 | `anomaly_detected` | The system flagged unusual claim activity. |
+| 21 | `profile_updated` | A user updated their own profile information. |
+
+---
+
+*AssureX Claim Engine · TechWiz 7 · Aptech Computer Education · 2026*

@@ -177,7 +177,67 @@ The reviewer can approve, reject, request more information, or override the AI r
 
 ---
 
-## What We Learned
+## Model Errors and Disagreement Cases
+
+No model is perfect — and understanding where ours fails is as important as knowing where it succeeds. On the 225-record test set, the Random Forest model misclassified 4 claims (1.78%). All four were Manual Review records that were predicted as Valid Claim. Examining them revealed a pattern: they were all edge cases where every measurable signal looked valid (active warranty, all documents present, serial match) but the fault description contained a subtle indicator of exclusion — something a rule check caught but the feature vector did not capture well.
+
+The Gradient Boosting image model misclassified 2 claims on the same test set (0.89%) — both were Manual Review cards that closely resembled Valid cards visually. This is actually a useful failure: the two models disagreed on exactly the kind of claim that should go to manual review.
+
+One specific disagreement case from our test set is illustrative: a laptop claim where the Python model predicted Valid Claim (87% confidence) but the GTM model predicted Manual Review (61% confidence). The confidence difference was 26%, landing it in the Weak Match tier. The rule engine then flagged an unauthorized repair in the history. The final decision: Manual Review Required — which was the correct label. Both models being partially wrong, but in opposite directions, produced the right outcome.
+
+---
+
+## Testing Results
+
+We wrote 180 automated tests across 10 test files covering every module in the system. All 180 pass.
+
+**Test breakdown by category:**
+- **Functional tests (62):** User registration, login, role-based redirects, product registration, 4-step claim wizard, OCR verification, reviewer workflow, admin dashboard, threshold configuration, CSV export
+- **Integration tests (24):** Full pipeline end-to-end from claim submission to decision, OCR-to-contradiction chain, reviewer queue population, notification delivery
+- **Boundary tests (18):** 5MB file size limit, fault date equal to today, warranty expiry date equal to today, maximum repair count edge cases, confidence threshold boundaries
+- **Negative tests (28):** Wrong file type upload, empty mandatory fields, future fault date, cross-role 403 access, missing warranty, invalid claim ID
+- **Security tests (20):** CSRF token validation, SQL injection attempts on search fields, XSS via claim description, unauthenticated access to protected views, admin-only endpoint access by customer role
+- **ML model tests (28):** Accuracy ≥ 85% on test set, feature count verification (19 features), confidence probabilities sum to 1.0, all five consistency tiers reachable, rule engine producing correct outcomes for all 11 mandatory SRS scenarios
+
+The 11 mandatory SRS scenarios (valid claim, invalid claim, manual review, expired warranty, missing document, duplicate claim, contradictory claim, serial mismatch, unauthorized repair, boundary date, model disagreement) each have dedicated test cases with known expected outputs. These are our "hidden test readiness" tests — designed specifically for evaluator queries.
+
+---
+
+## Security Considerations
+
+AssureX handles personally identifiable information — names, contact details, product serial numbers, and financial transaction records. We took several steps to protect it.
+
+**Authentication and authorization** use Django's built-in session framework with role-based decorators (`@customer_required`, `@employee_required`, `@reviewer_required`, `@admin_required`) on every view. Cross-role access returns a proper 403 response rather than redirecting, which prevents enumeration.
+
+**Document uploads** are validated by MIME type and file extension before storage. Files are stored outside the web root and served through Django's `FileResponse` with authentication checks, so a guessed URL cannot expose a document without login.
+
+**Duplicate document detection** uses SHA-256 hashing: the same physical file submitted under a different filename is caught before reaching the AI pipeline.
+
+**CSRF protection** is enabled on every form. The admin panel session times out after 30 minutes of inactivity.
+
+**Audit trail** records every significant action — login, document upload, OCR correction, model prediction, claim submission, reviewer decision, admin override — with timestamp and IP address. This provides a complete tamper-evident log for any dispute.
+
+---
+
+## Limitations and Future Enhancements
+
+**Current limitations:**
+
+AssureX uses a synthetic training dataset. While designed to cover realistic scenarios, it cannot capture the full distribution of real-world claim patterns — particularly regional ones (Pakistani market receipt formats, local brands). The models will need retraining on real data before production deployment.
+
+The Google Teachable Machine proxy model, while accurate on synthetic cards, is not a true neural network image model. A proper CNN trained end-to-end on real claim images would likely be more robust.
+
+OCR accuracy drops significantly on low-quality scans, handwritten text, or non-standard receipt layouts. The current Tesseract + EasyOCR combination handles most digital-print receipts well, but degraded copies remain a challenge.
+
+**Future enhancements:**
+
+The most impactful next step would be integrating with a real manufacturer's warranty database — instead of manual product registration, products would sync from the manufacturer's product catalogue, and warranty activation would be automatic at the point of sale.
+
+A mobile application for customers to photograph documents and check claim status would significantly reduce friction. The Django REST API backend is already in place; adding React Native or Flutter on top is the natural extension.
+
+Active learning would let the system improve over time: reviewer decisions become new training labels, gradually shifting the model toward real-world patterns rather than synthetic ones.
+
+---
 
 This project taught us several things we would not have learned from a simple CRUD application:
 

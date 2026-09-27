@@ -74,7 +74,7 @@
       {{ oldest_in_queue.claim_reference }}
     </a>
     — {{ oldest_in_queue.claimant.get_full_name }} ·
-    submitted {{ oldest_in_queue.submission_date|timesince|default:oldest_in_queue.created_at|timesince }} ago
+    submitted {{ oldest_in_queue.created_at|timesince }} ago
   </div>
   <a href="{% url 'reviewer:detail' oldest_in_queue.pk %}" class="btn btn-sm btn-warning ms-auto">Review Now</a>
 </div>
@@ -94,7 +94,7 @@
         <div class="table-responsive">
           <table class="table table-hover mb-0">
             <thead>
-              <tr><th>Reference</th><th>Customer</th><th>AI Decision</th><th>Confidence Δ</th><th>Action</th></tr>
+              <tr><th>Reference</th><th>Customer</th><th>AI Consistency</th><th>Confidence Δ</th><th>Action</th></tr>
             </thead>
             <tbody>
               {% for c in queue_preview %}
@@ -110,9 +110,19 @@
                   <small class="text-muted">{{ c.claimant.email }}</small>
                 </td>
                 <td>
-                  {% if c.final_decision == 'likely_valid' %}<span class="badge bg-success-subtle text-success">Likely Valid</span>
-                  {% elif c.final_decision == 'likely_invalid' %}<span class="badge bg-danger-subtle text-danger">Likely Invalid</span>
-                  {% else %}<span class="badge bg-secondary-subtle text-secondary">Uncertain</span>{% endif %}
+                  {% if c.model_consistency_status == 'strong_match' %}
+                    <span class="badge bg-success-subtle text-success">Strong Match</span>
+                  {% elif c.model_consistency_status == 'acceptable_match' %}
+                    <span class="badge bg-info-subtle text-info">Acceptable</span>
+                  {% elif c.model_consistency_status == 'weak_match' %}
+                    <span class="badge bg-warning-subtle text-warning">Weak Match</span>
+                  {% elif c.model_consistency_status == 'model_disagreement' %}
+                    <span class="badge bg-danger-subtle text-danger">Disagreement</span>
+                  {% elif c.model_consistency_status == 'uncertain_result' %}
+                    <span class="badge bg-secondary-subtle text-secondary">Uncertain</span>
+                  {% else %}
+                    <span class="badge bg-secondary-subtle text-secondary">Pending</span>
+                  {% endif %}
                 </td>
                 <td>
                   {% if c.confidence_difference is not None %}

@@ -1,0 +1,127 @@
+<mxfile host="diagrams.net" modified="2026-09-27" version="21.0.0">
+  <diagram name="Decision Flow — AI Final Decision" id="decision">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Decision Flow — AI Claim Evaluation Pipeline" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontStyle=1;fontColor=#003631;" vertex="1" parent="1">
+          <mxGeometry x="60" y="10" width="707" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Start -->
+        <mxCell id="s1" value="Claim Submitted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#003631;fontColor=#FFEDA8;strokeColor=#FFEDA8;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="294" y="70" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1: Preprocess -->
+        <mxCell id="s2" value="Extract 19 Features&#xa;(Preprocessing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57f17;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="294" y="160" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2: Python ML -->
+        <mxCell id="s3" value="Python ML Model&#xa;(Random Forest)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="260" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="s3a" value="py_pred + [conf_v, conf_i, conf_m]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="340" width="260" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 3: Card + GTM -->
+        <mxCell id="s4" value="Generate Claim Card&#xa;(600×420 PNG)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57f17;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="490" y="260" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="GTM Model&#xa;(Gradient Boosting)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0b2;strokeColor=#e65100;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="340" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="s5a" value="tm_pred + [conf_v, conf_i, conf_m]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="450" y="420" width="260" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 4: Compare -->
+        <mxCell id="s6" value="Compare Predictions&#xa;conf_diff = |py_top - tm_top|" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8eaf6;strokeColor=#283593;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="264" y="490" width="260" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Decision 1: Models agree? -->
+        <mxCell id="d1" value="py_pred == tm_pred&#xa;(Models Agree?)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="279" y="580" width="230" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Decision 2: Confidence diff -->
+        <mxCell id="d2" value="conf_diff ≤ 5%?&#xa;(Strong Match)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="100" y="700" width="200" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="conf_diff ≤ 15%?&#xa;(Acceptable Match)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="340" y="700" width="200" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Consistency labels -->
+        <mxCell id="c_strong" value="STRONG MATCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c_accept" value="ACCEPTABLE MATCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcedc8;strokeColor=#558b2f;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="820" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c_weak" value="WEAK MATCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="820" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c_disagree" value="MODEL&#xa;DISAGREEMENT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcdd2;strokeColor=#c62828;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="620" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Step 5: Rule Engine -->
+        <mxCell id="s7" value="Run Rule Engine&#xa;(11 Warranty Rules)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57f17;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="264" y="900" width="260" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Decision 3: Hard fail? -->
+        <mxCell id="d4" value="Any HARD FAIL&#xa;rule triggered?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="279" y="990" width="230" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Decision 4: Consistency OK? -->
+        <mxCell id="d5" value="Strong/Acceptable Match&#xa;AND min confidence ≥ 70%?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f57f17;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="259" y="1100" width="270" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Final decisions -->
+        <mxCell id="out_invalid" value="❌ LIKELY INVALID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c62828;fontColor=#fff;strokeColor=#fff;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="995" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="out_valid" value="✅ LIKELY VALID" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2e7d32;fontColor=#fff;strokeColor=#fff;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1210" width="180" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="out_manual" value="🔍 MANUAL REVIEW&#xa;REQUIRED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f57f17;fontColor=#fff;strokeColor=#fff;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1205" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="cn1" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="s1" target="s2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn2" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="s2" target="s3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn3" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="s2" target="s4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn4" style="endArrow=block;endFill=1;strokeColor=#e65100;strokeWidth=2;" edge="1" source="s3" target="s3a" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn5" style="endArrow=block;endFill=1;strokeColor=#e65100;strokeWidth=2;" edge="1" source="s4" target="s5" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn6" style="endArrow=block;endFill=1;strokeColor=#e65100;strokeWidth=2;" edge="1" source="s5" target="s5a" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn7" style="endArrow=block;endFill=1;strokeColor=#283593;strokeWidth=2;" edge="1" source="s3a" target="s6" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn8" style="endArrow=block;endFill=1;strokeColor=#283593;strokeWidth=2;" edge="1" source="s5a" target="s6" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn9" style="endArrow=block;endFill=1;strokeColor=#f57f17;strokeWidth=2;" edge="1" source="s6" target="d1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn10" value="YES" style="endArrow=block;endFill=1;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d1" target="d2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn11" value="NO" style="endArrow=block;endFill=1;strokeColor=#c62828;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d1" target="c_disagree" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn12" value="YES" style="endArrow=block;endFill=1;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;" edge="1" source="d2" target="c_strong" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn13" value="NO" style="endArrow=block;endFill=1;strokeColor=#c62828;strokeWidth=2;fontSize=11;" edge="1" source="d2" target="d3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn14" value="YES" style="endArrow=block;endFill=1;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;" edge="1" source="d3" target="c_accept" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn15" value="NO" style="endArrow=block;endFill=1;strokeColor=#f57f17;strokeWidth=2;fontSize=11;" edge="1" source="d3" target="c_weak" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn16" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="c_strong" target="s7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn17" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="c_accept" target="s7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn18" style="endArrow=block;endFill=1;strokeColor=#f57f17;strokeWidth=2;" edge="1" source="c_weak" target="s7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn19" style="endArrow=block;endFill=1;strokeColor=#c62828;strokeWidth=2;" edge="1" source="c_disagree" target="s7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn20" style="endArrow=block;endFill=1;strokeColor=#003631;strokeWidth=2;" edge="1" source="s7" target="d4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn21" value="YES" style="endArrow=block;endFill=1;strokeColor=#c62828;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d4" target="out_invalid" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn22" value="NO" style="endArrow=block;endFill=1;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d4" target="d5" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn23" value="YES" style="endArrow=block;endFill=1;strokeColor=#2e7d32;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d5" target="out_valid" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="cn24" value="NO" style="endArrow=block;endFill=1;strokeColor=#f57f17;strokeWidth=2;fontSize=11;fontStyle=1;" edge="1" source="d5" target="out_manual" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

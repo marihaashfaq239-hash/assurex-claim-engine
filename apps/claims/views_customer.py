@@ -103,12 +103,24 @@ def claim_detail(request, pk):
     Full claim detail — AI results, rule engine, reviewer comments, status timeline.
     SRS §1.6.xxxii — AI-Generated Claim Summary
     SRS §1.6.xxviii — Contradiction Detection (shown on detail page)
+    Accessible by: claimant, employee who submitted, reviewer, administrator.
     """
-    claim = get_object_or_404(
-        Claim,
-        pk=pk,
-        claimant=request.user
-    )
+    from django.db.models import Q
+    user = request.user
+
+    # Build access filter based on role
+    if user.is_administrator or user.is_reviewer:
+        # Admin and reviewer can see all claims
+        claim = get_object_or_404(Claim, pk=pk)
+    elif user.is_employee:
+        # Employee can see claims they submitted OR are the claimant
+        claim = get_object_or_404(
+            Claim,
+            Q(pk=pk) & (Q(claimant=user) | Q(submitted_by=user))
+        )
+    else:
+        # Customer can only see their own claims
+        claim = get_object_or_404(Claim, pk=pk, claimant=user)
     documents    = claim.documents.all()
     ocr_results  = claim.ocr_results.all()
     rule_results = claim.rule_results.all()
