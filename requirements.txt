@@ -39,7 +39,7 @@ whitenoise==6.7.0
 gunicorn==23.0.0
 
 # File processing (using python-magic for Linux compatibility)
-python-magic==0.4.27
+# python-magic is not needed - file type checking done via mimetypes
 
 # Testing
 pytest==8.3.3
