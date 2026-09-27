@@ -15,8 +15,7 @@ cmds = [
 [phases.build]
 cmds = [
   "python manage.py collectstatic --noinput",
-  "python manage.py migrate --noinput",
 ]
 
 [start]
-cmd = "gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+cmd = "python manage.py migrate --noinput && gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
