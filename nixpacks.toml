@@ -3,7 +3,7 @@ nixPkgs = [
   "tesseract",
   "python311",
   "gcc",
-  "libmagic",
+  "file",
 ]
 
 [phases.install]
