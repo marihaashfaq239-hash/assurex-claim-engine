@@ -9,7 +9,7 @@ nixPkgs = [
 
 [phases.install]
 cmds = [
-  "pip install -r requirements.txt",
+  "python3.11 -m pip install -r requirements.txt",
 ]
 
 [phases.build]
@@ -19,3 +19,4 @@ cmds = [
 
 [start]
 cmd = "gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+
