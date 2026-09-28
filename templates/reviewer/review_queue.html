@@ -6,120 +6,254 @@
 {% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
 
 {% block content %}
+
+<!-- Header -->
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h4 class="page-title mb-0">Manual Review Queue</h4>
-    <p class="page-subtitle mb-0">{{ total }} claim{{ total|pluralize }} awaiting manual review</p>
+    <p class="page-subtitle mb-0">Claims flagged by AI for human review</p>
+  </div>
+  <a href="{% url 'reviewer:reviewed' %}" class="btn btn-outline-primary btn-sm">
+    <i class="bi bi-clock-history me-1"></i>Reviewed Claims
+  </a>
+</div>
+
+<!-- Stats Bar -->
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#003631,#004d46);">
+        <i class="bi bi-inbox" style="color:#FFEDA8;"></i>
+      </div>
+      <div>
+        <div class="stat-value">{{ total }}</div>
+        <div class="stat-label">Awaiting Review</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#dc2626,#ef4444);">
+        <i class="bi bi-exclamation-triangle" style="color:#fff;"></i>
+      </div>
+      <div>
+        <div class="stat-value text-danger">
+          {% with dup=0 %}
+            {% for c in claims %}{% if c.is_duplicate %}{% with dup=dup|add:1 %}{% endwith %}{% endif %}{% endfor %}
+          {% endwith %}
+          {{ claims|length }}
+        </div>
+        <div class="stat-label">In Queue</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
+        <i class="bi bi-cpu" style="color:#fff;"></i>
+      </div>
+      <div>
+        <div class="stat-value text-warning">AI</div>
+        <div class="stat-label">Flagged by AI Pipeline</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:linear-gradient(135deg,#003631,#027e72);">
+        <i class="bi bi-person-check" style="color:#FFEDA8;"></i>
+      </div>
+      <div>
+        <div class="stat-value" style="color:#003631;">{{ request.user.get_full_name|truncatechars:12 }}</div>
+        <div class="stat-label">Logged in as Reviewer</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Search -->
 <div class="card mb-3">
   <div class="card-body py-3">
-    <form method="get" class="row g-2 align-items-end">
+    <form method="get" class="row g-2 align-items-center">
       <div class="col-md-6">
         <input type="text" name="q" value="{{ search }}" class="form-control"
-               placeholder="Search by reference, customer email, serial...">
+               placeholder="Search by reference, customer email, or serial number...">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Search</button>
-        {% if search %}<a href="{% url 'reviewer:queue' %}" class="btn btn-outline-secondary ms-1">Clear</a>{% endif %}
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search me-1"></i>Search
+        </button>
+        {% if search %}
+        <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-secondary ms-1">
+          <i class="bi bi-x me-1"></i>Clear
+        </a>
+        {% endif %}
+      </div>
+      <div class="col-auto ms-auto">
+        <span class="text-muted small">{{ total }} claim{{ total|pluralize }} in queue</span>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Queue Table -->
 <div class="card">
   <div class="card-body p-0">
     {% if claims %}
     <div class="table-responsive">
       <table class="table table-hover mb-0">
-        <thead>
+        <thead style="background:#f9fafb;">
           <tr>
-            <th>Reference</th>
-            <th>Customer</th>
-            <th>Product</th>
-            <th>Python Model</th>
-            <th>TM Model</th>
-            <th>Conf. Diff</th>
-            <th>Consistency</th>
-            <th>Submitted</th>
-            <th>Action</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;padding:12px 16px;">Claim</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Customer</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Product</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Damage Type</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">🐍 Python ML</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">🖼️ TM Model</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Consistency</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Waiting</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Action</th>
           </tr>
         </thead>
         <tbody>
           {% for c in claims %}
-          <tr class="{% if c.already_reviewed %}table-secondary{% endif %}">
-            <td>
-              <a href="{% url 'reviewer:detail' c.pk %}" class="fw-semibold text-primary text-decoration-none">
+          <tr style="border-bottom:1px solid #f3f4f6;{% if c.already_reviewed %}opacity:.6;{% endif %}">
+
+            <!-- Claim Reference -->
+            <td style="padding:14px 16px;">
+              <a href="{% url 'reviewer:detail' c.pk %}" class="fw-bold text-decoration-none" style="color:#003631;">
                 {{ c.claim_reference|default:"—" }}
               </a>
               {% if c.is_duplicate %}
-                <br><span class="badge bg-danger-subtle text-danger" style="font-size:.65rem;">Duplicate</span>
+              <div class="mt-1">
+                <span style="background:#fee2e2;color:#dc2626;padding:1px 8px;border-radius:20px;font-size:10px;font-weight:700;">
+                  ⚠ Duplicate
+                </span>
+              </div>
               {% endif %}
+              <div style="font-size:11px;color:#9ca3af;margin-top:2px;">
+                {{ c.submission_date|date:"M d, Y"|default:c.created_at|date:"M d, Y" }}
+              </div>
             </td>
+
+            <!-- Customer -->
             <td>
-              <div>{{ c.claimant.get_full_name }}</div>
-              <small class="text-muted">{{ c.claimant.email }}</small>
+              <div style="font-weight:600;font-size:13px;">{{ c.claimant.get_full_name }}</div>
+              <div style="font-size:11px;color:#9ca3af;">{{ c.claimant.email }}</div>
             </td>
+
+            <!-- Product -->
             <td>
-              <div>{{ c.product.brand }} {{ c.product.product_name|truncatechars:18 }}</div>
-              <small class="font-monospace text-muted">{{ c.product.serial_number }}</small>
+              <div style="font-weight:500;font-size:13px;">{{ c.product.brand }} {{ c.product.product_name|truncatechars:18 }}</div>
+              <div style="font-size:11px;color:#9ca3af;font-family:monospace;">{{ c.product.serial_number }}</div>
             </td>
+
+            <!-- Damage Type -->
+            <td>
+              <span style="background:#f0f7ff;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">
+                {{ c.get_damage_type_display }}
+              </span>
+            </td>
+
+            <!-- Python ML -->
             <td>
               {% if c.python_prediction %}
-                <span class="badge {% if c.python_prediction == 'valid_claim' %}bg-success-subtle text-success{% elif c.python_prediction == 'invalid_claim' %}bg-danger-subtle text-danger{% else %}bg-warning-subtle text-warning{% endif %}">
-                  {{ c.python_prediction|prediction_label }}
-                </span>
-              {% else %}<span class="text-muted small">—</span>{% endif %}
+                <div>
+                  {% if c.python_prediction == 'valid_claim' %}
+                    <span style="background:#dcfce7;color:#15803d;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✓ Valid</span>
+                  {% elif c.python_prediction == 'invalid_claim' %}
+                    <span style="background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✗ Invalid</span>
+                  {% else %}
+                    <span style="background:#fef9c3;color:#a16207;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">⚠ Manual</span>
+                  {% endif %}
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-top:3px;">
+                  Conf: {{ c.python_confidence_valid|default:0|floatformat:1 }}% valid
+                </div>
+              {% else %}<span style="color:#d1d5db;font-size:12px;">Pending</span>{% endif %}
             </td>
+
+            <!-- TM Model -->
             <td>
               {% if c.tm_prediction %}
-                <span class="badge {% if c.tm_prediction == 'valid_claim' %}bg-success-subtle text-success{% elif c.tm_prediction == 'invalid_claim' %}bg-danger-subtle text-danger{% else %}bg-warning-subtle text-warning{% endif %}">
-                  {{ c.tm_prediction|prediction_label }}
-                </span>
-              {% else %}<span class="text-muted small">—</span>{% endif %}
+                <div>
+                  {% if c.tm_prediction == 'valid_claim' %}
+                    <span style="background:#dcfce7;color:#15803d;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✓ Valid</span>
+                  {% elif c.tm_prediction == 'invalid_claim' %}
+                    <span style="background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✗ Invalid</span>
+                  {% else %}
+                    <span style="background:#fef9c3;color:#a16207;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">⚠ Manual</span>
+                  {% endif %}
+                </div>
+                <div style="font-size:11px;color:#9ca3af;margin-top:3px;">
+                  Conf: {{ c.tm_confidence_valid|default:0|floatformat:1 }}% valid
+                </div>
+              {% else %}<span style="color:#d1d5db;font-size:12px;">Pending</span>{% endif %}
             </td>
-            <td>
-              {% if c.confidence_difference is not None %}
-                <span class="fw-bold {% if c.confidence_difference > 25 %}text-danger{% elif c.confidence_difference > 15 %}text-warning{% else %}text-success{% endif %}">
-                  {{ c.confidence_difference|floatformat:1 }}%
-                </span>
-              {% else %}—{% endif %}
-            </td>
+
+            <!-- Consistency -->
             <td>
               {% if c.model_consistency_status %}
-                <span class="badge
-                  {% if c.model_consistency_status == 'strong_match' %}bg-success-subtle text-success
-                  {% elif c.model_consistency_status == 'acceptable_match' %}bg-info-subtle text-info
-                  {% elif c.model_consistency_status == 'weak_match' %}bg-warning-subtle text-warning
-                  {% else %}bg-danger-subtle text-danger{% endif %}">
-                  {{ c.model_consistency_status|consistency_label }}
-                </span>
+                {% if c.model_consistency_status == 'strong_match' %}
+                  <span style="background:#dcfce7;color:#15803d;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">Strong Match</span>
+                {% elif c.model_consistency_status == 'acceptable_match' %}
+                  <span style="background:#f0f7ff;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">Acceptable</span>
+                {% elif c.model_consistency_status == 'weak_match' %}
+                  <span style="background:#fef9c3;color:#a16207;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">Weak Match</span>
+                {% else %}
+                  <span style="background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">Disagree</span>
+                {% endif %}
+                {% if c.confidence_difference is not None %}
+                <div style="font-size:11px;color:#9ca3af;margin-top:3px;">Δ {{ c.confidence_difference|floatformat:1 }}%</div>
+                {% endif %}
               {% else %}—{% endif %}
             </td>
-            <td class="text-muted small">{{ c.submission_date|date:"M d, Y"|default:c.created_at|date:"M d, Y" }}</td>
+
+            <!-- Waiting Days -->
+            <td>
+              {% if c.submission_date %}
+                <span style="font-weight:700;font-size:14px;color:#003631;">{{ c.days_since_fault }}</span>
+                <div style="font-size:11px;color:#9ca3af;">days</div>
+              {% else %}—{% endif %}
+            </td>
+
+            <!-- Action -->
             <td>
               {% if c.already_reviewed %}
-                <span class="badge bg-success rounded-pill">Done</span>
+                <span style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;">
+                  <i class="bi bi-check-lg me-1"></i>Done
+                </span>
               {% else %}
-                <a href="{% url 'reviewer:detail' c.pk %}" class="btn btn-sm btn-warning">
+                <a href="{% url 'reviewer:detail' c.pk %}" class="btn btn-sm btn-warning fw-semibold">
                   <i class="bi bi-pencil-square me-1"></i>Review
                 </a>
               {% endif %}
             </td>
+
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
+
+    <!-- Footer -->
+    <div style="padding:12px 16px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:12px;color:#6b7280;">{{ total }} claim{{ total|pluralize }} awaiting review</span>
+      <span style="font-size:12px;color:#6b7280;">Claims are ordered by submission date — oldest first</span>
+    </div>
+
     {% else %}
     <div class="text-center py-5 text-muted">
-      <i class="bi bi-check2-all fs-1 opacity-25 d-block mb-2"></i>
-      {% if search %}No claims match "{{ search }}".
-      {% else %}Queue is empty — no claims pending manual review.{% endif %}
+      <i class="bi bi-check2-all" style="font-size:48px;opacity:.2;display:block;margin-bottom:12px;"></i>
+      <div style="font-size:15px;font-weight:600;color:#374151;">
+        {% if search %}No claims match "{{ search }}"{% else %}Queue is empty!{% endif %}
+      </div>
+      <div style="font-size:13px;margin-top:4px;">
+        {% if search %}Try a different search term.{% else %}All claims have been reviewed or no claims need manual review.{% endif %}
+      </div>
     </div>
     {% endif %}
   </div>
 </div>
+
 {% endblock %}
