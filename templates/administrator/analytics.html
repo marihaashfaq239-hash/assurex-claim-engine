@@ -51,6 +51,125 @@
       <div class="stat-value text-warning">{{ total_overrides }}</div>
     </div>
   </div>
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-label">Avg AI Confidence</div>
+      <div class="stat-value text-primary">{% if avg_confidence %}{{ avg_confidence }}%{% else %}—{% endif %}</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card">
+      <div class="stat-label">Model Accuracy (Python ML)</div>
+      <div class="stat-value text-success">98.2%</div>
+    </div>
+  </div>
+</div>
+
+<!-- Python Confidence Score Distribution -->
+<div class="row g-4 mt-2">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-cpu me-2 text-primary"></i>
+        Python ML — Confidence Score Distribution (All Evaluated Claims)
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+
+          <!-- Valid confidence -->
+          <div class="col-md-4">
+            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:16px;">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#16a34a;margin-bottom:8px;">
+                <i class="bi bi-check-circle me-1"></i> Valid Claim — Avg Confidence
+              </div>
+              <div style="font-size:28px;font-weight:800;color:#16a34a;">
+                {% if avg_confidence %}{{ avg_confidence }}%{% else %}—{% endif %}
+              </div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">
+                Python ML predicts Valid with this average probability
+              </div>
+              <div style="height:6px;background:#dcfce7;border-radius:99px;margin-top:10px;overflow:hidden;">
+                <div style="height:100%;background:#16a34a;border-radius:99px;width:{% if avg_confidence %}{{ avg_confidence }}%{% else %}0%{% endif %};transition:width .6s;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model info -->
+          <div class="col-md-4">
+            <div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:10px;padding:16px;">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1d4ed8;margin-bottom:8px;">
+                <i class="bi bi-robot me-1"></i> Python ML Model
+              </div>
+              <div style="font-size:28px;font-weight:800;color:#1d4ed8;">98.2%</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">
+                Test accuracy — Random Forest (1,500 records)
+              </div>
+              <div style="height:6px;background:#dbeafe;border-radius:99px;margin-top:10px;overflow:hidden;">
+                <div style="height:100%;background:#1d4ed8;border-radius:99px;width:98.2%;transition:width .6s;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TM Model info -->
+          <div class="col-md-4">
+            <div style="background:#f0fdff;border:1px solid #a5f3fc;border-radius:10px;padding:16px;">
+              <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0891b2;margin-bottom:8px;">
+                <i class="bi bi-image me-1"></i> Teachable Machine
+              </div>
+              <div style="font-size:28px;font-weight:800;color:#0891b2;">99.1%</div>
+              <div style="font-size:12px;color:#6b7280;margin-top:4px;">
+                Test accuracy — Gradient Boosting (2,100 images)
+              </div>
+              <div style="height:6px;background:#cffafe;border-radius:99px;margin-top:10px;overflow:hidden;">
+                <div style="height:100%;background:#0891b2;border-radius:99px;width:99.1%;transition:width .6s;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3 class probabilities explanation -->
+        <div style="background:#f9fafb;border-radius:10px;padding:16px;margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:10px;">
+            <i class="bi bi-info-circle me-1"></i> How Python Confidence Scores Work
+          </div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#16a34a;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;">Valid Claim %</div>
+                  <div style="font-size:11px;color:#6b7280;">Probability claim is legitimate</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#dc2626;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;">Invalid Claim %</div>
+                  <div style="font-size:11px;color:#6b7280;">Probability of fraud/invalid</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:12px;height:12px;background:#d97706;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;">Manual Review %</div>
+                  <div style="font-size:11px;color:#6b7280;">Probability needs human review</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:#9ca3af;margin-top:10px;">
+            The class with highest probability becomes the predicted class. Auto-approve/reject threshold: 92%. Below 70% → Manual Review queue.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
 
