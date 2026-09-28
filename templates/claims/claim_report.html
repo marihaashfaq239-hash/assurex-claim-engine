@@ -7,469 +7,960 @@
   <title>Claim Report — {{ claim.claim_reference }} — AssureX</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ── Print & screen styles ── */
-    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; color: #1a1a2e; background: #fff; }
+    :root {
+      --primary:   #1d4ed8;
+      --primary-dark: #1e3a8a;
+      --success:   #16a34a;
+      --danger:    #dc2626;
+      --warning:   #d97706;
+      --gray-50:   #f9fafb;
+      --gray-100:  #f3f4f6;
+      --gray-200:  #e5e7eb;
+      --gray-400:  #9ca3af;
+      --gray-600:  #4b5563;
+      --gray-800:  #1f2937;
+      --radius:    12px;
+      --shadow:    0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.06);
+    }
 
-    .report-header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 1.5rem; }
-    .report-header h2 { font-size: 1.4rem; margin: 0; }
-    .report-header .sub { opacity: .8; font-size: .85rem; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .section-title { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: #6b7280; font-weight: 700; margin-bottom: .5rem; padding-bottom: .25rem; border-bottom: 2px solid #e5e7eb; }
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: var(--gray-800);
+      background: #eef2f7;
+      line-height: 1.55;
+    }
 
-    .info-table td:first-child { color: #6b7280; width: 40%; font-size: .82rem; }
-    .info-table td:last-child   { font-weight: 600; font-size: .85rem; }
-    .info-table { margin-bottom: 0; }
+    /* ── Page wrapper ── */
+    .report-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
 
-    .decision-box { border-radius: 10px; padding: 1.2rem; text-align: center; }
-    .decision-valid   { background: #f0fdf4; border: 2px solid #16a34a; }
-    .decision-invalid { background: #fef2f2; border: 2px solid #dc2626; }
-    .decision-manual  { background: #fffbeb; border: 2px solid #d97706; }
+    /* ── Action bar ── */
+    .action-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .btn-print {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background .2s;
+    }
+    .btn-print:hover { background: var(--primary-dark); }
+    .btn-back {
+      background: #fff;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-    .conf-bar-wrap { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin: 3px 0; }
-    .conf-bar-fill { height: 100%; border-radius: 4px; }
+    /* ── Header ── */
+    .report-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 60%, #3b82f6 100%);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      color: #fff;
+      margin-bottom: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .report-header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .report-header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 40%;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,.04);
+      border-radius: 50%;
+    }
+    .brand-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-bottom: 6px;
+    }
+    .report-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: 10px;
+    }
+    .report-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 12px;
+      opacity: .8;
+    }
+    .report-meta span strong { opacity: 1; font-weight: 600; }
+    .status-badge-header {
+      position: absolute;
+      top: 28px; right: 36px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+    .status-dot.rejected { background: #f87171; }
+    .status-dot.pending  { background: #fbbf24; }
 
-    .rule-badge-pass { background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:20px;font-size:.75rem; }
-    .rule-badge-fail { background:#fee2e2;color:#dc2626;padding:2px 8px;border-radius:20px;font-size:.75rem; }
-    .rule-badge-warn { background:#fef9c3;color:#d97706;padding:2px 8px;border-radius:20px;font-size:.75rem; }
-    .rule-badge-skip { background:#f3f4f6;color:#6b7280;padding:2px 8px;border-radius:20px;font-size:.75rem; }
+    /* ── Cards & Sections ── */
+    .report-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .card-header-bar {
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header-bar .icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+    }
+    .icon-blue   { background: #dbeafe; color: #1d4ed8; }
+    .icon-green  { background: #dcfce7; color: #16a34a; }
+    .icon-orange { background: #ffedd5; color: #ea580c; }
+    .icon-purple { background: #ede9fe; color: #7c3aed; }
+    .icon-cyan   { background: #cffafe; color: #0891b2; }
+    .icon-red    { background: #fee2e2; color: #dc2626; }
+    .icon-gray   { background: #f3f4f6; color: #4b5563; }
+    .icon-yellow { background: #fef9c3; color: #ca8a04; }
 
-    .contra-hard { background:#fff1f2;border-left:4px solid #dc2626;padding:.6rem .8rem;margin-bottom:.5rem;border-radius:0 4px 4px 0; }
-    .contra-warn { background:#fffbeb;border-left:4px solid #d97706;padding:.6rem .8rem;margin-bottom:.5rem;border-radius:0 4px 4px 0; }
+    .card-header-bar h6 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--gray-600);
+      margin: 0;
+    }
+    .card-body-inner { padding: 20px 24px; }
 
-    .page-break { page-break-before: always; }
-    .no-print   { display: block; }
+    /* ── Info grid ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+    }
+    .info-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--gray-400);
+    }
+    .info-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+    .mono { font-family: 'Courier New', monospace; font-size: 12px; }
 
-    /* Watermark for non-final reports */
+    /* ── Decision box ── */
+    .decision-hero {
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .decision-valid   { background: linear-gradient(135deg,#f0fdf4,#dcfce7); border: 2px solid #86efac; }
+    .decision-invalid { background: linear-gradient(135deg,#fef2f2,#fee2e2); border: 2px solid #fca5a5; }
+    .decision-manual  { background: linear-gradient(135deg,#fffbeb,#fef3c7); border: 2px solid #fcd34d; }
+    .decision-pending { background: linear-gradient(135deg,#f8fafc,#f1f5f9); border: 2px solid #cbd5e1; }
+
+    .decision-icon { font-size: 40px; margin-bottom: 8px; }
+    .decision-label {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .decision-reason {
+      font-size: 12px;
+      color: var(--gray-600);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ── AI Model cards ── */
+    .model-card {
+      border-radius: 10px;
+      padding: 18px;
+      height: 100%;
+    }
+    .model-card-py   { background: #f0f7ff; border: 1px solid #bfdbfe; }
+    .model-card-tm   { background: #f0fdff; border: 1px solid #a5f3fc; }
+    .model-card-cmp  { background: #faf5ff; border: 1px solid #ddd6fe; }
+    .model-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+    .model-py  .model-label { color: #1d4ed8; }
+    .model-tm  .model-label { color: #0891b2; }
+    .model-cmp .model-label { color: #7c3aed; }
+    .model-prediction {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+
+    .conf-item { margin-bottom: 8px; }
+    .conf-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-600);
+      margin-bottom: 3px;
+    }
+    .conf-header span:last-child { font-weight: 700; color: var(--gray-800); }
+    .conf-track {
+      height: 6px;
+      background: rgba(0,0,0,.08);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .conf-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .fill-green  { background: linear-gradient(90deg,#4ade80,#16a34a); }
+    .fill-red    { background: linear-gradient(90deg,#f87171,#dc2626); }
+    .fill-yellow { background: linear-gradient(90deg,#fbbf24,#d97706); }
+
+    /* ── Comparison table ── */
+    .cmp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      font-size: 12px;
+    }
+    .cmp-row:last-child { border-bottom: none; }
+    .cmp-label { color: var(--gray-600); font-weight: 500; }
+    .cmp-value { font-weight: 700; }
+
+    /* ── Badges ── */
+    .badge-pass { background:#dcfce7;color:#15803d;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600; }
+    .badge-fail { background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600; }
+    .badge-warn { background:#fef9c3;color:#a16207;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600; }
+    .badge-skip { background:#f3f4f6;color:#6b7280;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600; }
+    .badge-info { background:#dbeafe;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600; }
+
+    /* ── Stats row ── */
+    .stats-row {
+      display: flex;
+      gap: 12px;
+    }
+    .stat-chip {
+      flex: 1;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-align: center;
+    }
+    .stat-chip .num {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-chip .lbl {
+      font-size: 11px;
+      color: var(--gray-400);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .num-green { color: var(--success); }
+    .num-red   { color: var(--danger); }
+    .num-yellow{ color: var(--warning); }
+    .num-gray  { color: var(--gray-400); }
+
+    /* ── Contradiction alerts ── */
+    .alert-hard {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-left: 4px solid #dc2626;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .alert-warn {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid #d97706;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    /* ── Documents table ── */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .doc-table th {
+      background: var(--gray-50);
+      padding: 9px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--gray-400);
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .doc-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-800);
+      vertical-align: middle;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table tr:hover td { background: var(--gray-50); }
+    .doc-icon { font-size: 18px; margin-right: 6px; }
+
+    /* ── Reviewer section ── */
+    .reviewer-decision {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .reviewer-avatar {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg,#1d4ed8,#3b82f6);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 700; font-size: 14px; }
+    .reviewer-role { font-size: 11px; color: var(--gray-400); }
+    .comment-box {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--gray-800);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    .report-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--gray-400);
+    }
+    .report-footer strong { color: var(--gray-600); }
+
+    /* ── Watermark ── */
     {% if claim.status == 'draft' %}
     body::before {
       content: "DRAFT";
-      position: fixed; top: 40%; left: 50%; transform: translate(-50%,-50%) rotate(-30deg);
-      font-size: 8rem; color: rgba(0,0,0,.04); font-weight: 900; pointer-events: none; z-index: 0;
+      position: fixed; top: 40%; left: 50%;
+      transform: translate(-50%,-50%) rotate(-30deg);
+      font-size: 9rem; color: rgba(0,0,0,.03);
+      font-weight: 900; pointer-events: none; z-index: 0;
     }
     {% endif %}
 
+    /* ── Print ── */
     @media print {
-      .no-print { display: none !important; }
-      body { font-size: 11px; }
-      .report-header { background: #1e3a5f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { background: #fff; font-size: 11px; }
+      .action-bar { display: none !important; }
+      .report-page { padding: 0; }
+      .report-header { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .model-card-py, .model-card-tm, .model-card-cmp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .report-card { box-shadow: none; border: 1px solid #e5e7eb; page-break-inside: avoid; }
     }
   </style>
 </head>
-<body class="p-4">
+<body>
+<div class="report-page">
 
-<!-- ── Print / Close buttons ── -->
-<div class="no-print d-flex gap-2 justify-content-end mb-3">
-  <button onclick="window.print()" class="btn btn-primary btn-sm">
-    <i class="bi bi-printer me-1"></i> Print / Save as PDF
-  </button>
-  <button onclick="window.close()" class="btn btn-outline-secondary btn-sm">
-    <i class="bi bi-x-lg me-1"></i> Close
-  </button>
-</div>
+  <!-- ── Action Bar ── -->
+  <div class="action-bar no-print">
+    <a href="javascript:history.back()" class="btn-back">
+      <i class="bi bi-arrow-left"></i> Back
+    </a>
+    <button onclick="window.print()" class="btn-print">
+      <i class="bi bi-printer-fill"></i> Print / Save PDF
+    </button>
+  </div>
 
-<!-- ════════════════════════════════════════════
-     HEADER
-     ════════════════════════════════════════════ -->
-<div class="report-header">
-  <div class="d-flex justify-content-between align-items-start">
-    <div>
-      <div style="font-size:1.1rem;font-weight:800;letter-spacing:.03em;">
-        <i class="bi bi-shield-check me-2"></i>AssureX Claim Engine
-      </div>
-      <h2 class="mt-1">Warranty Claim Report</h2>
-      <div class="sub">
-        Claim Reference: <strong>{{ claim.claim_reference }}</strong>
-        &nbsp;&middot;&nbsp;
-        Generated: {{ generated_at|date:"F d, Y — H:i" }}
+  <!-- ══════════════════════════════════════════
+       HEADER
+       ══════════════════════════════════════════ -->
+  <div class="report-header mb-4">
+    <div class="brand-name"><i class="bi bi-shield-check me-1"></i>AssureX Claim Engine</div>
+    <div class="report-title">Warranty Claim Report</div>
+    <div class="report-meta">
+      <span><strong>Ref:</strong> {{ claim.claim_reference }}</span>
+      <span><strong>Generated:</strong> {{ generated_at|date:"F d, Y — H:i" }}</span>
+      <span><strong>Claimant:</strong> {{ claim.claimant.get_full_name }}</span>
+      {% if claim.submitted_by and claim.submitted_by != claim.claimant %}
+      <span><strong>Submitted By:</strong> {{ claim.submitted_by.get_full_name }}</span>
+      {% endif %}
+    </div>
+    <div class="status-badge-header">
+      <span class="status-dot {% if claim.status == 'rejected' %}rejected{% elif claim.status in 'submitted,evaluation,manual,additional,draft' %}pending{% endif %}"></span>
+      {{ claim.get_status_display }}
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1 — PRODUCT & WARRANTY
+       ══════════════════════════════════════════ -->
+  <div class="row g-3 mb-0">
+    <div class="col-md-6">
+      <div class="report-card h-100">
+        <div class="card-header-bar">
+          <div class="icon icon-blue"><i class="bi bi-box-seam"></i></div>
+          <h6>Product Information</h6>
+        </div>
+        <div class="card-body-inner">
+          <div class="info-row"><span class="info-label">Product</span><span class="info-value">{{ claim.product.brand }} {{ claim.product.product_name }}</span></div>
+          <div class="info-row"><span class="info-label">Category</span><span class="info-value">{{ claim.product.category }}</span></div>
+          <div class="info-row"><span class="info-label">Model Number</span><span class="info-value mono">{{ claim.product.model_number }}</span></div>
+          <div class="info-row"><span class="info-label">Serial Number</span><span class="info-value mono">{{ claim.product.serial_number }}</span></div>
+          <div class="info-row"><span class="info-label">Purchase Date</span><span class="info-value">{{ claim.product.purchase_date|date:"M d, Y" }}</span></div>
+          <div class="info-row"><span class="info-label">Purchase Price</span><span class="info-value">PKR {{ claim.product.purchase_price|default:"—" }}</span></div>
+          <div class="info-row"><span class="info-label">Retailer</span><span class="info-value">{{ claim.product.retailer|default:"—" }}</span></div>
+          <div class="info-row"><span class="info-label">Product Age</span><span class="info-value">{{ ai_summary.product.age_months }} months</span></div>
+        </div>
       </div>
     </div>
-    <div class="text-end">
-      <div class="sub">Status</div>
-      <div style="font-size:1.2rem;font-weight:700;">{{ claim.get_status_display }}</div>
-      {% if claim.is_duplicate %}
-        <div class="mt-1"><span style="background:#fbbf24;color:#000;padding:2px 8px;border-radius:4px;font-size:.75rem;">⚠ Duplicate Flagged</span></div>
+    <div class="col-md-6">
+      <div class="report-card h-100">
+        <div class="card-header-bar">
+          <div class="icon icon-green"><i class="bi bi-shield-check"></i></div>
+          <h6>Warranty Information</h6>
+        </div>
+        <div class="card-body-inner">
+          {% if ai_summary.warranty %}
+          <div class="info-row"><span class="info-label">Provider</span><span class="info-value">{{ ai_summary.warranty.provider }}</span></div>
+          <div class="info-row"><span class="info-label">Type</span><span class="info-value">{{ ai_summary.warranty.type }}</span></div>
+          <div class="info-row"><span class="info-label">Start Date</span><span class="info-value">{{ ai_summary.warranty.start }}</span></div>
+          <div class="info-row"><span class="info-label">Expiry Date</span><span class="info-value">{{ ai_summary.warranty.expiry }}</span></div>
+          <div class="info-row">
+            <span class="info-label">Status</span>
+            <span class="info-value">
+              {% if ai_summary.warranty.is_expired %}
+                <span class="badge-fail">Expired</span>
+              {% else %}
+                <span class="badge-pass">Active — {{ ai_summary.warranty.remaining_days }} days left</span>
+              {% endif %}
+            </span>
+          </div>
+          {% else %}
+          <p class="text-muted small mt-2">No warranty record linked.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 — FAULT DETAILS
+       ══════════════════════════════════════════ -->
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-orange"><i class="bi bi-exclamation-triangle"></i></div>
+      <h6>Reported Fault Details</h6>
+    </div>
+    <div class="card-body-inner">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="info-row"><span class="info-label">Claim ID</span><span class="info-value mono">{{ claim.claim_reference }}</span></div>
+          <div class="info-row"><span class="info-label">Claimant</span><span class="info-value">{{ claim.claimant.get_full_name }} &nbsp;<span style="color:var(--gray-400);font-weight:400;">{{ claim.claimant.email }}</span></span></div>
+          <div class="info-row"><span class="info-label">Submission Date</span><span class="info-value">{{ claim.submission_date|date:"M d, Y H:i"|default:"Not submitted" }}</span></div>
+          <div class="info-row"><span class="info-label">Fault Date</span><span class="info-value">{{ claim.fault_date|date:"M d, Y" }}</span></div>
+          <div class="info-row"><span class="info-label">Damage Type</span><span class="info-value"><span class="badge-info">{{ claim.get_damage_type_display }}</span></span></div>
+          <div class="info-row"><span class="info-label">Days Since Fault</span><span class="info-value">{{ claim.days_since_fault }} days</span></div>
+        </div>
+        <div class="col-md-6">
+          <div style="background:var(--gray-50);border-radius:10px;padding:14px;margin-bottom:10px;">
+            <div class="info-label mb-1">Fault Description</div>
+            <p style="font-size:13px;color:var(--gray-800);line-height:1.6;margin:0;">{{ claim.fault_description }}</p>
+          </div>
+          {% if claim.additional_notes %}
+          <div style="background:var(--gray-50);border-radius:10px;padding:14px;">
+            <div class="info-label mb-1">Additional Notes</div>
+            <p style="font-size:12px;color:var(--gray-600);margin:0;">{{ claim.additional_notes }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 — DOCUMENTS & OCR
+       ══════════════════════════════════════════ -->
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-cyan"><i class="bi bi-paperclip"></i></div>
+      <h6>Uploaded Evidence &amp; OCR Results</h6>
+    </div>
+    <div class="card-body-inner">
+      {% if documents %}
+      <table class="doc-table mb-3">
+        <thead>
+          <tr>
+            <th>Document Type</th>
+            <th>Filename</th>
+            <th>Size</th>
+            <th>Uploaded</th>
+            <th>OCR Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for doc in documents %}
+          <tr>
+            <td>
+              {% if doc.doc_type == 'purchase_receipt' %}<span style="font-size:16px;">🧾</span>
+              {% elif doc.doc_type == 'warranty_card' %}<span style="font-size:16px;">📋</span>
+              {% elif doc.doc_type == 'fault_evidence' %}<span style="font-size:16px;">📸</span>
+              {% elif doc.doc_type == 'product_image' %}<span style="font-size:16px;">🖼️</span>
+              {% else %}<span style="font-size:16px;">📄</span>{% endif %}
+              {{ doc.get_doc_type_display }}
+            </td>
+            <td class="mono">{{ doc.file_name }}</td>
+            <td>{{ doc.file_size|filesizeformat }}</td>
+            <td>{{ doc.uploaded_at|date:"M d, Y" }}</td>
+            <td>
+              {% for ocr in ocr_results %}
+                {% if ocr.document_id == doc.pk %}
+                  {% if ocr.status == 'success' %}<span class="badge-pass">✓ Success</span>
+                  {% elif ocr.status == 'partial' %}<span class="badge-warn">~ Partial</span>
+                  {% else %}<span class="badge-fail">✗ Failed</span>{% endif %}
+                {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div style="text-align:center;padding:20px;color:var(--gray-400);">
+        <i class="bi bi-file-earmark-x" style="font-size:32px;display:block;margin-bottom:8px;"></i>
+        No documents uploaded.
+      </div>
+      {% endif %}
+
+      {% if ai_summary.missing_documents %}
+      <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 14px;font-size:12px;">
+        <strong style="color:#c2410c;">⚠ Missing Required Documents:</strong>
+        {% for m in ai_summary.missing_documents %}
+          <span class="badge-fail ms-1">{{ m|replace_underscore }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if ocr_results %}
+      <div style="margin-top:16px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:10px;">OCR Extracted Data</div>
+        <table class="doc-table">
+          <thead><tr><th>Document</th><th>Invoice #</th><th>Serial #</th><th>Purchase Date</th><th>Amount</th><th>Verified</th></tr></thead>
+          <tbody>
+          {% for ocr in ocr_results %}
+          <tr>
+            <td>{{ ocr.document.get_doc_type_display }}</td>
+            <td class="mono">{{ ocr.invoice_number|default:"—" }}</td>
+            <td class="mono">{{ ocr.serial_number|default:"—" }}</td>
+            <td>{{ ocr.purchase_date|default:"—" }}</td>
+            <td>{{ ocr.purchase_amount|default:"—" }}</td>
+            <td>{% if ocr.is_verified %}<span class="badge-pass">✓ Yes</span>{% else %}<span class="badge-skip">No</span>{% endif %}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
       {% endif %}
     </div>
   </div>
-</div>
 
+  <!-- ══════════════════════════════════════════
+       SECTION 4 — AI MODEL RESULTS
+       ══════════════════════════════════════════ -->
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-purple"><i class="bi bi-cpu"></i></div>
+      <h6>AI Model Results</h6>
+      <span class="ms-auto badge-info">Dual-Model Analysis</span>
+    </div>
+    <div class="card-body-inner">
+      <div class="row g-3">
 
-<!-- ════════════════════════════════════════════
-     SECTION 1 — CLAIM & PRODUCT DETAILS
-     ════════════════════════════════════════════ -->
-<div class="row g-4 mb-4">
+        <!-- Python ML -->
+        <div class="col-md-4">
+          <div class="model-card model-card-py model-py">
+            <div class="model-label">🐍 Python ML Model</div>
+            <div class="model-prediction">{{ claim.python_prediction|prediction_label|default:"Pending" }}</div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Valid Claim</span><span>{{ claim.python_confidence_valid|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-green" style="width:{{ claim.python_confidence_valid|default:0|floatformat:0 }}%"></div></div>
+            </div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Invalid Claim</span><span>{{ claim.python_confidence_invalid|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-red" style="width:{{ claim.python_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
+            </div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Manual Review</span><span>{{ claim.python_confidence_manual|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-yellow" style="width:{{ claim.python_confidence_manual|default:0|floatformat:0 }}%"></div></div>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-md-6">
-    <div class="section-title"><i class="bi bi-box-seam me-1"></i> Product Information</div>
-    <table class="table table-sm info-table">
-      <tr><td>Product</td><td>{{ claim.product.brand }} {{ claim.product.product_name }}</td></tr>
-      <tr><td>Model Number</td><td class="font-monospace">{{ claim.product.model_number }}</td></tr>
-      <tr><td>Serial Number</td><td class="font-monospace">{{ claim.product.serial_number }}</td></tr>
-      <tr><td>Purchase Date</td><td>{{ claim.product.purchase_date|date:"M d, Y" }}</td></tr>
-      <tr><td>Purchase Price</td><td>PKR {{ claim.product.purchase_price|default:"—" }}</td></tr>
-      <tr><td>Retailer</td><td>{{ claim.product.retailer|default:"—" }}</td></tr>
-      <tr><td>Product Age</td><td>{{ ai_summary.product.age_months }} months</td></tr>
-    </table>
+        <!-- Teachable Machine -->
+        <div class="col-md-4">
+          <div class="model-card model-card-tm model-tm">
+            <div class="model-label">🖼️ Teachable Machine (Image AI)</div>
+            <div class="model-prediction">{{ claim.tm_prediction|prediction_label|default:"Pending" }}</div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Valid Claim</span><span>{{ claim.tm_confidence_valid|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-green" style="width:{{ claim.tm_confidence_valid|default:0|floatformat:0 }}%"></div></div>
+            </div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Invalid Claim</span><span>{{ claim.tm_confidence_invalid|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-red" style="width:{{ claim.tm_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
+            </div>
+            <div class="conf-item">
+              <div class="conf-header"><span>Manual Review</span><span>{{ claim.tm_confidence_manual|default:0|floatformat:1 }}%</span></div>
+              <div class="conf-track"><div class="conf-fill fill-yellow" style="width:{{ claim.tm_confidence_manual|default:0|floatformat:0 }}%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div class="col-md-4">
+          <div class="model-card model-card-cmp model-cmp">
+            <div class="model-label">⚖️ Model Comparison</div>
+            <div class="model-prediction" style="font-size:13px;">
+              {% if claim.model_consistency_status == 'strong_match' %}✅ Strong Match
+              {% elif claim.model_consistency_status == 'acceptable_match' %}✔️ Acceptable Match
+              {% elif claim.model_consistency_status == 'weak_match' %}⚠️ Weak Match
+              {% elif claim.model_consistency_status == 'model_disagreement' %}❌ Model Disagreement
+              {% else %}— Pending{% endif %}
+            </div>
+            <div class="cmp-row"><span class="cmp-label">Python Prediction</span><span class="cmp-value">{{ claim.python_prediction|prediction_label|default:"—" }}</span></div>
+            <div class="cmp-row"><span class="cmp-label">TM Prediction</span><span class="cmp-value">{{ claim.tm_prediction|prediction_label|default:"—" }}</span></div>
+            <div class="cmp-row">
+              <span class="cmp-label">Class Match</span>
+              <span class="cmp-value">
+                {% if claim.python_prediction and claim.tm_prediction %}
+                  {% if claim.python_prediction == claim.tm_prediction %}
+                    <span class="badge-pass">✓ Match</span>
+                  {% else %}
+                    <span class="badge-fail">✗ Mismatch</span>
+                  {% endif %}
+                {% else %}—{% endif %}
+              </span>
+            </div>
+            <div class="cmp-row">
+              <span class="cmp-label">Conf. Difference</span>
+              <span class="cmp-value">{% if claim.confidence_difference is not None %}{{ claim.confidence_difference|floatformat:1 }}%{% else %}—{% endif %}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="section-title"><i class="bi bi-shield me-1"></i> Warranty Information</div>
-    {% if ai_summary.warranty %}
-    <table class="table table-sm info-table">
-      <tr><td>Provider</td><td>{{ ai_summary.warranty.provider }}</td></tr>
-      <tr><td>Type</td><td>{{ ai_summary.warranty.type }}</td></tr>
-      <tr><td>Start Date</td><td>{{ ai_summary.warranty.start }}</td></tr>
-      <tr><td>Expiry Date</td><td>{{ ai_summary.warranty.expiry }}</td></tr>
-      <tr><td>Status</td>
+  <!-- ══════════════════════════════════════════
+       SECTION 5 — RULE ENGINE
+       ══════════════════════════════════════════ -->
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-yellow"><i class="bi bi-clipboard-check"></i></div>
+      <h6>Warranty Rule Validation</h6>
+    </div>
+    <div class="card-body-inner">
+      {% if rule_results %}
+      <div class="stats-row mb-3">
+        <div class="stat-chip"><div class="num num-green">{{ claim.rules_passed }}</div><div class="lbl">Passed</div></div>
+        <div class="stat-chip"><div class="num num-red">{{ claim.rules_failed }}</div><div class="lbl">Failed</div></div>
+        <div class="stat-chip"><div class="num num-yellow">{{ claim.rules_warning }}</div><div class="lbl">Warnings</div></div>
+        <div class="stat-chip"><div class="num num-gray">{{ rule_results|length }}</div><div class="lbl">Total Rules</div></div>
+      </div>
+      <table class="doc-table">
+        <thead><tr><th>Rule</th><th>Type</th><th>Outcome</th><th>Details</th></tr></thead>
+        <tbody>
+        {% for r in rule_results %}
+        <tr>
+          <td><strong>{{ r.rule_name }}</strong></td>
+          <td><span class="badge-info">{{ r.rule_type|capfirst }}</span></td>
           <td>
-            {% if ai_summary.warranty.is_expired %}
-              <span class="rule-badge-fail">Expired</span>
-            {% else %}
-              <span class="rule-badge-pass">{{ ai_summary.warranty.status }} ({{ ai_summary.warranty.remaining_days }} days left)</span>
-            {% endif %}
+            {% if r.outcome == 'pass' %}<span class="badge-pass">✓ Pass</span>
+            {% elif r.outcome == 'fail' %}<span class="badge-fail">✗ Fail</span>
+            {% elif r.outcome == 'warning' %}<span class="badge-warn">⚠ Warning</span>
+            {% else %}<span class="badge-skip">Skip</span>{% endif %}
           </td>
-      </tr>
-    </table>
-    {% else %}
-    <p class="text-muted small">No warranty record linked to this claim.</p>
-    {% endif %}
+          <td style="color:var(--gray-600);">{{ r.description|truncatechars:90 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div style="text-align:center;padding:20px;color:var(--gray-400);">
+        <i class="bi bi-clipboard-x" style="font-size:32px;display:block;margin-bottom:8px;"></i>
+        Rule validation not yet performed.
+      </div>
+      {% endif %}
+    </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="section-title"><i class="bi bi-exclamation-triangle me-1"></i> Reported Fault</div>
-    <table class="table table-sm info-table">
-      <tr><td>Claimant</td><td>{{ claim.claimant.get_full_name }} ({{ claim.claimant.email }})</td></tr>
-      <tr><td>Claim ID</td><td class="font-monospace">{{ claim.claim_reference }}</td></tr>
-      <tr><td>Submission Date</td><td>{{ claim.submission_date|date:"M d, Y H:i"|default:"Not submitted" }}</td></tr>
-      <tr><td>Fault Date</td><td>{{ claim.fault_date|date:"M d, Y" }}</td></tr>
-      <tr><td>Damage Type</td><td>{{ claim.get_damage_type_display }}</td></tr>
-      <tr><td>Days Since Fault</td><td>{{ claim.days_since_fault }} days</td></tr>
-    </table>
-    <div class="section-title mt-2">Fault Description</div>
-    <p style="font-size:.85rem;background:#f9fafb;padding:.6rem;border-radius:4px;">{{ claim.fault_description }}</p>
-    {% if claim.additional_notes %}
-    <div class="section-title mt-1">Additional Notes</div>
-    <p style="font-size:.83rem;color:#6b7280;">{{ claim.additional_notes }}</p>
-    {% endif %}
+  <!-- ══════════════════════════════════════════
+       SECTION 6 — CONTRADICTIONS
+       ══════════════════════════════════════════ -->
+  {% if contradictions %}
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-red"><i class="bi bi-exclamation-diamond"></i></div>
+      <h6>Contradiction &amp; Inconsistency Report</h6>
+      <span class="ms-auto badge-fail">{{ contradictions|length }} Found</span>
+    </div>
+    <div class="card-body-inner">
+      {% for c in hard_contradictions %}
+      <div class="alert-hard">
+        <strong style="color:#dc2626;">HARD — {{ c.type|replace_underscore|title }}:</strong>
+        <span> {{ c.description }}</span>
+      </div>
+      {% endfor %}
+      {% for c in warn_contradictions %}
+      <div class="alert-warn">
+        <strong style="color:#d97706;">WARNING — {{ c.type|replace_underscore|title }}:</strong>
+        <span> {{ c.description }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ══════════════════════════════════════════
+       SECTION 7 — FINAL DECISION
+       ══════════════════════════════════════════ -->
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-green"><i class="bi bi-award"></i></div>
+      <h6>Final Decision</h6>
+    </div>
+    <div class="card-body-inner">
+      <div class="row g-3 align-items-start">
+        <div class="col-md-5">
+          <div class="decision-hero
+            {% if claim.final_decision == 'likely_valid' %}decision-valid
+            {% elif claim.final_decision == 'likely_invalid' %}decision-invalid
+            {% elif claim.final_decision == 'manual_review' %}decision-manual
+            {% else %}decision-pending{% endif %}">
+            {% if claim.final_decision == 'likely_valid' %}
+              <div class="decision-icon">✅</div>
+              <div class="decision-label" style="color:#16a34a;">Likely Valid</div>
+            {% elif claim.final_decision == 'likely_invalid' %}
+              <div class="decision-icon">❌</div>
+              <div class="decision-label" style="color:#dc2626;">Likely Invalid</div>
+            {% elif claim.final_decision == 'manual_review' %}
+              <div class="decision-icon">🔍</div>
+              <div class="decision-label" style="color:#d97706;">Manual Review Required</div>
+            {% else %}
+              <div class="decision-icon">⏳</div>
+              <div class="decision-label" style="color:#64748b;">Pending Evaluation</div>
+            {% endif %}
+            {% if claim.decision_reason %}
+            <div class="decision-reason mt-2">{{ claim.decision_reason }}</div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="stats-row mb-3">
+            <div class="stat-chip"><div class="num num-green">{{ ai_summary.rules_passed|length }}</div><div class="lbl">Rules Passed</div></div>
+            <div class="stat-chip"><div class="num num-red">{{ ai_summary.rules_failed|length }}</div><div class="lbl">Rules Failed</div></div>
+            <div class="stat-chip"><div class="num num-red">{{ hard_contradictions|length }}</div><div class="lbl">Hard Issues</div></div>
+            <div class="stat-chip"><div class="num num-yellow">{{ ai_summary.missing_documents|length }}</div><div class="lbl">Missing Docs</div></div>
+          </div>
+          <div class="info-row"><span class="info-label">Duplicate Flag</span><span class="info-value">{% if claim.is_duplicate %}<span class="badge-warn">⚠ Flagged</span>{% else %}<span class="badge-pass">✓ No Duplicate</span>{% endif %}</span></div>
+          <div class="info-row"><span class="info-label">Model Consistency</span><span class="info-value">{{ claim.model_consistency_status|consistency_label|default:"—" }}</span></div>
+          <div class="info-row"><span class="info-label">Confidence Difference</span><span class="info-value">{% if claim.confidence_difference is not None %}{{ claim.confidence_difference|floatformat:1 }}%{% else %}—{% endif %}</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="section-title"><i class="bi bi-tools me-1"></i> Repair History</div>
-    {% if repair_hist %}
-    <table class="table table-sm" style="font-size:.82rem;">
-      <thead><tr><th>Date</th><th>Center</th><th>Outcome</th><th>Auth?</th></tr></thead>
-      <tbody>
-      {% for r in repair_hist %}
+  <!-- ══════════════════════════════════════════
+       SECTION 8 — REVIEWER DECISION
+       ══════════════════════════════════════════ -->
+  {% if review %}
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-blue"><i class="bi bi-person-check"></i></div>
+      <h6>Reviewer Decision</h6>
+      {% if review.is_ai_override %}
+      <span class="ms-auto badge-warn">⚡ AI Override</span>
+      {% endif %}
+    </div>
+    <div class="card-body-inner">
+      <div class="reviewer-decision">
+        <div class="reviewer-avatar">
+          {{ review.reviewer.get_initials }}
+        </div>
+        <div>
+          <div class="reviewer-name">{{ review.reviewer.get_full_name }}</div>
+          <div class="reviewer-role">Claim Reviewer · {{ review.reviewed_at|date:"M d, Y H:i" }}</div>
+        </div>
+        <div class="ms-auto">
+          {% if review.decision == 'approved' %}<span class="badge-pass" style="font-size:13px;padding:6px 16px;">✓ Approved</span>
+          {% elif review.decision == 'rejected' %}<span class="badge-fail" style="font-size:13px;padding:6px 16px;">✗ Rejected</span>
+          {% else %}<span class="badge-warn" style="font-size:13px;padding:6px 16px;">{{ review.get_decision_display }}</span>{% endif %}
+        </div>
+      </div>
+      {% if review.reviewer_comments %}
+      <div class="info-label mb-2">Reviewer Comments</div>
+      <div class="comment-box">"{{ review.reviewer_comments }}"</div>
+      {% endif %}
+      {% if review.is_ai_override and review.override_reason %}
+      <div class="alert-warn mt-3">
+        <strong>Override Reason:</strong> {{ review.override_reason }}
+        <span class="ms-2 badge-info">Original AI: {{ review.ai_original_result }}</span>
+      </div>
+      {% endif %}
+      {% if review.additional_info_request %}
+      <div class="info-label mt-3 mb-2">Additional Info Requested</div>
+      <div class="comment-box">{{ review.additional_info_request }}</div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ══════════════════════════════════════════
+       REPAIR HISTORY
+       ══════════════════════════════════════════ -->
+  {% if repair_hist %}
+  <div class="report-card mt-3">
+    <div class="card-header-bar">
+      <div class="icon icon-gray"><i class="bi bi-tools"></i></div>
+      <h6>Prior Repair History</h6>
+    </div>
+    <div class="card-body-inner">
+      <table class="doc-table">
+        <thead><tr><th>Date</th><th>Repair Center</th><th>Outcome</th><th>Cost</th><th>Authorized</th></tr></thead>
+        <tbody>
+        {% for r in repair_hist %}
         <tr>
           <td>{{ r.repair_date }}</td>
           <td>{{ r.repair_center }}</td>
           <td>{{ r.get_outcome_display }}</td>
-          <td>{% if r.is_authorized %}<span class="rule-badge-pass">Yes</span>{% else %}<span class="rule-badge-fail">No</span>{% endif %}</td>
+          <td>{{ r.repair_cost|default:"—" }}</td>
+          <td>{% if r.is_authorized %}<span class="badge-pass">✓ Yes</span>{% else %}<span class="badge-fail">✗ No</span>{% endif %}</td>
         </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p class="text-muted small">No prior repair history recorded.</p>
-    {% endif %}
-  </div>
-
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 2 — UPLOADED EVIDENCE & OCR
-     ════════════════════════════════════════════ -->
-<div class="section-title"><i class="bi bi-paperclip me-1"></i> Uploaded Evidence</div>
-{% if documents %}
-<table class="table table-sm table-bordered mb-3" style="font-size:.82rem;">
-  <thead class="table-light"><tr><th>Document Type</th><th>Filename</th><th>Size</th><th>Uploaded</th></tr></thead>
-  <tbody>
-  {% for doc in documents %}
-  <tr>
-    <td>{{ doc.get_doc_type_display }}</td>
-    <td class="font-monospace">{{ doc.file_name }}</td>
-    <td>{{ doc.file_size|filesizeformat }}</td>
-    <td>{{ doc.uploaded_at|date:"M d, Y" }}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<p class="text-muted small mb-3">No documents uploaded.</p>
-{% endif %}
-
-{% if ai_summary.missing_documents %}
-<div class="contra-warn mb-3">
-  <strong>Missing Required Documents:</strong>
-  {% for m in ai_summary.missing_documents %}
-    <span class="rule-badge-fail ms-1">{{ m|replace_underscore }}</span>
-  {% endfor %}
-</div>
-{% endif %}
-
-{% if ocr_results %}
-<div class="section-title"><i class="bi bi-search me-1"></i> OCR Extraction Results</div>
-<table class="table table-sm table-bordered mb-4" style="font-size:.82rem;">
-  <thead class="table-light">
-    <tr><th>Document</th><th>Invoice #</th><th>Serial #</th><th>Purchase Date</th><th>Amount</th><th>Status</th><th>Verified</th></tr>
-  </thead>
-  <tbody>
-  {% for ocr in ocr_results %}
-  <tr>
-    <td>{{ ocr.document.get_doc_type_display }}</td>
-    <td class="font-monospace">{{ ocr.invoice_number|default:"—" }}</td>
-    <td class="font-monospace">{{ ocr.serial_number|default:"—" }}</td>
-    <td>{{ ocr.purchase_date|default:"—" }}</td>
-    <td>{{ ocr.purchase_amount|default:"—" }}</td>
-    <td>
-      {% if ocr.status == 'success' %}<span class="rule-badge-pass">Success</span>
-      {% elif ocr.status == 'partial' %}<span class="rule-badge-warn">Partial</span>
-      {% else %}<span class="rule-badge-fail">Failed</span>{% endif %}
-    </td>
-    <td>{% if ocr.is_verified %}<span class="rule-badge-pass">✓</span>{% else %}—{% endif %}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
-{% endif %}
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 3 — AI MODEL RESULTS (SRS §1.6.xliv)
-     ════════════════════════════════════════════ -->
-<div class="page-break"></div>
-
-<div class="section-title mt-4"><i class="bi bi-cpu me-1"></i> AI Model Results</div>
-
-<div class="row g-3 mb-4">
-
-  <!-- Python ML -->
-  <div class="col-md-4">
-    <div style="border:1px solid #dbeafe;border-radius:8px;padding:1rem;background:#f0f7ff;">
-      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#2563eb;margin-bottom:.5rem;">Python ML Model</div>
-      <div class="fw-bold" style="font-size:1rem;">
-        {{ claim.python_prediction|prediction_label|default:"Pending" }}
-      </div>
-      <div class="mt-2" style="font-size:.8rem;">
-        <div class="d-flex justify-content-between"><span>Valid Claim</span><span>{{ claim.python_confidence_valid|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-success" style="width:{{ claim.python_confidence_valid|default:0|floatformat:0 }}%"></div></div>
-        <div class="d-flex justify-content-between mt-1"><span>Invalid Claim</span><span>{{ claim.python_confidence_invalid|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-danger" style="width:{{ claim.python_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
-        <div class="d-flex justify-content-between mt-1"><span>Manual Review</span><span>{{ claim.python_confidence_manual|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-warning" style="width:{{ claim.python_confidence_manual|default:0|floatformat:0 }}%"></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Teachable Machine -->
-  <div class="col-md-4">
-    <div style="border:1px solid #cffafe;border-radius:8px;padding:1rem;background:#f0fdff;">
-      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#0891b2;margin-bottom:.5rem;">Teachable Machine (Image AI)</div>
-      <div class="fw-bold" style="font-size:1rem;">
-        {{ claim.tm_prediction|prediction_label|default:"Pending" }}
-      </div>
-      <div class="mt-2" style="font-size:.8rem;">
-        <div class="d-flex justify-content-between"><span>Valid Claim</span><span>{{ claim.tm_confidence_valid|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-success" style="width:{{ claim.tm_confidence_valid|default:0|floatformat:0 }}%"></div></div>
-        <div class="d-flex justify-content-between mt-1"><span>Invalid Claim</span><span>{{ claim.tm_confidence_invalid|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-danger" style="width:{{ claim.tm_confidence_invalid|default:0|floatformat:0 }}%"></div></div>
-        <div class="d-flex justify-content-between mt-1"><span>Manual Review</span><span>{{ claim.tm_confidence_manual|default:0|floatformat:1 }}%</span></div>
-        <div class="conf-bar-wrap"><div class="conf-bar-fill bg-warning" style="width:{{ claim.tm_confidence_manual|default:0|floatformat:0 }}%"></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Model Comparison -->
-  <div class="col-md-4">
-    <div style="border:1px solid #ede9fe;border-radius:8px;padding:1rem;background:#faf5ff;">
-      <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;color:#7c3aed;margin-bottom:.5rem;">Model Comparison</div>
-      <table class="table table-sm info-table">
-        <tr><td>Python Class</td><td>{{ claim.python_prediction|prediction_label|default:"—" }}</td></tr>
-        <tr><td>TM Class</td><td>{{ claim.tm_prediction|prediction_label|default:"—" }}</td></tr>
-        <tr><td>Class Match</td>
-          <td>
-            {% if claim.python_prediction and claim.tm_prediction %}
-              {% if claim.python_prediction == claim.tm_prediction %}
-                <span class="rule-badge-pass">✓ Match</span>
-              {% else %}
-                <span class="rule-badge-fail">✗ Mismatch</span>
-              {% endif %}
-            {% else %}—{% endif %}
-          </td>
-        </tr>
-        <tr><td>Conf. Difference</td>
-          <td>
-            {% if claim.confidence_difference is not None %}
-              <strong>{{ claim.confidence_difference|floatformat:1 }}%</strong>
-            {% else %}—{% endif %}
-          </td>
-        </tr>
-        <tr><td>Consistency</td>
-          <td>{{ claim.model_consistency_status|consistency_label|default:"—" }}</td>
-        </tr>
+        {% endfor %}
+        </tbody>
       </table>
     </div>
   </div>
+  {% endif %}
 
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 4 — WARRANTY RULE VALIDATION
-     ════════════════════════════════════════════ -->
-<div class="section-title"><i class="bi bi-clipboard-check me-1"></i> Warranty Rule Validation Results</div>
-{% if rule_results %}
-<table class="table table-sm table-bordered mb-4" style="font-size:.82rem;">
-  <thead class="table-light"><tr><th>Rule</th><th>Type</th><th>Outcome</th><th>Details</th></tr></thead>
-  <tbody>
-  {% for r in rule_results %}
-  <tr>
-    <td>{{ r.rule_name }}</td>
-    <td><span class="text-muted">{{ r.rule_type|capfirst }}</span></td>
-    <td>
-      {% if r.outcome == 'pass' %}<span class="rule-badge-pass">Pass</span>
-      {% elif r.outcome == 'fail' %}<span class="rule-badge-fail">Fail</span>
-      {% elif r.outcome == 'warning' %}<span class="rule-badge-warn">Warning</span>
-      {% else %}<span class="rule-badge-skip">Skip</span>{% endif %}
-    </td>
-    <td style="color:#6b7280;">{{ r.description|truncatechars:80 }}</td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
-<div class="d-flex gap-3 mb-3" style="font-size:.83rem;">
-  <span><strong style="color:#16a34a;">{{ claim.rules_passed }}</strong> Passed</span>
-  <span><strong style="color:#dc2626;">{{ claim.rules_failed }}</strong> Failed</span>
-  <span><strong style="color:#d97706;">{{ claim.rules_warning }}</strong> Warnings</span>
-</div>
-{% else %}
-<p class="text-muted small mb-3">Rule validation not yet performed.</p>
-{% endif %}
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 5 — CONTRADICTIONS (SRS §1.6.xxviii)
-     ════════════════════════════════════════════ -->
-{% if contradictions %}
-<div class="section-title"><i class="bi bi-exclamation-diamond me-1"></i> Contradiction & Inconsistency Report</div>
-<div class="mb-3">
-  {% for c in hard_contradictions %}
-  <div class="contra-hard">
-    <strong style="color:#dc2626;">HARD — {{ c.type|replace_underscore|title }}:</strong>
-    <span style="font-size:.82rem;"> {{ c.description }}</span>
+  <!-- ── Footer ── -->
+  <div class="report-footer">
+    <strong>AssureX Claim Engine</strong> — AI-Powered Warranty Claim Validation System<br>
+    Report generated: {{ generated_at|date:"Y-m-d H:i:s" }} · {{ claim.claim_reference }}<br>
+    <span style="font-size:10px;">This report is system-generated. Reviewer override and human judgment may supersede AI recommendations.</span>
   </div>
-  {% endfor %}
-  {% for c in warn_contradictions %}
-  <div class="contra-warn">
-    <strong style="color:#d97706;">WARNING — {{ c.type|replace_underscore|title }}:</strong>
-    <span style="font-size:.82rem;"> {{ c.description }}</span>
-  </div>
-  {% endfor %}
-</div>
-{% endif %}
 
-
-<!-- ════════════════════════════════════════════
-     SECTION 6 — FINAL DECISION (SRS §1.6.xxxiv, §1.6.xxxv)
-     ════════════════════════════════════════════ -->
-<div class="section-title"><i class="bi bi-award me-1"></i> Final Decision</div>
-<div class="row g-3 mb-4">
-  <div class="col-md-5">
-    <div class="decision-box
-      {% if claim.final_decision == 'likely_valid' %}decision-valid
-      {% elif claim.final_decision == 'likely_invalid' %}decision-invalid
-      {% else %}decision-manual{% endif %}">
-      {% if claim.final_decision == 'likely_valid' %}
-        <div style="font-size:2rem;">✅</div>
-        <div class="fw-bold text-success fs-5">Likely Valid</div>
-      {% elif claim.final_decision == 'likely_invalid' %}
-        <div style="font-size:2rem;">❌</div>
-        <div class="fw-bold text-danger fs-5">Likely Invalid</div>
-      {% elif claim.final_decision == 'manual_review' %}
-        <div style="font-size:2rem;">🔍</div>
-        <div class="fw-bold text-warning fs-5">Manual Review Required</div>
-      {% else %}
-        <div style="font-size:2rem;">⏳</div>
-        <div class="fw-bold text-secondary fs-5">Pending Evaluation</div>
-      {% endif %}
-    </div>
-  </div>
-  <div class="col-md-7">
-    {% if claim.decision_reason %}
-    <div class="section-title">Decision Explanation</div>
-    <p style="font-size:.85rem;background:#f9fafb;padding:.8rem;border-radius:6px;border-left:3px solid #3b82f6;">
-      {{ claim.decision_reason }}
-    </p>
-    {% endif %}
-
-    <table class="table table-sm info-table mt-2">
-      <tr><td>Supporting Factors</td>
-          <td>{{ ai_summary.rules_passed|length }} rules passed</td></tr>
-      <tr><td>Opposing Factors</td>
-          <td>{{ ai_summary.rules_failed|length }} rules failed,
-              {{ hard_contradictions|length }} hard contradiction(s)</td></tr>
-      <tr><td>Missing Evidence</td>
-          <td>{{ ai_summary.missing_documents|length }} document(s)</td></tr>
-      <tr><td>Duplicate Flag</td>
-          <td>{% if claim.is_duplicate %}<span class="rule-badge-warn">Yes — flagged</span>{% else %}No{% endif %}</td></tr>
-    </table>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     SECTION 7 — REVIEWER DECISION (SRS §1.6.xxxvii)
-     ════════════════════════════════════════════ -->
-{% if review %}
-<div class="section-title"><i class="bi bi-person-check me-1"></i> Reviewer Decision & Comments</div>
-<div class="row g-3 mb-4">
-  <div class="col-md-6">
-    <table class="table table-sm info-table">
-      <tr><td>Reviewer Decision</td>
-          <td>
-            {% if review.decision == 'approved' %}<span class="rule-badge-pass">Approved</span>
-            {% elif review.decision == 'rejected' %}<span class="rule-badge-fail">Rejected</span>
-            {% else %}<span class="rule-badge-warn">{{ review.get_decision_display }}</span>{% endif %}
-          </td>
-      </tr>
-      {% if review.is_ai_override %}
-      <tr><td>AI Override</td><td><span class="rule-badge-warn">Yes — Original: {{ review.ai_original_result }}</span></td></tr>
-      {% if review.override_reason %}<tr><td>Override Reason</td><td>{{ review.override_reason }}</td></tr>{% endif %}
-      {% endif %}
-      <tr><td>Reviewed At</td><td>{{ review.reviewed_at|date:"M d, Y H:i"|default:"—" }}</td></tr>
-    </table>
-  </div>
-  <div class="col-md-6">
-    {% if review.reviewer_comments %}
-    <div class="section-title">Reviewer Comments</div>
-    <p style="font-size:.85rem;background:#f9fafb;padding:.8rem;border-radius:6px;">{{ review.reviewer_comments }}</p>
-    {% endif %}
-    {% if review.additional_info_request %}
-    <div class="section-title">Additional Info Requested</div>
-    <p style="font-size:.85rem;color:#6b7280;">{{ review.additional_info_request }}</p>
-    {% endif %}
-  </div>
-</div>
-{% endif %}
-
-
-<!-- ── Footer ── -->
-<hr>
-<div class="d-flex justify-content-between" style="font-size:.75rem;color:#9ca3af;">
-  <span>AssureX Claim Engine &mdash; AI-Powered Warranty Claim Validation System</span>
-  <span>Report generated: {{ generated_at|date:"Y-m-d H:i:s" }} &mdash; {{ claim.claim_reference }}</span>
-</div>
-<div class="text-center text-muted mt-2" style="font-size:.72rem;">
-  This report is system-generated. Reviewer override and human judgment may supersede AI recommendations.
 </div>
 
 <script>
-  /* Auto-animate confidence bars on load */
-  document.querySelectorAll('.conf-bar-fill').forEach(function(b) {
-    var w = b.style.width; b.style.width = '0%';
-    setTimeout(function() { b.style.transition = 'width .5s ease'; b.style.width = w; }, 100);
+  /* Animate confidence bars on load */
+  document.querySelectorAll('.conf-fill').forEach(function(b) {
+    var w = b.style.width;
+    b.style.width = '0%';
+    setTimeout(function() {
+      b.style.transition = 'width .7s cubic-bezier(.4,0,.2,1)';
+      b.style.width = w;
+    }, 200);
   });
 </script>
 </body>
