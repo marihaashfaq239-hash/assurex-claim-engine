@@ -1,59 +1,231 @@
 {% extends "base/base.html" %}
+{% load static assurex_tags %}
 {% block title %}Reviewed Claims — AssureX{% endblock %}
 {% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
 {% block content %}
+
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4 class="page-title mb-0">Reviewed Claims</h4>
   <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-primary btn-sm">
     <i class="bi bi-inbox me-1"></i>Back to Queue
   </a>
 </div>
+
+<!-- Reviewer Info Banner -->
+<div style="background:linear-gradient(135deg,#003631,#004d46);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:#fff;display:flex;align-items:center;gap:16px;">
+  <div style="width:52px;height:52px;border-radius:12px;background:rgba(255,237,168,.15);border:2px solid rgba(255,237,168,.3);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#FFEDA8;flex-shrink:0;">
+    {{ request.user.get_initials }}
+  </div>
+  <div>
+    <div style="font-size:16px;font-weight:700;color:#FFEDA8;">{{ request.user.get_full_name }}</div>
+    <div style="font-size:12px;opacity:.75;">Claim Reviewer &nbsp;·&nbsp; {{ reviews|length }} claim{{ reviews|length|pluralize }} reviewed</div>
+  </div>
+  <div class="ms-auto d-flex gap-4 text-center">
+    <div>
+      <div style="font-size:22px;font-weight:800;color:#FFEDA8;">{{ reviews|length }}</div>
+      <div style="font-size:11px;opacity:.7;">Total Reviewed</div>
+    </div>
+    <div>
+      <div style="font-size:22px;font-weight:800;color:#4ade80;">
+        {% with approved=reviews|filter_decision:"approved" %}{{ approved|length }}{% endwith %}
+      </div>
+      <div style="font-size:11px;opacity:.7;">Approved</div>
+    </div>
+    <div>
+      <div style="font-size:22px;font-weight:800;color:#f87171;">
+        {% with rejected=reviews|filter_decision:"rejected" %}{{ rejected|length }}{% endwith %}
+      </div>
+      <div style="font-size:11px;opacity:.7;">Rejected</div>
+    </div>
+  </div>
+</div>
+
+<!-- Search -->
 <div class="card mb-3">
   <div class="card-body py-3">
-    <form method="get" class="row g-2">
+    <form method="get" class="row g-2 align-items-center">
       <div class="col-md-5">
-        <input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search reference or customer email...">
+        <input type="text" name="q" value="{{ search }}" class="form-control" placeholder="Search by reference or customer email...">
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Search</button>
-        {% if search %}<a href="{% url 'reviewer:reviewed' %}" class="btn btn-outline-secondary ms-1">Clear</a>{% endif %}
+        <button type="submit" class="btn btn-primary">
+          <i class="bi bi-search me-1"></i>Search
+        </button>
+        {% if search %}
+        <a href="{% url 'reviewer:reviewed' %}" class="btn btn-outline-secondary ms-1">
+          <i class="bi bi-x me-1"></i>Clear
+        </a>
+        {% endif %}
+      </div>
+      <div class="col-auto ms-auto text-muted small">
+        {{ reviews|length }} result{{ reviews|length|pluralize }}
       </div>
     </form>
   </div>
 </div>
+
+<!-- Claims Table -->
 <div class="card">
   <div class="card-body p-0">
     {% if reviews %}
     <div class="table-responsive">
       <table class="table table-hover mb-0">
-        <thead><tr><th>Reference</th><th>Customer</th><th>Product</th><th>Decision</th><th>AI Override</th><th>Reviewed</th><th></th></tr></thead>
+        <thead style="background:#f9fafb;">
+          <tr>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;padding:12px 16px;">Claim Reference</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Customer</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Product</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Damage Type</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">AI Decision</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Reviewer Decision</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Reviewed By</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">Reviewed At</th>
+            <th style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;">AI Override</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
           {% for rev in reviews %}
-          <tr>
-            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-semibold text-primary text-decoration-none">{{ rev.claim.claim_reference }}</a></td>
-            <td><div>{{ rev.claim.claimant.get_full_name }}</div><small class="text-muted">{{ rev.claim.claimant.email }}</small></td>
-            <td>{{ rev.claim.product.brand }} {{ rev.claim.product.product_name|truncatechars:18 }}</td>
-            <td>
-              {% if rev.decision == 'approved' %}<span class="badge bg-success rounded-pill">Approved</span>
-              {% elif rev.decision == 'rejected' %}<span class="badge bg-danger rounded-pill">Rejected</span>
-              {% elif rev.decision == 'more_info' %}<span class="badge bg-warning text-dark rounded-pill">More Info</span>
-              {% else %}<span class="badge bg-secondary rounded-pill">{{ rev.get_decision_display }}</span>{% endif %}
+          <tr style="border-bottom:1px solid #f3f4f6;">
+            <!-- Reference -->
+            <td style="padding:14px 16px;">
+              <a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-bold text-decoration-none" style="color:#003631;">
+                {{ rev.claim.claim_reference }}
+              </a>
+              <div style="font-size:11px;color:#9ca3af;margin-top:2px;">{{ rev.claim.submission_date|date:"M d, Y"|default:"—" }}</div>
             </td>
+
+            <!-- Customer -->
+            <td>
+              <div style="font-weight:600;font-size:13px;">{{ rev.claim.claimant.get_full_name }}</div>
+              <div style="font-size:11px;color:#9ca3af;">{{ rev.claim.claimant.email }}</div>
+            </td>
+
+            <!-- Product -->
+            <td>
+              <div style="font-weight:500;font-size:13px;">{{ rev.claim.product.brand }} {{ rev.claim.product.product_name|truncatechars:20 }}</div>
+              <div style="font-size:11px;color:#9ca3af;font-family:monospace;">{{ rev.claim.product.serial_number }}</div>
+            </td>
+
+            <!-- Damage Type -->
+            <td>
+              <span style="background:#f0f7ff;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">
+                {{ rev.claim.get_damage_type_display }}
+              </span>
+            </td>
+
+            <!-- AI Final Decision -->
+            <td>
+              {% if rev.claim.final_decision == 'likely_valid' %}
+                <span style="background:#dcfce7;color:#15803d;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✓ Likely Valid</span>
+              {% elif rev.claim.final_decision == 'likely_invalid' %}
+                <span style="background:#fee2e2;color:#b91c1c;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">✗ Likely Invalid</span>
+              {% elif rev.claim.final_decision == 'manual_review' %}
+                <span style="background:#fef9c3;color:#a16207;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">⚠ Manual Review</span>
+              {% else %}
+                <span style="background:#f3f4f6;color:#6b7280;padding:2px 10px;border-radius:20px;font-size:11px;">—</span>
+              {% endif %}
+            </td>
+
+            <!-- Reviewer Decision -->
+            <td>
+              {% if rev.decision == 'approved' %}
+                <span class="badge bg-success rounded-pill" style="font-size:11px;padding:4px 12px;">
+                  <i class="bi bi-check-lg me-1"></i>Approved
+                </span>
+              {% elif rev.decision == 'rejected' %}
+                <span class="badge bg-danger rounded-pill" style="font-size:11px;padding:4px 12px;">
+                  <i class="bi bi-x-lg me-1"></i>Rejected
+                </span>
+              {% elif rev.decision == 'more_info' %}
+                <span class="badge bg-warning text-dark rounded-pill" style="font-size:11px;padding:4px 12px;">
+                  <i class="bi bi-info-circle me-1"></i>More Info
+                </span>
+              {% else %}
+                <span class="badge bg-secondary rounded-pill" style="font-size:11px;">{{ rev.get_decision_display }}</span>
+              {% endif %}
+            </td>
+
+            <!-- Reviewed By -->
+            <td>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#003631,#004d46);color:#FFEDA8;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  {{ rev.reviewer.get_initials }}
+                </div>
+                <div>
+                  <div style="font-size:12px;font-weight:600;color:#1f2937;">{{ rev.reviewer.get_full_name }}</div>
+                  <div style="font-size:11px;color:#9ca3af;">Reviewer</div>
+                </div>
+              </div>
+            </td>
+
+            <!-- Reviewed At -->
+            <td style="font-size:12px;color:#6b7280;">
+              {{ rev.reviewed_at|date:"M d, Y"|default:"—" }}<br>
+              <span style="font-size:11px;color:#9ca3af;">{{ rev.reviewed_at|date:"H:i"|default:"" }}</span>
+            </td>
+
+            <!-- AI Override -->
             <td>
               {% if rev.is_ai_override %}
-                <span class="badge bg-danger-subtle text-danger"><i class="bi bi-pencil-square me-1"></i>Yes</span>
-              {% else %}<span class="text-muted small">—</span>{% endif %}
+                <span style="background:#fff1f2;color:#dc2626;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid #fecdd3;">
+                  <i class="bi bi-pencil-square me-1"></i>Override
+                </span>
+              {% else %}
+                <span style="font-size:12px;color:#d1d5db;">—</span>
+              {% endif %}
             </td>
-            <td class="text-muted small">{{ rev.reviewed_at|date:"M d, Y H:i"|default:"—" }}</td>
-            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="btn btn-sm btn-outline-secondary"><i class="bi bi-eye"></i></a></td>
+
+            <!-- Actions -->
+            <td>
+              <div style="display:flex;gap:4px;">
+                <a href="{% url 'claims:detail' rev.claim.pk %}" class="btn btn-sm btn-outline-secondary" title="View Claim">
+                  <i class="bi bi-eye"></i>
+                </a>
+                <a href="{% url 'claims:download_report' rev.claim.pk %}" class="btn btn-sm btn-outline-primary" title="Download Report">
+                  <i class="bi bi-file-earmark-text"></i>
+                </a>
+              </div>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
+
+    <!-- Footer summary -->
+    <div style="padding:12px 16px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:12px;color:#6b7280;">Showing {{ reviews|length }} reviewed claim{{ reviews|length|pluralize }}</span>
+      <div style="display:flex;gap:16px;font-size:12px;">
+        <span style="color:#15803d;font-weight:600;">
+          <i class="bi bi-check-circle me-1"></i>
+          {% with ct=0 %}
+            {% for r in reviews %}{% if r.decision == 'approved' %}{% with ct=ct|add:1 %}{% endwith %}{% endif %}{% endfor %}
+          {% endwith %}
+          Approved
+        </span>
+        <span style="color:#b91c1c;font-weight:600;">
+          <i class="bi bi-x-circle me-1"></i>
+          Rejected
+        </span>
+        <span style="color:#dc2626;font-weight:600;">
+          {% for r in reviews %}{% if r.is_ai_override %}<i class="bi bi-pencil-square me-1"></i>{% endif %}{% endfor %}
+          AI Overrides
+        </span>
+      </div>
+    </div>
+
     {% else %}
-    <div class="text-center py-5 text-muted"><i class="bi bi-clipboard-x fs-1 opacity-25 d-block mb-2"></i>No reviewed claims found.</div>
+    <div class="text-center py-5 text-muted">
+      <i class="bi bi-clipboard-x fs-1 opacity-25 d-block mb-3"></i>
+      <div style="font-size:15px;font-weight:600;">No reviewed claims yet</div>
+      <div style="font-size:13px;margin-top:4px;">Claims you review will appear here.</div>
+      <a href="{% url 'reviewer:queue' %}" class="btn btn-primary btn-sm mt-3">
+        <i class="bi bi-inbox me-1"></i>Go to Review Queue
+      </a>
+    </div>
     {% endif %}
   </div>
 </div>
+
 {% endblock %}
