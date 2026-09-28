@@ -182,7 +182,12 @@ def download_claim_report(request, pk):
     Google TM result, confidence comparison, rule-validation result, contradictions,
     final recommendation, and reviewer comments.
     """
-    claim = get_object_or_404(Claim, pk=pk, claimant=request.user)
+    # Customers can only see their own claims
+    # Reviewers and admins can see any claim's report
+    if request.user.role in ('reviewer', 'administrator'):
+        claim = get_object_or_404(Claim, pk=pk)
+    else:
+        claim = get_object_or_404(Claim, pk=pk, claimant=request.user)
 
     documents    = claim.documents.all()
     ocr_results  = claim.ocr_results.all()
