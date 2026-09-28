@@ -2,38 +2,179 @@
 {% load assurex_tags %}
 {% block title %}AI Override History — AssureX{% endblock %}
 {% block sidebar_menu %}{% include sidebar_template %}{% endblock %}
+
 {% block content %}
+
+<!-- Header -->
 <div class="d-flex justify-content-between align-items-center mb-4">
-  <h4 class="page-title mb-0">AI Override History</h4>
-  <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-primary btn-sm"><i class="bi bi-inbox me-1"></i>Back to Queue</a>
+  <div>
+    <h4 class="page-title mb-0">AI Override History</h4>
+    <p class="page-subtitle mb-0">Cases where reviewer disagreed with AI and made a different decision</p>
+  </div>
+  <a href="{% url 'reviewer:queue' %}" class="btn btn-outline-primary btn-sm">
+    <i class="bi bi-inbox me-1"></i>Back to Queue
+  </a>
 </div>
-<div class="card">
-  <div class="card-body p-0">
-    {% if overrides %}
-    <div class="table-responsive">
-      <table class="table table-hover mb-0">
-        <thead><tr><th>Reference</th><th>Customer</th><th>Original AI Result</th><th>My Decision</th><th>Override Reason</th><th>Date</th></tr></thead>
-        <tbody>
-          {% for rev in overrides %}
-          <tr>
-            <td><a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-semibold text-primary text-decoration-none">{{ rev.claim.claim_reference }}</a></td>
-            <td>{{ rev.claim.claimant.get_full_name }}</td>
-            <td><span class="badge bg-secondary-subtle text-secondary">{{ rev.ai_original_result|decision_label|default:"—" }}</span></td>
-            <td>
-              {% if rev.decision == 'approved' %}<span class="badge bg-success rounded-pill">Approved</span>
-              {% elif rev.decision == 'rejected' %}<span class="badge bg-danger rounded-pill">Rejected</span>
-              {% else %}<span class="badge bg-warning text-dark rounded-pill">{{ rev.get_decision_display }}</span>{% endif %}
-            </td>
-            <td class="text-muted" style="font-size:0.85rem;max-width:220px;">{{ rev.override_reason|truncatechars:80 }}</td>
-            <td class="text-muted small">{{ rev.reviewed_at|date:"M d, Y" }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% else %}
-    <div class="text-center py-5 text-muted"><i class="bi bi-pencil-square fs-1 opacity-25 d-block mb-2"></i>No AI overrides on record.</div>
-    {% endif %}
+
+<!-- Reviewer Banner -->
+<div style="background:linear-gradient(135deg,#7c3aed,#6d28d9);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:#fff;display:flex;align-items:center;gap:16px;">
+  <div style="width:52px;height:52px;border-radius:12px;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0;">
+    {{ request.user.get_initials }}
+  </div>
+  <div>
+    <div style="font-size:16px;font-weight:700;">{{ request.user.get_full_name }}</div>
+    <div style="font-size:12px;opacity:.75;">Claim Reviewer — AI Override History</div>
+  </div>
+  <div class="ms-auto text-center">
+    <div style="font-size:28px;font-weight:800;">{{ overrides|length }}</div>
+    <div style="font-size:11px;opacity:.75;">Total Override{{ overrides|length|pluralize }}</div>
   </div>
 </div>
+
+<!-- Info Card -->
+<div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+  <i class="bi bi-info-circle" style="color:#7c3aed;font-size:18px;flex-shrink:0;"></i>
+  <div style="font-size:13px;color:#4c1d95;">
+    An <strong>AI Override</strong> happens when the reviewer disagrees with the AI's final decision and uses their own judgment.
+    Every override is recorded here with the reason — maintaining full accountability and audit trail.
+  </div>
+</div>
+
+<!-- Overrides -->
+{% if overrides %}
+
+{% for rev in overrides %}
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:16px;overflow:hidden;">
+
+  <!-- Card Header -->
+  <div style="background:#f9fafb;border-bottom:1px solid #e5e7eb;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;">
+        <i class="bi bi-pencil-square"></i>
+      </div>
+      <div>
+        <a href="{% url 'claims:detail' rev.claim.pk %}" class="fw-bold text-decoration-none" style="color:#003631;font-size:15px;">
+          {{ rev.claim.claim_reference }}
+        </a>
+        <div style="font-size:11px;color:#9ca3af;">Reviewed: {{ rev.reviewed_at|date:"M d, Y H:i" }}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span style="background:#ede9fe;color:#7c3aed;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;">
+        <i class="bi bi-pencil-square me-1"></i>AI Override
+      </span>
+      <a href="{% url 'claims:download_report' rev.claim.pk %}" class="btn btn-sm btn-outline-secondary" title="Report">
+        <i class="bi bi-file-earmark-text"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card Body -->
+  <div style="padding:18px 20px;">
+    <div class="row g-4">
+
+      <!-- Claim Info -->
+      <div class="col-md-3">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:10px;">Claim Info</div>
+        <div style="font-size:13px;font-weight:600;color:#1f2937;">{{ rev.claim.claimant.get_full_name }}</div>
+        <div style="font-size:11px;color:#9ca3af;">{{ rev.claim.claimant.email }}</div>
+        <div style="margin-top:8px;font-size:13px;color:#374151;">
+          {{ rev.claim.product.brand }} {{ rev.claim.product.product_name|truncatechars:22 }}
+        </div>
+        <div style="font-size:11px;color:#9ca3af;font-family:monospace;">{{ rev.claim.product.serial_number }}</div>
+        <div style="margin-top:8px;">
+          <span style="background:#f0f7ff;color:#1d4ed8;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;">
+            {{ rev.claim.get_damage_type_display }}
+          </span>
+        </div>
+      </div>
+
+      <!-- AI Said -->
+      <div class="col-md-3">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:10px;">
+          <i class="bi bi-cpu me-1"></i>AI Said
+        </div>
+        <div style="background:#f3f4f6;border-radius:10px;padding:14px;text-align:center;">
+          {% if rev.ai_original_result == 'likely_valid' %}
+            <div style="font-size:24px;">✅</div>
+            <div style="font-weight:700;color:#15803d;margin-top:4px;">Likely Valid</div>
+          {% elif rev.ai_original_result == 'likely_invalid' %}
+            <div style="font-size:24px;">❌</div>
+            <div style="font-weight:700;color:#b91c1c;margin-top:4px;">Likely Invalid</div>
+          {% elif rev.ai_original_result == 'manual_review' %}
+            <div style="font-size:24px;">🔍</div>
+            <div style="font-weight:700;color:#a16207;margin-top:4px;">Manual Review</div>
+          {% else %}
+            <div style="font-size:24px;">❓</div>
+            <div style="font-weight:700;color:#6b7280;margin-top:4px;">{{ rev.ai_original_result|default:"—" }}</div>
+          {% endif %}
+          <div style="font-size:11px;color:#9ca3af;margin-top:6px;">AI Final Decision</div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="col-md-1 d-flex align-items-center justify-content-center">
+        <div style="text-align:center;">
+          <i class="bi bi-arrow-right" style="font-size:24px;color:#7c3aed;"></i>
+          <div style="font-size:10px;color:#9ca3af;margin-top:4px;">Override</div>
+        </div>
+      </div>
+
+      <!-- Reviewer Said -->
+      <div class="col-md-2">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:10px;">
+          <i class="bi bi-person-check me-1"></i>Reviewer Said
+        </div>
+        <div style="border-radius:10px;padding:14px;text-align:center;
+          {% if rev.decision == 'approved' %}background:#f0fdf4;border:2px solid #86efac;
+          {% elif rev.decision == 'rejected' %}background:#fef2f2;border:2px solid #fca5a5;
+          {% else %}background:#fffbeb;border:2px solid #fcd34d;{% endif %}">
+          {% if rev.decision == 'approved' %}
+            <div style="font-size:24px;">✅</div>
+            <div style="font-weight:700;color:#15803d;margin-top:4px;">Approved</div>
+          {% elif rev.decision == 'rejected' %}
+            <div style="font-size:24px;">❌</div>
+            <div style="font-weight:700;color:#b91c1c;margin-top:4px;">Rejected</div>
+          {% else %}
+            <div style="font-size:24px;">ℹ️</div>
+            <div style="font-weight:700;color:#a16207;margin-top:4px;">{{ rev.get_decision_display }}</div>
+          {% endif %}
+          <div style="font-size:11px;color:#9ca3af;margin-top:6px;">Human Decision</div>
+        </div>
+      </div>
+
+      <!-- Override Reason -->
+      <div class="col-md-3">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af;margin-bottom:10px;">
+          <i class="bi bi-chat-quote me-1"></i>Override Reason
+        </div>
+        <div style="background:#faf5ff;border:1px solid #ddd6fe;border-radius:10px;padding:12px;font-size:12px;color:#4c1d95;font-style:italic;line-height:1.6;">
+          "{{ rev.override_reason|default:"No reason provided." }}"
+        </div>
+        {% if rev.reviewer_comments %}
+        <div style="margin-top:8px;font-size:11px;color:#9ca3af;">
+          <strong>Comments:</strong> {{ rev.reviewer_comments|truncatechars:60 }}
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endfor %}
+
+{% else %}
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;text-align:center;padding:48px 20px;">
+  <i class="bi bi-pencil-square" style="font-size:48px;color:#ddd6fe;display:block;margin-bottom:12px;"></i>
+  <div style="font-size:15px;font-weight:600;color:#374151;">No AI overrides yet</div>
+  <div style="font-size:13px;color:#9ca3af;margin-top:6px;">
+    When you disagree with the AI and override its decision, those cases will appear here.
+  </div>
+  <a href="{% url 'reviewer:queue' %}" class="btn btn-primary btn-sm mt-3">
+    <i class="bi bi-inbox me-1"></i>Go to Review Queue
+  </a>
+</div>
+{% endif %}
+
 {% endblock %}
