@@ -4,19 +4,20 @@ nixPkgs = [
   "python311",
   "gcc",
   "file",
-  "python311Packages.pip",
 ]
 
 [phases.install]
 cmds = [
-  "pip install -r requirements.txt",
+  "python -m venv /opt/venv",
+  "/opt/venv/bin/pip install --upgrade pip",
+  "/opt/venv/bin/pip install -r requirements.txt",
 ]
 
 [phases.build]
 cmds = [
-  "python manage.py collectstatic --noinput",
-  "python manage.py migrate --noinput",
+  "/opt/venv/bin/python manage.py collectstatic --noinput",
+  "/opt/venv/bin/python manage.py migrate --noinput",
 ]
 
 [start]
-cmd = "gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+cmd = "/opt/venv/bin/gunicorn assurex.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
