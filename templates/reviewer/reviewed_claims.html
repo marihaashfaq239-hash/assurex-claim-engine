@@ -26,15 +26,11 @@
       <div style="font-size:11px;opacity:.7;">Total Reviewed</div>
     </div>
     <div>
-      <div style="font-size:22px;font-weight:800;color:#4ade80;">
-        {% with approved=reviews|filter_decision:"approved" %}{{ approved|length }}{% endwith %}
-      </div>
+      <div style="font-size:22px;font-weight:800;color:#4ade80;">{{ approved_count }}</div>
       <div style="font-size:11px;opacity:.7;">Approved</div>
     </div>
     <div>
-      <div style="font-size:22px;font-weight:800;color:#f87171;">
-        {% with rejected=reviews|filter_decision:"rejected" %}{{ rejected|length }}{% endwith %}
-      </div>
+      <div style="font-size:22px;font-weight:800;color:#f87171;">{{ rejected_count }}</div>
       <div style="font-size:11px;opacity:.7;">Rejected</div>
     </div>
   </div>
@@ -197,21 +193,9 @@
     <div style="padding:12px 16px;background:#f9fafb;border-top:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;">
       <span style="font-size:12px;color:#6b7280;">Showing {{ reviews|length }} reviewed claim{{ reviews|length|pluralize }}</span>
       <div style="display:flex;gap:16px;font-size:12px;">
-        <span style="color:#15803d;font-weight:600;">
-          <i class="bi bi-check-circle me-1"></i>
-          {% with ct=0 %}
-            {% for r in reviews %}{% if r.decision == 'approved' %}{% with ct=ct|add:1 %}{% endwith %}{% endif %}{% endfor %}
-          {% endwith %}
-          Approved
-        </span>
-        <span style="color:#b91c1c;font-weight:600;">
-          <i class="bi bi-x-circle me-1"></i>
-          Rejected
-        </span>
-        <span style="color:#dc2626;font-weight:600;">
-          {% for r in reviews %}{% if r.is_ai_override %}<i class="bi bi-pencil-square me-1"></i>{% endif %}{% endfor %}
-          AI Overrides
-        </span>
+        <span style="color:#15803d;font-weight:600;"><i class="bi bi-check-circle me-1"></i>{{ approved_count }} Approved</span>
+        <span style="color:#b91c1c;font-weight:600;"><i class="bi bi-x-circle me-1"></i>{{ rejected_count }} Rejected</span>
+        <span style="color:#dc2626;font-weight:600;"><i class="bi bi-pencil-square me-1"></i>{{ override_count }} AI Override{{ override_count|pluralize }}</span>
       </div>
     </div>
 

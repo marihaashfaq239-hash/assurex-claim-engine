@@ -249,9 +249,12 @@ def reviewed_claims(request):
         )
 
     context = {
-        'page_title': 'Reviewed Claims',
-        'reviews':    reviews,
-        'search':     search,
+        'page_title':     'Reviewed Claims',
+        'reviews':        reviews,
+        'search':         search,
+        'approved_count': reviews.filter(decision='approved').count(),
+        'rejected_count': reviews.filter(decision='rejected').count(),
+        'override_count': reviews.filter(is_ai_override=True).count(),
     }
     return render(request, 'reviewer/reviewed_claims.html', context)
 
